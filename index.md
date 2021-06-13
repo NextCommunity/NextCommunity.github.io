@@ -17,25 +17,25 @@ title: Max Base - Software Engineer and Open source maintainer
 &nbsp;|&nbsp;
 <a href="#talks--conference">Talks & Conference</a>
 &nbsp;|&nbsp;
-<a href="#publications-white-papers">Publications White Papers</a>
-&nbsp;|&nbsp;
+<!-- <a href="#publications-white-papers">Publications White Papers</a> -->
+<!-- &nbsp;|&nbsp; -->
 <!-- <a href="#educations">Educations</a> -->
 <!-- &nbsp;|&nbsp; -->
-<a href="#books">Book(s)</a>
-&nbsp;|&nbsp;
+<!-- <a href="#books">Book(s)</a> -->
+<!-- &nbsp;|&nbsp; -->
 <a href="#open-source-staff">Open Source Staff</a>
 &nbsp;|&nbsp;
-<a href="#blog-posts-technical-blog">Blog posts</a>
+<a href="#blog-posts">Blog posts</a>
 &nbsp;|&nbsp;
-<a href="#life-blog-drafts">Life blog</a>
-&nbsp;|&nbsp;
+<!-- <a href="#life-blog-drafts">Life blog</a> -->
+<!-- &nbsp;|&nbsp; -->
 <a href="#social-network-of-max-base">Social Network</a>
 &nbsp;|&nbsp;
 <a href="#contact-me">Contact me</a>
 
 # Max Base
 
-([Also available in Persian](https://maxbase.ir/){:target="_blank"})
+<!-- ([Also available in Persian](https://maxbase.ir/){:target="_blank"}) -->
 
 In the name of god; Greetings!
 
@@ -184,7 +184,10 @@ But totally my main projects are following:
 - [UDate](https://udate.ir/){:target="_blank"} - A free website to see persian calendar to see days and occasions of the year and month (Convert date to each other)
 
 
-## Blog posts
+<h2>
+  <a href="/blog/">&uarr;</a>
+  Blog posts
+</h2>
 
 <ul>
   {% for post in site.posts %}
@@ -203,21 +206,31 @@ But totally my main projects are following:
 - **Jan 2019:** International Gap workshop - Introduction to GAP System and its Application on group theory (Dihedral group, Monster group, etc)
 
 - **May 2019**: [Computer and Informatics Department, University of Kashan](https://kashanu.ac.ir/){:target="_blank"} - Introduction to "ONE Programming language" and why my compiler?
+
 - **Jan 2020**: [12th Iranian International Group Theory Conference](https://igtc12.modares.ac.ir/){:target="_blank"} GAP (Group Algorithm Programming)
+
 - **Feb 2021**: [51st Annual of Iranian Mathematics Conference](https://aimc51.kashanu.ac.ir/){:target="_blank"} - Programming from the perspective of group theory
+
 - **Jan 2021**: [Meeting Baz](https://t.me/MeetingBazzz){:target="_blank"} - Compiler Design and Structure of JIT(Just In-time)
+
 - **August 2021**: [POSSF](https://possf.ir){:target="_blank"} (Persian Open Source Software Festival) - Keynote speaker
 
+<!--
 ## Publications White Papers
 
 - [12th Iranian International Group Theory Conference](https://igtc12.modares.ac.ir/){:target="_blank"} GAP (Group Algorithm Programming); Seyyed Ali Mohammadieyeh and [Prof. Ali Reza Ashrafi](https://en.wikipedia.org/wiki/Ali_Reza_Ashrafi){:target="_blank"}
 - Draft: [51st Annual of Iranian Mathematics Conference](https://igtc12.modares.ac.ir/){:target="_blank"} - Draw science image via Pi number
 - Draft: Calculation Ramsey number R(5,5); Seyyed Ali Mohammadieyeh and [Dr. Reza Kahkeshani](https://rezakahkeshani.ir/){:target="_blank"}
 
+-->
+
+<!--
 ## Book(s)
 
 - **2021**: <b>GAP (Group Algorithm Programming)</b>; Seyyed Ali Mohammadieyeh and <a href="https://en.wikipedia.org/wiki/Ali_Reza_Ashrafi">Prof. Ali Reza Ashrafi</a>
 - **2020 – 2021**: Introduction to Git; Seyyed Ali Mohammadieyeh (Soon)
+ -->
+
 
 ## Open Source Staff
 
@@ -1434,7 +1447,7 @@ But totally my main projects are following:
 
 - **GitHub**: [BaseMax](https://github.com/basemax){:target="_blank"}
 - **Telegram**: [@MAX_BASE](https://t.me/MAX_BASE){:target="_blank"}
-- **Skype**: [https://join.skype.com/invite/kD13cbbNTLDV](https://join.skype.com/invite/kD13cbbNTLDV){:target="_blank"}
+- **Skype**: Max Base, [https://join.skype.com/invite/kD13cbbNTLDV](https://join.skype.com/invite/kD13cbbNTLDV){:target="_blank"}
 - **Gitlab**: [BaseMax](https://gitlab.com/BaseMax){:target="_blank"}
 - **Stackoverflow**: [max-base](https://stackoverflow.com/users/10096230/max-base){:target="_blank"}
 
