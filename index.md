@@ -15,17 +15,17 @@ title: Max Base - Software Engineer and Open source maintainer
 &nbsp;|&nbsp;
 <a href="#involved-projects">Involved Projects</a>
 &nbsp;|&nbsp;
-<a href="#talks--conference">Talks & Conference</a>
-&nbsp;|&nbsp;
 <!-- <a href="#publications-white-papers">Publications White Papers</a> -->
 <!-- &nbsp;|&nbsp; -->
 <!-- <a href="#educations">Educations</a> -->
 <!-- &nbsp;|&nbsp; -->
 <!-- <a href="#books">Book(s)</a> -->
 <!-- &nbsp;|&nbsp; -->
-<a href="#open-source-staff">Open Source Staff</a>
-&nbsp;|&nbsp;
 <a href="#blog-posts">Blog posts</a>
+&nbsp;|&nbsp;
+<a href="#talks--conference">Talks & Conference</a>
+&nbsp;|&nbsp;
+<a href="#open-source-staff">Open Source Staff</a>
 &nbsp;|&nbsp;
 <!-- <a href="#life-blog-drafts">Life blog</a> -->
 <!-- &nbsp;|&nbsp; -->
