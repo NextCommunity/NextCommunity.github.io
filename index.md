@@ -184,7 +184,7 @@ But totally my main projects are following:
 - [UDate](https://udate.ir/){:target="_blank"} - A free website to see persian calendar to see days and occasions of the year and month (Convert date to each other)
 
 
-<h2>
+<h2 id="blog-posts">
   <a href="/blog/">&uarr;</a>
   Blog posts
 </h2>
