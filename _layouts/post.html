@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<article itemscope itemtype="http://schema.org/BlogPosting">
+  <h1>
+    <a href="/">&uarr;</a>
+    {{ page.title }}
+  </h1>
+  <span class="subtitle">{{ page.subtitle }}</span>
+
+  {{ content }}
+
+  {% if site.disqus.shortname %}
+    {% include disqus_comments.html %}
+  {% endif %}
+
+</article>

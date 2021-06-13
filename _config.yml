@@ -1,1 +1,21 @@
+title: "Max Base"
+description: "@github developer maintainer. Full-Time Open-Sourcerer. Full-stack programmer. In the path of a real computer engineer... (Compiler enthusiast)"
+markdown: kramdown
+plugins:
+  - jekyll-sitemap
+  - jekyll-admin
 
+# collections:
+#   drafts:
+#     output: true
+#     sidebar_label: Drafts
+#   workshops:
+#     output: true
+#     sidebar_label: Workshops
+
+jekyll_admin:
+  hidden_links:
+    - staticfiles
+    - datafiles
+    - configuration
+  homepage: "posts"
