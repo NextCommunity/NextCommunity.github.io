@@ -1,4 +1,4 @@
-# Next Max Base
+# Next Max Base (MaxBase.org)
 
 It's the personal website and blog of Max Base built with Jekyll and powered by GitHub server.
 
