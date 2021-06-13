@@ -6,7 +6,7 @@ title: Max Base - Blog posts
 
 <h1>
 	<a href="/">&uarr;</a>
-	Technical blog
+	Blog posts
 </h1>
 
 <ul>

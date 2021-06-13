@@ -86,7 +86,6 @@ I'm young but I have been working with computers since I was a child and it is a
 	[https://stntaxi.org/](https://stntaxi.org/){:target="_blank"}
 
 
-
 - **[Asrez Group](https://asrez.com/){:target="_blank"}**: Technical Manager
 	<br>
 	_2015 – 2020, Canada, Germany, Sweden, India, Iran_
@@ -185,7 +184,7 @@ But totally my main projects are following:
 - [UDate](https://udate.ir/){:target="_blank"} - A free website to see persian calendar to see days and occasions of the year and month (Convert date to each other)
 
 
-## Blog posts (Technical blog)
+## Blog posts
 
 <ul>
   {% for post in site.posts %}
@@ -194,20 +193,6 @@ But totally my main projects are following:
 		<i>{{ post.date | date: date_format }}</i>: 
 			<a href="{{ post.url | relative_url }}" title="{{ post.title }}">
 			{{ post.title | escape }}
-		</a>
-    </li>
-  {% endfor %}
-</ul>
-
-## Life blog (Drafts)
-
-<ul>
-  {% for draft in site.drafts %}
-    <li>
-      {% assign date_format = site.cayman-blog.date_format | default: "%b %-d, %Y" %}
-		<i>{{ draft.date | date: date_format }}</i>: 
-			<a href="{{ draft.url | relative_url }}" title="{{ draft.title }}">
-			{{ draft.title | escape }}
 		</a>
     </li>
   {% endfor %}

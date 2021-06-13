@@ -1,0 +1,57 @@
+<script>
+const GH_API_URL = 'https://api.github.com/repos/basemax/NextMax/issues/5/comments?per_page=100';
+
+let request = new XMLHttpRequest();
+request.open( 'GET', GH_API_URL, true );
+request.onload = function() {
+	if ( this.status >= 200 && this.status < 400 ) {
+		let response = JSON.parse( this.response );
+
+		for ( var i = 0; i < response.length; i++ ) {
+			document.getElementById( 'gh-comments-list' ).appendChild( createCommentEl( response[ i ] ) );
+		}
+
+		if ( 0 === response.length ) {
+			document.getElementById( 'no-comments-found' ).style.display = 'block';
+		}
+	} else {
+		console.error( this );
+	}
+};
+
+function createCommentEl(response) {
+	let imgUrl = response.user.url.replace( 'api.github.com/users', 'github.com');
+	let comment = document.createElement('table');
+	comment.innerHTML = `
+	<tr>
+		<td width="50">
+			<a href="${imgUrl}">
+				<img width="50" height="50" src="${response.user.avatar_url}">
+			</a>
+		</td>
+		<td>
+			<a href="${response.html_url}">
+				${response.user.login} (#${response.id}-${response.created_at})
+			</a>
+			<br>
+			<p>${response.body}</p>
+		</td>
+	</tr>`;
+
+	return comment;
+}
+request.send();
+</script>
+
+<div class="github-comments">
+	<h2>Comments</h2>
+
+	<ul id="gh-comments-list"></ul>
+
+	<p id="no-comments-found" style="display:none;">
+		No comments found for this article.
+	</p>
+	<p id="leave-a-comment">
+		Join the discussion for this article on <a href="https://github.com/BaseMax/NextMax/issues/{{page.comments_id}}">this ticket</a>. Comments appear on this page instantly.
+	</p>
+</div>
