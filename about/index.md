@@ -11,9 +11,9 @@ Max Base
 
 ## Who I Am: Software Engineer and Open source maintainer
 
-As a Full-stack developer I tried many different area of computer science. from assembly and system to web development and design. from high processing and high traffic to algorithm design.
+As a Full-stack developer I tried many different area of computer science. from assembly and system to web development and design. From high processing and high traffic to algorithm design.
 
-I'm young but I have been working with computers since I was a child and it is a big part of my life.
+I'm young, but I have been working with computers since I was a child, and it is a big part of my life.
 
 - Birthday - 28 May.
 - Research interests - Compiler and system. (I'm not a researcher, just a learner)
@@ -22,7 +22,7 @@ I'm young but I have been working with computers since I was a child and it is a
 - Education Fields - [Applied mathematics](https://en.wikipedia.org/wiki/Applied_mathematics){:target="\_blank"}, [Pure mathematics](https://en.wikipedia.org/wiki/Pure_mathematics){:target="\_blank"}.
 - Scientific career - [Computer science](https://en.wikipedia.org/wiki/Computer_science){:target="\_blank"}.
 - Institutions - GitHub.
-- Musical Likes - [Violon](https://en.wikipedia.org/wiki/Violon){:target="\_blank"}, [Kamancheh](https://en.wikipedia.org/wiki/Kamancheh){:target="\_blank"}, [Piano](https://en.wikipedia.org/wiki/Piano){:target="\_blank"}, [Electronic keyboard](https://en.wikipedia.org/wiki/Electronic_keyboard){:target="\_blank"}.
+- Musical Likes - [Violon](https://en.wikipedia.org/wiki/Violin){:target="\_blank"}, [Kamancheh](https://en.wikipedia.org/wiki/Kamancheh){:target="\_blank"}, [Piano](https://en.wikipedia.org/wiki/Piano){:target="\_blank"}, [Electronic keyboard](https://en.wikipedia.org/wiki/Electronic_keyboard){:target="\_blank"}.
 - Sport - [Table tennis](https://en.wikipedia.org/wiki/Table_tennis){:target="\_blank"}.
 
 ## Experience
@@ -31,15 +31,15 @@ I'm young but I have been working with computers since I was a child and it is a
   <br>
   _2013 – Present, Remote_
 
-  As one of world most active programmers (11th in GitHub ranking), I'm one member of team and help to open source community day by day.
+  As `one` of world most active programmers (11th in GitHub ranking), I'm `one` member of the team that helps the open source community day by day.
   [Open Source Friday campaign](https://opensourcefriday.com){:target="\_blank"} and other my repositories.
 
 - **[Scandinavian Transport Network](https://stntaxi.se/){:target="\_blank"}**: Senior Software Engineer
   <br>
   _Oct 2018 – Oct 2020, Contract (Remote), Linköping, Ostergotland County, Sweden_
 
-  Help shape the business from start to final. To reach the customer and support problems. (AWS, Google Cloud, Web Services, etc) Web design, development of mobile applications and map and location infrastructure, driver and customer software.
-  ES6, Javascript, PHP, CSS, Linux administration problems, React, Web development, IOS and Android software development, Qt C++ …
+  Help shape the business from start to finish. To reach the customer and support problems. (AWS, Google Cloud, Web Services, etc) Web design, development of mobile applications and map and location infrastructure, driver and customer software.
+  ES6, JavaScript, PHP, CSS, Linux administration problems, React, Web development, IOS and Android software development, Qt C++ …
   [https://stntaxi.org/](https://stntaxi.org/){:target="\_blank"}
 
 - **[Asrez Group](https://asrez.com/){:target="\_blank"}**: Technical Manager
@@ -50,7 +50,7 @@ I'm young but I have been working with computers since I was a child and it is a
 
 ## Work and cooperation with me
 
-Currently, I'm not hired and not have a full-time job so I'm all day active in the Open source software ecosystem without income and wrote software with bugs.
+Currently, I'm not hired and don't have a full-time job, so I'm all day active in the Open source software ecosystem without income and wrote software with bugs.
 
 ![Max Base GitHub](https://camo.githubusercontent.com/073b6589f83b75a1ec05fdbb73972bf9ee845db28260d2fd4b3710ec6d76b514/68747470733a2f2f6368786f2e636f6d2f6c6162656c67656e2f6c6162656c67656e2e7068703f7465787476616c3d2b6d617862617365636f6465253430676d61696c2e636f6d26666f6e743d415249414c2e5454462673697a653d3132266267636f6c6f723d2532336666666666662674657874636f6c6f723d253233303030303030267375626d69743d6372656174652b696d616765)
 
@@ -128,7 +128,7 @@ On another side of programming and technical cooperation, I can also speak at yo
 I have so many projects and repositories in GitHub you can see them [here](https://github.com/BaseMax?tab=repositories){:target="\_blank"}.
 But totally my main projects are following:
 
-- **[One Programming Language](https://github.com/One-Language/){:target="\_blank"}**: One (onelang) is an open-source system programming language that makes it easy to build reliable, efficient and performant software.
+- **[One Programming Language](https://github.com/One-Language/){:target="\_blank"}**: `One` (onelang) is an open-source system programming language that makes it easy to build reliable, efficient and performant software.
 - **[Donya Operating system](https://github.com/DonyaOS){:target="\_blank"}**: Donya is an Operating system. Yet Another Linux distro built using a package management system.
 
 ## Involved Projects
@@ -191,7 +191,7 @@ But totally my main projects are following:
 - **GitHub**: [BaseMax](https://github.com/basemax){:target="\_blank"}
 - **Telegram**: [@MAX_BASE](https://t.me/MAX_BASE){:target="\_blank"}
 - **Skype**: Max Base, [https://join.skype.com/invite/kD13cbbNTLDV](https://join.skype.com/invite/kD13cbbNTLDV){:target="\_blank"}
-- **Gitlab**: [BaseMax](https://gitlab.com/BaseMax){:target="\_blank"}
+- **GitLab**: [BaseMax](https://gitlab.com/BaseMax){:target="\_blank"}
 - **Stackoverflow**: [max-base](https://stackoverflow.com/users/10096230/max-base){:target="\_blank"}
 
 ## Contact me
@@ -204,4 +204,4 @@ But totally my main projects are following:
   - **+46 ............**
   - **+1 ............** (International business contacts)
 
-Please be sure to coordinate via email before calling and I will never have a phone with me.
+Please be sure to coordinate via email before calling, and I will never have a phone with me.
