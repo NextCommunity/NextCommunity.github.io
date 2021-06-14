@@ -11,10 +11,4 @@ It's the personal website and blog of Max Base built with Jekyll and powered by 
 - Wait for moderators to merge your PR.
 - Hooray! You are joined to our community.
 
-### Preview
-
-![Max Base Website](demo1.jpg)
-
-![Max Base Website](demo2.jpg)
-
 © Copyright Max Base, 2021
