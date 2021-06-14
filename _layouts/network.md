@@ -15,7 +15,17 @@ layout: default
   <br>
   <span class="subtitle">{{ page.country }}, {{ page.location }}</span>
 
-  {{ content }}
-
+  <table width="100%" border="0">
+    <tr>
+      <td>
+        <a href="https://github.com/{{ page.github }}/">
+          <img src="https://github.com/{{ network.github }}.png?size=80" width="60">
+        </a>
+      </td>
+      <td>
+        {{ content }}
+      </td>
+    </tr>
+  </table>
 
 </article>
