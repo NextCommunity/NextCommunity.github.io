@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: /about/open-source-staff/
+permalink: /about/open-source/
 title: Max Base - Open Source Staff
 ---
 
