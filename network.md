@@ -34,8 +34,6 @@ ul.accounts ul div * {
 ul.accounts h4, ul.accounts h5, ul.accounts h6 {
   padding: 0;
   margin: 0;
-  background: transparent !important;
-  border: 0px !important;
 }
 </style>
 
