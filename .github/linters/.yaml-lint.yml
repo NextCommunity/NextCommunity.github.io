@@ -1,0 +1,11 @@
+---
+extends: default
+
+ignore: |
+  vendor/
+
+rules:
+  comments: disable
+  document-start: disable
+  line-length: disable
+  truthy: false

@@ -15,7 +15,6 @@ A community for open-source programmers and software engineers.
 ## Card Structure Template
 
 ```md
-
 ---
 layout: network <!-- DO NOT CHANGE THIS -->
 permalink: /network/your-full-name-without-space/ <!-- name-surname -->
@@ -32,7 +31,7 @@ languages: c php js css3 html5 <!-- YOU SHOULDN'T USE SPACE IN THE NAME OF THE P
 A short biography and a short text about your technical skills.
 ```
 
----------
+---
 
 It's the website and blog of Max Base built with Jekyll and powered by GitHub server.
 

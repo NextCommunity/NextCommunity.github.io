@@ -13,7 +13,7 @@ title: Max Base - Blog posts
   {% for post in site.posts %}
     <li>
       {% assign date_format = site.cayman-blog.date_format | default: "%b %-d, %Y" %}
-		<i>{{ post.date | date: date_format }}</i>: 
+		<i>{{ post.date | date: date_format }}</i>:
 			<a href="{{ post.url | relative_url }}" title="{{ post.title }}">
 			{{ post.title | escape }}
 		</a>
