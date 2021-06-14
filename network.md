@@ -10,7 +10,7 @@ title: Community of programmers and software engineers
 </h1>
 
 <p>
-Do you want to see yourself here? click (here)[https://github.com/BaseMax/NextMaxCommunity] to add your own.
+Do you want to see yourself here? click [here](https://github.com/BaseMax/NextMaxCommunity){:target="_blank"} to add your own.
 </p>
 
 <style type="text/css">
