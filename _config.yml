@@ -5,7 +5,10 @@ plugins:
   - jekyll-sitemap
   - jekyll-admin
 
-# collections:
+collections:
+  networks:
+    output: true
+    sidebar_label: Networks
 #   drafts:
 #     output: true
 #     sidebar_label: Drafts
