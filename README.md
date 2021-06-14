@@ -4,6 +4,7 @@ Community of open-source programmers or software engineers.
 
 ## Want to add yourself?
 
+- Star this repository
 - Fork this repository
 - Create a new file with your GitHub username at `_networks` directory, for example if your GitHub username is Max, so please create `_networks/max.md` file.
 - Fill your information and name at the file.
