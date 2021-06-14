@@ -34,6 +34,12 @@ ul.accounts ul div * {
 ul.accounts h4, ul.accounts h5, ul.accounts h6 {
   padding: 0;
   margin: 0;
+  background: transparent !important;
+  border: 0px !important;
+}
+ul.accounts li a.avatar:hover {
+  background: transparent !important;
+  border: 0px !important;
 }
 </style>
 
@@ -42,7 +48,7 @@ ul.accounts h4, ul.accounts h5, ul.accounts h6 {
 <ul class="accounts">
   {% for network in site.networks %}
   <li>
-    <a href="{{ network.url | relative_url }}">
+    <a href="{{ network.url | relative_url }}" class="avatar">
       <img src="https://github.com/{{ network.github }}.png?size=80" width="60">
     </a>
     <div>
