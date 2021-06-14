@@ -1,6 +1,6 @@
 ---
 layout: network
-permalink: /network/max-base/
+permalink: /network/basemax/
 name: Max Base
 github: basemax
 website: https://maxbase.org/
