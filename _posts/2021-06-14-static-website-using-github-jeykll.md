@@ -7,7 +7,7 @@ lang: en
 author: Max Base
 authorDescription: GitHub Maintainer Developer
 authorImage: /image/Seyyed_Ali_Mohammadiyeh.jpg
-categories: 
+categories:
 tags: programming python telegram
 title: Static Website using GitHub Pages and Jeykll Ruby
 ---
@@ -21,4 +21,3 @@ Quam vulputate dignissim suspendisse in est ante in. Condimentum lacinia quis ve
 Ipsum nunc aliquet bibendum enim facilisis gravida neque. Egestas dui id ornare arcu odio. Vel quam elementum pulvinar etiam non quam lacus suspendisse. Volutpat sed cras ornare arcu dui vivamus arcu felis bibendum. Etiam erat velit scelerisque in dictum non. Leo vel fringilla est ullamcorper. Egestas sed tempus urna et pharetra pharetra massa. Et malesuada fames ac turpis egestas sed tempus urna. Ut tristique et egestas quis ipsum suspendisse ultrices. Amet volutpat consequat mauris nunc congue nisi vitae. Natoque penatibus et magnis dis parturient montes nascetur. Sit amet purus gravida quis blandit turpis cursus.
 
 Massa sapien faucibus et molestie. Orci eu lobortis elementum nibh tellus molestie nunc non blandit. Duis ultricies lacus sed turpis. Diam quis enim lobortis scelerisque fermentum dui. Sed velit dignissim sodales ut eu. Ullamcorper velit sed ullamcorper morbi tincidunt ornare. Tellus integer feugiat scelerisque varius morbi enim. Iaculis urna id volutpat lacus laoreet non curabitur. Venenatis a condimentum vitae sapien. Sem viverra aliquet eget sit amet tellus. Ut tortor pretium viverra suspendisse. Volutpat est velit egestas dui id ornare arcu. Blandit libero volutpat sed cras ornare arcu. Fermentum et sollicitudin ac orci phasellus egestas tellus. Egestas diam in arcu cursus euismod quis viverra nibh cras. Pretium quam vulputate dignissim suspendisse in est ante in. Sit amet nisl suscipit adipiscing bibendum est. At ultrices mi tempus imperdiet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Enim lobortis scelerisque fermentum dui faucibus in.
-

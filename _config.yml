@@ -22,3 +22,12 @@ jekyll_admin:
     - datafiles
     - configuration
   homepage: "posts"
+
+exclude:
+  - .all-contributorsrc
+  - .gitignore
+  - CODEOWNERS
+  - codespell.txt
+  - Gemfile
+  - Gemfile.lock
+  - server

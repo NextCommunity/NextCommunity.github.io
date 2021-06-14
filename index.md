@@ -11,16 +11,15 @@ In the name of god; Greetings!
 
 I, Ali, and my my nickname is Max. I am a software engineer and/or programmer.
 
-
 <p class="callout">
 	Linus Torvalds: “Talk is cheap. Show me the code.”
 </p>
 
-**Look at my GitHub profile: [https://github.com/BaseMax](https://github.com/BaseMax){:target="_blank"}**
+**Look at my GitHub profile: [https://github.com/BaseMax](https://github.com/BaseMax){:target="\_blank"}**
 
 ## Next Community
 
-You can see a list of all [Community persons](/network/){:target="_blank"}, also you can join [here](https://github.com/BaseMax/NextCommunity#want-to-add-yourself){:target="_blank"}.
+You can see a list of all [Community persons](/network/){:target="\_blank"}, also you can join [here](https://github.com/BaseMax/NextCommunity#want-to-add-yourself){:target="\_blank"}.
 
 ## Contact me
 

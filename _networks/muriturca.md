@@ -1,10 +1,10 @@
 ---
-layout: network 
+layout: network
 permalink: /network/hasan-macit/
 name: Hasan Macit
 github: Muriturca
 website: https://www.staticolour.com/
-email: hsnmct98@gmail.com 
+email: hsnmct98@gmail.com
 country: Turkey
 location: Ankara/Karaman/Antalya
 role: Moderator

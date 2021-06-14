@@ -9,7 +9,7 @@ title: Community of programmers and software engineers
 	Community of programmers and software engineers
 </h1>
 
-Do you want to see yourself here? click [here](https://github.com/BaseMax/NextCommunity){:target="_blank"} to add your own.
+Do you want to see yourself here? click [here](https://github.com/BaseMax/NextCommunity){:target="\_blank"} to add your own.
 
 <style type="text/css">
 ul.accounts li {

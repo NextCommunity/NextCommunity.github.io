@@ -18,38 +18,35 @@ I'm young but I have been working with computers since I was a child and it is a
 - Birthday - 28 May.
 - Research interests - Compiler and system. (I'm not a researcher, just a learner)
 - Interests - Back-End and Web development.
-- Alma mater - [University of Kashan](https://kashanu.ac.ir/en/){:target="_blank"} (2019).
-- Education Fields - [Applied mathematics](https://en.wikipedia.org/wiki/Applied_mathematics){:target="_blank"}, [Pure mathematics](https://en.wikipedia.org/wiki/Pure_mathematics){:target="_blank"}.
-- Scientific career - [Computer science](https://en.wikipedia.org/wiki/Computer_science){:target="_blank"}.
+- Alma mater - [University of Kashan](https://kashanu.ac.ir/en/){:target="\_blank"} (2019).
+- Education Fields - [Applied mathematics](https://en.wikipedia.org/wiki/Applied_mathematics){:target="\_blank"}, [Pure mathematics](https://en.wikipedia.org/wiki/Pure_mathematics){:target="\_blank"}.
+- Scientific career - [Computer science](https://en.wikipedia.org/wiki/Computer_science){:target="\_blank"}.
 - Institutions - GitHub.
-- Musical Likes - [Violon](https://en.wikipedia.org/wiki/Violon){:target="_blank"}, [Kamancheh](https://en.wikipedia.org/wiki/Kamancheh){:target="_blank"}, [Piano](https://en.wikipedia.org/wiki/Piano){:target="_blank"}, [Electronic keyboard](https://en.wikipedia.org/wiki/Electronic_keyboard){:target="_blank"}.
-- Sport - [Table tennis](https://en.wikipedia.org/wiki/Table_tennis){:target="_blank"}.
+- Musical Likes - [Violon](https://en.wikipedia.org/wiki/Violon){:target="\_blank"}, [Kamancheh](https://en.wikipedia.org/wiki/Kamancheh){:target="\_blank"}, [Piano](https://en.wikipedia.org/wiki/Piano){:target="\_blank"}, [Electronic keyboard](https://en.wikipedia.org/wiki/Electronic_keyboard){:target="\_blank"}.
+- Sport - [Table tennis](https://en.wikipedia.org/wiki/Table_tennis){:target="\_blank"}.
 
 ## Experience
 
+- **[GitHub](https://github.com/){:target="\_blank"}**: Open source maintainer
+  <br>
+  _2013 – Present, Remote_
 
-- **[GitHub](https://github.com/){:target="_blank"}**: Open source maintainer
-	<br>
-	_2013 – Present, Remote_
+  As one of world most active programmers (11th in GitHub ranking), I'm one member of team and help to open source community day by day.
+  [Open Source Friday campaign](https://opensourcefriday.com){:target="\_blank"} and other my repositories.
 
-	As one of world most active programmers (11th in GitHub ranking), I'm one member of team and help to open source community day by day.
-	[Open Source Friday campaign](https://opensourcefriday.com){:target="_blank"} and other my repositories.
+- **[Scandinavian Transport Network](https://stntaxi.se/){:target="\_blank"}**: Senior Software Engineer
+  <br>
+  _Oct 2018 – Oct 2020, Contract (Remote), Linköping, Ostergotland County, Sweden_
 
+  Help shape the business from start to final. To reach the customer and support problems. (AWS, Google Cloud, Web Services, etc) Web design, development of mobile applications and map and location infrastructure, driver and customer software.
+  ES6, Javascript, PHP, CSS, Linux administration problems, React, Web development, IOS and Android software development, Qt C++ …
+  [https://stntaxi.org/](https://stntaxi.org/){:target="\_blank"}
 
-- **[Scandinavian Transport Network](https://stntaxi.se/){:target="_blank"}**: Senior Software Engineer
-	<br>
-    _Oct 2018 – Oct 2020, Contract (Remote), Linköping, Ostergotland County, Sweden_
+- **[Asrez Group](https://asrez.com/){:target="\_blank"}**: Technical Manager
+  <br>
+  _2015 – 2020, Canada, Germany, Sweden, India, Iran_
 
-	Help shape the business from start to final. To reach the customer and support problems. (AWS, Google Cloud, Web Services, etc) Web design, development of mobile applications and map and location infrastructure, driver and customer software.
-	ES6, Javascript, PHP, CSS, Linux administration problems, React, Web development, IOS and Android software development, Qt C++ …
-	[https://stntaxi.org/](https://stntaxi.org/){:target="_blank"}
-
-
-- **[Asrez Group](https://asrez.com/){:target="_blank"}**: Technical Manager
-	<br>
-	_2015 – 2020, Canada, Germany, Sweden, India, Iran_
-
-	Experience: Web, Android, JavaScript, PHP, C, ReactJS, VueJS, etc.
+  Experience: Web, Android, JavaScript, PHP, C, ReactJS, VueJS, etc.
 
 ## Work and cooperation with me
 
@@ -128,20 +125,19 @@ On another side of programming and technical cooperation, I can also speak at yo
 
 ## My Projects
 
-I have so many projects and repositories in GitHub you can see them [here](https://github.com/BaseMax?tab=repositories){:target="_blank"}. 
+I have so many projects and repositories in GitHub you can see them [here](https://github.com/BaseMax?tab=repositories){:target="\_blank"}.
 But totally my main projects are following:
 
-- **[One Programming Language](https://github.com/One-Language/){:target="_blank"}**: One (onelang) is an open-source system programming language that makes it easy to build reliable, efficient and performant software.
-- **[Donya Operating system](https://github.com/DonyaOS){:target="_blank"}**: Donya is an Operating system. Yet Another Linux distro built using a package management system.
+- **[One Programming Language](https://github.com/One-Language/){:target="\_blank"}**: One (onelang) is an open-source system programming language that makes it easy to build reliable, efficient and performant software.
+- **[Donya Operating system](https://github.com/DonyaOS){:target="\_blank"}**: Donya is an Operating system. Yet Another Linux distro built using a package management system.
 
 ## Involved Projects
 
-- [Open Source Friday](https://opensourcefriday.com/){:target="_blank"} - This Friday, invest a few hours contributing to the software you use and love.
-- [iAPK](https://en.iapk.org/){:target="_blank"} - Android Application Market with 7 diffrent languages. (French, Swedish, English, Persian, etc)
-- [Sarrafchi](https://sarrafchi.ir/){:target="_blank"} - A free website to get live currency rates in Free Market.
-- [Ye Film](https://yefilm.ir/){:target="_blank"} - A free website to download movies and animations.
-- [UDate](https://udate.ir/){:target="_blank"} - A free website to see persian calendar to see days and occasions of the year and month (Convert date to each other)
-
+- [Open Source Friday](https://opensourcefriday.com/){:target="\_blank"} - This Friday, invest a few hours contributing to the software you use and love.
+- [iAPK](https://en.iapk.org/){:target="\_blank"} - Android Application Market with 7 diffrent languages. (French, Swedish, English, Persian, etc)
+- [Sarrafchi](https://sarrafchi.ir/){:target="\_blank"} - A free website to get live currency rates in Free Market.
+- [Ye Film](https://yefilm.ir/){:target="\_blank"} - A free website to download movies and animations.
+- [UDate](https://udate.ir/){:target="\_blank"} - A free website to see persian calendar to see days and occasions of the year and month (Convert date to each other)
 
 <h2 id="blog-posts">
   <a href="/blog/">&uarr;</a>
@@ -152,7 +148,7 @@ But totally my main projects are following:
   {% for post in site.posts %}
     <li>
       {% assign date_format = site.cayman-blog.date_format | default: "%b %-d, %Y" %}
-		<i>{{ post.date | date: date_format }}</i>: 
+		<i>{{ post.date | date: date_format }}</i>:
 			<a href="{{ post.url | relative_url }}" title="{{ post.title }}">
 			{{ post.title | escape }}
 		</a>
@@ -164,15 +160,15 @@ But totally my main projects are following:
 
 - **Jan 2019:** International Gap workshop - Introduction to GAP System and its Application on group theory (Dihedral group, Monster group, etc)
 
-- **May 2019**: [Computer and Informatics Department, University of Kashan](https://kashanu.ac.ir/){:target="_blank"} - Introduction to "ONE Programming language" and why my compiler?
+- **May 2019**: [Computer and Informatics Department, University of Kashan](https://kashanu.ac.ir/){:target="\_blank"} - Introduction to "ONE Programming language" and why my compiler?
 
-- **Jan 2020**: [12th Iranian International Group Theory Conference](https://igtc12.modares.ac.ir/){:target="_blank"} GAP (Group Algorithm Programming)
+- **Jan 2020**: [12th Iranian International Group Theory Conference](https://igtc12.modares.ac.ir/){:target="\_blank"} GAP (Group Algorithm Programming)
 
-- **Feb 2021**: [51st Annual of Iranian Mathematics Conference](https://aimc51.kashanu.ac.ir/){:target="_blank"} - Programming from the perspective of group theory
+- **Feb 2021**: [51st Annual of Iranian Mathematics Conference](https://aimc51.kashanu.ac.ir/){:target="\_blank"} - Programming from the perspective of group theory
 
-- **Jan 2021**: [Meeting Baz](https://t.me/MeetingBazzz){:target="_blank"} - Compiler Design and Structure of JIT(Just In-time)
+- **Jan 2021**: [Meeting Baz](https://t.me/MeetingBazzz){:target="\_blank"} - Compiler Design and Structure of JIT(Just In-time)
 
-- **August 2021**: [POSSF](https://possf.ir){:target="_blank"} (Persian Open Source Software Festival) - Keynote speaker
+- **August 2021**: [POSSF](https://possf.ir){:target="\_blank"} (Persian Open Source Software Festival) - Keynote speaker
 
 <!--
 ## Publications White Papers
@@ -190,24 +186,22 @@ But totally my main projects are following:
 - **2020 – 2021**: Introduction to Git; Seyyed Ali Mohammadieyeh (Soon)
  -->
 
-
-
 ## Social Network of Max Base
 
-- **GitHub**: [BaseMax](https://github.com/basemax){:target="_blank"}
-- **Telegram**: [@MAX_BASE](https://t.me/MAX_BASE){:target="_blank"}
-- **Skype**: Max Base, [https://join.skype.com/invite/kD13cbbNTLDV](https://join.skype.com/invite/kD13cbbNTLDV){:target="_blank"}
-- **Gitlab**: [BaseMax](https://gitlab.com/BaseMax){:target="_blank"}
-- **Stackoverflow**: [max-base](https://stackoverflow.com/users/10096230/max-base){:target="_blank"}
+- **GitHub**: [BaseMax](https://github.com/basemax){:target="\_blank"}
+- **Telegram**: [@MAX_BASE](https://t.me/MAX_BASE){:target="\_blank"}
+- **Skype**: Max Base, [https://join.skype.com/invite/kD13cbbNTLDV](https://join.skype.com/invite/kD13cbbNTLDV){:target="\_blank"}
+- **Gitlab**: [BaseMax](https://gitlab.com/BaseMax){:target="\_blank"}
+- **Stackoverflow**: [max-base](https://stackoverflow.com/users/10096230/max-base){:target="\_blank"}
 
 ## Contact me
 
 - **Email**:
-	
-	You can send email for me to maxbasecode (at) gmail.com. I read everything sent there, but I receive too much email to respond to everything.
+
+  You can send email for me to maxbasecode (at) gmail.com. I read everything sent there, but I receive too much email to respond to everything.
 
 - **Phone**:
-	- **+46 ............**
-	- **+1  ............** (International business contacts)
+  - **+46 ............**
+  - **+1 ............** (International business contacts)
 
 Please be sure to coordinate via email before calling and I will never have a phone with me.
