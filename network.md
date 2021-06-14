@@ -56,7 +56,6 @@ ul.accounts h4, ul.accounts h5, ul.accounts h6 {
       <h5>{{ network.role }}</h5>
       <h6>{{ network.country}}, {{ network.location}}</h6>
     </div>
-    </a>
   </li>
   {% endfor %}
 </ul>
