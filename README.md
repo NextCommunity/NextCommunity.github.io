@@ -1,6 +1,6 @@
 # Next Community
 
-It's the personal website and blog of Max Base built with Jekyll and powered by GitHub server.
+Community of open-source programmers or software engineers.
 
 ## Want to add yourself?
 
@@ -30,5 +30,9 @@ languages: c php js css3 html5
 
 A biography and profile text about your technical skills and your situation
 ```
+
+---------
+
+It's the website and blog of Max Base built with Jekyll and powered by GitHub server.
 
 © Copyright Max Base, 2021
