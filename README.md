@@ -5,7 +5,7 @@ Community of open-source programmers or software engineers.
 ## Want to add yourself?
 
 - Fork this repository
-- Create a new fiel with your github username at `_networks` directory, for example if your github username is Max, so please create `_networks/max.md` file.
+- Create a new field with your GitHub username at `_networks` directory, for example if your GitHub username is Max, so please create `_networks/max.md` file.
 - Fill your information and name at the file.
 - Send Pull request.
 - Wait for moderators to merge your PR.
