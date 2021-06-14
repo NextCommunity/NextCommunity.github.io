@@ -232,32 +232,6 @@ But totally my main projects are following:
  -->
 
 
-## Open Source Staff
-
-
-<b>JavaScript</b>
-<ul>
-  <li>
-    <a href="https://github.com/BaseMax/AirplaneTicketFirefox" alt="AirplaneTicketFirefox - The firefox addon for analyzing the purchase of Airplane tickets.">AirplaneTicketFirefox</a>: 
-    <span>The firefox addon for analyzing the purchase of Airplane tickets.</span>
-  </li>
-  <li>
-    <a href="https://github.com/BaseMax/BrowserFeaturesJs" alt="BrowserFeaturesJs - Tiny Library for browser features detection.">BrowserFeaturesJs</a>: 
-    <span>Tiny Library for browser features detection.</span>
-  </li>
-  <li>
-    <a href="https://github.com/BaseMax/ChangeNumbersJs" alt="ChangeNumbersJs - Tiny Library for change number from a language in other language.">ChangeNumbersJs</a>: 
-    <span>Tiny Library for change number from a language in other language.</span>
-  </li>
-  <li>
-    <a href="https://github.com/BaseMax/ChessDesktopElectron" alt="ChessDesktopElectron - Chess game with two player based on electron. (SOON)">ChessDesktopElectron</a>: 
-    <span>Chess game with two player based on electron. (SOON)</span>
-  </li>
-  <li>
-    <a href="https://github.com/BaseMax/ChessWeb" alt="ChessWeb - Chess game with two player. (SOON)">ChessWeb</a>: 
-    <span>Chess game with two player. (SOON)</span>
-  </li>
-  <li>
 
 ## Social Network of Max Base
 
