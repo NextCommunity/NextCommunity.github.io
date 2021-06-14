@@ -6,7 +6,6 @@ title: Max Base - Open Source Staff
 
 # Open Source Staff
 
-{{{ TABLES }}}
 <b>JavaScript</b>
 <ul>
   <li>
