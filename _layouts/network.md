@@ -4,7 +4,7 @@ layout: default
 
 <article itemscope itemtype="http://schema.org/BlogPosting">
   <h1>
-    <a href="/">&uarr;</a>
+    <a href="/network/">&uarr;</a>
     Network Profile: {{ page.name }}
   </h1>
   <b><span class="subtitle">{{ page.role }}</span></b>
