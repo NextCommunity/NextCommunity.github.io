@@ -134,7 +134,7 @@ But totally my main projects are following:
 ## Involved Projects
 
 - [Open Source Friday](https://opensourcefriday.com/){:target="\_blank"} - This Friday, invest a few hours contributing to the software you use and love.
-- [iAPK](https://en.iapk.org/){:target="\_blank"} - Android Application Market with 7 diffrent languages. (French, Swedish, English, Persian, etc)
+- [iAPK](https://en.iapk.org/){:target="\_blank"} - Android Application Market with 7 different languages. (French, Swedish, English, Persian, etc)
 - [Sarrafchi](https://sarrafchi.ir/){:target="\_blank"} - A free website to get live currency rates in Free Market.
 - [Ye Film](https://yefilm.ir/){:target="\_blank"} - A free website to download movies and animations.
 - [UDate](https://udate.ir/){:target="\_blank"} - A free website to see persian calendar to see days and occasions of the year and month (Convert date to each other)

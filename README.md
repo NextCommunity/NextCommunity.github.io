@@ -17,7 +17,7 @@ A community for open-source programmers and software engineers.
 ```md
 ---
 layout: network <!-- DO NOT CHANGE THIS -->
-permalink: /network/your-full-name-without-space/ <!-- name-surname -->
+permalink: /network/your-full-name-without-space/ <!-- NAME-SURNAME -->
 name: Your full name
 github: your-github-username
 website: http://site.org/ <!-- LINK TO YOUR WEBSITE -->
