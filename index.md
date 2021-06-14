@@ -3,8 +3,6 @@ layout: default
 title: Max Base - Software Engineer and Open source maintainer
 ---
 
-
-
 # Max Base
 
 <!-- ([Also available in Persian](https://maxbase.ir/){:target="_blank"}) -->
