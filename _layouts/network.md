@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Network Profile: {{ page.name }}
+title: Network Profile
 ---
 
 <article itemscope itemtype="http://schema.org/BlogPosting">
@@ -28,5 +28,4 @@ title: Network Profile: {{ page.name }}
       </td>
     </tr>
   </table>
-
 </article>
