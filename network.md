@@ -45,12 +45,13 @@ ul.accounts h4, ul.accounts h5, ul.accounts h6 {
 {% for network in site.networks %}
   <li>
     <a href="{{ network.url | relative_url }}">
-    <img src="https://github.com/{{ network.github }}.png?size=80" width="60">
-    <div>
-      <h4>{{ network.name }}</h4>
-      <h5>{{ network.role }}</h5>
-      <h6>{{ network.country}}, {{ network.location}}</h6>
-    </div>
+       <img src="https://github.com/{{ network.github }}.png?size=80" width="60">
+       <div>
+         <h4>{{ network.name }}</h4>
+         <h5>{{ network.role }}</h5>
+         <h6>{{ network.country}}, {{ network.location}}</h6>
+       </div>
+    </a>
   </li>
 {% endfor %}
 </ul>
