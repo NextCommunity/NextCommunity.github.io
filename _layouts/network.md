@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Network Profile: {{ page.name }}
 ---
 
 <article itemscope itemtype="http://schema.org/BlogPosting">
