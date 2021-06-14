@@ -4,7 +4,10 @@ permalink: /about/
 title: Max Base - Software Engineer and Open source maintainer
 ---
 
-# Max Base
+<h1>
+<a href="/">&uarr;</a>
+Max Base
+</h1>
 
 ## Who I Am: Software Engineer and Open source maintainer
 

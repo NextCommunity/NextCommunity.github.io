@@ -4,6 +4,7 @@ A community for open-source programmers and software engineers.
 
 ## Do you want to add yourself?
 
+- Star this repository
 - Fork this repository
 - Create a new Markdown file with your GitHub username at `_networks`. For example, if your GitHub username is Max, you should create a Markdown file named `max.md` in the `_networks` folder. So, the directory to your file should be `_networks/max.md`.
 - Copy the template below and paste it to the Markdown file you've just created. **(First line should NOT be blank.)**
