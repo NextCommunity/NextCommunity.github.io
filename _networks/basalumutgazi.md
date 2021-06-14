@@ -5,7 +5,7 @@ name: Umut Gazi BAŞAL
 github: basalumutgazi
 website:
 email: basalumutgazi@gmail.com
-country: Turkeys
+country: Turkey
 location: İstanbul/Kırıkkale
 role: Translator and Python Developer
 languages: Python
