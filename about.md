@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Max Base - About me: Software Engineer and Open source maintainer
 permalink: /about/
+title: Max Base - About me: Software Engineer and Open source maintainer
 ---
 
 # About Max Base
