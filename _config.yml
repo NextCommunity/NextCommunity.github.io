@@ -2,8 +2,9 @@ title: "Max Base"
 description: "@github developer maintainer. Full-Time Open-Sourcerer. Full-stack programmer. In the path of a real computer engineer... (Compiler enthusiast)"
 markdown: kramdown
 plugins:
-  - jekyll-sitemap
   - jekyll-admin
+  - jekyll-sitemap
+  - jemoji
 
 collections:
   networks:
@@ -25,9 +26,17 @@ jekyll_admin:
 
 exclude:
   - .all-contributorsrc
+  - .editorconfig
+  - .github
   - .gitignore
+  - .jekyll-cache
+  - .pre-commit-config.yaml
   - CODEOWNERS
   - codespell.txt
+  - demo1.jpg
+  - demo2.jpg
   - Gemfile
   - Gemfile.lock
+  - vendor
   - server
+  - super-linter.report
