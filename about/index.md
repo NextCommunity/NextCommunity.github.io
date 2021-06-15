@@ -11,7 +11,7 @@ Max Base
 
 ## Who I Am: Software Engineer and Open source maintainer
 
-As a Full-stack developer I tried many different area of computer science. from assembly and system to web development and design. From high processing and high traffic to algorithm design.
+As a Full-stack developer I tried many areas of computer science. From assembly and system to web development and design. From high processing and high traffic to algorithm design.
 
 I'm young, but I have been working with computers since I was a child, and it is a big part of my life.
 
@@ -22,7 +22,7 @@ I'm young, but I have been working with computers since I was a child, and it is
 - Education Fields - [Applied mathematics](https://en.wikipedia.org/wiki/Applied_mathematics){:target="\_blank"}, [Pure mathematics](https://en.wikipedia.org/wiki/Pure_mathematics){:target="\_blank"}.
 - Scientific career - [Computer science](https://en.wikipedia.org/wiki/Computer_science){:target="\_blank"}.
 - Institutions - GitHub.
-- Musical Likes - [Violon](https://en.wikipedia.org/wiki/Violin){:target="\_blank"}, [Kamancheh](https://en.wikipedia.org/wiki/Kamancheh){:target="\_blank"}, [Piano](https://en.wikipedia.org/wiki/Piano){:target="\_blank"}, [Electronic keyboard](https://en.wikipedia.org/wiki/Electronic_keyboard){:target="\_blank"}.
+- Musical Likes - [Violin](https://en.wikipedia.org/wiki/Violin){:target="\_blank"}, [Kamancheh](https://en.wikipedia.org/wiki/Kamancheh){:target="\_blank"}, [Piano](https://en.wikipedia.org/wiki/Piano){:target="\_blank"}, [Electronic keyboard](https://en.wikipedia.org/wiki/Electronic_keyboard){:target="\_blank"}.
 - Sport - [Table tennis](https://en.wikipedia.org/wiki/Table_tennis){:target="\_blank"}.
 
 ## Experience
@@ -160,7 +160,7 @@ But totally my main projects are following:
 
 - **Jan 2019:** International Gap workshop - Introduction to GAP System and its Application on group theory (Dihedral group, Monster group, etc)
 
-- **May 2019**: [Computer and Informatics Department, University of Kashan](https://kashanu.ac.ir/){:target="\_blank"} - Introduction to "ONE Programming language" and why my compiler?
+- **May 2019**: [Computer and Informatics Department, University of Kashan](https://kashanu.ac.ir/){:target="\_blank"} - Introduction to "ONE Programming Language" and why my compiler?
 
 - **Jan 2020**: [12th Iranian International Group Theory Conference](https://igtc12.modares.ac.ir/){:target="\_blank"} GAP (Group Algorithm Programming)
 
@@ -192,7 +192,7 @@ But totally my main projects are following:
 - **Telegram**: [@MAX_BASE](https://t.me/MAX_BASE){:target="\_blank"}
 - **Skype**: Max Base, [https://join.skype.com/invite/kD13cbbNTLDV](https://join.skype.com/invite/kD13cbbNTLDV){:target="\_blank"}
 - **GitLab**: [BaseMax](https://gitlab.com/BaseMax){:target="\_blank"}
-- **Stackoverflow**: [max-base](https://stackoverflow.com/users/10096230/max-base){:target="\_blank"}
+- **Stack Overflow**: [max-base](https://stackoverflow.com/users/10096230/max-base){:target="\_blank"}
 
 ## Contact me
 
