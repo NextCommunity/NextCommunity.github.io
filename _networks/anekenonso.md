@@ -1,5 +1,5 @@
 ---
-layout: network <!-- DO NOT CHANGE THIS -->
+layout: network
 permalink: /network/anekenonso
 name: okenwa kenneth
 github: Anekenonso
@@ -8,7 +8,7 @@ email: okenwanonsokenneth@gmail.com
 country: Nigeria
 location: Enugu
 role: Web Developer
-languages: html5,CSS3,JavaScript
+languages: html5 CSS3 JavaScript
 ---
 
 I'm a web developer from Nigeria and my focus is on the Front-end.
