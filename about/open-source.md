@@ -942,8 +942,8 @@ title: Max Base - Open Source Staff
     <span>A tiny and powerful library for converting calendar date units. (gregorian, jalali)</span>
   </li>
   <li>
-    <a href="https://github.com/BaseMax/cUrlC" alt="cUrlC - Sample cUrl program to send request and recive response using C.">cUrlC</a>:
-    <span>Sample cUrl program to send request and recive response using C.</span>
+    <a href="https://github.com/BaseMax/cUrlC" alt="cUrlC - Sample cUrl program to send request and receive response using C.">cUrlC</a>:
+    <span>Sample cUrl program to send request and receive response using C.</span>
   </li>
   <li>
     <a href="https://github.com/BaseMax/dcat" alt="dcat - Implementation cat unix tools using pure C programming language. cat is a standard Unix utility that reads files sequentially, writing them to standard output. (cat: concatenate files)">dcat</a>:
