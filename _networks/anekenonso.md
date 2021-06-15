@@ -1,7 +1,7 @@
 ---
 layout: network
 permalink: /network/anekenonso
-name: okenwa kenneth
+name: Okenwa Kenneth
 github: Anekenonso
 website: http://anekenonso.com
 email: okenwanonsokenneth@gmail.com
