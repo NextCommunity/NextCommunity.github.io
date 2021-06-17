@@ -21,6 +21,12 @@ Do you want to see yourself here? Click [here](https://github.com/BaseMax/NextCo
 .accounts tr .second {
   font-size: 20px;
 }
+.accounts tr h1, .accounts tr h2, .accounts tr h3, .accounts tr h4, .accounts tr h5, .accounts tr h6 {
+  margin-left: 0px !important;
+  padding-left: 0px !important;
+  margin-right: 0px !important;
+  padding-right: 0px !important;
+}
 .accounts tr .second * {
   font-size: initial;
 }
