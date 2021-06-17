@@ -43,21 +43,23 @@ ul.accounts li a.avatar:hover {
 
 ## List of members
 
-<ul class="accounts">
+<table class="accounts" width="100%" border="0">
   {% for network in site.networks %}
-  <li>
-    <a href="{{ network.url | relative_url }}" class="avatar">
-      <img src="https://github.com/{{ network.github }}.png?size=80" width="60">
-    </a>
-    <div>
-      <a href="{{ network.url | relative_url }}">
-        <h4>
+  <tr> 
+    <td width="auto">
+       <a href="{{ network.url | relative_url }}" class="avatar">
+         <img src="https://github.com/{{ network.github }}.png?size=80" width="60">
+       </a>
+    </td>
+    <td>
+      <h4>
+        <a href="{{ network.url | relative_url }}">
           {{ network.name }}
-        </h4>
-      </a>
+        </a>
+      </h4>
       <h5>{{ network.role }}</h5>
       <h6>{{ network.country}}, {{ network.location}}</h6>
-    </div>
-  </li>
+    </td>
+  </tr>
   {% endfor %}
 </ul>
