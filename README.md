@@ -25,6 +25,7 @@ email: your-email@gmail.com
 instagram: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
 twitter: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
 linkedin: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
+facebook: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
 country: Iran
 location: Isfahan
 role: Web Developer
