@@ -37,6 +37,6 @@ A short biography and a short text about your technical skills.
 
 ---
 
-It's the website and blog of Max Base built with Jekyll and powered by GitHub server.
+It's the website and blog of [Max Base](https://maxbase.org/) built with Jekyll and powered by GitHub server.
 
 © Copyright Max Base, 2021
