@@ -1,9 +1,9 @@
 ---
-layout: network <!-- DO NOT CHANGE THIS -->
-permalink: /network/ajakov/ <!-- GITHUB-USERNAME -->
+layout: network
+permalink: /network/ajakov/
 name: Aleksandar Jakovljević
 github: ajakov
-website: https://aleksandarjakovljevic.com/ <!-- LINK TO YOUR WEBSITE -->
+website: https://aleksandarjakovljevic.com/
 email: aleksandarjakovljevic@gmail.com
 instagram: https://www.instagram.com/aleksandarjakovljevic/
 twitter: https://twitter.com/aleksandar_sd
