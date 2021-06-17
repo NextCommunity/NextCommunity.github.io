@@ -12,30 +12,30 @@ title: Community of programmers and software engineers
 Do you want to see yourself here? Click [here](https://github.com/BaseMax/NextCommunity){:target="\_blank"} to add your own.
 
 <style type="text/css">
-.accounts li {
+.accounts tr {
   float: left;
   width: 100%;
   list-style: none;
   margin-bottom: 10px;
 }
-.accounts li img {
+.accounts tr img {
   float: left;
   margin-right: 10px;
 }
-.accounts li div {
+.accounts tr div {
   float: left;
   font-size: 20px;
 }
-.accounts ul div * {
+.accounts tr div * {
   font-size: initial;
 }
-.accounts h4, ul.accounts h5, ul.accounts h6 {
+.accounts h4, .accounts h5, .accounts h6 {
   padding: 0;
   margin: 0;
   background: transparent !important;
   border: 0px !important;
 }
-.accounts li a.avatar:hover {
+.accounts tr a.avatar:hover {
   background: transparent !important;
   border: 0px !important;
 }
