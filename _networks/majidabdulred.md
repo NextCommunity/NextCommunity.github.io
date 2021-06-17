@@ -11,4 +11,4 @@ role: Bot Developer
 languages: python html5 css js c
 ---
 
-A freelancer and Pythonista. I love everything that's in Python. My skills are web scraping, Discord bot development, API integration and automation. 
+A freelancer and Pythonista. I love everything that's in Python. My skills are web scraping, Discord bot development, API integration and automation.
