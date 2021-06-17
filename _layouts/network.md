@@ -18,7 +18,7 @@ title: Network Profile
 
   <table width="100%" border="0">
     <tr>
-      <td>
+      <td valign="top">
         <a href="https://github.com/{{ page.github }}/">
           <img src="https://github.com/{{ page.github }}.png?size=80" width="60">
         </a>
