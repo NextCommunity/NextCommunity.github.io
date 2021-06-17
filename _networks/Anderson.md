@@ -1,6 +1,6 @@
 ---
-layout: 
-permalink: 
+layout: network
+permalink: /network/anderson-garcia/
 name: Anderson Steve García
 github: Anderson-Garcia
 website:
