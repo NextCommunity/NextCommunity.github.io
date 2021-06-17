@@ -28,4 +28,5 @@ Professional Web Developer and Web technology enthusiast. Working with web techn
 9. Elixir Lang, Phoenix
 10. React JS, JavaScript
 11. Flutter / Dart
+
 I am moreover into latest technology and good parts of anything out there always learning. I make open source contributions frequently on GitHub.
