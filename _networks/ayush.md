@@ -19,6 +19,6 @@ languages: JS, React, TS , GraphQL
 _SKILLS_
 
 - NodeJS, Express
-- Javascript, HTML, CSS, MySQL, 
-- DevOps - Linux-based systems -  nginx, bash, 
+- Javascript, HTML, CSS, MySQL,
+- DevOps - Linux-based systems - nginx, bash,
 - Design - Photoshop, Illustrator, Figma
