@@ -1,7 +1,7 @@
 ---
 layout: network
 permalink: /network/enimiste/
-name: NE
+name: Nouni Elbachir
 github: enimiste
 website:
 email: nouni.elbachir@gmail.com
