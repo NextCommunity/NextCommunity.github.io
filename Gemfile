@@ -1,8 +1,16 @@
 source 'https://rubygems.org'
-gem 'jekyll'
-gem 'jekyll-target-blank'
-gem 'jekyll-sitemap'
-gem 'jekyll-admin', group: :jekyll_plugins
 
-gem 'jemoji'
-gem "webrick", "~> 1.7"
+# gem "jekyll"
+
+# If you want to use GitHub Pages, remove the "gem "jekyll"" above and
+# uncomment the line below. To upgrade, run `bundle update github-pages`.
+gem 'github-pages', group: :jekyll_plugins
+
+# If you have any plugins, put them here!
+group :jekyll_plugins do
+  gem 'jekyll-sitemap'
+  gem 'jekyll-target-blank'
+  gem 'jemoji'
+end
+
+gem 'webrick', '~> 1.7'
