@@ -1,14 +1,14 @@
 ---
-layout: network <!-- DO NOT CHANGE THIS -->
-permalink: /network/prio101/ <!-- GITHUB-USERNAME -->
+layout: network
+permalink: /network/prio101/
 name: Mahabub Islam
 github: prio101
-website: http://mahabub.space/ <!-- LINK TO YOUR WEBSITE -->
+website: http://mahabub.space/
 email: miprio101@gmail.com
-instagram: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
+instagram:
 twitter: https://twitter.com/prio_mahabub
 linkedin: https://www.linkedin.com/in/miprio101/
-facebook: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
+facebook:
 country: Bangladesh
 location: Sirajganj
 role: Web Developer
