@@ -46,7 +46,7 @@ Do you want to see yourself here? Click [here](https://github.com/BaseMax/NextCo
 
 <table class="accounts" width="100%" border="0">
   {% for network in site.networks %}
-  <tr> 
+  <tr>
     <td width="auto">
        <a href="{{ network.url | relative_url }}" class="avatar">
          <img src="https://github.com/{{ network.github }}.png?size=80" width="60">
