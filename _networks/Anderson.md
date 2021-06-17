@@ -1,6 +1,6 @@
 ---
-layout: network
-permalink: /network/umut-gazi-basal/
+layout: 
+permalink: 
 name: Anderson Steve García
 github: Anderson-Garcia
 website:
