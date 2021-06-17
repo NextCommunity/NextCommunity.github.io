@@ -8,7 +8,7 @@ email: aegiptogt@gmail.com
 country: Venezuela
 location: Valencia
 role: Translator, psychologist, text editor.
-languages: 
+languages:
 ---
 
 English Spanish Translator / Psychologist / Academic writer
