@@ -15,7 +15,7 @@ role: Web Developer
 languages: ruby elixir js python3 css3 html5
 ---
 
-Professional Web Developer and Web technology enthusiast . Working with web technology with passion for around 5 years. Here is some key skills I can point out about me,
+Professional Web Developer and Web technology enthusiast. Working with web technology with passion for around 5 years. Here is some key skills I can point out about me,
 
 1. Test Driven Development .
 2. Through On Documentation .
