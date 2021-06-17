@@ -6,7 +6,7 @@ github: ayushrana182
 website: https://tiny.cc/ayushrana
 email: ayushrana182@gmail.com
 instagram: n/a
-twitter: https://twitter.com/aleksandar_sd
+twitter: https://twitter.com/AyushRana7
 linkedin: https://www.linkedin.com/in/ayush-rana-725460135/
 country: Nepal
 location: Kathmandu
