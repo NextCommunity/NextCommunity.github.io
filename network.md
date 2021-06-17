@@ -18,15 +18,10 @@ Do you want to see yourself here? Click [here](https://github.com/BaseMax/NextCo
   list-style: none;
   margin-bottom: 10px;
 }
-.accounts tr img {
-  float: left;
-  margin-right: 10px;
-}
-.accounts tr div {
-  float: left;
+.accounts tr .second {
   font-size: 20px;
 }
-.accounts tr div * {
+.accounts tr .second * {
   font-size: initial;
 }
 .accounts h4, .accounts h5, .accounts h6 {
@@ -51,7 +46,7 @@ Do you want to see yourself here? Click [here](https://github.com/BaseMax/NextCo
          <img src="https://github.com/{{ network.github }}.png?size=80" width="60">
        </a>
     </td>
-    <td>
+    <td class="second">
       <h4>
         <a href="{{ network.url | relative_url }}">
           {{ network.name }}
