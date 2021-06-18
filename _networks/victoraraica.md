@@ -1,6 +1,6 @@
 ---
 layout: network
-permalink: /network/victoraraica/ 
+permalink: /network/victoraraica/
 name: Víctor Araica
 github: VictorAraica
 email: victoraraica@hotmail.com
@@ -12,4 +12,4 @@ role: Web Developer
 languages: python js css3 html5
 ---
 
-Hello, I'm Victor, I'm 19 years old and I live in Venezuela, I started programing in 2019 with Python as a hobby makins games and animations in pygame, and in 2020 I started learning about web development 
+Hello, I'm Victor, I'm 19 years old, and I live in Venezuela. I started programming in 2019 with Python as a hobby making games and animations in pygame, and in 2020 I started learning about web development.
