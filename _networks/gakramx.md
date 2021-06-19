@@ -12,7 +12,7 @@ facebook:
 country: Algeria
 location: M'sila
 role: Systems programmer 
-languages: c c++ assmebly python scheme bash
+languages: c c++ assembly python scheme bash
 ---
 I'm a software engineer & Electronic Technician, I have programming experience System Programming and Desktop Software,
 Also in embedded systems such as Arduino and Raspberry Pi .. etc.
