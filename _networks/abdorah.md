@@ -18,4 +18,4 @@ A short biography and a short text about your technical skills.
 
 I am a curious software engineering student at the national higher school of computer science and system analysis, ✨ENSIAS✨.
 I love coding and contributing in open source projects. Also, everytime I learn about a new topic or technology, I like to ✨ write articles and tutorials ✨ about it.
-I like to work also on ✨ competitve programming problems ✨ and learn from genius solutions.
+I like to work also on ✨ competitive programming problems ✨ and learn from genius solutions.
