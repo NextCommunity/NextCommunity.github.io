@@ -17,5 +17,5 @@ languages: c java js css3 html5 <!-- YOU SHOULDN'T USE SPACE IN THE NAME OF THE 
 A short biography and a short text about your technical skills.
 
 I am a curious software engineering student at the national higher school of computer science and system analysis, ✨ENSIAS✨.
-I love coding and contributing in open source projects. Also, everytime I learn about a new topic or technology, I like to ✨ write articles and tutorials ✨ about it.
+I love coding and contributing in open source projects. Also, every time I learn about a new topic or technology, I like to ✨ write articles and tutorials ✨ about it.
 I like to work also on ✨ competitive programming problems ✨ and learn from genius solutions.
