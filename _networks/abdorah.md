@@ -1,17 +1,17 @@
-layout: network <!-- DO NOT CHANGE THIS -->
-permalink: /network/abdorah/ <!-- GITHUB-USERNAME -->
+layout: network
+permalink: /network/abdorah/
 name: Kotbi Abderrahmane
 github: abdorah
-website: https://kotbiabderrahmane.web.app/ <!-- LINK TO YOUR WEBSITE -->
+website: https://kotbiabderrahmane.web.app/
 email: kotbymo@gmail.com
-instagram: https://www.instagram.com/kotbiabderrahmane/ <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-twitter: https://twitter.com/KotbiAbderrahm1 <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-linkedin: https://www.linkedin.com/in/abderrahmane-kotbi-59470a146/ <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-facebook: https://www.facebook.com/profile.php?id=100010553502928 <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
+instagram: https://www.instagram.com/kotbiabderrahmane/
+twitter: https://twitter.com/KotbiAbderrahm1
+linkedin: https://www.linkedin.com/in/abderrahmane-kotbi-59470a146/
+facebook: https://www.facebook.com/profile.php?id=100010553502928
 country: Morocco
 location: Rabat
 role: Web Developer
-languages: c java js css3 html5 <!-- YOU SHOULDN'T USE SPACE IN THE NAME OF THE PROGRAMMING LANGUAGE -->
+languages: c java js css3 html5
 ---
 
 A short biography and a short text about your technical skills.
