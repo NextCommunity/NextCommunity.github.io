@@ -19,7 +19,7 @@ I, Ali, and my nickname is Max. I am a software engineer and/or programmer.
 
 ## Next Community
 
-You can see a list of all [Community members](/network/){:target="\_blank"}, also you can join [here](https://github.com/BaseMax/NextCommunity#want-to-add-yourself){:target="\_blank"}.
+You can see a list of all [Community members](/network/){:target="\_blank"}, also you can join [here](https://github.com/NextCommunity/NextCommunity#do-you-want-to-add-yourself){:target="\_blank"}.
 
 ## Contact me
 
