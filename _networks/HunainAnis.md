@@ -1,18 +1,18 @@
 ---
-layout: network <!-- DO NOT CHANGE THIS -->
-permalink: /network/HunainAnis/ <!-- GITHUB-USERNAME -->
+layout: network
+permalink: /network/HunainAnis/
 name: Muhammad Hunain
 github: HunainAnis
-website: http://www.github.com/HunainAnis <!-- LINK TO YOUR WEBSITE -->
+website: http://www.github.com/HunainAnis
 email: hunainmuhammad@rocketmail.com
-instagram: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-twitter: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
+instagram:
+twitter:
 linkedin: https://linkedin.com/in/hunainanis
-facebook: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
+facebook:
 country: Pakistan
 location: Karachi
 role: React Frontend Developer
-languages: HTML CSS JavaScript Python <!-- YOU SHOULDN'T USE SPACE IN THE NAME OF THE PROGRAMMING LANGUAGE -->
+languages: HTML CSS JavaScript Python
 ---
 
 A Frontend ReactJS developer, who is pationate about Mastering Javascript.
