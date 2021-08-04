@@ -1,18 +1,15 @@
 ---
-layout: network <!-- DO NOT CHANGE THIS -->
-permalink: /network/abd-ar/ <!-- GITHUB-USERNAME -->
+layout: network
+permalink: /network/abd-ar/ 
 name: Abd Ar
 github: abd-ar
-website: http://abd.github.io/ <!-- LINK TO YOUR WEBSITE -->
+website: http://abd.github.io/
 email: abd.arstiae@gmail.com
-instagram: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
 twitter: https://twitter.com/abd_ink
-linkedin: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-facebook: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
 country: Pakistan
 location: ATD
 role: Web and App Developer
-languages: js css3 html5 <!-- YOU SHOULDN'T USE SPACE IN THE NAME OF THE PROGRAMMING LANGUAGE -->
+languages: js css3 html5
 ---
 
 I'm  a Student, Developer, Learner and Graphic Designer.
