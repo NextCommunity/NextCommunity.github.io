@@ -19,5 +19,5 @@ languages: JS, React, TS , GraphQL
 _SKILLS_
 
 - NodeJS, Express
-- Javascript, HTML, CSS, MySQL, 
+- Javascript, HTML, CSS, MySQL,
 - Design - Photoshop, Illustrator, Figma
