@@ -20,5 +20,4 @@ _SKILLS_
 
 - NodeJS, Express
 - Javascript, HTML, CSS, MySQL, 
-- DevOps - Linux-based systems -  nginx, bash, 
 - Design - Photoshop, Illustrator, Figma
