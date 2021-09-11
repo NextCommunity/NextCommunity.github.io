@@ -1,17 +1,18 @@
 ---
-layout: network <!-- DO NOT CHANGE THIS -->
-permalink: /network/codingSpecies/ <!-- GITHUB-USERNAME -->
+layout: network
+permalink: /network/codingSpecies/
 name: Coding Species
 github: CodingSpecies
-website: https://codingspecies.github.io/MeAndMyApps/ <!-- LINK TO YOUR WEBSITE -->
+website: https://codingspecies.github.io/MeAndMyApps/
 email: 
-instagram: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-twitter: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-linkedin: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-facebook: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
+instagram: 
+twitter: 
+linkedin: 
+facebook: 
 country: World
 location: World
 role: Web Developer
-languages: reactjs markdown js css3 html5 <!-- YOU SHOULDN'T USE SPACE IN THE NAME OF THE PROGRAMMING LANGUAGE -->
+languages: reactjs markdown js css3 html5
 ---
+
 Love to make new react apps, love to code
