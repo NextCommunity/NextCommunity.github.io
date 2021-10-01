@@ -1,6 +1,6 @@
 ---
 layout: network
-permalink: /network/abd-ar/ 
+permalink: /network/abd-ar/
 name: Abd Ar
 github: abd-ar
 website: http://abd.github.io/
@@ -12,6 +12,6 @@ role: Web and App Developer
 languages: js css3 html5
 ---
 
-I'm  a Student, Developer, Learner and Graphic Designer.
+I'm a Student, Developer, Learner and Graphic Designer.
 I’m interested in Web & App Development.
 I’m currently learning Flutter, React Native & Python.

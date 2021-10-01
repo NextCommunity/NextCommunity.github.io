@@ -4,11 +4,11 @@ permalink: /network/yhdesai/
 name: Yash Desai
 github: Yash Desai
 website: https://yashdesai.dev
-email: 
+email:
 instagram: https://www.instagram.com/yhdesai/
 twitter: https://www.twitter.com/yhdesai/
 linkedin: https://www.linkedin.com/in/yhdesai/
-facebook: 
+facebook:
 country: India
 location: Jalgaon, Maharashtra
 role: React Developer

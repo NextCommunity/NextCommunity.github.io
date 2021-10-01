@@ -5,9 +5,9 @@ name: Andrew Miracle
 github: koolamusic
 website: https://andrewmiracle.com
 email: me@andrewmiracle.com
-instagram: 
+instagram:
 twitter: https://twitter.com/koolamusic
-linkedin: 
+linkedin:
 country: Nigeria
 location: Lagos
 role: Software Engineer
