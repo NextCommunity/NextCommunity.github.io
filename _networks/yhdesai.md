@@ -2,7 +2,7 @@
 layout: network
 permalink: /network/yhdesai/
 name: Yash Desai
-github: Yash Desai
+github: yhdesai
 website: https://yashdesai.dev
 email:
 instagram: https://www.instagram.com/yhdesai/
