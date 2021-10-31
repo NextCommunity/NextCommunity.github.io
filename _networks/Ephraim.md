@@ -1,6 +1,6 @@
 ---
 layout: network
-permalink: /network/your-github-username-without-space/ <!-- GITHUB-USERNAME -->
+permalink: /network/Leo-Chan01/
 name: Umunnakwe Ephraim Ekene
 github: Leo-Chan01
 website: 
