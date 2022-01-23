@@ -3,16 +3,16 @@ layout: network
 permalink: /network/rtewari056/
 name: Rohit Tewari
 github: rtewari056
-website: 
+website:
 email: rtewari056@gmail.com
 instagram: https://www.instagram.com/rtewari056/
 twitter: https://twitter.com/rtewari056
 linkedin: https://www.linkedin.com/in/rtewari056/
-facebook: 
+facebook:
 country: India
 location: West Bengal
 role: Full-Stack Developer
-languages: C, C++, HTML, CSS, JavsScript, Python
+languages: C, C++, HTML, CSS, JavaScript, Python
 ---
 
 <br>
@@ -24,4 +24,3 @@ languages: C, C++, HTML, CSS, JavsScript, Python
 - 💼 I’m pursuing a Bachelor's degree in Software Engineering;
 
 - 🌱 Learning all about **Open Source**
- 
