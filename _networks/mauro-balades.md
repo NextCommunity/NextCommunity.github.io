@@ -5,10 +5,10 @@ name: Mauro Baladés
 github: mauro-balades
 website: http://maucode.com/
 email: mauro.balades@tutanota.com
-instagram: 
+instagram:
 twitter: https://twitter.com/Mauro60715204
-linkedin: 
-facebook: 
+linkedin:
+facebook:
 country: Spain
 location: Madri
 role: Programmer
