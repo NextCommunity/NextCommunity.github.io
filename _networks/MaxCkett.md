@@ -1,6 +1,6 @@
 ---
 layout: network
-permalink: /network/MaxCkett/ 
+permalink: /network/MaxCkett/
 name: MaximilianBeckett
 github: MaxCkett
 website: https://maxckett.github.io/
@@ -12,7 +12,7 @@ facebook:
 country: The internet
 location: Remote
 role: Web Developer
-languages: js css3 html5 
+languages: js css3 html5
 ---
 
 just learning
