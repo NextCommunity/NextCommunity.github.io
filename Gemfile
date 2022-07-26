@@ -12,5 +12,3 @@ group :jekyll_plugins do
   gem 'jekyll-target-blank'
   gem 'jemoji'
 end
-
-gem 'webrick', '~> 1.7'
