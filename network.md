@@ -42,7 +42,12 @@ Do you want to see yourself here? Click [here](https://github.com/NextCommunity/
 }
 </style>
 
-## List of members
+{% for network in site.networks %}
+{% capture members %}{% increment total %}{% endcapture %}
+{% endfor %}
+{% capture members %}{% increment total %}{% endcapture %}
+
+## List of {{ members }} members
 
 <table class="accounts" width="100%" border="0">
   {% for network in site.networks %}
