@@ -1,14 +1,14 @@
 ---
-layout: network <!-- DO NOT CHANGE THIS -->
-permalink: /network/0xMRTT/ <!-- GITHUB-USERNAME -->
+layout: network 
+permalink: /network/0xMRTT/ 
 name: 0xMRTT
 github: 0xMRTT
-website: http://0xMRTT.github.io/ <!-- LINK TO YOUR WEBSITE -->
+website: http://0xMRTT.github.io/ 
 email: 0xMRTT@tuta.io
-instagram: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-twitter: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-linkedin: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-facebook: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
+instagram: 
+twitter:
+linkedin: 
+facebook: 
 country: Universe
 location: Earth
 role: Web Developer
