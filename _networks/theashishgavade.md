@@ -1,6 +1,6 @@
 ---
 layout: network
-permalink: /network/theashishgavade/ 
+permalink: /network/theashishgavade/
 name: Ashish Gavade
 github: Theashishgavade
 website: https://github.com/theashishgavade
@@ -11,7 +11,7 @@ linkedin: https://www.linkedin.com/in/theashishgavade/
 facebook: https://facebook.com/theashishgavade
 country: India
 role: Web Developer
-languages: c php js css3 html5 Java Python Android 
+languages: c php js css3 html5 Java Python Android
 ---
 
 Computer Engineer🖥️ Ethical Hacker 👨🏻‍💻 Mahamitra of Raigad 👑.

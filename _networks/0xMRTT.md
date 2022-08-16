@@ -1,14 +1,14 @@
 ---
-layout: network 
-permalink: /network/0xMRTT/ 
+layout: network
+permalink: /network/0xMRTT/
 name: 0xMRTT
 github: 0xMRTT
-website: http://0xMRTT.github.io/ 
+website: http://0xMRTT.github.io/
 email: 0xMRTT@tuta.io
-instagram: 
+instagram:
 twitter:
-linkedin: 
-facebook: 
+linkedin:
+facebook:
 country: Universe
 location: Earth
 role: Web Developer
