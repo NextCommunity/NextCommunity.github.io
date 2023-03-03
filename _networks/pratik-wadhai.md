@@ -1,14 +1,14 @@
 ---
-layout: network 
+layout: network
 permalink: /network/pratik-wadhai/
 name: Pratik Wadhai
 github: pratik-wadhai
 website: https://deft-cobbler-5d0c2f.netlify.app/
 email: pratikwadhai001@gmail.com
-instagram: 
+instagram:
 twitter: https://twitter.com/PratikWadhai5
 linkedin: https://www.linkedin.com/in/pratik-wadhai/
-facebook: 
+facebook:
 country: India
 location: Nagpur
 role: Frontend Developer
