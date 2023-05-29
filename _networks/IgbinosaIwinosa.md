@@ -4,7 +4,7 @@ permalink: /network/Igbinosaiwinosa
 name: Igbinosa Iwinosa
 github: Favourene
 website: www.iwinosa.me
-email: Igbinosaiwinosa01@gmail,com
+email: Igbinosaiwinosa01@gmail.com
 instagram: Favoureneosas
 twitter: Favourene4
 linkedin: IgbinosaIwinosa
