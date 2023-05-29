@@ -5,8 +5,6 @@ title: Next Community - Software Engineers agency
 
 # Next Community
 
-<!-- ([Also available in Persian](https://maxbase.ir/){:target="_blank"}) -->
-
 In the name of god; Greetings!
 
 <p class="callout">
@@ -19,6 +17,6 @@ You can see a list of all [Community members](/network/){:target="\_blank"}, als
 
 ## Contact me
 
-You can send an email for me to maxbasecode (at) gmail.com. I read everything sent there, but I receive too much email to respond to everything.
+You can send an email for Max to maxbasecode (at) gmail.com. Max will read everything sent there, but he receives too much email to respond to everything.
 
-<!-- JOHN PLEASE ADD YOUR EMAIL ADDRESS HERE -->
+To contact John, email jbampton (at) gmail.com.
