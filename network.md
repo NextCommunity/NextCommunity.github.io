@@ -54,7 +54,8 @@ Do you want to see yourself here? Click [here](https://github.com/NextCommunity/
   <tr>
     <td width="auto">
        <a href="{{ network.url | relative_url }}" class="avatar">
-         <img src="https://github.com/{{ network.github }}.png?size=80" width="60">
+         <img src="https://github.com/{{ network.github }}.png?size=80" width="60"
+            alt="{{ network.name }}">
        </a>
     </td>
     <td class="second">
