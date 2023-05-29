@@ -1,10 +1,10 @@
 ---
 layout: network
-permalink: /network/your-github-username-without-space/ <!-- GITHUB-USERNAME -->
+permalink: /network/your-github-username-without-space/
 name: Hammed Babatunde
 github: HammedBabatunde
 website:
-email: olawale6708@gmail,com
+email: olawale6708@gmail.com
 instagram:
 twitter:
 linkedin:
