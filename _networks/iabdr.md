@@ -2,7 +2,7 @@
 layout: network
 permalink: /network/iabdr/
 name: Abd Ar
-github: abd-ar
+github: iabdr
 website: http://abd.github.io/
 email: abd.arstiae@gmail.com
 twitter: https://twitter.com/abd_ink
