@@ -1,3 +1,4 @@
+---
 layout: network
 permalink: /network/anufdo/
 name: Anuradha Fernando
