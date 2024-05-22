@@ -14,7 +14,9 @@ title: Network Profile
     <span class="subtitle">{{ page.email }}</span>
   </a>
   <br>
-  <span class="subtitle">{{ page.country }}, {{ page.location }}</span>
+  <span class="subtitle">
+    {{ page.country }}{% if page.country != blank and page.location != blank %}, {% endif %}{{ page.location }}
+  </span>
 
   <table width="100%" border="0">
     <tr>
