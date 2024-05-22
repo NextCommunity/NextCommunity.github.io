@@ -65,7 +65,8 @@ Do you want to see yourself here? Click [here](https://github.com/NextCommunity/
         </a>
       </h4>
       <h5>{{ network.role }}</h5>
-      <h6>{{ network.country}}, {{ network.location}}</h6>
+      <h6>{{ network.country}}{% if network.country != blank and network.location != blank %}, {% endif %}{{ network.location}}
+      </h6>
     </td>
   </tr>
   {% endfor %}
