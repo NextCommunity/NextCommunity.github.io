@@ -3,7 +3,7 @@ layout: network
 permalink: /network/ayush/
 name: Ayush Dhoj Rana
 github: ayushrana182
-website: https://tiny.cc/ayushrana
+website:
 email: ayushrana182@gmail.com
 instagram: n/a
 twitter: https://twitter.com/AyushRana7
@@ -16,7 +16,7 @@ languages: JS, React, TS , GraphQL
 
 2+ years of experience.
 
-_SKILLS_
+# _SKILLS_
 
 - NodeJS, Express
 - Javascript, HTML, CSS, MySQL,

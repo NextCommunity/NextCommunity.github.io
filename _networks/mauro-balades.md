@@ -3,7 +3,7 @@ layout: network
 permalink: /network/mauro-balades/
 name: Mauro Baladés
 github: mauro-balades
-website: http://maucode.com/
+website:
 email: mauro.balades@tutanota.com
 instagram:
 twitter: https://twitter.com/Mauro60715204

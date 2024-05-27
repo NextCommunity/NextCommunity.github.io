@@ -16,7 +16,7 @@ languages: php js css3 html5
 
 16+ years of experience.
 
-_SKILLS_
+# _SKILLS_
 
 - PHP - Symfony 2/3/4/5, Drupal, WordPress, eZPlatform, Sulu, swoole
 - Javascript, HTML, CSS, MySQL, PostgreSQL

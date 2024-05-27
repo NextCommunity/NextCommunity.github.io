@@ -3,7 +3,6 @@ layout: network
 permalink: /network/itsjoniur/
 name: Ahmad Amoori
 github: itsjoniur
-website: http://site.org/
 email: ahmadamoori.dev@gmail.com
 instagram:
 twitter:
