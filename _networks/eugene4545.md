@@ -1,5 +1,5 @@
 ---
-layout: network 
+layout: network
 permalink: /network/eugene4545/
 name: Eugene Onuoha
 github: eugene4545
