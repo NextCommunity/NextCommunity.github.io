@@ -16,4 +16,3 @@ languages: javascript typescript python
 ---
 
 Med student and aspiring Full Stack developer, open source contributor
-
