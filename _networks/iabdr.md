@@ -3,7 +3,7 @@ layout: network
 permalink: /network/iabdr/
 name: Abd Ar
 github: iabdr
-website: http://abd.github.io/
+website:
 email: abd.arstiae@gmail.com
 twitter: https://twitter.com/abd_ink
 country: Pakistan

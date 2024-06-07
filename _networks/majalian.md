@@ -3,7 +3,7 @@ layout: network
 permalink: /network/majalian/
 name: Mujahid Al-Majali
 github: Majalian
-website: https://www.upwork.com/freelancers/~013dd1f9db3380689d
+website:
 email: mujahid.majalian@gmail.com
 instagram: https://www.instagram.com/mujbour/
 twitter: https://mobile.twitter.com/majalian

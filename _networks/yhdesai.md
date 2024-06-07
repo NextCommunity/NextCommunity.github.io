@@ -15,4 +15,4 @@ role: React Developer
 languages: html5 css3 js react java kotlin python
 ---
 
-Indie Maker | Working on https://shipr.dev
+Indie Maker | Working on <https://shipr.dev>

@@ -3,7 +3,7 @@ layout: network
 permalink: /network/pratik-wadhai/
 name: Pratik Wadhai
 github: pratik-wadhai
-website: https://deft-cobbler-5d0c2f.netlify.app/
+website:
 email: pratikwadhai001@gmail.com
 instagram:
 twitter: https://twitter.com/PratikWadhai5

@@ -3,7 +3,7 @@ layout: network
 permalink: /network/anekenonso
 name: Okenwa Kenneth
 github: Anekenonso
-website: http://anekenonso.com
+website:
 email: okenwanonsokenneth@gmail.com
 country: Nigeria
 location: Enugu

@@ -5,8 +5,8 @@ title: Community of programmers and software engineers
 ---
 
 <h1>
-	<a href="/">&uarr;</a>
-	Community of programmers and software engineers
+ <a href="/">&uarr;</a>
+ Community of programmers and software engineers
 </h1>
 
 Do you want to see yourself here? Click [here](https://github.com/NextCommunity/NextCommunity.github.io){:target="\_blank"} to add your own.
