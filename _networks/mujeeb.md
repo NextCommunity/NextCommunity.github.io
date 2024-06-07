@@ -19,5 +19,3 @@ Debugging
 LINUX Terraform NPM
 MS Office
 ---
-
-A short biography and a short text about your technical skills.
