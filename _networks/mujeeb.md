@@ -3,7 +3,7 @@ layout: network
 permalink: /network/mujeebshk/
 name: Shaik Mujeeb
 github: mujeebshk
-website: https://github.com/mujeebshkg/
+website: https://github.com/mujeebshk/
 email: mujeebshk48@gmail.com
 instagram: https://www.instagram.com/mujeebshk_/
 twitter: https://twitter.com/mujeebshk2
