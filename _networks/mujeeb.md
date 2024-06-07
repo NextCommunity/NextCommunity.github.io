@@ -8,7 +8,7 @@ email: mujeebshk48@gmail.com
 instagram: https://www.instagram.com/mujeebshk_/
 twitter: https://twitter.com/mujeebshk2
 linkedin: https://www.linkedin.com/in/mujeeb-shaik-1a9961224/
-facebook: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
+facebook:
 country: India
 location: Andhra Pradesh
 role: Web Developer
