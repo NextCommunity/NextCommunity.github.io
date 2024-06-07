@@ -12,10 +12,5 @@ facebook:
 country: India
 location: Andhra Pradesh
 role: Web Developer
-languages: Web Design AWS
-SvelteJs, React Figma
-Git
-Debugging
-LINUX Terraform NPM
-MS Office
+languages: Web Design AWS SvelteJs React Figma Git Debugging LINUX Terraform NPM MS Office
 ---
