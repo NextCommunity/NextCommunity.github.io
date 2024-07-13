@@ -3,12 +3,12 @@ layout: default
 title: Next Community - Software Engineers agency
 ---
 
-# Next Community
+## Next Community
 
 In the name of god; Greetings!
 
 <p class="callout">
-	Linus Torvalds: “Talk is cheap. Show me the code.”
+ Linus Torvalds: “Talk is cheap. Show me the code.”
 </p>
 
 ## Community

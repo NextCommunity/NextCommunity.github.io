@@ -3,7 +3,7 @@ layout: network
 permalink: /network/Igbinosaiwinosa
 name: Igbinosa Iwinosa
 github: Favourene
-website: www.iwinosa.me
+website:
 email: Igbinosaiwinosa01@gmail.com
 instagram: Favoureneosas
 twitter: Favourene4

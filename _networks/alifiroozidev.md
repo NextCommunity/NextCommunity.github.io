@@ -3,7 +3,7 @@ layout: network
 permalink: /network/alifiroozidev/
 name: Ali Firoozi
 github: alifiroozidev
-website: https://alifiroozi.dev/
+website:
 email: contact.alifiroozi@gmail.com
 instagram: alifiroozi.art
 twitter:

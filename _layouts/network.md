@@ -22,7 +22,7 @@ title: Network Profile
     <tr>
       <td valign="top">
         <a href="https://github.com/{{ page.github }}/">
-          <img src="https://github.com/{{ page.github }}.png?size=80" width="60">
+          <img src="https://github.com/{{ page.github }}.png?size=80" width="60" alt="github page">
         </a>
       </td>
       <td>
