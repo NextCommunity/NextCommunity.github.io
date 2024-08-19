@@ -2,8 +2,8 @@ layout: network
 permalink: /network/SushantAdh07/
 name: Sushant Adhikari
 github: SushantAdh07
-website: https://sushantadh07.github.io/
-email: sushantadhikari2075@gmail.com
+website: <https://sushantadh07.github.io/>
+email: <sushantadhikari2075@gmail.com>
 instagram:
 twitter:
 linkedin:

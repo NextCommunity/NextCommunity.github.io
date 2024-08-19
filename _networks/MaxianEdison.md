@@ -3,7 +3,7 @@ layout: network
 permalink: /MaxianEdison/
 name: MaximilianEdison
 github: MaxianEdison
-website: https://MaximilianEdison.com
+website:
 email: contact@maximilianedison.com
 instagram: https://www.instagram.com/MaxianEdison
 twitter:

@@ -17,7 +17,7 @@ languages: C, C++, HTML, CSS, JavaScript, Python
 
 <br>
 
-### <img src="https://raw.githubusercontent.com/TheDudeThatCode/TheDudeThatCode/master/Assets/Developer.gif" width="45px"> About Me:
+### <img src="https://raw.githubusercontent.com/TheDudeThatCode/TheDudeThatCode/master/Assets/Developer.gif" width="45px" alt="Developer.gif"> About Me:
 
 - 💻 I use daily `.js`, `.html`, `.css`, `.cpp`, `.py`
 

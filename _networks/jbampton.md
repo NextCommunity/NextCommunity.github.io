@@ -26,7 +26,7 @@ irb(main):003:0> exit
 RobyGems@Universe~ $
 ```
 
-You can read up more on [Interactive Ruby shell](https://ruby-doc.org/stdlib-3.0.0/libdoc/irb/rdoc/IRB.html) or irb [here](https://en.wikipedia.org/wiki/Interactive_Ruby_Shell)
+You can read up more on [Interactive Ruby shell](https://ruby-doc.org/stdlib-3.0.0/libdoc/irb/rdoc/IRB.html) or irb [here](https://github.com/ruby/irb)
 
 If you have Ruby installed you can run:
 
