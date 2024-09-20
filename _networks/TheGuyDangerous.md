@@ -1,7 +1,7 @@
 ---
 layout: network
 permalink: /network/TheGuyDangerous/
-name: Yazdan Haider
+name: Sannidhya Dubey
 github: https://github.com/TheGuyDangerous
 website: http://sannidhya.me/
 email: sannidhyadubey@gmail.com
