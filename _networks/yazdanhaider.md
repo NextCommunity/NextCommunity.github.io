@@ -6,13 +6,13 @@ github: https://github.com/yazdanhaider
 website: yazdanhaider.github.io/Yazdan-Personal-Portfolio-Website/
 email: yazdanhaider007@gmail.com
 instagram: https://www.instagram.com/yazdan.haider23/
-twitter: 
+twitter:
 linkedin: https://www.linkedin.com/in/yazdan-haider
 facebook:
 country: India
 location: Bhopal
 role: Full Stack Developer
-languages: C++ JavaScript php css html dart mysql 
+languages: C++ JavaScript php css html dart mysql
 ---
 
 I am currently a student of Vellore Institute Of Technology, Bhopal.
