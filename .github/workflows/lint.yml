@@ -7,8 +7,8 @@ jobs:
     name: Run pre-commit # https://pre-commit.com/
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2 # https://www.python.org/
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5 # https://www.python.org/
         with:
           python-version: "3.x" # Version range or exact version of a Python version to use, using SemVer's version range syntax
           architecture: "x64" # optional x64 or x86. Defaults to x64 if not specified
@@ -18,7 +18,7 @@ jobs:
           pip install pre-commit
       - name: Set PY
         run: echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV
-      - uses: actions/cache@v2.1.6
+      - uses: actions/cache@v3
         with:
           path: ~/.cache/pre-commit
           key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml') }}
