@@ -2,7 +2,7 @@
 layout: network
 permalink: /network/TheGuyDangerous/
 name: Sannidhya Dubey
-github: https://github.com/TheGuyDangerous
+github: TheGuyDangerous
 website: http://sannidhya.me/
 email: sannidhyadubey@gmail.com
 instagram: https://www.instagram.com/sannnidhya/
