@@ -3,7 +3,7 @@ layout: network
 permalink: /network/ayush/
 name: Ayush Dhoj Rana
 github: ayushrana182
-website:
+website: https://portfolio-plrgcvrq4-ayushrana182.vercel.app/
 email: ayushrana182@gmail.com
 instagram: n/a
 twitter: https://twitter.com/AyushRana7
