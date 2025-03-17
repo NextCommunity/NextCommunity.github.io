@@ -2,8 +2,8 @@
 layout: network
 permalink: /network/yazdanhaider/
 name: Yazdan Haider
-github: https://github.com/yazdanhaider
-website: yazdanhaider.github.io/Yazdan-Personal-Portfolio-Website/
+github: yazdanhaider
+website: https://www.yazdanhaider.me/
 email: yazdanhaider007@gmail.com
 instagram: https://www.instagram.com/yazdan.haider23/
 twitter:

@@ -3,7 +3,7 @@ layout: network
 permalink: /network/rjphares/
 name: Robert Phares
 github: rjphares
-website: https://github.com/rjphares/
+website: https://rjphares.github.io/
 email: rjphares914@gmail.com
 country: United States
 location: Georgia

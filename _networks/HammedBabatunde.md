@@ -1,6 +1,6 @@
 ---
 layout: network
-permalink: /network/your-github-username-without-space/
+permalink: /network/HammedBabatunde/
 name: Hammed Babatunde
 github: HammedBabatunde
 website:

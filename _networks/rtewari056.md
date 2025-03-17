@@ -3,7 +3,7 @@ layout: network
 permalink: /network/rtewari056/
 name: Rohit Tewari
 github: rtewari056
-website:
+website: https://rohittewari.vercel.app/
 email: rtewari056@gmail.com
 instagram: https://www.instagram.com/rtewari056/
 twitter: https://twitter.com/rtewari056

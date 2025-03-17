@@ -2,7 +2,7 @@
 layout: network
 permalink: /network/Passion-Over-Pain/
 name: Tinotenda Mhedziso
-github: https://github.com/Passion-Over-Pain
+github: Passion-Over-Pain
 website: https://tinotenda-mhedziso.pages.dev/
 email: tinomhedziso21@gmail.com
 instagram:
