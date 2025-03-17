@@ -3,7 +3,7 @@ layout: network
 permalink: /network/novalramdhani
 name: Noval Ramdhani
 github: novalramdhani
-website:
+website: https://novalll.vercel.app/
 email: tokisakik950@gmail.com
 instagram: noval.codes
 twitter: codewithval
