@@ -39,4 +39,4 @@ A short biography and a short text about your technical skills.
 
 This is a community website built with Jekyll and powered by GitHub Pages server.
 
-© Copyright Next Community, 2021-2024
+© Copyright Next Community, 2021-2025
