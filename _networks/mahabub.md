@@ -3,7 +3,7 @@ layout: network
 permalink: /network/prio101/
 name: Mahabub Islam
 github: prio101
-website:
+website: https://www.mahabub.dev/
 email: miprio101@gmail.com
 instagram:
 twitter: https://twitter.com/prio_mahabub
