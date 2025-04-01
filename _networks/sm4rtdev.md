@@ -5,10 +5,10 @@ name: Elon Scott
 github: sm4rtdev
 website: https://elonscottdev.pro
 email: elonscottdev@gmail.com
-instagram: 
-twitter: 
-linkedin: 
-facebook: 
+instagram:
+twitter:
+linkedin:
+facebook:
 country: US
 location: Texas
 role: Senior Front-End and Web3 Developer
