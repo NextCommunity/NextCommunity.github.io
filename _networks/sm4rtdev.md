@@ -1,5 +1,5 @@
 ---
-layout: network <!-- DO NOT CHANGE THIS -->
+layout: network
 permalink: /network/sm4rtdev
 name: Elon Scott
 github: sm4rtdev
