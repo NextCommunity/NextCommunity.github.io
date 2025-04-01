@@ -14,4 +14,3 @@ location: Pasig
 role: Web Developer
 languages: c php js css3 html5
 ---
-
