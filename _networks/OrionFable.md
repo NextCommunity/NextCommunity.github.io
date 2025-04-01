@@ -1,18 +1,17 @@
 ---
-layout: network <!-- DO NOT CHANGE THIS -->
-permalink: /network/OrionFable/ <!-- GITHUB-USERNAME -->
+layout: network
+permalink: /network/OrionFable/
 name: Ethan Benny
 github: OrionFable
-website: http://site.org/ <!-- LINK TO YOUR WEBSITE -->
+website:
 email: alexbenny544@gmail.com
-instagram: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-twitter: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-linkedin: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-facebook: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
+instagram:
+twitter:
+linkedin:
+facebook:
 country: Philippines
 location: Pasig
 role: Web Developer
-languages: c php js css3 html5 <!-- YOU SHOULDN'T USE SPACE IN THE NAME OF THE PROGRAMMING LANGUAGE -->
+languages: c php js css3 html5
 ---
 
-A short biography and a short text about your technical skills.
