@@ -11,7 +11,7 @@ repos:
       - id: identity
       - id: check-hooks-apply
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -28,7 +28,7 @@ repos:
   #  hooks:
   #    - id: remove-tabs
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.3.0
+    rev: v2.4.1
     hooks:
       - id: codespell
         name: Run codespell
@@ -36,20 +36,20 @@ repos:
         entry: codespell --ignore-words=codespell.txt
         exclude: ^_site/.*$|^vendor/.*$
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.41.0
+    rev: v0.44.0
     hooks:
       - id: markdownlint
         name: Run markdownlint
         args: [--config=.github/linters/.markdown-lint.yml]
         exclude: ^\.github/.*$|^_site/.*$|^vendor/.*$
   - repo: https://github.com/tcort/markdown-link-check
-    rev: v3.12.2
+    rev: v3.13.7
     hooks:
       - id: markdown-link-check
         args: ["-q", "-c", ".markdown-link-check.json"]
         files: ^(?!.*(network|blog|index)\.md$).*\.md$
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.35.1
+    rev: v1.37.0
     hooks:
       - id: yamllint
         name: Check YAML files with yamllint
