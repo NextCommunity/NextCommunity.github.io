@@ -16,5 +16,5 @@ languages: C# CSS3 HTML5 JS Python MySQL
 ---
 
 Final year Bachelor of Information Technology student who has some
-experience with Full-stack web development in vanilla JS💻, building 
+experience with Full-stack web development in vanilla JS💻, building
 desktop applications using C#🔎 and advanced chatbot building using Botpress👷🏿‍.
