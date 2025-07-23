@@ -1,18 +1,18 @@
 ---
-layout: network <!-- DO NOT CHANGE THIS -->
-permalink: /network/tanverified/ <!-- GITHUB-USERNAME -->
+layout: network
+permalink: /network/tanverified/
 name: Tanveer
 github: tanverified
-website: http://site.org/ <!-- LINK TO YOUR WEBSITE -->
+website: http://site.org/
 email: your-email@gmail.com
-instagram: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-twitter: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-linkedin: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
-facebook: <!-- LEAVE EMPTY OR PUT LINK TO YOUR PROFILE -->
+instagram:
+twitter:
+linkedin:
+facebook:
 country: India
 location: Mumbai
 role: Full Stack Developer
-languages: c php js css3 html5 <!-- YOU SHOULDN'T USE SPACE IN THE NAME OF THE PROGRAMMING LANGUAGE -->
+languages: c php js css3 html5
 ---
 
 A short biography and a short text about your technical skills.
