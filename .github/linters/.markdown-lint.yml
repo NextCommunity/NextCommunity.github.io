@@ -24,3 +24,6 @@ MD040: false
 
 # MD041/first-line-heading/first-line-h1 First line in a file should be a top-level heading
 MD041: false
+
+# MD059/descriptive-link-text Link text should be descriptive
+MD059: false
