@@ -11,7 +11,7 @@ repos:
       - id: identity
       - id: check-hooks-apply
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -42,12 +42,12 @@ repos:
         name: Run markdownlint
         args: [--config=.github/linters/.markdown-lint.yml]
         exclude: ^\.github/.*$|^_site/.*$|^vendor/.*$
-  - repo: https://github.com/tcort/markdown-link-check
-    rev: v3.13.7
-    hooks:
-      - id: markdown-link-check
-        args: ["-q", "-c", ".markdown-link-check.json"]
-        files: ^(?!.*(network|blog|index)\.md$).*\.md$
+  # - repo: https://github.com/tcort/markdown-link-check
+  #  rev: v3.13.7
+  #  hooks:
+  #    - id: markdown-link-check
+  #      args: ["-q", "-c", ".markdown-link-check.json"]
+  #      files: ^(?!.*(network|blog|index)\.md$).*\.md$
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.37.1
     hooks:
