@@ -1,6 +1,3 @@
-/**
- * THEME LOGIC: Light -> Dark -> Random
- */
 function toggleTheme() {
     const currentTheme = localStorage.getItem('theme') || 'light';
     let nextTheme;
@@ -48,16 +45,88 @@ function updateIcon(theme) {
     else icon.innerText = '☀️';                        // Next is Light
 }
 
+// --- EASTER EGG STATE ---
+let surpriseClickCount = 0;
+let matrixActive = false;
+
 /**
- * SURPRISE ME LOGIC
+ * Updated Surprise Me Logic with Counter
  */
 function scrollToRandomUser() {
+    // Increment Easter Egg counter
+    surpriseClickCount++;
+    if (surpriseClickCount === 5) {
+        initMatrix();
+    }
+
     const cards = document.querySelectorAll('.user-card');
+    if (cards.length === 0) return;
+
     cards.forEach(c => c.classList.remove('highlight-pulse'));
     const randomCard = cards[Math.floor(Math.random() * cards.length)];
     randomCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     randomCard.classList.add('highlight-pulse');
     setTimeout(() => randomCard.classList.remove('highlight-pulse'), 3500);
+}
+
+// --- THE MATRIX ENGINE ---
+function initMatrix() {
+    matrixActive = true;
+    const overlay = document.getElementById('matrix-overlay');
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    overlay.classList.remove('hidden');
+
+    // Set canvas to full screen
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const nums = '0123456789';
+    const alphabet = katakana + latin + nums;
+
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const rainDrops = Array.from({ length: columns }).fill(1);
+
+    const render = () => {
+        // Subtle fade effect to create trails
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#0F0'; // Matrix Green
+        ctx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < rainDrops.length; i++) {
+            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+            if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                rainDrops[i] = 0;
+            }
+            rainDrops[i]++;
+        }
+
+        if (matrixActive) requestAnimationFrame(render);
+    };
+
+    render();
+
+    // Listen for Escape key to exit
+    window.addEventListener('keydown', handleEsc);
+}
+
+function closeMatrix() {
+    matrixActive = false;
+    surpriseClickCount = 0; // Reset counter
+    document.getElementById('matrix-overlay').classList.add('hidden');
+    window.removeEventListener('keydown', handleEsc);
+}
+
+function handleEsc(e) {
+    if (e.key === 'Escape') closeMatrix();
 }
 
 // Initial Run
