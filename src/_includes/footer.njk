@@ -1,0 +1,39 @@
+<footer class="mt-20 border-t border-[var(--border-color)] bg-[var(--bg-footer)] py-12">
+  <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
+
+    <div class="text-center md:text-left">
+      <p class="text-[var(--text-main)] font-bold text-sm uppercase tracking-widest">Developer Directory</p>
+      <p class="text-[var(--text-muted)] text-xs mt-1 mb-4">© 2026 Powered by the open-source community</p>
+
+      <div class="flex items-center justify-center md:justify-start gap-3">
+        <a href="https://www.11ty.dev/" target="_blank" rel="noopener"
+           class="text-[10px] font-bold px-2 py-1 rounded bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-muted)] hover:text-accent hover:border-accent transition-all flex items-center gap-1">
+          <span>🎈</span> 11ty
+        </a>
+        <a href="https://tailwindcss.com/" target="_blank" rel="noopener"
+           class="text-[10px] font-bold px-2 py-1 rounded bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-muted)] hover:text-accent hover:border-accent transition-all flex items-center gap-1">
+          <span class="text-sky-400">🌊</span> Tailwind
+        </a>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center md:items-end gap-2">
+      <div class="flex items-center gap-3">
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        <span class="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">
+          Last Build: {{ build.timestamp }}
+        </span>
+      </div>
+
+      <a href="{{ build.repoUrl }}/commit/{{ build.hash }}"
+         target="_blank"
+         rel="noopener"
+         class="group flex items-center gap-2 bg-[var(--bg-card)] border border-[var(--border-color)] px-3 py-1.5 rounded-lg hover:border-accent transition-colors">
+        <span class="text-[var(--text-muted)] text-[10px] font-mono">Build Hash:</span>
+        <span class="text-accent font-mono text-[10px] font-bold underline decoration-dotted">{{ build.hash }}</span>
+        <span class="text-[var(--text-muted)] group-hover:text-accent transition-transform group-hover:translate-x-0.5">↗</span>
+      </a>
+    </div>
+
+  </div>
+</footer>
