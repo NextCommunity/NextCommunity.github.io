@@ -3,89 +3,127 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ name }} | Developer Bio</title>
-
+  <title>{{ name }} | {{ role }}</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { darkMode: 'class' }
-
-    // Sync theme on load
-    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  </script>
   <link rel="stylesheet" href="/assets/css/style.css">
+  <script>
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') document.documentElement.classList.add('dark');
+  </script>
 </head>
-<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen">
+<body class="min-h-screen">
 
-  <header class="sticky top-0 z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 py-4 mb-12">
+  <header class="sticky top-0 z-50 bg-[var(--bg-page)]/80 backdrop-blur-md border-b border-[var(--border-color)] py-4">
     <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-
-      <a href="/" class="group flex items-center gap-2 font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors">
+      <a href="/" class="group flex items-center gap-2 font-bold text-accent transition-colors">
         <span class="transition-transform group-hover:-translate-x-1">←</span>
-        <span class="hidden sm:inline">Directory</span>
+        <span>Directory</span>
       </a>
-
-      <div class="text-center">
-        <h2 class="text-sm font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">Developer Profile</h2>
-        <p class="font-bold text-slate-900 dark:text-white">{{ name }}</p>
+      <div class="text-center hidden sm:block">
+        <p class="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Viewing Profile</p>
+        <p class="font-bold text-sm">{{ name }}</p>
       </div>
-
-      <button onclick="toggleTheme()" class="p-2.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:bg-slate-100 dark:hover:bg-slate-700 transition-all active:scale-90">
-        <span class="dark:hidden text-indigo-600 text-lg">🌙</span>
-        <span class="hidden dark:block text-yellow-400 text-lg">☀️</span>
+      <button onclick="toggleTheme()" class="p-2.5 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] shadow-sm">
+        <span id="theme-icon">🌙</span>
       </button>
-
     </div>
   </header>
 
-  <main class="max-w-3xl mx-auto px-4 pb-24">
-    <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-800">
-      <div class="p-8 sm:p-12">
-        <header class="mb-8">
-          <h1 class="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-2">{{ name }}</h1>
-          <p class="text-xl sm:text-2xl text-indigo-600 dark:text-indigo-400 font-medium">{{ role }}</p>
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-          <div class="mt-4 flex flex-wrap gap-3">
-            <span class="bg-slate-100 dark:bg-slate-800 px-4 py-1.5 rounded-full text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wide">
-              {{ location }}{% if country %}, {{ country }}{% endif %}
-            </span>
+      <div class="lg:col-span-1 space-y-6">
+        <div class="user-card p-8 rounded-3xl sticky top-24">
+          <div class="mb-6">
+            <h1 class="text-3xl font-black leading-tight">{{ name }}</h1>
+            <p class="text-accent font-bold mt-1">{{ role }}</p>
           </div>
-        </header>
 
-        <div class="border-t border-slate-100 dark:border-slate-800 pt-8">
-          <h3 class="text-xs uppercase tracking-[0.2em] font-black text-slate-400 dark:text-slate-500 mb-4">About Me</h3>
-          <div class="text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line text-lg">
+          <div class="space-y-4 text-sm border-t border-[var(--border-color)] pt-6">
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📍</span>
+              <span class="text-[var(--text-muted)]">{{ location }}{% if country %}, {{ country }}{% endif %}</span>
+            </div>
+
+            {% if email %}
+            <div class="flex items-center gap-3 group cursor-pointer" onclick="copyToClipboard('{{ email }}', this)">
+              <span class="text-lg">✉️</span>
+              <span class="text-[var(--text-muted)] group-hover:text-accent truncate">{{ email }}</span>
+              <span class="hidden group-hover:inline text-[10px] bg-accent text-white px-2 py-0.5 rounded">Copy</span>
+            </div>
+            {% endif %}
+
+            {% if website %}
+            <div class="flex items-center gap-3">
+              <span class="text-lg">🔗</span>
+              <a href="{{ website }}" target="_blank" class="text-accent font-bold hover:underline truncate">{{ website | replace("https://", "") }}</a>
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="mt-8 pt-8 border-t border-[var(--border-color)]">
+            <h3 class="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mb-4">Connect</h3>
+            <div class="grid grid-cols-2 gap-3">
+              {% if github %}
+              <a href="https://github.com/{{ github }}" target="_blank" class="flex items-center justify-center p-3 rounded-xl bg-[var(--bg-footer)] border border-[var(--border-color)] hover:border-accent transition-colors">
+                <span class="font-bold text-xs">GitHub</span>
+              </a>
+              {% endif %}
+              {% if linkedin %}
+              <a href="{{ linkedin }}" target="_blank" class="flex items-center justify-center p-3 rounded-xl bg-[var(--bg-footer)] border border-[var(--border-color)] hover:border-accent transition-colors">
+                <span class="font-bold text-xs text-[#0077b5]">LinkedIn</span>
+              </a>
+              {% endif %}
+              {% if twitter %}
+              <a href="{{ twitter }}" target="_blank" class="flex items-center justify-center p-3 rounded-xl bg-[var(--bg-footer)] border border-[var(--border-color)] hover:border-accent transition-colors">
+                <span class="font-bold text-xs">Twitter</span>
+              </a>
+              {% endif %}
+              {% if instagram %}
+              <a href="{{ instagram }}" target="_blank" class="flex items-center justify-center p-3 rounded-xl bg-[var(--bg-footer)] border border-[var(--border-color)] hover:border-accent transition-colors">
+                <span class="font-bold text-xs text-pink-500">Instagram</span>
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-2 space-y-8">
+        <div class="user-card p-8 sm:p-12 rounded-3xl">
+          <h2 class="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-6 flex items-center gap-2">
+            <span class="w-8 h-[2px] bg-accent"></span> Professional Bio
+          </h2>
+          <div class="text-[var(--text-main)] text-lg leading-relaxed whitespace-pre-line">
             {{ bio }}
           </div>
         </div>
 
-        <div class="mt-10">
-          <h3 class="text-xs uppercase tracking-[0.2em] font-black text-slate-400 dark:text-slate-500 mb-4">Tech Stack</h3>
-          <div class="flex flex-wrap gap-2">
+        <div class="user-card p-8 rounded-3xl">
+          <h2 class="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-6">Technologies</h2>
+          <div class="flex flex-wrap gap-3">
             {% set skills = languages.split(' ') %}
             {% for skill in skills %}
-              <span class="px-3 py-1.5 bg-slate-900 dark:bg-slate-700 text-white text-xs font-bold rounded-lg uppercase">
+              <span class="px-4 py-2 bg-accent text-white text-xs font-black rounded-xl uppercase tracking-widest shadow-sm">
                 {{ skill }}
               </span>
             {% endfor %}
           </div>
         </div>
-
-        <div class="mt-12 pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row gap-4">
-          <a href="https://github.com/{{ github }}" target="_blank" rel="noopener" class="flex-1 text-center bg-slate-900 dark:bg-white dark:text-slate-900 text-white px-6 py-4 rounded-2xl font-bold hover:opacity-90 transition-opacity">
-            GitHub Profile
-          </a>
-          <a href="{{ linkedin }}" target="_blank" rel="noopener" class="flex-1 text-center bg-blue-600 text-white px-6 py-4 rounded-2xl font-bold hover:bg-blue-700 transition-colors">
-            LinkedIn Profile
-          </a>
-        </div>
       </div>
+
     </div>
   </main>
 
   <script src="/assets/js/script.js"></script>
+  <script>
+    // Specific helper for the bio page email copy
+    function copyToClipboard(text, el) {
+      navigator.clipboard.writeText(text);
+      const span = el.querySelector('span:last-child');
+      span.innerText = 'Copied!';
+      setTimeout(() => span.innerText = 'Copy', 2000);
+    }
+  </script>
 </body>
 </html>
