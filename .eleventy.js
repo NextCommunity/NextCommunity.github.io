@@ -23,9 +23,21 @@ module.exports = function(eleventyConfig) {
     }
   });
 
-  // 3. Collection setup
-  eleventyConfig.addCollection("people", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/users/*.yaml");
+  // 2. The Randomized Collection
+  eleventyConfig.addCollection("randomPeople", function(collectionApi) {
+    // Grab all yaml files from the users folder
+    const people = collectionApi.getFilteredByGlob("src/users/*.yaml");
+
+    // Create a copy of the array to avoid mutating the original global collection
+    let shuffled = [...people];
+
+    // Fisher-Yates Shuffle
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    return shuffled;
   });
 
   return {
