@@ -1,0 +1,107 @@
+---
+layout: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Directory</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+
+    // Immediate Theme Check (Prevents White Flash)
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 scroll-smooth min-h-screen">
+
+  <header class="sticky top-0 z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 py-6 mb-8">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center sm:items-end">
+
+      <div class="border-l-4 border-indigo-500 pl-6">
+        <h1 class="text-2xl sm:text-4xl font-black uppercase tracking-tight dark:text-white">Our Developers</h1>
+        <p class="text-slate-500 dark:text-slate-400 font-medium text-xs sm:text-sm">Global talent directory</p>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-4">
+        <div class="hidden md:flex flex-col items-end mr-2">
+          <span class="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 mb-1">Profiles</span>
+          <span class="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-900 px-3 py-1 border border-slate-200 dark:border-slate-800 rounded-lg shadow-sm">
+            {{ collections.people.length }}
+          </span>
+        </div>
+
+        <button onclick="toggleTheme()" class="p-2.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:bg-slate-100 dark:hover:bg-slate-700 transition-all active:scale-90">
+          <span class="dark:hidden text-indigo-600 text-lg">🌙</span>
+          <span class="hidden dark:block text-yellow-400 text-lg">☀️</span>
+        </button>
+
+        <button onclick="scrollToRandomUser()" class="text-[10px] font-bold uppercase tracking-widest bg-indigo-600 text-white px-4 sm:px-5 py-3 rounded-full hover:bg-indigo-700 transition-all shadow-md active:scale-95 flex items-center gap-2">
+          <span>🎲</span> <span class="hidden sm:inline">Surprise Me</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 pb-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+      {% for person in collections.people %}
+      <div class="user-card group card-glow bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col hover:-translate-y-2 hover:border-indigo-400 dark:hover:border-indigo-500 scroll-mt-32">
+
+        <div class="p-8">
+          <div class="flex justify-between items-start gap-4">
+            <div class="flex-1">
+              <h2 class="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
+                {{ person.data.name }}
+              </h2>
+              <p class="text-indigo-600 dark:text-indigo-400 font-semibold text-sm uppercase tracking-wider">
+                {{ person.data.role }}
+              </p>
+            </div>
+            <span class="shrink-0 text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-2 py-1 rounded font-bold uppercase group-hover:bg-indigo-600 group-hover:text-white transition-all">
+              {{ person.data.location }}{% if person.data.country %}, {{ person.data.country }}{% endif %}
+            </span>
+          </div>
+
+          <div class="mt-6 flex flex-wrap gap-2">
+            {% set skills = person.data.languages.split(' ') %}
+            {% for skill in skills %}
+              <span class="px-2 py-1 bg-slate-800 dark:bg-slate-700 text-white text-[10px] font-bold rounded uppercase group-hover:bg-indigo-500 transition-colors">
+                {{ skill }}
+              </span>
+            {% endfor %}
+          </div>
+
+          <div class="mt-4 text-slate-600 dark:text-slate-400 text-sm line-clamp-2 italic">
+            "{{ person.data.bio | truncate(110) }}"
+          </div>
+        </div>
+
+        <div class="mt-auto bg-slate-50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-800 p-4 flex justify-between items-center px-6">
+          <div class="flex items-center gap-4 text-slate-400 dark:text-slate-500 text-[11px] uppercase tracking-wider font-medium">
+            <a href="https://github.com/{{ person.data.github }}" target="_blank" rel="noopener" class="hover:text-black dark:hover:text-white transition-colors">GitHub</a>
+            <div class="h-3 w-[1px] bg-slate-300 dark:bg-slate-700"></div>
+            <a href="{{ person.data.linkedin }}" target="_blank" rel="noopener" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">LinkedIn</a>
+          </div>
+          <a href="{{ person.url }}" class="font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 flex items-center whitespace-nowrap">
+            <span>Full Bio</span>
+            <span class="inline-block ml-1 transition-transform duration-300 group-hover:translate-x-2">→</span>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </main>
+
+  <script src="/assets/js/script.js"></script>
+</body>
+</html>

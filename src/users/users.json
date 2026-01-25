@@ -1,0 +1,7 @@
+{
+  "layout": "bio.njk",
+  "tags": "people",
+  "eleventyComputed": {
+    "permalink": "/people/{{ github | slugify }}/index.html"
+  }
+}
