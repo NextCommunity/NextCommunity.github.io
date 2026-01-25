@@ -1,0 +1,28 @@
+name: Deploy static site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Setup Node.js (or other environment if needed)
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Install dependencies and build site
+        run: |
+          npm install
+          npm run build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: '_site' # The directory that contains the deployable files
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
