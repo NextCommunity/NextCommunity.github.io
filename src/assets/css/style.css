@@ -1,0 +1,103 @@
+/* --- 1. CORE ANIMATIONS --- */
+
+/* Glow effect for cards and random selection highlight */
+@keyframes glow-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(99, 102, 241, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
+}
+
+/* Apply pulse on manual hover (class-based for performance) */
+.card-glow:hover,
+.highlight-pulse {
+  animation: glow-pulse 2s infinite;
+}
+
+/* State for the JS "Surprise Me" selection */
+.highlight-pulse {
+  border-color: #6366f1 !important; /* Tailwind Indigo-500 */
+  transform: translateY(-8px);
+}
+
+/* --- 2. THEME TRANSITIONS --- */
+
+/* Ensures background and text colors change smoothly when toggling themes */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Apply transitions to containers and borders to prevent "flashing" */
+.user-card,
+header,
+main,
+.bg-white,
+.bg-slate-50,
+.bg-slate-900,
+.bg-slate-950,
+.border-slate-200,
+.border-slate-800 {
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+/* --- 3. CUSTOM SCROLLBAR --- */
+
+/* Light mode scrollbar (Subtle) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9; /* slate-100 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* slate-300 */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* slate-400 */
+}
+
+/* Dark mode scrollbar (Integrated with UI) */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #020617; /* slate-950 */
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #1e293b; /* slate-800 */
+  border-radius: 10px;
+  border: 2px solid #020617; /* adds padding effect */
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #334155; /* slate-700 */
+}
+
+/* --- 4. UTILITY OVERRIDES --- */
+
+/* Fix for smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevents the card content from shifting when the "→" moves */
+.inline-block {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Ensure images/icons in dark mode aren't too bright */
+.dark img {
+  filter: brightness(.8) contrast(1.2);
+}
