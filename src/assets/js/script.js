@@ -147,16 +147,22 @@ function unlockEgg(eggId) {
         updateGameUI();
     }
 }
-
 /**
  * UNIVERSAL EGG UNLOCKER
- * First trigger of any secret adds +1 to Level progress
+ * Grants exactly one level per unique secret type.
  */
 function triggerSecretUnlock(effectType) {
-    if (effectType === 'matrix') initMatrix();
-    else if (effectType === 'konami') activateKonami();
-    else if (effectType === 'gravity') triggerGravity(null);
+    // 1. Run the Visuals (These run every time)
+    if (effectType === 'matrix') {
+        initMatrix();
+    } else if (effectType === 'konami') {
+        activateKonami();
+    } else if (effectType === 'gravity') {
+        triggerGravity(null);
+    }
 
+    // 2. Grant Level (Only runs the VERY first time for each ID)
+    // IDs are static: 'secret_matrix', 'secret_konami', 'secret_gravity'
     unlockEgg(`secret_${effectType}`);
 }
 
@@ -232,6 +238,7 @@ function scrollToRandomUser() {
     surpriseClickCount++;
     if (surpriseClickCount >= 5) {
         surpriseClickCount = 0;
+        // This now checks for 'secret_matrix' and won't level up twice
         triggerSecretUnlock('matrix');
     }
 
@@ -356,6 +363,23 @@ function closeMatrix() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Secret: Triple-tap the copyright year in the footer to open Dev Tools on mobile
+    const footerYear = document.getElementById('current-year');
+    let tapCount = 0;
+
+    if (footerYear) {
+        footerYear.addEventListener('touchstart', () => {
+            tapCount++;
+            if (tapCount === 3) {
+                const devPanel = document.getElementById('dev-tools');
+                devPanel.classList.toggle('hidden');
+                playSound('secret');
+                tapCount = 0;
+            }
+            // Reset count if they stop tapping for 1 second
+            setTimeout(() => { tapCount = 0; }, 1000);
+        });
+    }
     applyTheme(localStorage.getItem('theme') || 'light');
     updateGameUI();
 });
