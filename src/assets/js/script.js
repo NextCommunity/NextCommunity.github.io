@@ -147,23 +147,31 @@ function unlockEgg(eggId) {
         updateGameUI();
     }
 }
+
 /**
  * UNIVERSAL EGG UNLOCKER
- * Grants exactly one level per unique secret type.
+ * 4 Secrets: matrix, konami, gravity (hash), badge_click
  */
 function triggerSecretUnlock(effectType) {
-    // 1. Run the Visuals (These run every time)
+    // 1. Trigger Visuals
     if (effectType === 'matrix') {
         initMatrix();
     } else if (effectType === 'konami') {
         activateKonami();
     } else if (effectType === 'gravity') {
+        // This is triggered by clicking the Hash or the Dev Button
         triggerGravity(null);
+    } else if (effectType === 'badge_click') {
+        playSound('click');
     }
 
-    // 2. Grant Level (Only runs the VERY first time for each ID)
-    // IDs are static: 'secret_matrix', 'secret_konami', 'secret_gravity'
+    // 2. Grant Level (Fixed IDs ensure max level 4)
     unlockEgg(`secret_${effectType}`);
+}
+
+// Ensure the actual badge click also uses this logic
+function handleLevelClick() {
+    triggerSecretUnlock('badge_click');
 }
 
 function showLevelUpNotification(newLevelIndex) {
