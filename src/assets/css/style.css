@@ -551,3 +551,35 @@ body[data-level="6"]::after {
     /* This makes sure the text is crisp on light/dark themes */
     text-shadow: 0 0 4px rgba(0,0,0,0.3);
 }
+
+
+
+/* Username: Big, bold, and using the random accent */
+.developer-name, h1 {
+    color: var(--accent);
+    text-shadow: 0 0 20px hsla(var(--accent-hue), 90%, 65%, 0.3);
+}
+
+/* Skills: Give them a 'glass' look using the random background */
+.skill-tag {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+}
+
+.skill-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
+}
+
+/* Links: Make them pop! */
+a {
+    color: var(--accent);
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    filter: brightness(1.2);
+    text-decoration: underline;
+}
