@@ -152,22 +152,6 @@ function unlockEgg(eggId) {
  * UNIVERSAL EGG UNLOCKER
  * 4 Secrets: matrix, konami, gravity (hash), badge_click
  */
-function triggerSecretUnlock(effectType) {
-    // 1. Trigger Visuals
-    if (effectType === 'matrix') {
-        initMatrix();
-    } else if (effectType === 'konami') {
-        activateKonami();
-    } else if (effectType === 'gravity') {
-        // This is triggered by clicking the Hash or the Dev Button
-        triggerGravity(null);
-    } else if (effectType === 'badge_click') {
-        playSound('click');
-    }
-
-    // 2. Grant Level (Fixed IDs ensure max level 4)
-    unlockEgg(`secret_${effectType}`);
-}
 
 // Ensure the actual badge click also uses this logic
 function handleLevelClick() {
@@ -376,64 +360,119 @@ let destructInterval;
  * SELF DESTRUCT ENGINE
  * Forces console visibility and manages the dynamic loading bar
  */
+/**
+ * RE-INITIALIZE THE SELF-DESTRUCT (SOUND + PERSISTENCE)
+ */
 window.startSelfDestruct = function() {
     const btn = document.getElementById('self-destruct-btn');
     const devPanel = document.getElementById('dev-tools');
+    const timerText = document.getElementById('destruct-timer');
+    const progressBar = document.getElementById('destruct-bar');
 
     if (destructInterval) return;
 
-    // 1. Move console to BODY to escape parent container collapses
-    document.body.appendChild(devPanel);
-
-    // 2. Lock and Audio Resume
-    devPanel.setAttribute('data-lock', 'true');
+    // AUDIO BOOTUP
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     audioCtx.resume();
 
-    let barContainer = document.getElementById('destruct-bar-container') || createBar(btn);
-    const progressBar = document.getElementById('destruct-bar-progress');
-
+    // UI LOCKING
+    document.body.appendChild(devPanel);
+    devPanel.setAttribute('data-lock', 'true');
     btn.classList.add('is-destructing');
+
     let timeLeft = 10;
 
     destructInterval = setInterval(() => {
-        timeLeft--;
+    timeLeft--; // Countdown moves from 10 towards 0
 
-        // FORCE RE-CHECK (The 4-second fix)
-        devPanel.classList.remove('hidden');
-        devPanel.style.display = 'block';
+    // 1. Update the numerical text
+    const timerDisplay = document.getElementById('destruct-timer');
+    const statusText = document.getElementById('destruct-text');
 
-        const progressPercent = ((10 - timeLeft) / 10) * 100;
-        progressBar.style.width = `${progressPercent}%`;
+    if (timerDisplay) {
+        timerDisplay.innerText = `${timeLeft}s`;
+        timerDisplay.style.color = "#fff"; // Ensure it's visible against the red
+    }
 
-        // Color Change: Green -> Yellow -> Red
-        progressBar.style.backgroundColor = timeLeft > 5 ? "#22c55e" : (timeLeft > 2 ? "#eab308" : "#ef4444");
+    // 2. Update the progress bar (Green -> Red)
+    const progressBar = document.getElementById('destruct-bar');
+    if (progressBar) {
+        const percent = ((10 - timeLeft) / 10) * 100;
+        progressBar.style.width = `${percent}%`;
 
-        btn.innerHTML = `HALT SYSTEM IN ${timeLeft}s 💣`;
+        // Color transition logic
+        if (timeLeft > 5) progressBar.style.backgroundColor = "#22c55e"; // Green
+        else if (timeLeft > 2) progressBar.style.backgroundColor = "#eab308"; // Yellow
+        else progressBar.style.backgroundColor = "#ef4444"; // Red
+    }
 
-        // Sound Engine (scheduling precisely)
-        if (audioCtx) {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain); gain.connect(audioCtx.destination);
-            osc.frequency.setValueAtTime(200 + (progressPercent * 10), audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
-            osc.start(); osc.stop(audioCtx.currentTime + 0.1);
-        }
+    // 3. Audio & Haptics
+    if (audioCtx) {
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.connect(g); g.connect(audioCtx.destination);
+        // Pitch goes up as time runs out
+        osc.frequency.setValueAtTime(300 + (10 - timeLeft) * 50, audioCtx.currentTime);
+        g.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+    }
 
-        if (timeLeft <= 4) {
-            document.body.classList.add('glitch-shake');
-        }
+    // 4. Visual Panic (Last 4 seconds)
+    if (timeLeft <= 4) {
+        document.body.classList.add('glitch-shake');
+        if (statusText) statusText.innerText = "SYSTEM_FAILURE_IMMINENT";
+    }
 
-        if (timeLeft <= 0) {
-            clearInterval(destructInterval);
-            destructInterval = null;
-            devPanel.setAttribute('data-lock', 'false'); // Finally release the lock
-            triggerSecretUnlock('gravity');
-        }
-    }, 1000);
-};
+    // 5. Termination
+    if (timeLeft <= 0) {
+        clearInterval(destructInterval);
+        destructInterval = null;
+        if (timerDisplay) timerDisplay.innerText = "0s";
+
+        // Release lock and trigger explosion
+        const devPanel = document.getElementById('dev-tools');
+        devPanel.setAttribute('data-lock', 'false');
+        triggerSecretUnlock('gravity');
+    }
+}, 1000);
+}
+/**
+ * UPDATED TRIGGER LOGIC
+ * Corrects the 'Gravity' failure for the Commit Hash
+ */
+function triggerSecretUnlock(type) {
+    if (type === 'gravity') {
+        // Run specific gravity visual logic
+        activateGravityEffect();
+    } else if (type === 'matrix') {
+        initMatrix();
+    } else if (type === 'konami') {
+        activateKonami();
+    }
+
+    // Global XP Unlock
+    unlockEgg(`secret_${type}`);
+}
+
+function activateGravityEffect() {
+    playSound('secret');
+    document.body.classList.add('glitch-shake');
+
+    setTimeout(() => {
+        document.body.classList.remove('glitch-shake');
+        // Targeted elements for falling
+        const targets = document.querySelectorAll('.user-card, header, footer, main, h1');
+        targets.forEach(el => {
+            const dist = window.innerHeight + 500;
+            el.style.transition = `transform ${1 + Math.random()}s ease-in, opacity 1s`;
+            el.style.transform = `translateY(${dist}px) rotate(${Math.random() * 60 - 30}deg)`;
+            el.style.opacity = "0";
+            el.style.pointerEvents = "none";
+        });
+    }, 500);
+}
+
 // Internal helper to ensure bar exists
 function createBar(btn) {
     const container = document.createElement('div');
