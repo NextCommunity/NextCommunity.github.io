@@ -299,11 +299,11 @@ function playSound(type) {
     else if (type === 'levelUp') {
         osc.type = 'square';
         osc.frequency.setValueAtTime(440, now);
-        osc.frequency.exponentialRampToValueAtTime(880, now + 0.2);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.4);
         gain.gain.setValueAtTime(0.15, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
         osc.start(now);
-        osc.stop(now + 0.4);
+        osc.stop(now + 1.5);
     }
     else if (type === 'secret') {
         osc.type = 'triangle';
@@ -311,11 +311,11 @@ function playSound(type) {
             const s = audioCtx.createOscillator();
             const g = audioCtx.createGain();
             s.connect(g); g.connect(audioCtx.destination);
-            s.frequency.setValueAtTime(freq, now + i * 0.1);
-            g.gain.setValueAtTime(0.07, now + i * 0.1);
-            g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.1 + 0.1);
-            s.start(now + i * 0.1);
-            s.stop(now + i * 0.1 + 0.1);
+            s.frequency.setValueAtTime(freq, now + i * 0.3);
+            g.gain.setValueAtTime(0.07, now + i * 0.3);
+            g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.3 + 0.3);
+            s.start(now + i * 0.3);
+            s.stop(now + i * 0.3 + 0.3);
         });
     }
     else if (type === 'restore') {
@@ -655,6 +655,7 @@ function triggerSecretUnlock(type) {
 
     // 3. Only process XP and Save if it's the first time
     if (isNewUnlock) {
+        playSound('secret');
         // Update the array and save to localStorage
         unlockedEggs.push(eggId);
         localStorage.setItem('unlockedEggs', JSON.stringify(unlockedEggs));
@@ -670,6 +671,7 @@ function triggerSecretUnlock(type) {
 
         console.log(`✨ Secret Unlocked: ${eggId}`);
     } else {
+        playSound('click');
         console.log(`Secret ${eggId} already discovered. No extra XP granted.`);
     }
 }
@@ -687,7 +689,11 @@ window.addEventListener('keydown', (e) => {
         const systemDash = document.getElementById('dev-tools'); // Adjust ID as needed
         const isOpening = systemDash.classList.contains('hidden');
 
+        localStorage.setItem('devToolsVisible', !isOpening);
+        playSound(isOpening ? 'secret' : 'click');
+
         if (isOpening) {
+
             document.getElementById('matrix-console-container').classList.add('hidden');
             systemDash.classList.remove('hidden');
 
@@ -717,13 +723,12 @@ window.addEventListener('keydown', (e) => {
 });
 
 function activateKonami() {
-    playSound('secret');
     document.documentElement.classList.add('konami-roll');
     setTimeout(() => document.documentElement.classList.remove('konami-roll'), 2000);
 }
 
 function activateGravityEffect() {
-    playSound('secret');
+
     document.body.classList.add('glitch-shake');
 
     setTimeout(() => {
@@ -816,6 +821,41 @@ function closeMatrix() {
     if (overlay) { overlay.classList.add('hidden'); overlay.style.display = 'none'; }
     window.removeEventListener('keydown', handleMatrixEsc);
 }
+
+
+let hasTriggeredFirstLevel = false; // Prevents the sound from spamming every click
+
+function triggerBadgeLevelUp() {
+    const badge = document.getElementById('level-badge');
+
+    // 1. Visual Pop Animation
+    if (badge) {
+        badge.classList.remove('animate-badge-pop');
+        void badge.offsetWidth; // Force reflow to restart animation
+        badge.classList.add('animate-badge-pop');
+    }
+
+    // 2. Secret Sound & Level Logic
+    if (!hasTriggeredFirstLevel) {
+        // Play your secret sound
+        playSound('secret');
+
+        // Force a level up for the "first time" experience
+        addExperience(45); // Assuming 45 XP = 1 Level
+
+        hasTriggeredFirstLevel = true;
+
+        // Push a special "Easter Egg" message to the Matrix Console
+        if (typeof matrixConsoleLog === 'function') {
+            matrixConsoleLog(currentLevel);
+        }
+    }
+}
+
+// Attach to the badge click
+document.getElementById('level-badge').addEventListener('click', triggerBadgeLevelUp);
+
+
 
 /**
  * 7. SELF DESTRUCT ENGINE
