@@ -84,6 +84,26 @@
             <span class="opacity-50">5S</span>
         </button>
     </div>
+<div class="mt-4 pt-4 border-t border-white/10">
+    <label class="text-[8px] text-white/60 uppercase tracking-widest mb-1.5 block font-bold">Coordinate Jump (0-200)</label>
+    <div class="flex gap-2">
+        <input
+            type="number"
+            id="jump-lvl"
+            placeholder="0"
+            min="0"
+            max="200"
+            style="background-color: #000 !important; color: #00ffcc !important; border: 1px solid #00ffcc !important; width: 60px !important; height: 30px !important; font-size: 14px !important; padding: 0 5px !important; border-radius: 4px !important;"
+        >
+        <button
+            onclick="jumpToLevel()"
+            class="flex-1 bg-accent/20 hover:bg-accent/40 text-accent text-[10px] font-black py-1 rounded transition-all border border-accent/40 uppercase"
+            style="height: 30px !important;"
+        >
+            EXECUTE
+        </button>
+    </div>
+</div>
 
     <div class="flex gap-1.5 pt-2 border-t border-white/10">
         <button id="self-destruct-btn" onclick="startSelfDestruct()" class="flex-1 py-1.5 bg-red-600/10 hover:bg-red-600/30 text-red-500 text-[8px] border border-red-500/30 rounded flex justify-center gap-1">
