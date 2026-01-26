@@ -354,6 +354,67 @@ function getRank(lvl) {
     return rank;
 }
 
+
+const consoleContainer = document.getElementById('matrix-console-container');
+const consoleOutput = document.getElementById('matrix-console-output');
+
+function minimizeConsole() {
+    // Toggles the height of the output area
+    if (consoleOutput.style.display === 'none') {
+        consoleOutput.style.display = 'block';
+        consoleContainer.style.width = '20rem'; // w-80
+    } else {
+        consoleOutput.style.display = 'none';
+        consoleContainer.style.width = '150px'; // Compact view
+    }
+}
+
+function maximizeConsole() {
+    // Toggles a full-screen-ish mode
+    consoleContainer.classList.toggle('console-maximized');
+
+    // Adjust height when maximized
+    if (consoleContainer.classList.contains('console-maximized')) {
+        consoleOutput.style.height = '70vh';
+        consoleOutput.style.display = 'block';
+    } else {
+        consoleOutput.style.height = '12rem'; // h-48
+    }
+}
+
+function closeConsole() {
+    const container = document.getElementById('matrix-console-container');
+    const reopenBtn = document.getElementById('reopen-console-btn');
+
+    // Hide the console
+    container.style.opacity = '0';
+    container.style.transform = 'translateY(20px)';
+
+    setTimeout(() => {
+        container.classList.add('hidden');
+        // Show the small reopen button
+        if (reopenBtn) reopenBtn.classList.remove('hidden');
+    }, 300);
+}
+
+function reopenConsole() {
+    const container = document.getElementById('matrix-console-container');
+    const reopenBtn = document.getElementById('reopen-console-btn');
+
+    // Show the console
+    container.classList.remove('hidden');
+
+    // Trigger reflow for animation
+    void container.offsetWidth;
+
+    container.style.opacity = '1';
+    container.style.transform = 'translateY(0)';
+
+    // Hide the reopen button
+    if (reopenBtn) reopenBtn.classList.add('hidden');
+}
+
+
 let isProcessingXP = false;
 
 // Ensure this is in the GLOBAL scope (not hidden inside another function)
@@ -884,6 +945,69 @@ function renderXP(value) {
     // console.log(`XP: ${currentXPNum}, Percent: ${percentage}%`);
 }
 
+function showLevelUpToast(rank) {
+    // 1. Create the container
+    const toast = document.createElement('div');
+    toast.className = 'level-up-toast';
+
+    // 2. Build the inner content
+    // We use the rank color for the name and emoji to make it feel custom
+    toast.innerHTML = `
+        <div class="toast-content">
+            <span class="toast-emoji">${rank.emoji}</span>
+            <div class="toast-text">
+                <p class="toast-title">LEVEL UP!</p>
+                <p class="toast-rank" style="color: ${rank.color}">${rank.name}</p>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(toast);
+
+    // 3. Auto-remove after animation
+    setTimeout(() => {
+        toast.classList.add('fade-out');
+        setTimeout(() => toast.remove(), 500);
+    }, 2500);
+}
+
+
+function matrixConsoleLog(level) {
+    const rank = getRank(level);
+
+    // This looks awesome in the F12 Dev Console
+    console.log(
+        `%c [SYSTEM] %c LEVEL UP: %c ${rank.name.toUpperCase()} %c [LVL ${level}] `,
+        "color: #10b981; font-weight: bold; background: #064e3b; padding: 2px;",
+        "color: #ffffff; background: #1e293b; padding: 2px;",
+        `color: ${rank.color}; font-weight: 900; background: #1e293b; padding: 2px;`,
+        "color: #94a3b8; background: #1e293b; padding: 2px;"
+    );
+
+    // 3. If you have an on-screen Matrix Console element, push there too:
+    const matrixConsole = document.getElementById('matrix-console-output');
+    if (matrixConsole) {
+        const line = document.createElement('p');
+        line.className = 'matrix-line text-xs font-mono mb-1';
+        line.innerHTML = `<span class="text-green-500">>></span> Rank Updated: <span style="color: ${rank.color}">${rank.name}</span>`;
+        matrixConsole.appendChild(line);
+        // Auto-scroll to bottom
+        matrixConsole.scrollTop = matrixConsole.scrollHeight;
+    }
+}
+
+document.addEventListener('keydown', (e) => {
+    // Check if user pressed 'L' (for Log) and isn't typing in an input field
+    if (e.key.toLowerCase() === 'l' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+        const container = document.getElementById('matrix-console-container');
+        if (container.classList.contains('hidden')) {
+            reopenConsole();
+        } else {
+            closeConsole();
+        }
+    }
+});
+
 async function addExperience(amount) {
     // 1. Force strict numeric types to prevent "1" + "1" = "11"
     let xpToAdd = Number(amount) || 0;
@@ -898,14 +1022,29 @@ async function addExperience(amount) {
     // Using a while loop ensures that if you gain 100 XP,
     // it processes Level 1, then Level 2, with the remainder left over.
     while (currentXP >= XP_THRESHOLD && currentLevel < 200) {
-        currentXP -= XP_THRESHOLD; // Subtract exactly the cost of one level
+        currentXP -= XP_THRESHOLD;
         currentLevel++;
+        // 1. Trigger the Visual Toast (Top of screen)
+        if (typeof showLevelUpToast === 'function') {
+            showLevelUpToast(getRank(currentLevel));
+        }
 
-        // Safety: Ensure we don't end up with negative XP from rounding
-        currentXP = Math.max(0, currentXP);
+        // 2. Trigger the "Matrix" Console Log
+        matrixConsoleLog(currentLevel);
 
-        // Optional: Trigger level-up specific effects here
-        console.log(`Leveled Up! Now Level: ${currentLevel}`);
+        // --- THE POPUP TRIGGER ---
+        const badge = document.getElementById('level-badge');
+        if (badge) {
+            // Remove the class if it exists (to reset animation)
+            badge.classList.remove('animate-badge-pop');
+            // Trigger a "reflow" (magic trick to allow re-animation)
+            void badge.offsetWidth;
+            // Re-add the class
+            badge.classList.add('animate-badge-pop');
+        }
+        // --------------------------
+
+        console.log(`Leveled Up to ${currentLevel}!`);
     }
 
     // 4. Persistence: Save clean numbers

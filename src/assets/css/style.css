@@ -583,3 +583,150 @@ a:hover {
     filter: brightness(1.2);
     text-decoration: underline;
 }
+
+@keyframes badgePop {
+    0% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.4); filter: brightness(1.5); }
+    100% { transform: scale(1); filter: brightness(1); }
+}
+
+.animate-badge-pop {
+    animation: badgePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    z-index: 101; /* Ensure it pops above the header bar */
+}
+
+/* Optional: Add a glow to the level number too */
+#level-number {
+    transition: all 0.3s ease;
+}
+.animate-badge-pop #level-number {
+    color: white;
+    text-shadow: 0 0 10px rgba(255,255,255,1);
+}
+
+
+
+.level-up-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.9); /* Dark background for contrast */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5),
+                0 0 15px var(--accent); /* Glow matches current level */
+    z-index: 1000;
+    animation: slideDownIn 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.toast-emoji {
+    font-size: 2rem;
+}
+
+.toast-title {
+    color: #94a3b8;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1rem;
+    margin: 0;
+}
+
+.toast-rank {
+    font-size: 1.25rem;
+    font-weight: 900;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+@keyframes slideDownIn {
+    from { transform: translate(-50%, -100px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+    transition: all 0.5s ease;
+}
+.matrix-alert {
+    position: fixed;
+    bottom: 20%;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    border-left: 4px solid #10b981;
+    color: #10b981;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    z-index: 2000;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    animation: matrixSlideIn 0.3s ease-out;
+}
+
+@keyframes matrixSlideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+#matrix-console-output {
+    /* Subtle green glow on text */
+    text-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Custom scrollbar for the terminal */
+#matrix-console-output::-webkit-scrollbar {
+    width: 3px;
+}
+#matrix-console-output::-webkit-scrollbar-thumb {
+    background: rgba(16, 185, 129, 0.3);
+}
+
+/* The Matrix Line Animation */
+.matrix-line {
+    border-left: 2px solid #10b981;
+    padding-left: 8px;
+    margin-bottom: 4px;
+    animation: matrixLineFade 0.3s ease-out;
+}
+
+@keyframes matrixLineFade {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+/* Maximize State */
+.console-maximized {
+    width: 90vw !important;
+    height: auto !important;
+    bottom: 5vh !important;
+    right: 5vw !important;
+    left: 5vw !important;
+    z-index: 2000 !important;
+}
+
+#matrix-console-output {
+    scrollbar-width: thin;
+    scrollbar-color: #10b981 transparent;
+}
+
+/* Add a scanline effect for that retro terminal feel */
+#matrix-console-output::before {
+    content: " ";
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 10;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}

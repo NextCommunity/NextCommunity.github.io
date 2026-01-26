@@ -124,3 +124,26 @@
         [ESC] EXIT_SIMULATION
     </button>
 </div>
+<button id="reopen-console-btn" onclick="reopenConsole()" class="fixed bottom-6 right-6 p-3 bg-black/80 border border-green-500/30 rounded-full text-green-500 hidden hover:scale-110 transition-all z-[999]" title="Open System Log">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+</button>
+<div id="matrix-console-container" class="fixed bottom-6 right-6 w-80 z-[1000] transition-all duration-300 ease-in-out">
+    <div class="bg-black/90 backdrop-blur-xl border border-green-500/30 rounded-t-lg overflow-hidden shadow-2xl">
+
+        <div class="bg-green-500/10 border-b border-green-500/30 px-3 py-2 flex justify-between items-center cursor-default select-none">
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono text-green-500 uppercase tracking-widest opacity-70">System_Log</span>
+            </div>
+
+            <div class="flex gap-2">
+                <button onclick="minimizeConsole()" class="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50 hover:bg-yellow-500/50 transition-colors" title="Minimize"></button>
+                <button onclick="maximizeConsole()" class="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50 hover:bg-green-500/50 transition-colors" title="Maximize"></button>
+                <button onclick="closeConsole()" class="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50 hover:bg-red-500/50 transition-colors" title="Close"></button>
+            </div>
+        </div>
+
+        <div id="matrix-console-output" class="h-48 p-3 overflow-y-auto font-mono text-[11px] leading-tight transition-all duration-300">
+            <p class="text-green-500/40">// Terminal link established...</p>
+        </div>
+    </div>
+</div>
