@@ -237,7 +237,7 @@ const LEVELS = [
 const XP_PER_LEVEL = 45;
 
 // Load saved level or start at 0
-let currentLevel = parseInt(localStorage.getItem('userLevel')) || 0;
+let currentLevel = Number(localStorage.getItem('userLevel')) || 0;
 
 // Load saved XP or start at 0
 let currentXP = parseInt(localStorage.getItem('userXP')) || 0;
@@ -354,8 +354,17 @@ function getRank(lvl) {
     return rank;
 }
 
+let isProcessingXP = false;
+
 // Ensure this is in the GLOBAL scope (not hidden inside another function)
 window.createFloatingXP = function(e) {
+    // Prevent "spam" firing from high-speed mouse movement
+    if (isProcessingXP) return;
+    isProcessingXP = true;
+
+    // Release the lock after 50ms
+    setTimeout(() => { isProcessingXP = false; }, 50);
+
     // 1. Create the XP element
     const popup = document.createElement('div');
 
@@ -875,48 +884,35 @@ function renderXP(value) {
     // console.log(`XP: ${currentXPNum}, Percent: ${percentage}%`);
 }
 
-
 async function addExperience(amount) {
-    if (document.getElementById('dev-tools')?.getAttribute('data-lock') === 'true') return;
-
-    // 1. Force everything to be a clean number to prevent negative/NaN math
+    // 1. Force strict numeric types to prevent "1" + "1" = "11"
     let xpToAdd = Number(amount) || 0;
     currentXP = Number(currentXP) || 0;
     currentLevel = Number(currentLevel) || 0;
+    const XP_THRESHOLD = 45;
 
+    // 2. Add the new XP
     currentXP += xpToAdd;
 
-    // 2. Level Up Loop
-    while (currentXP >= XP_PER_LEVEL && currentLevel < 200) {
-        // Visual fill to end
-        renderXP(XP_PER_LEVEL);
-        await new Promise(r => setTimeout(r, 300));
-
-        // The Math: Subtract 45 and increment level
-        currentXP -= XP_PER_LEVEL;
+    // 3. Process Level Ups one by one
+    // Using a while loop ensures that if you gain 100 XP,
+    // it processes Level 1, then Level 2, with the remainder left over.
+    while (currentXP >= XP_THRESHOLD && currentLevel < 200) {
+        currentXP -= XP_THRESHOLD; // Subtract exactly the cost of one level
         currentLevel++;
 
-        // Safety: Ensure XP never drops below 0
+        // Safety: Ensure we don't end up with negative XP from rounding
         currentXP = Math.max(0, currentXP);
 
-        // Reset bar visually for next level in the loop
-        const pb = document.getElementById('level-progress');
-        if (pb) {
-            pb.style.transition = 'none';
-            renderXP(0);
-            void pb.offsetWidth;
-            pb.style.transition = 'width 0.3s ease-in-out';
-        }
-
-        const rank = getRank(currentLevel);
-        showLevelUpNotification(rank);
-        playSound('levelUp');
+        // Optional: Trigger level-up specific effects here
+        console.log(`Leveled Up! Now Level: ${currentLevel}`);
     }
 
-    // 3. Save clean numbers back to storage
+    // 4. Persistence: Save clean numbers
     localStorage.setItem('userLevel', currentLevel.toString());
     localStorage.setItem('userXP', currentXP.toString());
 
+    // 5. Update UI
     updateGameUI();
 }
 
