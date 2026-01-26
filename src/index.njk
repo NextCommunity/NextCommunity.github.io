@@ -9,63 +9,16 @@ layout: false
   <title>Developer Directory</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/assets/css/style.css">
-  <script>
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark') document.documentElement.classList.add('dark');
-  </script>
 </head>
-<body class="min-h-screen scroll-smooth">
+<body class="min-h-screen scroll-smooth bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-300">
 
-  <header class="sticky top-0 z-50 bg-[var(--bg-page)]/80 backdrop-blur-md border-b border-[var(--border-color)] py-6 mb-8">
-    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+  {% include "header.njk" %}
 
-      <div class="border-l-4 border-accent pl-6">
-        <h1 class="text-3xl font-black uppercase tracking-tight">Our Developers</h1>
-        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1">
-          <span class="text-xs font-bold text-accent uppercase tracking-widest">
-            {{ collections.randomPeople.length }} Active Profiles
-          </span>
-          <span class="text-slate-300 dark:text-slate-700">|</span>
-          <p class="text-[var(--text-muted)] text-xs font-medium uppercase tracking-tighter">
-            Global Network: Worldwide
-          </p>
-        </div>
-      </div>
-
-<div id="game-stats" class="flex items-center gap-4 px-5 py-3 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-3xl shadow-lg">
-    <div id="level-badge" class="flex items-center justify-center w-12 h-12 rounded-2xl text-2xl shadow-md transition-all duration-700 transform hover:scale-110">
-        </div>
-
-    <div class="flex flex-col">
-        <div class="flex items-center gap-2">
-            <span id="level-name" class="text-sm font-black uppercase tracking-widest leading-none">---</span>
-
-            <span class="text-[10px] bg-black/10 dark:bg-white/10 px-2 py-1 rounded-md font-bold text-[var(--text-main)] opacity-80 border border-[var(--border-color)]">
-                LVL <span id="level-number">0</span>
-            </span>
-        </div>
-
-        <div class="w-32 h-1.5 bg-black/5 dark:bg-white/5 rounded-full mt-2 overflow-hidden border border-[var(--border-color)]">
-            <div id="level-progress" class="h-full bg-accent transition-all duration-1000 shadow-[0_0_8px_var(--accent)]" style="width: 0%"></div>
-        </div>
-    </div>
-</div>
-
-      <div class="flex items-center gap-3">
-        <button onclick="toggleTheme()" class="p-3 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] shadow-sm active:scale-90 transition-transform">
-          <span id="theme-icon">🌙</span>
-        </button>
-        <button onclick="scrollToRandomUser()" class="bg-accent text-white text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-full shadow-lg active:scale-95 transition-all">
-          🎲 Surprise Me
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-7xl mx-auto px-4 pb-24">
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+  <main class="max-w-7xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {# We use collections.developer (or whichever tag you use in your .md files) #}
       {% for person in collections.randomPeople %}
-      <div class="user-card group rounded-2xl overflow-hidden flex flex-col scroll-mt-32">
+      <div class="user-card group bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl overflow-hidden flex flex-col scroll-mt-32 transition-all hover:shadow-2xl hover:-translate-y-1">
         <div class="p-8">
           <div class="flex justify-between items-start gap-4">
             <div class="flex-1">
@@ -73,38 +26,33 @@ layout: false
               <p class="text-accent font-semibold text-sm uppercase tracking-wider">{{ person.data.role }}</p>
             </div>
             <span class="shrink-0 text-[10px] bg-[var(--bg-footer)] text-[var(--text-muted)] px-2 py-1 rounded font-bold uppercase border border-[var(--border-color)]">
-              {{ person.data.location }}{% if person.data.country %}, {{ person.data.country }}{% endif %}
+              {{ person.data.location }}
             </span>
           </div>
 
           <div class="mt-6 flex flex-wrap gap-2">
             {% set skills = person.data.languages.split(' ') %}
             {% for skill in skills %}
-              <span class="px-2 py-1 bg-accent text-white text-[10px] font-bold rounded uppercase">{{ skill }}</span>
+              <span class="px-2 py-1 bg-accent text-white text-[10px] font-bold rounded uppercase shadow-sm">{{ skill }}</span>
             {% endfor %}
           </div>
 
           <p class="mt-4 text-[var(--text-muted)] text-sm italic line-clamp-3">"{{ person.data.bio | truncate(120) }}"</p>
         </div>
 
-        <div class="mt-auto card-footer p-4 flex justify-between items-center px-6">
+        <div class="mt-auto p-4 flex justify-between items-center px-6 bg-black/5 dark:bg-white/5 border-t border-[var(--border-color)]">
           <div class="flex items-center gap-4">
             {% if person.data.github %}
-            <a href="https://github.com/{{ person.data.github }}" target="_blank" rel="noopener" class="text-[var(--text-muted)] hover:text-accent transition-colors">
-              <span class="text-[11px] font-bold uppercase tracking-tighter">GitHub</span>
-            </a>
+            <a href="https://github.com/{{ person.data.github }}" target="_blank" class="text-[var(--text-muted)] hover:text-accent transition-colors font-bold text-[10px] uppercase">GitHub</a>
             {% endif %}
-
             {% if person.data.linkedin %}
-            <a href="{{ person.data.linkedin }}" target="_blank" rel="noopener" class="text-[var(--text-muted)] hover:text-accent transition-colors">
-              <span class="text-[11px] font-bold uppercase tracking-tighter">LinkedIn</span>
-            </a>
+            <a href="{{ person.data.linkedin }}" target="_blank" class="text-[var(--text-muted)] hover:text-accent transition-colors font-bold text-[10px] uppercase">LinkedIn</a>
             {% endif %}
           </div>
 
-          <a href="{{ person.url }}" class="font-bold text-accent flex items-center group/link">
-            <span>Full Bio</span>
-            <span class="inline-block ml-1 transition-transform group-hover/link:translate-x-2">→</span>
+          <a href="{{ person.url }}" class="font-bold text-accent flex items-center group/link text-sm">
+            <span>Profile</span>
+            <span class="inline-block ml-1 transition-transform group-hover/link:translate-x-1">→</span>
           </a>
         </div>
       </div>
@@ -113,6 +61,11 @@ layout: false
   </main>
 
   {% include "footer.njk" %}
+
+  <div id="matrix-overlay" class="fixed inset-0 bg-black hidden z-[9999]">
+      <canvas id="matrix-canvas"></canvas>
+      <button onclick="closeMatrix()" class="fixed top-8 right-8 z-[10000] bg-white/10 text-white px-4 py-2 rounded-full border border-white/20 backdrop-blur-md text-xs">EXIT [ESC]</button>
+  </div>
 
   <script src="/assets/js/script.js"></script>
 </body>

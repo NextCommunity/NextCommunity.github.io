@@ -1,5 +1,7 @@
+/**
+ * 1. THEME VARIABLES
+ */
 :root {
-  /* Default Light Mode */
   --bg-page: #f8fafc;
   --bg-card: #ffffff;
   --bg-footer: #f1f5f9;
@@ -7,9 +9,9 @@
   --text-muted: #64748b;
   --border-color: #e2e8f0;
   --accent: #4f46e5;
+  --accent-rgb: 79, 70, 229;
 }
 
-/* Dark Mode Class */
 .dark {
   --bg-page: #020617;
   --bg-card: #0f172a;
@@ -18,19 +20,61 @@
   --text-muted: #94a3b8;
   --border-color: #1e293b;
   --accent: #818cf8;
+  --accent-rgb: 129, 140, 248;
 }
 
-/* Base Styles */
-body {
+/**
+ * 2. BASE STYLES & STICKY FIXES
+ */
+html, body {
+  overflow-x: clip; /* Important: prevents sticky break and horizontal scroll */
+  height: auto;
+  min-height: 100%;
   background-color: var(--bg-page);
   color: var(--text-main);
   transition: background-color 0.4s ease, color 0.4s ease;
+  scroll-behavior: smooth;
 }
 
+/**
+ * 3. STICKY HEADER
+ */
+header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: var(--bg-page);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--border-color);
+  box-sizing: border-box;
+}
+
+h1 {
+  line-height: 0.85;
+  text-shadow: 2px 2px 0px transparent;
+}
+
+.dark h1 {
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+}
+
+/**
+ * 4. CARD STYLES
+ */
 .user-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.user-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 .card-footer {
@@ -38,16 +82,51 @@ body {
   border-top: 1px solid var(--border-color);
 }
 
-/* Accent Color Overrides */
+/**
+ * 5. GAME & UTILITY
+ */
 .text-accent { color: var(--accent); }
 .bg-accent { background-color: var(--accent); }
-.border-accent { border-color: var(--accent); }
 
-/* Animations */
+#game-stats { transition: all 0.3s ease; }
+#level-progress { box-shadow: 0 0 8px var(--accent); }
+
+/**
+ * 6. ANIMATIONS
+ */
+
+/* Konami Barrel Roll - Applied to HTML */
+.konami-roll {
+    transition: transform 2s cubic-bezier(0.65, 0, 0.35, 1);
+    transform: rotate(360deg);
+    transform-style: preserve-3d;
+    pointer-events: none;
+}
+
+/* Fix sticky header jitter during rotation */
+header {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* Matrix Overlay */
+#matrix-overlay {
+  background-color: black;
+  z-index: 9999 !important;
+}
+
+#matrix-canvas {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* Surprise Me Pulse */
 @keyframes glow-pulse {
-  0% { box-shadow: 0 0 0 0 var(--accent); opacity: 0.7; }
-  70% { box-shadow: 0 0 0 15px transparent; }
-  100% { box-shadow: 0 0 0 0 transparent; }
+  0% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.4); opacity: 1; }
+  70% { box-shadow: 0 0 0 20px rgba(var(--accent-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); }
 }
 
 .highlight-pulse {
@@ -56,31 +135,8 @@ body {
   border-color: var(--accent) !important;
 }
 
-html { scroll-behavior: smooth; }
-
-/* Easter Egg: The Barrel Roll */
-.konami-roll {
-  transition: transform 2s cubic-bezier(0.65, 0, 0.35, 1);
-  transform: rotate(360deg);
-}
-
-/* Optional: Fun font change for the title */
-.leet-mode h1 {
-  font-family: "Courier New", monospace !important;
-  color: #00ff00 !important;
-  text-shadow: 2px 2px #ff0000;
-}
-
-#matrix-overlay {
-    background-color: black;
-    /* Ensure it's high, but lower than the Level Up notification (z-2000) */
-    z-index: 1500;
-}
-
-/* Make sure the canvas fills the whole screen even if scrolling */
-#matrix-canvas {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
+/* Level Up Popups */
+.fixed.top-24 {
+  margin-top: 1.5rem;
+  z-index: 10000;
 }
