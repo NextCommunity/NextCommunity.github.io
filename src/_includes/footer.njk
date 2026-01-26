@@ -24,20 +24,22 @@
         <span class="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">Build: {{ build.timestamp }}</span>
       </div>
 
-      <div class="flex items-center bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg overflow-hidden shadow-sm">
-        <button onclick="triggerGravity(event)" class="px-3 py-1.5 text-[10px] font-mono hover:bg-red-500/10 transition-colors group/hash">
-          <span class="text-[var(--text-muted)] group-hover/hash:text-red-500">Hash:</span>
-          <span class="text-accent font-bold underline decoration-dotted">{{ build.hash }}</span>
-        </button>
+     <div class="flex items-center bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg overflow-hidden shadow-sm">
+      <button onclick="triggerSecretUnlock('gravity')" class="px-3 py-1.5 text-[10px] font-mono hover:bg-red-500/10 transition-colors group/hash">
+        <span class="text-[var(--text-muted)] group-hover/hash:text-red-500">Hash:</span>
+        <span class="text-accent font-bold underline decoration-dotted">
+          <code class="cursor-pointer hover:text-red-500 transition-colors">{{ build.hash }}</code>
+        </span>
+      </button>
 
-        <a href="{{ build.repoUrl }}/commit/{{ build.hash }}"
-           target="_blank"
-           rel="noopener"
-           class="px-3 py-1.5 border-l border-[var(--border-color)] bg-[var(--bg-footer)] hover:text-accent transition-colors"
-           title="View Commit on GitHub">
-          <span>↗</span>
-        </a>
-      </div>
+      <a href="{{ build.repoUrl }}/commit/{{ build.hash }}"
+         target="_blank"
+         rel="noopener"
+         class="px-3 py-1.5 border-l border-[var(--border-color)] bg-[var(--bg-footer)] hover:text-accent transition-colors"
+         title="View Commit on GitHub">
+        <span>↗</span>
+      </a>
+    </div>
     </div>
 
   </div>
@@ -62,6 +64,11 @@
 
         <button onclick="triggerSecretUnlock('gravity')" class="w-full py-2 bg-white/5 hover:bg-red-500/20 text-red-500 text-[10px] border border-red-500/30 rounded-lg transition-all flex justify-between px-3">
             <span>INIT_GRAVITY</span>
+            <span class="opacity-50">+1 LVL</span>
+        </button>
+
+        <button onclick="triggerSecretUnlock('badge_click')" class="w-full py-2 bg-white/5 hover:bg-purple-500/20 text-purple-400 text-[10px] border border-purple-500/30 rounded-lg transition-all flex justify-between px-3">
+            <span>UNLOCK_BADGE_XP</span>
             <span class="opacity-50">+1 LVL</span>
         </button>
 
