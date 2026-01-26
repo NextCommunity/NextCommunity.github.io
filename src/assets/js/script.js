@@ -1,82 +1,4 @@
-/**
- * 1. RETRO SOUND ENGINE
- */
-let audioCtx;
 
-function initAudio() {
-    try {
-        if (!audioCtx) {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-        }
-    } catch (e) {
-        console.error("AudioContext failed to initialize:", e);
-    }
-}
-
-window.addEventListener('click', initAudio, { once: true });
-window.addEventListener('keydown', initAudio, { once: true });
-
-function playSound(type) {
-    initAudio();
-    if (!audioCtx || audioCtx.state !== 'running') return;
-
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    const now = audioCtx.currentTime;
-
-    if (type === 'click') {
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(880, now);
-        gain.gain.setValueAtTime(0.1, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-        osc.start(now);
-        osc.stop(now + 0.1);
-    }
-    else if (type === 'levelUp') {
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(440, now);
-        osc.frequency.exponentialRampToValueAtTime(880, now + 0.2);
-        gain.gain.setValueAtTime(0.15, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
-        osc.start(now);
-        osc.stop(now + 0.4);
-    }
-    else if (type === 'secret') {
-        osc.type = 'triangle';
-        [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
-            const s = audioCtx.createOscillator();
-            const g = audioCtx.createGain();
-            s.connect(g); g.connect(audioCtx.destination);
-            s.frequency.setValueAtTime(freq, now + i * 0.1);
-            g.gain.setValueAtTime(0.07, now + i * 0.1);
-            g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.1 + 0.1);
-            s.start(now + i * 0.1);
-            s.stop(now + i * 0.1 + 0.1);
-        });
-    }
-    else if (type === 'restore') {
-        osc.type = 'sine';
-        [220, 440, 880, 1760].forEach((freq, i) => {
-            const s = audioCtx.createOscillator();
-            const g = audioCtx.createGain();
-            s.connect(g); g.connect(audioCtx.destination);
-            s.frequency.setValueAtTime(freq, now + i * 0.05);
-            g.gain.setValueAtTime(0.1, now + i * 0.05);
-            g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.05 + 0.1);
-            s.start(now + i * 0.05);
-            s.stop(now + i * 0.05 + 0.1);
-        });
-    }
-}
-
-/**
- * 2. GLOBAL STATE & CONFIGURATION
- */
 /**
  * 1. LEVELS DATA (0-100)
  */
@@ -202,58 +124,280 @@ const LEVELS = [
     { level: 97, name: "Gandalf the Grey", emoji: "🎆", color: "#64748b" },
     { level: 98, name: "Gandalf the White", emoji: "🧙‍♂️", color: "#ffffff" },
     { level: 99, name: "The Creator", emoji: "🌌", color: "#6366f1" },
-    { level: 100, name: "Eru Ilúvatar", emoji: "✨", color: "#ffffff" }
+    { level: 100, name: "Eru Ilúvatar", emoji: "✨", color: "#ffffff" },
+
+    { level: 101, name: "Padawan Learner", emoji: "🧘", color: "#60a5fa" },
+    { level: 102, name: "Moisture Farmer", emoji: "🚜", color: "#d97706" },
+    { level: 103, name: "Scrappy Scavenger", emoji: "🔧", color: "#fcd34d" },
+    { level: 104, name: "Cantina Regular", emoji: "🍹", color: "#9333ea" },
+    { level: 105, name: "Holocron Finder", emoji: "🧊", color: "#38bdf8" },
+    { level: 106, name: "Speeder Racer", emoji: "🏎️", color: "#fb923c" },
+    { level: 107, name: "Droid Mechanic", emoji: "🤖", color: "#94a3b8" },
+    { level: 108, name: "Kyber Seeker", emoji: "💎", color: "#ffffff" },
+    { level: 109, name: "Outer Rim Nomad", emoji: "🏜️", color: "#a8a29e" },
+    { level: 110, name: "Rebel Pilot", emoji: "🚀", color: "#ef4444" },
+    { level: 111, name: "Squadron Leader", emoji: "📡", color: "#f87171" },
+    { level: 112, name: "Astromech Specialist", emoji: "🔌", color: "#3b82f6" },
+    { level: 113, name: "Smuggler Associate", emoji: "📦", color: "#b45309" },
+    { level: 114, name: "Sabacc Champion", emoji: "🃏", color: "#fbbf24" },
+    { level: 115, name: "Jedi Knight", emoji: "⚔️", color: "#60a5fa" },
+    { level: 116, name: "Lightsaber Smith", emoji: "🛠️", color: "#2dd4bf" },
+    { level: 117, name: "Force Sensitive", emoji: "🌀", color: "#818cf8" },
+    { level: 118, name: "Temple Guardian", emoji: "🏰", color: "#facc15" },
+    { level: 119, name: "Wayseeker", emoji: "🧭", color: "#94a3b8" },
+    { level: 120, name: "Mandalorian Initiate", emoji: "🛡️", color: "#64748b" },
+    { level: 121, name: "Foundling", emoji: "👶", color: "#cbd5e1" },
+    { level: 122, name: "Beskar Bearer", emoji: "🌑", color: "#475569" },
+    { level: 123, name: "Clan Defender", emoji: "⚔️", color: "#1e293b" },
+    { level: 124, name: "Jetpack Ace", emoji: "🔥", color: "#f97316" },
+    { level: 125, name: "Jedi Guardian", emoji: "🛡️", color: "#22c55e" },
+
+    // --- IMPERIAL MIGHT: THE SHADOW (126-150) ---
+    { level: 126, name: "Stormtrooper Recruit", emoji: "⚪", color: "#ffffff" },
+    { level: 127, name: "Scout Trooper", emoji: "🏍️", color: "#e2e8f0" },
+    { level: 128, name: "TIE Pilot", emoji: "🦇", color: "#1f2937" },
+    { level: 129, name: "Imperial Officer", emoji: "💂", color: "#334155" },
+    { level: 130, name: "Millennium Captain", emoji: "🌌", color: "#fbbf24" },
+    { level: 131, name: "Sith Acolyte", emoji: "💀", color: "#991b1b" },
+    { level: 132, name: "Shadow Guard", emoji: "👤", color: "#000000" },
+    { level: 133, name: "Inquisitor Trainee", emoji: "🔴", color: "#dc2626" },
+    { level: 134, name: "Purge Trooper", emoji: "🧨", color: "#450a0a" },
+    { level: 135, name: "Sith Stalker", emoji: "🕵️", color: "#7f1d1d" },
+    { level: 136, name: "Red Guard", emoji: "🛡️", color: "#b91c1c" },
+    { level: 137, name: "Dark Side Adept", emoji: "🌑", color: "#450606" },
+    { level: 138, name: "Sith Alchemist", emoji: "🧪", color: "#6d28d9" },
+    { level: 139, name: "Holocron Corruptor", emoji: "🔻", color: "#be123c" },
+    { level: 140, name: "Imperial Inquisitor", emoji: "🤺", color: "#991b1b" },
+    { level: 141, name: "Grand Inquisitor", emoji: "👹", color: "#7f1d1d" },
+    { level: 142, name: "Star Destroyer Commander", emoji: "🚢", color: "#94a3b8" },
+    { level: 143, name: "Super Star Destroyer Admin", emoji: "📐", color: "#64748b" },
+    { level: 144, name: "Kyber Crystal Corruptor", emoji: "🩸", color: "#f43f5e" },
+    { level: 145, name: "Death Star Architect", emoji: "🛰️", color: "#475569" },
+    { level: 146, name: "Planetary Governor", emoji: "🪐", color: "#ca8a04" },
+    { level: 147, name: "Imperial Advisor", emoji: "🧠", color: "#a855f7" },
+    { level: 148, name: "Sith Warrior", emoji: "⚔️", color: "#991b1b" },
+    { level: 149, name: "Dark Disciple", emoji: "🔥", color: "#dc2626" },
+    { level: 150, name: "Sith Lord", emoji: "😈", color: "#000000" },
+
+    // --- BOUNTY HUNTERS & MERCENARIES (151-175) ---
+    { level: 151, name: "Guild Member", emoji: "📜", color: "#8b5e3c" },
+    { level: 152, name: "Tracker", emoji: "👣", color: "#a8a29e" },
+    { level: 153, name: "Sniper Specialist", emoji: "🎯", color: "#ef4444" },
+    { level: 154, name: "Thermal Detonator Expert", emoji: "💣", color: "#f97316" },
+    { level: 155, name: "Bounty Hunter Prime", emoji: "🎖️", color: "#4ade80" },
+    { level: 156, name: "Carbonite Freezer", emoji: "🧊", color: "#bae6fd" },
+    { level: 157, name: "Underworld Kingpin", emoji: "👑", color: "#7c3aed" },
+    { level: 158, name: "Hutt Enforcer", emoji: "🐌", color: "#65a30d" },
+    { level: 159, name: "Crime Syndicate Boss", emoji: "💼", color: "#1e1b4b" },
+    { level: 160, name: "Grand Moff", emoji: "🏅", color: "#334155" },
+    { level: 161, name: "Imperial Regent", emoji: "🏛️", color: "#94a3b8" },
+    { level: 162, name: "Hand of Justice", emoji: "⚖️", color: "#facc15" },
+    { level: 163, name: "Ancient Archivist", emoji: "📚", color: "#d97706" },
+    { level: 164, name: "Dathomir Witch", emoji: "🔮", color: "#db2777" },
+    { level: 165, name: "Grey Jedi", emoji: "☯️", color: "#64748b" },
+    { level: 166, name: "Balance Seeker", emoji: "🌓", color: "#94a3b8" },
+    { level: 167, name: "Jedi Master", emoji: "🧘", color: "#60a5fa" },
+    { level: 168, name: "Council Member", emoji: "🪑", color: "#3b82f6" },
+    { level: 169, name: "Temple Overseer", emoji: "🏛️", color: "#2563eb" },
+    { level: 170, name: "Jedi Sage", emoji: "📜", color: "#93c5fd" },
+    { level: 171, name: "High Republic Hero", emoji: "🌟", color: "#fbbf24" },
+    { level: 172, name: "Living Force Vessel", emoji: "🍃", color: "#4ade80" },
+    { level: 173, name: "Chosen One Initiate", emoji: "⚡", color: "#ffffff" },
+    { level: 174, name: "Master of the Order", emoji: "👑", color: "#1d4ed8" },
+    { level: 175, name: "Jedi Grand Master", emoji: "🧘‍♂️", color: "#10b981" },
+
+    // --- THE FORCE SUPREME (176-200) ---
+    { level: 176, name: "Dark Side Entity", emoji: "🌑", color: "#111827" },
+    { level: 177, name: "Life Force Leecher", emoji: "🩸", color: "#7f1d1d" },
+    { level: 178, name: "Sith Emperor", emoji: "👑", color: "#000000" },
+    { level: 179, name: "World Eater", emoji: "🌎", color: "#4c0519" },
+    { level: 180, name: "Darth Vader's Wrath", emoji: "👺", color: "#b91c1c" },
+    { level: 181, name: "Unstoppable Force", emoji: "🌪️", color: "#ffffff" },
+    { level: 182, name: "Immovable Object", emoji: "🗿", color: "#475569" },
+    { level: 183, name: "Force Projection", emoji: "✨", color: "#7dd3fc" },
+    { level: 184, name: "Voice of the Force", emoji: "🗣️", color: "#e2e8f0" },
+    { level: 185, name: "Emperor's Hand", emoji: "⚡", color: "#a855f7" },
+    { level: 186, name: "Force Stormbringer", emoji: "🌩️", color: "#38bdf8" },
+    { level: 187, name: "Space-Time Weaver", emoji: "🕸️", color: "#c084fc" },
+    { level: 188, name: "World Between Worlds Explorer", emoji: "🌌", color: "#a5b4fc" },
+    { level: 189, name: "Cosmic Sentinel", emoji: "👁️", color: "#2dd4bf" },
+    { level: 190, name: "Force Ghost", emoji: "👻", color: "#bae6fd" },
+    { level: 191, name: "Ethereal Guide", emoji: "🕯️", color: "#ffffff" },
+    { level: 192, name: "Midi-chlorian Master", emoji: "🧬", color: "#4ade80" },
+    { level: 193, name: "Force Nexus", emoji: "🔆", color: "#facc15" },
+    { level: 194, name: "Ancient One", emoji: "⏳", color: "#d97706" },
+    { level: 195, name: "The Son & The Daughter", emoji: "☯️", color: "#000000" },
+    { level: 196, name: "Avatar of Mortis", emoji: "🏛️", color: "#f8fafc" },
+    { level: 197, name: "Bendu's Wisdom", emoji: "🐂", color: "#78350f" },
+    { level: 198, name: "The Father", emoji: "⚖️", color: "#fbbf24" },
+    { level: 199, name: "The Whills", emoji: "👁️", color: "#5eead4" },
+    { level: 200, name: "One With The Force", emoji: "🌌", color: "#ffffff" }
 ];
+
+const XP_PER_LEVEL = 45;
+
+// Load saved level or start at 0
+let currentLevel = parseInt(localStorage.getItem('userLevel')) || 0;
+
+// Load saved XP or start at 0
+let currentXP = parseInt(localStorage.getItem('userXP')) || 0;
+
+
+/**
+ * 1. RETRO SOUND ENGINE
+ */
+let audioCtx;
+
+function initAudio() {
+    try {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    } catch (e) {
+        console.error("AudioContext failed to initialize:", e);
+    }
+}
+
+window.addEventListener('click', initAudio, { once: true });
+window.addEventListener('keydown', initAudio, { once: true });
+
+function playSound(type) {
+    initAudio();
+    if (!audioCtx || audioCtx.state !== 'running') return;
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    const now = audioCtx.currentTime;
+
+    if (type === 'click') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, now);
+        gain.gain.setValueAtTime(0.1, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+        osc.start(now);
+        osc.stop(now + 0.1);
+    }
+    else if (type === 'levelUp') {
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.2);
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+        osc.start(now);
+        osc.stop(now + 0.4);
+    }
+    else if (type === 'secret') {
+        osc.type = 'triangle';
+        [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+            const s = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            s.connect(g); g.connect(audioCtx.destination);
+            s.frequency.setValueAtTime(freq, now + i * 0.1);
+            g.gain.setValueAtTime(0.07, now + i * 0.1);
+            g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.1 + 0.1);
+            s.start(now + i * 0.1);
+            s.stop(now + i * 0.1 + 0.1);
+        });
+    }
+    else if (type === 'restore') {
+        osc.type = 'sine';
+        [220, 440, 880, 1760].forEach((freq, i) => {
+            const s = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            s.connect(g); g.connect(audioCtx.destination);
+            s.frequency.setValueAtTime(freq, now + i * 0.05);
+            g.gain.setValueAtTime(0.1, now + i * 0.05);
+            g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.05 + 0.1);
+            s.start(now + i * 0.05);
+            s.stop(now + i * 0.05 + 0.1);
+        });
+    }
+}
+
+
 let unlockedEggs = JSON.parse(localStorage.getItem('unlockedEggs')) || [];
 let surpriseClickCount = 0;
 let matrixActive = false;
 let destructInterval;
 
+function getRank(lvl) {
+    // 1. Ensure lvl is a valid number
+    const searchLvl = parseInt(lvl) || 0;
+
+    // 2. Find the highest rank that is less than or equal to current level
+    // We slice().reverse() to check the highest levels first
+    const rank = LEVELS.slice().reverse().find(r => searchLvl >= r.level);
+
+    // 3. Fallback: If rank is undefined, return the first level (Newbie)
+    if (!rank) {
+        console.warn(`Rank not found for level ${searchLvl}, defaulting to Level 0.`);
+        return LEVELS[0];
+    }
+
+    return rank;
+}
+
 /**
  * 3. GAME ENGINE
  */
 function updateGameUI() {
-    const eggCount = unlockedEggs.length;
-    const levelIndex = Math.min(eggCount, LEVELS.length - 1);
-    const rank = LEVELS[levelIndex];
+    // Ensure currentLevel is a valid number
+    const lvl = parseInt(currentLevel) || 0;
+    // Check if LEVELS exists yet
+    if (!LEVELS || LEVELS.length === 0) return;
 
-    // 1. Level Elements
-    const badge = document.getElementById('level-badge');
+    const rank = getRank(currentLevel);
+
+    // If rank is STILL undefined (e.g. LEVELS is empty), stop here
+    if (!rank) return;
+
+    const xpBar = document.getElementById('level-progress');
+    const xpText = document.getElementById('total-xp-display');
+
+    if (xpBar) {
+        const progress = (currentXP / 45) * 100;
+        xpBar.style.width = `${progress}%`;
+    }
+
+    if (xpText) {
+        xpText.innerText = `${currentXP} / 45`;
+    }
+
     const nameLabel = document.getElementById('level-name');
+    if (nameLabel) {
+        nameLabel.innerText = rank.name;
+        // This is where it was crashing:
+        nameLabel.style.color = rank.color || "#ffffff";
+    }
+
+    const badge = document.getElementById('level-badge');
     const numLabel = document.getElementById('level-number');
-    const progressBar = document.getElementById('level-progress');
-
-    // 2. XP Display Element
-    const xpDisplay = document.getElementById('total-xp-display');
-    if (xpDisplay) {
-        // Show current XP toward next level (or cumulative if you prefer)
-        xpDisplay.innerText = currentXP;
-    }
-
-    if (levelIndex >= 10) {
-        document.body.classList.add('level-architect');
-    }
 
     if (badge) {
         badge.innerText = rank.emoji;
         badge.style.backgroundColor = rank.color;
     }
+    if (numLabel) numLabel.innerText = currentLevel;
 
-    if (nameLabel) {
-        nameLabel.innerText = rank.name;
-        nameLabel.style.color = rank.color;
+    // Update the Progress Bar
+    const pb = document.getElementById('level-progress');
+    if (pb) {
+        // Use 45 XP per level as the denominator
+        const progressPercent = Math.min((currentXP / 45) * 100, 100);
+        pb.style.width = `${progressPercent}%`;
+        pb.style.backgroundColor = rank.color;
     }
-
-    if (numLabel) numLabel.innerText = levelIndex;
-
-    if (progressBar) {
-        // Logic for progress bar between levels
-        // currentXP / XP_PER_LEVEL gives the % toward NEXT level
-        const progressPercent = (currentXP / XP_PER_LEVEL) * 100;
-        progressBar.style.width = `${progressPercent}%`;
-        progressBar.style.backgroundColor = rank.color;
+    // Sith Theme Auto-Switch (Levels 131-160)
+    if (lvl >= 131 && lvl <= 160) {
+        document.documentElement.style.setProperty('--accent', '#ef4444');
     }
 }
+
 
 function unlockEgg(eggId) {
     if (!unlockedEggs.includes(eggId)) {
@@ -269,20 +413,36 @@ function handleLevelClick() {
     triggerSecretUnlock('badge_click');
 }
 
-function showLevelUpNotification(newLevelIndex) {
-    const levelIndex = Math.min(newLevelIndex, LEVELS.length - 1);
-    const rank = LEVELS[levelIndex];
+function showLevelUpNotification(input) {
+    // Determine if input is a rank object or a level number
+    let rank;
+    if (typeof input === 'object' && input !== null) {
+        rank = input;
+    } else {
+        rank = getRank(input); // Convert number to rank object
+    }
+
+    // Safety fallback to prevent the "undefined" crash
+    if (!rank) rank = LEVELS[0];
+
     const notify = document.createElement('div');
     notify.className = "fixed top-24 left-1/2 -translate-x-1/2 z-[2000] px-8 py-4 bg-white dark:bg-slate-900 border-4 rounded-full shadow-2xl flex items-center gap-4 animate-bounce";
+
+    // Now rank.color is guaranteed to exist
     notify.style.borderColor = rank.color;
+
     notify.innerHTML = `
         <span class="text-4xl">${rank.emoji}</span>
         <div class="text-left">
-            <h4 class="text-[10px] font-black uppercase tracking-widest text-slate-500">New Rank Achieved!</h4>
+            <h4 class="text-[10px] font-black uppercase tracking-widest text-slate-500">Rank Update</h4>
             <p class="text-xl font-black uppercase tracking-tighter" style="color: ${rank.color}">${rank.name}</p>
         </div>`;
+
     document.body.appendChild(notify);
-    setTimeout(() => { notify.style.opacity = '0'; setTimeout(() => notify.remove(), 500); }, 4000);
+    setTimeout(() => {
+        notify.style.opacity = '0';
+        setTimeout(() => notify.remove(), 500);
+    }, 4000);
 }
 
 /**
@@ -656,32 +816,52 @@ document.addEventListener('DOMContentLoaded', () => {
 /**
  * 9. ENHANCED XP & SKILL MINING SYSTEM
  */
-let currentXP = JSON.parse(localStorage.getItem('userXP')) || 0;
-const XP_PER_LEVEL = 45; // Adjust this to make leveling harder/easier
 
-function addExperience(amount) {
-    // Stop XP if at Max Level or if system is locked (Self-Destruct)
-    const isLocked = document.getElementById('dev-tools')?.hasAttribute('data-lock');
-    if (unlockedEggs.length >= LEVELS.length - 1 || isLocked) return;
-
-    const xpNum = document.getElementById('total-xp-display');
-    if (xpNum) {
-        xpNum.classList.add('xp-pulse');
-        setTimeout(() => xpNum.classList.remove('xp-pulse'), 100);
-    }
+async function addExperience(amount) {
+    if (document.getElementById('dev-tools')?.getAttribute('data-lock') === 'true') return;
 
     currentXP += amount;
 
-    // Check for Level Up
-    // If XP exceeds threshold, we "unlock" a new egg/level
-    if (currentXP >= XP_PER_LEVEL) {
-        currentXP = 0; // Reset for next level
-        unlockEgg(`level_up_${unlockedEggs.length + 1}`);
+    // Check if we have enough XP to level up
+    while (currentXP >= 45 && currentLevel < 200) {
+        // 1. Force the bar to 100% manually first
+        renderXP(45);
+
+        // 2. Wait for the CSS transition to finish (matches your transition speed)
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        // 3. Perform the actual Level Up
+        currentXP -= 45;
+        currentLevel++;
+
+        playSound('levelUp');
+        showLevelUpNotification(getRank(currentLevel));
+
+        // 4. Momentarily disable transitions to reset bar to 0% without sliding back
+        const pb = document.getElementById('level-progress');
+        if (pb) {
+            pb.style.transition = 'none';
+            renderXP(0);
+            void pb.offsetWidth; // Force a reflow
+            pb.style.transition = 'width 0.3s ease-in-out';
+        }
     }
 
-    localStorage.setItem('userXP', JSON.stringify(currentXP));
+    // 5. Save and Render final state
+    localStorage.setItem('userLevel', currentLevel);
+    localStorage.setItem('userXP', currentXP);
     updateGameUI();
 }
+
+// Helper to update just the bar width
+function renderXP(value) {
+    const pb = document.getElementById('level-progress');
+    if (pb) {
+        const percent = Math.min((value / 45) * 100, 100);
+        pb.style.width = `${percent}%`;
+    }
+}
+
 
 function createFloatingXP(event, type = "skill") {
     const float = document.createElement('div');
@@ -752,8 +932,13 @@ function triggerMagicXP() {
     // 1. Play the high-pitched secret sound
     playSound('secret');
 
-    // 2. Add the massive XP chunk
-    addExperience(100);
+    // Check if function exists
+    if (typeof addExperience === "function") {
+        addExperience(100);
+        console.log("Magic XP Injected");
+    } else {
+        console.error("Critical Error: addExperience function not found!");
+    }
 
     // 3. Visual "Magic" Flare on the badge
     const badge = document.getElementById('level-badge');
@@ -776,4 +961,55 @@ function triggerMagicXP() {
 
     // 4. Console feedback
     console.log("%c ✨ Magic XP Cast! +100 XP added to the void.", "color: #a855f7; font-weight: bold;");
+}
+
+function triggerForceSurge() {
+    playSound('secret');
+
+    // 1. Add XP via the engine (which handles the math)
+    addExperience(100);
+
+    // 2. Show a specific "Force" notification manually if you want
+    // We get the rank object FIRST to avoid passing a raw number
+    const currentRank = getRank(currentLevel);
+    showLevelUpNotification(currentRank);
+
+    // 3. Visuals
+    const badge = document.getElementById('level-badge');
+    if (badge) {
+        badge.classList.add('force-glow');
+        setTimeout(() => badge.classList.remove('force-glow'), 2000);
+    }
+}
+
+/**
+ * SYSTEM LEVEL JUMP
+ */
+
+function jumpToLevel() {
+    const input = document.getElementById('jump-lvl');
+    if (!input || input.value === "") return;
+
+    let targetLvl = parseInt(input.value);
+
+    // Clamp between 0 and 200
+    targetLvl = Math.max(0, Math.min(200, targetLvl));
+
+    // Update the GLOBAL variables
+    currentLevel = targetLvl;
+    currentXP = 0;
+
+    // Save to LocalStorage
+    localStorage.setItem('userLevel', currentLevel);
+    localStorage.setItem('userXP', currentXP);
+
+    // Refresh everything
+    updateGameUI();
+
+    const rank = getRank(currentLevel);
+    showLevelUpNotification(rank);
+
+    if (currentLevel >= 101) {
+        triggerForceSurge();
+    }
 }
