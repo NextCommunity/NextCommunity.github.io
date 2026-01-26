@@ -1,5 +1,5 @@
 /**
- * RETRO SOUND ENGINE
+ * 1. RETRO SOUND ENGINE
  */
 let audioCtx;
 
@@ -59,10 +59,23 @@ function playSound(type) {
             s.stop(now + i * 0.1 + 0.1);
         });
     }
+    else if (type === 'restore') {
+        osc.type = 'sine';
+        [220, 440, 880, 1760].forEach((freq, i) => {
+            const s = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            s.connect(g); g.connect(audioCtx.destination);
+            s.frequency.setValueAtTime(freq, now + i * 0.05);
+            g.gain.setValueAtTime(0.1, now + i * 0.05);
+            g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.05 + 0.1);
+            s.start(now + i * 0.05);
+            s.stop(now + i * 0.05 + 0.1);
+        });
+    }
 }
 
 /**
- * 1. GLOBAL STATE & CONFIGURATION
+ * 2. GLOBAL STATE & CONFIGURATION
  */
 const LEVELS = [
     { level: 0, name: "Newbie", emoji: "🐣", color: "#94a3b8" },
@@ -81,21 +94,14 @@ const LEVELS = [
 let unlockedEggs = JSON.parse(localStorage.getItem('unlockedEggs')) || [];
 let surpriseClickCount = 0;
 let matrixActive = false;
+let destructInterval;
 
 /**
- * 2. GAME ENGINE & SEQUENTIAL UNLOCKING
- */
-/**
- * 2. GAME ENGINE
+ * 3. GAME ENGINE
  */
 function updateGameUI() {
-    // Total count of unique things found
     const eggCount = unlockedEggs.length;
-
-    // Ensure we don't exceed the array length
     const levelIndex = Math.min(eggCount, LEVELS.length - 1);
-
-    // Pick the rank object (0 found = Newbie, 1 found = Script Kid, etc.)
     const rank = LEVELS[levelIndex];
 
     const badge = document.getElementById('level-badge');
@@ -103,7 +109,6 @@ function updateGameUI() {
     const numLabel = document.getElementById('level-number');
     const progressBar = document.getElementById('level-progress');
 
-    // Add this line to trigger the CSS Architect styles
     if (levelIndex >= 10) {
         document.body.classList.add('level-architect');
     } else {
@@ -113,7 +118,6 @@ function updateGameUI() {
     if (badge) {
         badge.innerText = rank.emoji;
         badge.style.backgroundColor = rank.color;
-        // Add a little pop animation when the rank changes
         badge.classList.add('animate-bounce');
         setTimeout(() => badge.classList.remove('animate-bounce'), 1000);
     }
@@ -126,7 +130,6 @@ function updateGameUI() {
     if (numLabel) numLabel.innerText = levelIndex;
 
     if (progressBar) {
-        // Calculate percentage based on total possible ranks
         const progressPercent = (levelIndex / (LEVELS.length - 1)) * 100;
         progressBar.style.width = `${progressPercent}%`;
         progressBar.style.backgroundColor = rank.color;
@@ -134,26 +137,15 @@ function updateGameUI() {
 }
 
 function unlockEgg(eggId) {
-    // Only proceed if this is a NEW discovery
     if (!unlockedEggs.includes(eggId)) {
         unlockedEggs.push(eggId);
         localStorage.setItem('unlockedEggs', JSON.stringify(unlockedEggs));
-
-        // Play sound and show the notification for the NEW level count
         playSound('levelUp');
         showLevelUpNotification(unlockedEggs.length);
-
-        // Refresh the whole UI with the new rank
         updateGameUI();
     }
 }
 
-/**
- * UNIVERSAL EGG UNLOCKER
- * 4 Secrets: matrix, konami, gravity (hash), badge_click
- */
-
-// Ensure the actual badge click also uses this logic
 function handleLevelClick() {
     triggerSecretUnlock('badge_click');
 }
@@ -175,7 +167,7 @@ function showLevelUpNotification(newLevelIndex) {
 }
 
 /**
- * 3. THEME SYSTEM
+ * 4. THEME SYSTEM
  */
 function applyTheme(theme) {
     const html = document.documentElement;
@@ -206,7 +198,6 @@ function applyTheme(theme) {
         }
     }
     else if (heart) { heart.innerText = '❤️'; }
-
     updateThemeIcon(theme);
 }
 
@@ -223,23 +214,17 @@ function updateThemeIcon(theme) {
 }
 
 /**
- * 4. EASTER EGG LOGIC
+ * 5. EASTER EGG LOGIC & TRIGGERS
  */
-function scrollToRandomUser() {
-    playSound('click');
-    surpriseClickCount++;
-    if (surpriseClickCount >= 5) {
-        surpriseClickCount = 0;
-        // This now checks for 'secret_matrix' and won't level up twice
-        triggerSecretUnlock('matrix');
+function triggerSecretUnlock(type) {
+    if (type === 'gravity') {
+        activateGravityEffect();
+    } else if (type === 'matrix') {
+        initMatrix();
+    } else if (type === 'konami') {
+        activateKonami();
     }
-
-    const cards = document.querySelectorAll('.user-card');
-    if (cards.length === 0) return;
-    cards.forEach(c => c.classList.remove('highlight-pulse'));
-    const randomCard = cards[Math.floor(Math.random() * cards.length)];
-    randomCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    randomCard.classList.add('highlight-pulse');
+    unlockEgg(`secret_${type}`);
 }
 
 const konamiCode = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a'];
@@ -247,19 +232,18 @@ let konamiPosition = 0;
 
 window.addEventListener('keydown', (e) => {
     const key = e.key.toLowerCase();
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
-    if (key === 'd' && e.target.tagName !== 'INPUT') {
+    if (key === 'd') {
         const devPanel = document.getElementById('dev-tools');
         if (devPanel) {
             const isHidden = devPanel.classList.toggle('hidden');
-            // SAVE STATE: Store whether it's hidden or not
             localStorage.setItem('devToolsVisible', !isHidden);
             playSound(isHidden ? 'click' : 'secret');
         }
         return;
     }
 
-    // Konami Sequence
     if (key === konamiCode[konamiPosition]) {
         konamiPosition++;
         if (konamiPosition === konamiCode.length) {
@@ -277,19 +261,17 @@ function activateKonami() {
     setTimeout(() => document.documentElement.classList.remove('konami-roll'), 2000);
 }
 
-function triggerGravity(event) {
-    if (event) event.preventDefault();
+function activateGravityEffect() {
     playSound('secret');
     document.body.classList.add('glitch-shake');
 
     setTimeout(() => {
         document.body.classList.remove('glitch-shake');
-        const elements = document.querySelectorAll('.user-card, header, footer, main, h1, #game-stats');
-        elements.forEach((el) => {
-            const fallDist = window.innerHeight + 500;
-            const rotation = Math.random() * 90 - 45;
-            el.style.transition = `transform ${1 + Math.random()}s cubic-bezier(0.47, 0, 0.745, 0.715), opacity 1.5s ease-in`;
-            el.style.transform = `translateY(${fallDist}px) rotate(${rotation}deg)`;
+        const targets = document.querySelectorAll('.user-card, header, footer, main, h1, #game-stats');
+        targets.forEach(el => {
+            const dist = window.innerHeight + 1000;
+            el.style.transition = `transform ${1 + Math.random()}s ease-in, opacity 1s`;
+            el.style.transform = `translateY(${dist}px) rotate(${Math.random() * 60 - 30}deg)`;
             el.style.opacity = "0";
             el.style.pointerEvents = "none";
         });
@@ -299,16 +281,35 @@ function triggerGravity(event) {
                 const btn = document.createElement('button');
                 btn.id = 'repair-btn';
                 btn.innerHTML = "REPAIR CORE SYSTEM";
-                btn.className = "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent text-white px-10 py-5 rounded-full font-black z-[3000] shadow-2xl animate-pulse cursor-pointer border-4 border-white";
-                btn.onclick = () => window.location.reload();
+                btn.style.cssText = `
+                    position: fixed !important;
+                    top: 50% !important;
+                    left: 50% !important;
+                    transform: translate(-50%, -50%) !important;
+                    z-index: 999999 !important;
+                    background: #2563eb !important;
+                    color: white !important;
+                    padding: 20px 40px;
+                    border-radius: 50px;
+                    font-weight: 900;
+                    border: 4px solid white;
+                    cursor: pointer;
+                    box-shadow: 0 0 50px rgba(37, 99, 235, 0.8);
+                `;
+                btn.onclick = () => {
+                    playSound('restore');
+                    btn.innerHTML = "SYSTEM RESTORED";
+                    btn.style.pointerEvents = "none";
+                    setTimeout(() => window.location.reload(), 1000);
+                };
                 document.body.appendChild(btn);
             }
-        }, 1200);
+        }, 1500);
     }, 500);
 }
 
 /**
- * 5. MATRIX ENGINE
+ * 6. MATRIX ENGINE
  */
 function initMatrix() {
     matrixActive = true;
@@ -355,27 +356,19 @@ function closeMatrix() {
     window.removeEventListener('keydown', handleMatrixEsc);
 }
 
-let destructInterval;
 /**
- * SELF DESTRUCT ENGINE
- * Forces console visibility and manages the dynamic loading bar
- */
-/**
- * RE-INITIALIZE THE SELF-DESTRUCT (SOUND + PERSISTENCE)
+ * 7. SELF DESTRUCT ENGINE
  */
 window.startSelfDestruct = function() {
     const btn = document.getElementById('self-destruct-btn');
     const devPanel = document.getElementById('dev-tools');
-    const timerText = document.getElementById('destruct-timer');
+    const timerDisplay = document.getElementById('destruct-timer');
     const progressBar = document.getElementById('destruct-bar');
+    const statusText = document.getElementById('destruct-text');
 
     if (destructInterval) return;
 
-    // AUDIO BOOTUP
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    audioCtx.resume();
-
-    // UI LOCKING
+    initAudio();
     document.body.appendChild(devPanel);
     devPanel.setAttribute('data-lock', 'true');
     btn.classList.add('is-destructing');
@@ -383,127 +376,82 @@ window.startSelfDestruct = function() {
     let timeLeft = 10;
 
     destructInterval = setInterval(() => {
-    timeLeft--; // Countdown moves from 10 towards 0
+        timeLeft--;
 
-    // 1. Update the numerical text
-    const timerDisplay = document.getElementById('destruct-timer');
-    const statusText = document.getElementById('destruct-text');
+        if (timerDisplay) {
+            timerDisplay.innerText = `${timeLeft}s`;
+            timerDisplay.style.color = "#fff";
+        }
 
-    if (timerDisplay) {
-        timerDisplay.innerText = `${timeLeft}s`;
-        timerDisplay.style.color = "#fff"; // Ensure it's visible against the red
-    }
+        if (progressBar) {
+            const percent = ((10 - timeLeft) / 10) * 100;
+            progressBar.style.width = `${percent}%`;
+            if (timeLeft > 5) progressBar.style.backgroundColor = "#22c55e";
+            else if (timeLeft > 2) progressBar.style.backgroundColor = "#eab308";
+            else progressBar.style.backgroundColor = "#ef4444";
+        }
 
-    // 2. Update the progress bar (Green -> Red)
-    const progressBar = document.getElementById('destruct-bar');
-    if (progressBar) {
-        const percent = ((10 - timeLeft) / 10) * 100;
-        progressBar.style.width = `${percent}%`;
+        if (audioCtx) {
+            const osc = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            osc.connect(g); g.connect(audioCtx.destination);
+            osc.frequency.setValueAtTime(300 + (10 - timeLeft) * 50, audioCtx.currentTime);
+            g.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+        }
 
-        // Color transition logic
-        if (timeLeft > 5) progressBar.style.backgroundColor = "#22c55e"; // Green
-        else if (timeLeft > 2) progressBar.style.backgroundColor = "#eab308"; // Yellow
-        else progressBar.style.backgroundColor = "#ef4444"; // Red
-    }
+        if (timeLeft <= 4) {
+            document.body.classList.add('glitch-shake');
+            if (statusText) statusText.innerText = "SYSTEM_FAILURE_IMMINENT";
+        }
 
-    // 3. Audio & Haptics
-    if (audioCtx) {
-        const osc = audioCtx.createOscillator();
-        const g = audioCtx.createGain();
-        osc.connect(g); g.connect(audioCtx.destination);
-        // Pitch goes up as time runs out
-        osc.frequency.setValueAtTime(300 + (10 - timeLeft) * 50, audioCtx.currentTime);
-        g.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
-        osc.start(); osc.stop(audioCtx.currentTime + 0.1);
-    }
-
-    // 4. Visual Panic (Last 4 seconds)
-    if (timeLeft <= 4) {
-        document.body.classList.add('glitch-shake');
-        if (statusText) statusText.innerText = "SYSTEM_FAILURE_IMMINENT";
-    }
-
-    // 5. Termination
-    if (timeLeft <= 0) {
-        clearInterval(destructInterval);
-        destructInterval = null;
-        if (timerDisplay) timerDisplay.innerText = "0s";
-
-        // Release lock and trigger explosion
-        const devPanel = document.getElementById('dev-tools');
-        devPanel.setAttribute('data-lock', 'false');
-        triggerSecretUnlock('gravity');
-    }
-}, 1000);
+        if (timeLeft <= 0) {
+            clearInterval(destructInterval);
+            destructInterval = null;
+            devPanel.setAttribute('data-lock', 'false');
+            triggerSecretUnlock('gravity');
+        }
+    }, 1000);
 }
+
+function scrollToRandomUser() {
+    playSound('click');
+
+    // 1. Secret Unlock Logic
+    surpriseClickCount++;
+    if (surpriseClickCount >= 5) {
+        surpriseClickCount = 0;
+        // This triggers the Matrix overlay
+        triggerSecretUnlock('matrix');
+    }
+
+    // 2. Scrolling Logic
+    const cards = document.querySelectorAll('.user-card');
+    if (cards.length === 0) {
+        console.warn("No .user-card elements found to scroll to.");
+        return;
+    }
+
+    // Clear previous highlights
+    cards.forEach(c => c.classList.remove('highlight-pulse'));
+
+    // Pick a random card and scroll
+    const randomCard = cards[Math.floor(Math.random() * cards.length)];
+    randomCard.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Changed to center for better visibility
+
+    // Add the pulse animation
+    randomCard.classList.add('highlight-pulse');
+}
+
 /**
- * UPDATED TRIGGER LOGIC
- * Corrects the 'Gravity' failure for the Commit Hash
+ * 8. INITIALIZATION
  */
-function triggerSecretUnlock(type) {
-    if (type === 'gravity') {
-        // Run specific gravity visual logic
-        activateGravityEffect();
-    } else if (type === 'matrix') {
-        initMatrix();
-    } else if (type === 'konami') {
-        activateKonami();
-    }
-
-    // Global XP Unlock
-    unlockEgg(`secret_${type}`);
-}
-
-function activateGravityEffect() {
-    playSound('secret');
-    document.body.classList.add('glitch-shake');
-
-    setTimeout(() => {
-        document.body.classList.remove('glitch-shake');
-        // Targeted elements for falling
-        const targets = document.querySelectorAll('.user-card, header, footer, main, h1');
-        targets.forEach(el => {
-            const dist = window.innerHeight + 500;
-            el.style.transition = `transform ${1 + Math.random()}s ease-in, opacity 1s`;
-            el.style.transform = `translateY(${dist}px) rotate(${Math.random() * 60 - 30}deg)`;
-            el.style.opacity = "0";
-            el.style.pointerEvents = "none";
-        });
-    }, 500);
-}
-
-// Internal helper to ensure bar exists
-function createBar(btn) {
-    const container = document.createElement('div');
-    container.id = 'destruct-bar-container';
-    container.innerHTML = '<div id="destruct-bar-progress"></div>';
-    btn.parentNode.insertBefore(container, btn.nextSibling);
-    return container;
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Restore Console Visibility
     const devToolsVisible = localStorage.getItem('devToolsVisible') === 'true';
     const devPanel = document.getElementById('dev-tools');
     if (devToolsVisible && devPanel) {
         devPanel.classList.remove('hidden');
-    }
-
-    // 2. Setup Mobile Override
-    const footerYear = document.getElementById('current-year');
-    let tapCount = 0;
-    if (footerYear) {
-        footerYear.addEventListener('touchstart', () => {
-            tapCount++;
-            if (tapCount === 3) {
-                devPanel.classList.toggle('hidden');
-                localStorage.setItem('devToolsVisible', !devPanel.classList.contains('hidden'));
-                playSound('secret');
-                tapCount = 0;
-            }
-            setTimeout(() => { tapCount = 0; }, 1000);
-        });
     }
 
     applyTheme(localStorage.getItem('theme') || 'light');
