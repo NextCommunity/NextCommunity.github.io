@@ -343,3 +343,51 @@ html body #dev-tools[data-lock="true"] {
         filter: drop-shadow(0 0 12px var(--accent)) hue-rotate(360deg);
     }
 }
+/* Visual feedback when hovering a skill to gain XP */
+.mining-xp {
+    filter: brightness(1.5);
+    box-shadow: 0 0 15px var(--accent);
+    transition: all 0.2s ease;
+}
+
+/* Special styling for those who have reached Level 5 (Data Miner) */
+body[data-level="5"] .skill-item {
+    border-color: #06b6d4 !important; /* Data Miner Cyan */
+    background: rgba(6, 182, 212, 0.1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add a gem-like sparkle to skills at Level 5 */
+body[data-level="5"] .skill-item::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform: rotate(45deg);
+    animation: gem-shimmer 3s infinite;
+}
+
+@keyframes gem-shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+@keyframes float-up {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, -50px); opacity: 0; }
+}
+
+/* Level 5 Specific Visual Perk */
+.level-architect .skill-item,
+body[data-level="5"] .skill-item {
+    border-color: #06b6d4 !important;
+    background: rgba(6, 182, 212, 0.1) !important;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+}
+
+.skill-item {
+    cursor: crosshair; /* Makes it feel like you are "mining" */
+}

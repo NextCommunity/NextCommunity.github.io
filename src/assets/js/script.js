@@ -520,6 +520,9 @@ window.toggleScreenshotMode = function() {
 document.addEventListener('DOMContentLoaded', () => {
     const devToolsVisible = localStorage.getItem('devToolsVisible') === 'true';
     const devPanel = document.getElementById('dev-tools');
+    // Add this to your initialization script
+    let skillHoverCount = 0;
+
     if (devToolsVisible && devPanel) {
         devPanel.classList.remove('hidden');
     }
@@ -527,3 +530,75 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTheme(localStorage.getItem('theme') || 'light');
     updateGameUI();
 });
+
+/**
+ * 9. ENHANCED XP & SKILL MINING SYSTEM
+ */
+let currentXP = JSON.parse(localStorage.getItem('userXP')) || 0;
+const XP_PER_LEVEL = 20; // Adjust this to make leveling harder/easier
+
+function addExperience(amount) {
+    // Stop XP if at Max Level or if system is locked (Self-Destruct)
+    const isLocked = document.getElementById('dev-tools')?.hasAttribute('data-lock');
+    if (unlockedEggs.length >= LEVELS.length - 1 || isLocked) return;
+
+    currentXP += amount;
+
+    // Check for Level Up
+    // If XP exceeds threshold, we "unlock" a new egg/level
+    if (currentXP >= XP_PER_LEVEL) {
+        currentXP = 0; // Reset for next level
+        unlockEgg(`level_up_${unlockedEggs.length + 1}`);
+    }
+
+    localStorage.setItem('userXP', JSON.stringify(currentXP));
+    updateGameUI();
+}
+
+function createFloatingXP(event) {
+    const float = document.createElement('div');
+    // Color matches Level 5 "Data Miner" Cyan
+    const levelColor = LEVELS[unlockedEggs.length]?.color || '#06b6d4';
+
+    float.innerText = '+1 XP';
+    float.style.cssText = `
+        position: fixed;
+        left: ${event.clientX}px;
+        top: ${event.clientY}px;
+        color: ${levelColor};
+        font-family: monospace;
+        font-weight: 900;
+        font-size: 14px;
+        pointer-events: none;
+        z-index: 10000;
+        animation: float-up 0.8s ease-out forwards;
+        text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    `;
+
+    document.body.appendChild(float);
+    setTimeout(() => float.remove(), 800);
+}
+
+function initSkillXP() {
+    const skills = document.querySelectorAll('.skill-item');
+    skills.forEach(skill => {
+        skill.addEventListener('mouseenter', (e) => {
+            const isLocked = document.getElementById('dev-tools')?.hasAttribute('data-lock');
+            if (!isLocked) {
+                addExperience(1);
+                createFloatingXP(e);
+
+                // Fancy scale-up on hover
+                skill.style.transform = "scale(1.1) translateY(-2px)";
+                skill.style.transition = "transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+            }
+        });
+
+        skill.addEventListener('mouseleave', () => {
+            skill.style.transform = "scale(1) translateY(0)";
+        });
+    });
+}
+
+// Re-initialize skills after Surprise scroll or any DOM changes
+window.addEventListener('DOMContentLoaded', initSkillXP);
