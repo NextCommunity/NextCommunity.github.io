@@ -72,6 +72,14 @@
             <span class="opacity-50">+1 LVL</span>
         </button>
 
+        <button
+          onclick="toggleScreenshotMode()"
+          class="w-full flex justify-between items-center p-2 mb-2 rounded-md border border-white/5 bg-white/5 text-[10px] font-mono text-slate-400 hover:bg-white/10 hover:border-slate-400 hover:translate-x-1 transition-all duration-200 cursor-pointer"
+        >
+          <span class="flex items-center gap-2">📸 SCREENSHOT</span>
+          <span class="opacity-50">[5 seconds]</span>
+        </button>
+
         <div class="pt-2">
             <button onclick="localStorage.clear(); location.reload();" class="w-full py-3 bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 text-[10px] font-bold border border-blue-500/30 rounded-lg transition-all">
                 RESET_PLAYER_DATA

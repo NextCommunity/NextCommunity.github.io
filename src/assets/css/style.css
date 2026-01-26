@@ -42,38 +42,36 @@ html, body {
 /**
  * 2. USER CARDS - DYNAMIC & STATIC
  */
-.user-card h2 {
-  /* Dynamic color from theme logic */
+/**
+ * DYNAMIC COLORING (NO ANIMATION)
+ */
+.user-card h2,
+.profile-link,
+.user-card a {
   color: var(--accent) !important;
   font-weight: 800;
-  transition: color 0.3s ease; /* Only animate the color fade, not movement */
-  margin-bottom: 0.5rem;
-}
-
-/* Hover state: No movement, just a slight brightness shift */
-.user-card:hover h2 {
-  filter: brightness(1.1);
-}
-
-/**
- * 3. PROFILE LINKS - THEMED
- */
-.profile-link,
-.user-card a[href*="github"],
-.user-card a[href*="linkedin"] {
-  color: var(--accent) !important;
-  font-weight: 700;
   text-decoration: none;
-  transition: opacity 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
+  /* Animate ONLY the color property when theme changes */
+  transition: color 0.4s ease, opacity 0.2s ease;
+}
+
+/* Static Hover: No movement */
+.user-card:hover h2 {
+  filter: brightness(1.2);
 }
 
 .profile-link:hover,
 .user-card a:hover {
   text-decoration: underline;
-  opacity: 0.8; /* Subtle visual feedback instead of moving */
+  opacity: 0.8;
+}
+
+/* Button to trigger Screenshot Mode in the Dev Panel */
+.screenshot-btn {
+    border-color: var(--text-muted) !important;
+    color: var(--text-muted) !important;
+    font-size: 0.6rem !important;
+    margin-top: 10px;
 }
 
 /* If your links look like tags/pills */
@@ -291,3 +289,57 @@ html body #dev-tools[data-lock="true"] {
 }
 
 .konami-roll { animation: konami-barrel-roll 2s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
+
+/**
+ * FANCY USER SELECTION EFFECT
+ */
+@keyframes fancy-ping {
+    0% {
+        box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 20px rgba(var(--accent-rgb), 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0);
+    }
+}
+/* Ensure the card can show the trace glow */
+.user-card.selected-fancy {
+    z-index: 50;
+    overflow: visible !important;
+    transform: scale(1.02);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.border-trace {
+    position: absolute;
+    inset: -2px; /* Slightly outside the card border */
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    pointer-events: none;
+    fill: none;
+}
+
+.border-trace rect {
+    stroke-width: 4px;
+    stroke-linecap: round;
+    /* Perimeter length - 2500px is a safe bet for these cards */
+    stroke-dasharray: 2500;
+    stroke-dashoffset: 2500;
+    animation: retrace-sequence 7.5s linear forwards;
+}
+
+@keyframes retrace-sequence {
+    0% {
+        stroke-dashoffset: 2500;
+        stroke: var(--accent);
+        filter: drop-shadow(0 0 8px var(--accent));
+    }
+    100% {
+        stroke-dashoffset: 0;
+        /* Cycle through colors while drawing */
+        stroke: var(--accent);
+        filter: drop-shadow(0 0 12px var(--accent)) hue-rotate(360deg);
+    }
+}
