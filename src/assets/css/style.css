@@ -316,3 +316,24 @@ button[onclick*="gravity"] {
 .surprise-btn:hover::after {
   left: 100%;
 }
+
+/* Konami Secret Animation */
+.konami-roll {
+    animation: konami-barrel-roll 2s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    overflow: hidden; /* Prevents scrollbars during rotation */
+}
+
+@keyframes konami-barrel-roll {
+    0% {
+        transform: rotate(0deg) scale(1);
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg) scale(0.8);
+        filter: hue-rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+        filter: hue-rotate(360deg);
+    }
+}
