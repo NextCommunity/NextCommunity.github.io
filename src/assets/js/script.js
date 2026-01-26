@@ -77,7 +77,11 @@ function playSound(type) {
 /**
  * 2. GLOBAL STATE & CONFIGURATION
  */
+/**
+ * 1. LEVELS DATA (0-100)
+ */
 const LEVELS = [
+    // 0-10: Original Ranks
     { level: 0, name: "Newbie", emoji: "🐣", color: "#94a3b8" },
     { level: 1, name: "Script Kid", emoji: "🛹", color: "#10b981" },
     { level: 2, name: "Code Breaker", emoji: "🕵️‍♂️", color: "#f59e0b" },
@@ -88,9 +92,118 @@ const LEVELS = [
     { level: 7, name: "Terminal Pro", emoji: "⌨️", color: "#7c3aed" },
     { level: 8, name: "Cloud Expert", emoji: "☁️", color: "#3b82f6" },
     { level: 9, name: "Full Stack", emoji: "🥞", color: "#f97316" },
-    { level: 10, name: "Architect", emoji: "👑", color: "#ef4444" }
-];
+    { level: 10, name: "Architect", emoji: "👑", color: "#ef4444" },
 
+    // 11-30: Magic the Gathering (Creatures & Keywords)
+    { level: 11, name: "Llanowar Elf", emoji: "🏹", color: "#2d5a27" },
+    { level: 12, name: "Scryer", emoji: "🔮", color: "#1d4ed8" },
+    { level: 13, name: "Trampler", emoji: "🐘", color: "#15803d" },
+    { level: 14, name: "Flying Menace", emoji: "🦇", color: "#4a044e" },
+    { level: 15, name: "Mana Leech", emoji: "💧", color: "#0ea5e9" },
+    { level: 16, name: "Spellcounter", emoji: "🚫", color: "#2563eb" },
+    { level: 17, name: "Goblin Guide", emoji: "👺", color: "#dc2626" },
+    { level: 18, name: "Serum Visionary", emoji: "🧪", color: "#6366f1" },
+    { level: 19, name: "Mythic Rare", emoji: "🟠", color: "#f97316" },
+    { level: 20, name: "Planeswalker", emoji: "✨", color: "#fbbf24" },
+
+    // 21-40: Game of Thrones (Houses & Heroes)
+    { level: 21, name: "Night's Watch", emoji: "🦅", color: "#1e293b" },
+    { level: 22, name: "Wildling Scout", emoji: "❄️", color: "#94a3b8" },
+    { level: 23, name: "Ironborn", emoji: "⚓", color: "#475569" },
+    { level: 24, name: "Dothraki Rider", emoji: "🐎", color: "#b45309" },
+    { level: 25, name: "Kingslayer", emoji: "🗡️", color: "#facc15" },
+    { level: 26, name: "Winterfell Warden", emoji: "🐺", color: "#cbd5e1" },
+    { level: 27, name: "Dragonstone Guard", emoji: "🐉", color: "#991b1b" },
+    { level: 28, name: "Faceless Man", emoji: "🎭", color: "#4b5563" },
+    { level: 29, name: "Hand of the King", emoji: "🖐️", color: "#d97706" },
+    { level: 30, name: "Iron Throne Heir", emoji: "⚔️", color: "#111827" },
+
+    // 31-50: Wheel of Time (The Tiers of Power)
+    { level: 31, name: "Two Rivers Archer", emoji: "🏹", color: "#166534" },
+    { level: 32, name: "Gleeman", emoji: "🎶", color: "#be185d" },
+    { level: 33, name: "Borderlander", emoji: "🛡️", color: "#991b1b" },
+    { level: 34, name: "Warders Bond", emoji: "🔗", color: "#1e293b" },
+    { level: 35, name: "Aes Sedai Novice", emoji: "🕯️", color: "#f8fafc" },
+    { level: 36, name: "Accepted", emoji: "💍", color: "#e2e8f0" },
+    { level: 37, name: "Aiel Dreamwalker", emoji: "🏜️", color: "#d97706" },
+    { level: 38, name: "Asha'man", emoji: "⚡", color: "#000000" },
+    { level: 39, name: "Amyrlin Seat", emoji: "📜", color: "#ffffff" },
+    { level: 40, name: "Ta'veren", emoji: "🌀", color: "#6366f1" },
+
+    // 41-60: Lord of the Rings (Fellowship & Foes)
+    { level: 41, name: "Hobbit Adventurer", emoji: "🍺", color: "#15803d" },
+    { level: 42, name: "Bree Strider", emoji: "👢", color: "#451a03" },
+    { level: 43, name: "Riddermark Lord", emoji: "🏇", color: "#166534" },
+    { level: 44, name: "Gondor Soldier", emoji: "🛡️", color: "#94a3b8" },
+    { level: 45, name: "Uruk-hai Berserker", emoji: "✋", color: "#450a0a" },
+    { level: 46, name: "Elven Archer", emoji: "🍃", color: "#4ade80" },
+    { level: 47, name: "Dwarf Warrior", emoji: "⛏️", color: "#78350f" },
+    { level: 48, name: "Nazgûl Rider", emoji: "🐎", color: "#020617" },
+    { level: 49, name: "Istari Pupil", emoji: "🧙", color: "#3b82f6" },
+    { level: 50, name: "Ring-bearer", emoji: "💍", color: "#fbbf24" },
+
+    // NEW LEVELS 51-60
+    { level: 51, name: "White Wizard", emoji: "🧙‍♂️", color: "#f8fafc" },
+    { level: 52, name: "Silmaril Seeker", emoji: "💎", color: "#7dd3fc" },
+    { level: 53, name: "Dune Walker", emoji: "⏳", color: "#fcd34d" },
+    { level: 54, name: "Shadowfax Rider", emoji: "🐎", color: "#e2e8f0" },
+    { level: 55, name: "Master of Coin", emoji: "🪙", color: "#fbbf24" },
+    { level: 56, name: "Kingsguard", emoji: "🛡️", color: "#94a3b8" },
+    { level: 57, name: "Valyrian Smith", emoji: "⚒️", color: "#475569" },
+    { level: 58, name: "Night Watcher", emoji: "🦉", color: "#312e81" },
+    { level: 59, name: "Obsidian Blade", emoji: "🗡️", color: "#1e293b" },
+    { level: 60, name: "Citadel Maester", emoji: "📜", color: "#8b5e3c" },
+
+    // 61-80: High Magic & Artifacts
+    { level: 61, name: "Mox Emerald", emoji: "💚", color: "#10b981" },
+    { level: 62, name: "Mox Sapphire", emoji: "💙", color: "#3b82f6" },
+    { level: 63, name: "Mox Ruby", emoji: "❤️", color: "#ef4444" },
+    { level: 64, name: "Mox Jet", emoji: "🖤", color: "#18181b" },
+    { level: 65, name: "Mox Pearl", emoji: "🤍", color: "#f8fafc" },
+    { level: 66, name: "Black Lotus", emoji: "🌺", color: "#000000" },
+    { level: 67, name: "Balrog Slayer", emoji: "🔥", color: "#f97316" },
+    { level: 68, name: "Witch-king", emoji: "👑", color: "#334155" },
+    { level: 69, name: "Shelob's Kin", emoji: "🕷️", color: "#0f172a" },
+    { level: 70, name: "Dragon-friend", emoji: "🐲", color: "#dc2626" },
+
+    // NEW LEVELS 71-80
+    { level: 71, name: "Neon Ghost", emoji: "👻", color: "#22d3ee" },
+    { level: 72, name: "Dragon's Greed", emoji: "🪙", color: "#fbbf24" },
+    { level: 73, name: "Mistborn", emoji: "🌫️", color: "#94a3b8" },
+    { level: 74, name: "Cinder Soul", emoji: "🔥", color: "#f87171" },
+    { level: 75, name: "High Council", emoji: "🏛️", color: "#6366f1" },
+    { level: 76, name: "Valyrian Steel", emoji: "🗡️", color: "#cbd5e1" },
+    { level: 77, name: "Golden Snitch", emoji: "✨", color: "#facc15" },
+    { level: 78, name: "Ether Weaver", emoji: "🕸️", color: "#a855f7" },
+    { level: 79, name: "Star Forge", emoji: "🔨", color: "#38bdf8" },
+    { level: 80, name: "Mithril Guard", emoji: "🛡️", color: "#e2e8f0" },
+
+    // 81-90: Wheel of Time (The Forsaken & Dragons)
+    { level: 81, name: "Lan Mandragoran", emoji: "🗡️", color: "#1e293b" },
+    { level: 82, name: "Moiraine Damodred", emoji: "💧", color: "#1d4ed8" },
+    { level: 83, name: "Ishamael", emoji: "👁️", color: "#450a0a" },
+    { level: 84, name: "Callandor Wielder", emoji: "💎", color: "#22d3ee" },
+    { level: 85, name: "Lewes Therin", emoji: "☀️", color: "#fde047" },
+    { level: 86, name: "Dragon Reborn", emoji: "🐉", color: "#ef4444" },
+
+    // NEW LEVELS 87-90
+    { level: 87, name: "Phoenix Down", emoji: "🪶", color: "#fb7185" },
+    { level: 88, name: "Void Sentinel", emoji: "👁️‍🗨️", color: "#4ade80" },
+    { level: 89, name: "Elder Wand", emoji: "🪄", color: "#94a3b8" },
+    { level: 90, name: "Balrog's Whip", emoji: "🔥", color: "#b91c1c" },
+
+    // 91-100: Cosmic Legends
+    { level: 91, name: "Sauron's Shadow", emoji: "👁️", color: "#000000" },
+    { level: 92, name: "Galadriel's Light", emoji: "🌟", color: "#e2e8f0" },
+    { level: 93, name: "Eldrazi Titan", emoji: "🐙", color: "#a855f7" },
+    { level: 94, name: "Tom Bombadil", emoji: "🍄", color: "#fbbf24" },
+    { level: 95, name: "Sauron Unleashed", emoji: "🌋", color: "#7f1d1d" },
+    { level: 96, name: "Saruman the White", emoji: "✋", color: "#cbd5e1" },
+    { level: 97, name: "Gandalf the Grey", emoji: "🎆", color: "#64748b" },
+    { level: 98, name: "Gandalf the White", emoji: "🧙‍♂️", color: "#ffffff" },
+    { level: 99, name: "The Creator", emoji: "🌌", color: "#6366f1" },
+    { level: 100, name: "Eru Ilúvatar", emoji: "✨", color: "#ffffff" }
+];
 let unlockedEggs = JSON.parse(localStorage.getItem('unlockedEggs')) || [];
 let surpriseClickCount = 0;
 let matrixActive = false;
@@ -630,4 +743,37 @@ function addMaintenanceXP() {
     if (unlockedEggs.length >= 6) {
         console.log("%c [SYS_ADMIN] System optimized: +5 XP", "color: #ec4899; font-weight: bold;");
     }
+}
+
+/**
+ * MAGIC XP HANDLER
+ */
+function triggerMagicXP() {
+    // 1. Play the high-pitched secret sound
+    playSound('secret');
+
+    // 2. Add the massive XP chunk
+    addExperience(100);
+
+    // 3. Visual "Magic" Flare on the badge
+    const badge = document.getElementById('level-badge');
+    if (badge) {
+        badge.style.filter = "drop-shadow(0 0 20px #a855f7) brightness(1.5)";
+        badge.animate([
+            { transform: 'scale(1) rotate(0deg)' },
+            { transform: 'scale(2) rotate(180deg)', offset: 0.5 },
+            { transform: 'scale(1) rotate(360deg)' }
+        ], {
+            duration: 800,
+            easing: 'ease-out'
+        });
+
+        // Reset filter after animation
+        setTimeout(() => {
+            badge.style.filter = "none";
+        }, 800);
+    }
+
+    // 4. Console feedback
+    console.log("%c ✨ Magic XP Cast! +100 XP added to the void.", "color: #a855f7; font-weight: bold;");
 }
