@@ -193,8 +193,8 @@ function applyTheme(theme) {
         html.style.setProperty('--bg-footer', `hsl(${h}, 40%, 5%)`);   // Deepest
         html.style.setProperty('--text-main', `hsl(${h}, 20%, 95%)`);  // Near White
         html.style.setProperty('--text-muted', `hsl(${h}, 15%, 70%)`); // Softened
-        html.style.setProperty('--accent', `hsl(${h}, 90%, 60%)`);     // Vivid Pop
-        html.style.setProperty('--accent-light', `hsla(${h}, 90%, 60%, 0.15)`);
+        html.style.setProperty('--accent', `hsl(${h}, 90%, 65%)`);     // Vivid Pop
+        html.style.setProperty('--accent-light', `hsla(${h}, 90%, 65%, 0.15)`);
         html.style.setProperty('--border-color', `hsl(${h}, 30%, 20%)`);
 
         if (heart) {
@@ -375,7 +375,7 @@ window.startSelfDestruct = function() {
 
     initAudio();
 
-    // Move to HTML tag so it ignores Body shakes and stays at top of screen
+    // Move to HTML root to ignore scroll position and Body transforms
     document.documentElement.appendChild(devPanel);
     devPanel.setAttribute('data-lock', 'true');
     devPanel.classList.remove('hidden');
@@ -387,46 +387,50 @@ window.startSelfDestruct = function() {
     destructInterval = setInterval(() => {
         timeLeft--;
 
-        // RE-FETCH elements inside the panel to ensure they aren't null
+        // Re-locate elements in the new DOM position
         const timerDisplay = document.getElementById('destruct-timer');
         const progressBar = document.getElementById('destruct-bar');
         const statusText = document.getElementById('destruct-text');
 
-        // Update the numerical text
-        if (timerDisplay) {
-            timerDisplay.innerText = `${timeLeft}s`;
-        }
+        if (timerDisplay) timerDisplay.innerText = `${timeLeft}s`;
 
-        // Update the progress bar logic
         if (progressBar) {
             const percent = ((10 - timeLeft) / 10) * 100;
             progressBar.style.width = `${percent}%`;
 
-            // Color Shift
+            // Color Logic
             if (timeLeft > 5) progressBar.style.backgroundColor = "#22c55e";
             else if (timeLeft > 2) progressBar.style.backgroundColor = "#eab308";
             else progressBar.style.backgroundColor = "#ef4444";
         }
 
-        // Audio Pitch Increase
+        // Rising Audio Frequency
         if (audioCtx) {
             const osc = audioCtx.createOscillator();
             const g = audioCtx.createGain();
             osc.connect(g); g.connect(audioCtx.destination);
-            osc.frequency.setValueAtTime(300 + (10 - timeLeft) * 60, audioCtx.currentTime);
+            osc.frequency.setValueAtTime(400 + (10 - timeLeft) * 80, audioCtx.currentTime);
             g.gain.setValueAtTime(0.1, audioCtx.currentTime);
             g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
             osc.start(); osc.stop(audioCtx.currentTime + 0.1);
         }
 
-        if (timeLeft <= 4) {
+        // CRITICAL STATE: 3 Seconds Left
+        if (timeLeft <= 3) {
             document.body.classList.add('glitch-shake');
-            if (statusText) statusText.innerText = "CRITICAL_FAILURE";
+            // Flash the console background red
+            devPanel.style.backgroundColor = (timeLeft % 2 === 0) ? "rgba(239, 68, 68, 0.9)" : "rgba(15, 23, 42, 0.95)";
+            devPanel.style.borderColor = "#ffffff";
+            if (statusText) statusText.innerText = "OVERHEAT_CRITICAL";
         }
 
         if (timeLeft <= 0) {
             clearInterval(destructInterval);
             destructInterval = null;
+            if (timerDisplay) timerDisplay.innerText = "0s";
+
+            // Clean up and trigger the fall
+            devPanel.style.backgroundColor = "rgba(15, 23, 42, 0.95)";
             triggerSecretUnlock('gravity');
         }
     }, 1000);
