@@ -79,6 +79,14 @@
         </div>
     </div>
 
+    <div class="relative group">
+        <button id="self-destruct-btn" onclick="startSelfDestruct()" class="w-full py-2 bg-red-600/20 hover:bg-red-600/40 text-red-500 text-[10px] border border-red-500/50 rounded-lg transition-all flex justify-between px-3 overflow-hidden">
+            <span id="destruct-text">SYS_SELF_DESTRUCT</span>
+            <span id="destruct-timer" class="font-black"></span>
+        </button>
+        <div id="destruct-bar" class="absolute bottom-0 left-0 h-[2px] bg-red-500 w-0 transition-all"></div>
+    </div>
+
     <div class="mt-4 pt-4 border-t border-white/10">
         <p class="text-[9px] text-slate-500 leading-tight">Secret Console: <span class="text-white">'D'</span></p>
     </div>

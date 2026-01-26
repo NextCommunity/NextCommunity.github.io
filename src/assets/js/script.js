@@ -264,11 +264,12 @@ let konamiPosition = 0;
 window.addEventListener('keydown', (e) => {
     const key = e.key.toLowerCase();
 
-    // Developer Toggle
     if (key === 'd' && e.target.tagName !== 'INPUT') {
         const devPanel = document.getElementById('dev-tools');
         if (devPanel) {
             const isHidden = devPanel.classList.toggle('hidden');
+            // SAVE STATE: Store whether it's hidden or not
+            localStorage.setItem('devToolsVisible', !isHidden);
             playSound(isHidden ? 'click' : 'secret');
         }
         return;
@@ -370,24 +371,102 @@ function closeMatrix() {
     window.removeEventListener('keydown', handleMatrixEsc);
 }
 
+let destructInterval;
+/**
+ * SELF DESTRUCT ENGINE
+ * Forces console visibility and manages the dynamic loading bar
+ */
+window.startSelfDestruct = function() {
+    const btn = document.getElementById('self-destruct-btn');
+    const devPanel = document.getElementById('dev-tools');
+
+    if (destructInterval) return;
+
+    // 1. Move console to BODY to escape parent container collapses
+    document.body.appendChild(devPanel);
+
+    // 2. Lock and Audio Resume
+    devPanel.setAttribute('data-lock', 'true');
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audioCtx.resume();
+
+    let barContainer = document.getElementById('destruct-bar-container') || createBar(btn);
+    const progressBar = document.getElementById('destruct-bar-progress');
+
+    btn.classList.add('is-destructing');
+    let timeLeft = 10;
+
+    destructInterval = setInterval(() => {
+        timeLeft--;
+
+        // FORCE RE-CHECK (The 4-second fix)
+        devPanel.classList.remove('hidden');
+        devPanel.style.display = 'block';
+
+        const progressPercent = ((10 - timeLeft) / 10) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+
+        // Color Change: Green -> Yellow -> Red
+        progressBar.style.backgroundColor = timeLeft > 5 ? "#22c55e" : (timeLeft > 2 ? "#eab308" : "#ef4444");
+
+        btn.innerHTML = `HALT SYSTEM IN ${timeLeft}s 💣`;
+
+        // Sound Engine (scheduling precisely)
+        if (audioCtx) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.frequency.setValueAtTime(200 + (progressPercent * 10), audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+        }
+
+        if (timeLeft <= 4) {
+            document.body.classList.add('glitch-shake');
+        }
+
+        if (timeLeft <= 0) {
+            clearInterval(destructInterval);
+            destructInterval = null;
+            devPanel.setAttribute('data-lock', 'false'); // Finally release the lock
+            triggerSecretUnlock('gravity');
+        }
+    }, 1000);
+};
+// Internal helper to ensure bar exists
+function createBar(btn) {
+    const container = document.createElement('div');
+    container.id = 'destruct-bar-container';
+    container.innerHTML = '<div id="destruct-bar-progress"></div>';
+    btn.parentNode.insertBefore(container, btn.nextSibling);
+    return container;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Secret: Triple-tap the copyright year in the footer to open Dev Tools on mobile
+    // 1. Restore Console Visibility
+    const devToolsVisible = localStorage.getItem('devToolsVisible') === 'true';
+    const devPanel = document.getElementById('dev-tools');
+    if (devToolsVisible && devPanel) {
+        devPanel.classList.remove('hidden');
+    }
+
+    // 2. Setup Mobile Override
     const footerYear = document.getElementById('current-year');
     let tapCount = 0;
-
     if (footerYear) {
         footerYear.addEventListener('touchstart', () => {
             tapCount++;
             if (tapCount === 3) {
-                const devPanel = document.getElementById('dev-tools');
                 devPanel.classList.toggle('hidden');
+                localStorage.setItem('devToolsVisible', !devPanel.classList.contains('hidden'));
                 playSound('secret');
                 tapCount = 0;
             }
-            // Reset count if they stop tapping for 1 second
             setTimeout(() => { tapCount = 0; }, 1000);
         });
     }
+
     applyTheme(localStorage.getItem('theme') || 'light');
     updateGameUI();
 });
