@@ -730,3 +730,11 @@ a:hover {
     background-size: 100% 2px, 3px 100%;
     pointer-events: none;
 }
+.cursor-grab:active {
+    cursor: grabbing;
+}
+
+/* Prevents the terminal text from getting highlighted while you move the window */
+#matrix-console-container.is-dragging {
+    user-select: none;
+}
