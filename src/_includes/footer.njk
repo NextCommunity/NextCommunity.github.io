@@ -67,7 +67,7 @@
     </div>
 
     <div class="space-y-1 mb-2">
-        <button onclick="addExperience(5)" class="w-full flex justify-between px-2 py-1 bg-cyan-500/5 text-cyan-400 text-[8px] border border-cyan-500/20 rounded">
+        <button onclick="addExperience(5); playSound('click');" class="w-full flex justify-between px-2 py-1 bg-cyan-500/5 text-cyan-400 text-[8px] border border-cyan-500/20 rounded">
             <span>💎 SKILL_MINER</span>
             <span class="opacity-50">+5</span>
         </button>
@@ -75,7 +75,7 @@
             <span>🛠️ SYS_OPTIMIZE</span>
             <span class="opacity-50">+15</span>
         </button>
-        <button onclick="triggerMagicXP()" class="w-full flex justify-between px-2 py-1.5 bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-400 text-[8px] border border-purple-500/30 rounded hover:from-purple-600/40 hover:to-blue-600/40 transition-all group">
+        <button onclick="triggerMagicXP(); playSound('levelUp');" class="w-full flex justify-between px-2 py-1.5 bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-400 text-[8px] border border-purple-500/30 rounded hover:from-purple-600/40 hover:to-blue-600/40 transition-all group">
             <span>✨ CAST_MAGIC_XP</span>
             <span class="group-hover:animate-pulse">+50 XP</span>
         </button>
@@ -130,8 +130,8 @@
 <div id="matrix-console-container" class="fixed bottom-6 right-6 w-80 z-[1000] transition-all duration-300 ease-in-out">
     <div class="bg-black/90 backdrop-blur-xl border border-green-500/30 rounded-t-lg overflow-hidden shadow-2xl">
 
-        <div class="bg-green-500/10 border-b border-green-500/30 px-3 py-2 flex justify-between items-center cursor-default select-none">
-            <div class="flex items-center gap-2">
+        <div class="bg-green-500/10 border-b border-green-500/30 px-3 py-2 flex justify-between items-center cursor-grab select-none">
+             <div class="flex items-center gap-2">
                 <span class="text-[10px] font-mono text-green-500 uppercase tracking-widest opacity-70">System_Log</span>
             </div>
 
@@ -142,7 +142,7 @@
             </div>
         </div>
 
-        <div id="matrix-console-output" class="h-48 p-3 overflow-y-auto font-mono text-[11px] leading-tight transition-all duration-300">
+        <div id="matrix-console-output" class="h-48 p-3 overflow-y-auto font-mono text-[11px] leading-tight">
             <p class="text-green-500/40">// Terminal link established...</p>
         </div>
     </div>

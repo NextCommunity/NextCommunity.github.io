@@ -358,6 +358,51 @@ function getRank(lvl) {
 const consoleContainer = document.getElementById('matrix-console-container');
 const consoleOutput = document.getElementById('matrix-console-output');
 
+const dragContainer = document.getElementById('matrix-console-container');
+const dragHeader = dragContainer.querySelector('.bg-green-500\\/10'); // Selects the header bar
+
+let isDragging = false;
+let offsetLeft = 0;
+let offsetTop = 0;
+
+dragHeader.addEventListener('mousedown', (e) => {
+    // Prevent dragging when clicking the minimize/close buttons
+    if (e.target.tagName === 'BUTTON') return;
+
+    isDragging = true;
+
+    // Calculate where the mouse is relative to the top-left of the console
+    const rect = dragContainer.getBoundingClientRect();
+    offsetLeft = e.clientX - rect.left;
+    offsetTop = e.clientY - rect.top;
+
+    // Change cursor to indicate moving
+    dragHeader.style.cursor = 'grabbing';
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+
+    // Calculate new position
+    let x = e.clientX - offsetLeft;
+    let y = e.clientY - offsetTop;
+
+    // Boundary Check (Optional: keeps it inside the screen)
+    x = Math.max(0, Math.min(x, window.innerWidth - dragContainer.offsetWidth));
+    y = Math.max(0, Math.min(y, window.innerHeight - dragContainer.offsetHeight));
+
+    // Apply position and remove Tailwind's 'bottom' and 'right' so they don't fight the 'top'/'left'
+    dragContainer.style.bottom = 'auto';
+    dragContainer.style.right = 'auto';
+    dragContainer.style.left = `${x}px`;
+    dragContainer.style.top = `${y}px`;
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+    dragHeader.style.cursor = 'grab';
+});
+
 function minimizeConsole() {
     // Toggles the height of the output area
     if (consoleOutput.style.display === 'none') {
