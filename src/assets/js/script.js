@@ -370,15 +370,16 @@ function closeMatrix() {
 window.startSelfDestruct = function() {
     const btn = document.getElementById('self-destruct-btn');
     const devPanel = document.getElementById('dev-tools');
-    const timerDisplay = document.getElementById('destruct-timer');
-    const progressBar = document.getElementById('destruct-bar');
-    const statusText = document.getElementById('destruct-text');
 
     if (destructInterval) return;
 
     initAudio();
-    document.body.appendChild(devPanel);
+
+    // Move to HTML tag so it ignores Body shakes and stays at top of screen
+    document.documentElement.appendChild(devPanel);
     devPanel.setAttribute('data-lock', 'true');
+    devPanel.classList.remove('hidden');
+
     btn.classList.add('is-destructing');
 
     let timeLeft = 10;
@@ -386,24 +387,33 @@ window.startSelfDestruct = function() {
     destructInterval = setInterval(() => {
         timeLeft--;
 
+        // RE-FETCH elements inside the panel to ensure they aren't null
+        const timerDisplay = document.getElementById('destruct-timer');
+        const progressBar = document.getElementById('destruct-bar');
+        const statusText = document.getElementById('destruct-text');
+
+        // Update the numerical text
         if (timerDisplay) {
             timerDisplay.innerText = `${timeLeft}s`;
-            timerDisplay.style.color = "#fff";
         }
 
+        // Update the progress bar logic
         if (progressBar) {
             const percent = ((10 - timeLeft) / 10) * 100;
             progressBar.style.width = `${percent}%`;
+
+            // Color Shift
             if (timeLeft > 5) progressBar.style.backgroundColor = "#22c55e";
             else if (timeLeft > 2) progressBar.style.backgroundColor = "#eab308";
             else progressBar.style.backgroundColor = "#ef4444";
         }
 
+        // Audio Pitch Increase
         if (audioCtx) {
             const osc = audioCtx.createOscillator();
             const g = audioCtx.createGain();
             osc.connect(g); g.connect(audioCtx.destination);
-            osc.frequency.setValueAtTime(300 + (10 - timeLeft) * 50, audioCtx.currentTime);
+            osc.frequency.setValueAtTime(300 + (10 - timeLeft) * 60, audioCtx.currentTime);
             g.gain.setValueAtTime(0.1, audioCtx.currentTime);
             g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
             osc.start(); osc.stop(audioCtx.currentTime + 0.1);
@@ -411,13 +421,12 @@ window.startSelfDestruct = function() {
 
         if (timeLeft <= 4) {
             document.body.classList.add('glitch-shake');
-            if (statusText) statusText.innerText = "SYSTEM_FAILURE_IMMINENT";
+            if (statusText) statusText.innerText = "CRITICAL_FAILURE";
         }
 
         if (timeLeft <= 0) {
             clearInterval(destructInterval);
             destructInterval = null;
-            devPanel.setAttribute('data-lock', 'false');
             triggerSecretUnlock('gravity');
         }
     }, 1000);

@@ -148,17 +148,26 @@ html, body {
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
 }
 
-/* NUCLEAR LOCK: Override during Self Destruct */
+/* NUCLEAR LOCK: Forces console to stay in your literal eyeballs */
 html body #dev-tools[data-lock="true"] {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    top: 1rem !important;
-    right: 1rem !important;
-    border-left-color: var(--danger) !important;
-    box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
-    animation: none !important; /* Prevent it from shaking with the body */
+
+    /* Stick to the screen, not the page content */
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+
+    /* Ensure it is ABOVE the glitch/shake layers */
+    z-index: 2147483647 !important;
+
+    /* Stop it from flying away or shaking */
     transform: none !important;
+    animation: none !important;
+
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 40px rgba(239, 68, 68, 0.6) !important;
 }
 
 /* Custom Scrollbar for the console */
