@@ -682,13 +682,27 @@ window.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
     if (key === 'd') {
-        const devPanel = document.getElementById('dev-tools');
-        if (devPanel) {
-            const isHidden = devPanel.classList.toggle('hidden');
-            localStorage.setItem('devToolsVisible', !isHidden);
-            playSound(isHidden ? 'click' : 'secret');
+        e.preventDefault();
+
+        const systemDash = document.getElementById('dev-tools'); // Adjust ID as needed
+        const isOpening = systemDash.classList.contains('hidden');
+
+        if (isOpening) {
+            document.getElementById('matrix-console-container').classList.add('hidden');
+            systemDash.classList.remove('hidden');
+
+            // Wait 100-150ms for the animation/display to settle
+            setTimeout(() => {
+                // Find the first interactive element (button or link)
+                const firstControl = systemDash.querySelector('button, a, input');
+                if (firstControl) {
+                    firstControl.focus();
+                }
+            }, 150);
+        } else {
+            systemDash.classList.add('hidden');
+            document.body.focus(); // Return focus to the page
         }
-        return;
     }
 
     if (key === konamiCode[konamiPosition]) {
