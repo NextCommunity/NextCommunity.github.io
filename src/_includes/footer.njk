@@ -45,69 +45,53 @@
   </div>
 </footer>
 
-<div id="dev-tools" class="fixed bottom-6 left-6 z-[5000] hidden bg-slate-900 border-2 border-accent p-6 rounded-2xl shadow-2xl backdrop-blur-xl w-64 font-mono">
-    <div class="flex justify-between items-center mb-4">
-        <h3 class="text-accent text-xs font-black uppercase tracking-tighter">System Override</h3>
-        <span class="text-[9px] bg-accent/20 text-accent px-1.5 py-0.5 rounded">v1.0.4</span>
+<div id="dev-tools" class="fixed bottom-6 left-6 z-[5000] hidden bg-slate-950/90 border border-accent/40 p-3 rounded-xl shadow-2xl backdrop-blur-md w-64 font-mono">
+    <div class="flex justify-between items-center mb-2 pb-2 border-b border-white/10">
+        <h3 class="text-accent text-[9px] font-black uppercase tracking-widest">System Override</h3>
+        <span class="text-[8px] text-white/40">v1.0.4</span>
     </div>
 
-    <div class="space-y-3">
-        <button onclick="triggerSecretUnlock('matrix')" class="w-full py-2 bg-white/5 hover:bg-green-500/20 text-green-500 text-[10px] border border-green-500/30 rounded-lg transition-all flex justify-between px-3">
-            <span>RUN_MATRIX.exe</span>
-            <span class="opacity-50">+1 LVL</span>
+    <div class="grid grid-cols-2 gap-1.5 mb-2">
+        <button onclick="triggerSecretUnlock('matrix')" class="py-1.5 bg-green-500/5 hover:bg-green-500/20 text-green-500 text-[8px] border border-green-500/20 rounded transition-all">
+            MATRIX
         </button>
-
-        <button onclick="triggerSecretUnlock('konami')" class="w-full py-2 bg-white/5 hover:bg-yellow-500/20 text-yellow-500 text-[10px] border border-yellow-500/30 rounded-lg transition-all flex justify-between px-3">
-            <span>TRIGGER_KONAMI</span>
-            <span class="opacity-50">+1 LVL</span>
+        <button onclick="triggerSecretUnlock('konami')" class="py-1.5 bg-yellow-500/5 hover:bg-yellow-500/20 text-yellow-500 text-[8px] border border-yellow-500/20 rounded transition-all">
+            KONAMI
         </button>
-
-        <button onclick="triggerSecretUnlock('gravity')" class="w-full py-2 bg-white/5 hover:bg-red-500/20 text-red-500 text-[10px] border border-red-500/30 rounded-lg transition-all flex justify-between px-3">
-            <span>INIT_GRAVITY</span>
-            <span class="opacity-50">+1 LVL</span>
+        <button onclick="triggerSecretUnlock('gravity')" class="py-1.5 bg-red-500/5 hover:bg-red-500/20 text-red-500 text-[8px] border border-red-500/20 rounded transition-all">
+            GRAVITY
         </button>
-
-        <button onclick="triggerSecretUnlock('badge_click')" class="w-full py-2 bg-white/5 hover:bg-purple-500/20 text-purple-400 text-[10px] border border-purple-500/30 rounded-lg transition-all flex justify-between px-3">
-            <span>UNLOCK_BADGE_XP</span>
-            <span class="opacity-50">+1 LVL</span>
+        <button onclick="triggerSecretUnlock('badge_click')" class="py-1.5 bg-purple-500/5 hover:bg-purple-500/20 text-purple-400 text-[8px] border border-purple-500/20 rounded transition-all">
+            BADGE_XP
         </button>
-
-      <div class="flex flex-col gap-2 mt-4 pt-4 border-t border-white/10">
-            <button
-              onclick="addExperience(5)"
-              class="w-full flex justify-between items-center p-2 rounded-md border border-cyan-500/30 bg-cyan-500/5 text-[10px] font-mono text-cyan-400 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all cursor-pointer"
-            >
-              <span class="flex items-center gap-2">💎 SIMULATE SKILL MINING</span>
-              <span class="opacity-60">+5 XP</span>
-            </button>
-
-            <button
-              onclick="toggleScreenshotMode()"
-              class="w-full flex justify-between items-center p-2 rounded-md border border-white/5 bg-white/5 text-[10px] font-mono text-slate-400 hover:bg-white/10 hover:border-slate-400 transition-all cursor-pointer"
-            >
-              <span class="flex items-center gap-2">📸 SCREENSHOT MODE</span>
-              <span class="opacity-40">[5S]</span>
-            </button>
-        </div>
-
-        <div class="pt-2">
-            <button onclick="localStorage.clear(); location.reload();" class="w-full py-3 bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 text-[10px] font-bold border border-blue-500/30 rounded-lg transition-all">
-                RESET_PLAYER_DATA
-            </button>
-        </div>
     </div>
 
-    <div class="relative group">
-        <button id="self-destruct-btn" onclick="startSelfDestruct()" class="w-full py-2 bg-red-600/20 hover:bg-red-600/40 text-red-500 text-[10px] border border-red-500/50 rounded-lg transition-all flex justify-between px-3 overflow-hidden">
-            <span id="destruct-text">SYS_SELF_DESTRUCT</span>
-            <span id="destruct-timer" class="font-black"></span>
+    <div class="space-y-1 mb-2">
+        <button onclick="addExperience(5)" class="w-full flex justify-between px-2 py-1 bg-cyan-500/5 text-cyan-400 text-[8px] border border-cyan-500/20 rounded">
+            <span>💎 SKILL_MINER</span>
+            <span class="opacity-50">+5</span>
         </button>
-        <div id="destruct-bar" class="absolute bottom-0 left-0 h-[2px] bg-red-500 w-0 transition-all"></div>
+        <button onclick="addExperience(15); playSound('restore');" class="w-full flex justify-between px-2 py-1 bg-pink-500/5 text-pink-400 text-[8px] border border-pink-500/20 rounded">
+            <span>🛠️ SYS_OPTIMIZE</span>
+            <span class="opacity-50">+15</span>
+        </button>
+        <button onclick="toggleScreenshotMode()" class="w-full flex justify-between px-2 py-1 bg-white/5 text-slate-400 text-[8px] border border-white/10 rounded">
+            <span>📸 SCREENSHOT</span>
+            <span class="opacity-50">5S</span>
+        </button>
     </div>
 
-    <div class="mt-4 pt-4 border-t border-white/10">
-        <p class="text-[9px] text-slate-500 leading-tight">Secret Console: <span class="text-white">'D'</span></p>
+    <div class="flex gap-1.5 pt-2 border-t border-white/10">
+        <button id="self-destruct-btn" onclick="startSelfDestruct()" class="flex-1 py-1.5 bg-red-600/10 hover:bg-red-600/30 text-red-500 text-[8px] border border-red-500/30 rounded flex justify-center gap-1">
+            <span id="destruct-text">DESTRUCT</span>
+            <span id="destruct-timer"></span>
+        </button>
+        <button onclick="localStorage.clear(); location.reload();" class="px-2 py-1.5 bg-blue-600/10 hover:bg-blue-600/30 text-blue-400 text-[8px] border border-blue-500/20 rounded uppercase">
+            Reset
+        </button>
     </div>
+
+    <p class="mt-2 text-[7px] text-slate-600 text-center uppercase tracking-tighter">Press <span class="text-slate-400">'D'</span> to toggle</p>
 </div>
 
 <div id="matrix-overlay" class="fixed inset-0 bg-black hidden z-[9999]">

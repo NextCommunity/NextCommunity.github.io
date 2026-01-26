@@ -391,3 +391,34 @@ body[data-level="5"] .skill-item {
 .skill-item {
     cursor: crosshair; /* Makes it feel like you are "mining" */
 }
+/* Level 6 Visuals */
+body[data-level="6"] .user-card {
+    border-color: rgba(236, 72, 153, 0.3);
+}
+
+body[data-level="6"]::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 0.1) 50%
+    );
+    background-size: 100% 4px;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.2; /* Very subtle scanlines */
+}
+#total-xp-display {
+    display: inline-block;
+    transition: transform 0.1s ease;
+}
+
+/* Added via JS when XP increases */
+.xp-pulse {
+    transform: scale(1.3);
+    color: white !important;
+}
