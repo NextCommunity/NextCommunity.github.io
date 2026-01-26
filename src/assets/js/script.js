@@ -242,6 +242,20 @@ let currentLevel = parseInt(localStorage.getItem('userLevel')) || 0;
 // Load saved XP or start at 0
 let currentXP = parseInt(localStorage.getItem('userXP')) || 0;
 
+function getContrastYIQ(hexcolor){
+    hexcolor = hexcolor.replace("#", "");
+    var r = parseInt(hexcolor.substr(0,2),16);
+    var g = parseInt(hexcolor.substr(2,2),16);
+    var b = parseInt(hexcolor.substr(4,2),16);
+    var yiq = ((r*299)+(g*587)+(b*114))/1000;
+    return (yiq >= 128) ? 'black' : 'white';
+}
+
+
+function isEggUnlocked(eggId) {
+    // Returns true if the ID exists in the array, false otherwise
+    return unlockedEggs.includes(eggId);
+}
 
 /**
  * 1. RETRO SOUND ENGINE
@@ -326,78 +340,56 @@ let matrixActive = false;
 let destructInterval;
 
 function getRank(lvl) {
-    // 1. Ensure lvl is a valid number
-    const searchLvl = parseInt(lvl) || 0;
+    const numericLevel = Number(lvl) || 0;
 
-    // 2. Find the highest rank that is less than or equal to current level
-    // We slice().reverse() to check the highest levels first
-    const rank = LEVELS.slice().reverse().find(r => searchLvl >= r.level);
+    // IMPORTANT: .slice().reverse() creates a temporary reversed list
+    // so we find the HIGHEST level match first.
+    const rank = LEVELS.slice().reverse().find(r => numericLevel >= r.level);
 
-    // 3. Fallback: If rank is undefined, return the first level (Newbie)
     if (!rank) {
-        console.warn(`Rank not found for level ${searchLvl}, defaulting to Level 0.`);
+        console.warn("Rank not found, defaulting to Newbie");
         return LEVELS[0];
     }
 
     return rank;
 }
 
-/**
- * 3. GAME ENGINE
- */
-function updateGameUI() {
-    // Ensure currentLevel is a valid number
-    const lvl = parseInt(currentLevel) || 0;
-    // Check if LEVELS exists yet
-    if (!LEVELS || LEVELS.length === 0) return;
+// Ensure this is in the GLOBAL scope (not hidden inside another function)
+window.createFloatingXP = function(e) {
+    // 1. Create the XP element
+    const popup = document.createElement('div');
 
+    // 2. Styling (Tailwind classes + Inline for positioning)
+    popup.className = 'fixed pointer-events-none z-[999] font-black text-sm tracking-tighter animate-xp-float';
+    popup.innerText = '+1 XP';
+
+    // 3. Get current Rank color for the "Pop"
     const rank = getRank(currentLevel);
+    popup.style.color = rank.color;
 
-    // If rank is STILL undefined (e.g. LEVELS is empty), stop here
-    if (!rank) return;
+    // 4. Position at mouse (using clientX/Y for fixed positioning)
+    popup.style.left = `${e.clientX}px`;
+    popup.style.top = `${e.clientY}px`;
 
-    const xpBar = document.getElementById('level-progress');
-    const xpText = document.getElementById('total-xp-display');
+    document.body.appendChild(popup);
 
-    if (xpBar) {
-        const progress = (currentXP / 45) * 100;
-        xpBar.style.width = `${progress}%`;
+    // 5. Award XP and update that "Newbie" header
+    if (typeof addExperience === 'function') {
+        addExperience(1);
     }
 
-    if (xpText) {
-        xpText.innerText = `${currentXP} / 45`;
-    }
+    // 6. Cleanup
+    setTimeout(() => popup.remove(), 800);
+};
 
-    const nameLabel = document.getElementById('level-name');
-    if (nameLabel) {
-        nameLabel.innerText = rank.name;
-        // This is where it was crashing:
-        nameLabel.style.color = rank.color || "#ffffff";
-    }
-
-    const badge = document.getElementById('level-badge');
-    const numLabel = document.getElementById('level-number');
-
-    if (badge) {
-        badge.innerText = rank.emoji;
-        badge.style.backgroundColor = rank.color;
-    }
-    if (numLabel) numLabel.innerText = currentLevel;
-
-    // Update the Progress Bar
-    const pb = document.getElementById('level-progress');
-    if (pb) {
-        // Use 45 XP per level as the denominator
-        const progressPercent = Math.min((currentXP / 45) * 100, 100);
-        pb.style.width = `${progressPercent}%`;
-        pb.style.backgroundColor = rank.color;
-    }
-    // Sith Theme Auto-Switch (Levels 131-160)
-    if (lvl >= 131 && lvl <= 160) {
-        document.documentElement.style.setProperty('--accent', '#ef4444');
-    }
+// Re-attach listeners to your skill tags
+function attachSkillListeners() {
+    const skillTags = document.querySelectorAll('.skill-tag'); // Use your actual class name
+    skillTags.forEach(tag => {
+        // Use 'mouseenter' for a clean single-pop on hover
+        tag.addEventListener('mouseenter', createXPPopup);
+    });
 }
-
 
 function unlockEgg(eggId) {
     if (!unlockedEggs.includes(eggId)) {
@@ -472,8 +464,6 @@ function applyTheme(theme) {
         html.style.setProperty('--bg-footer', `hsl(${h}, 40%, 5%)`);   // Deepest
         html.style.setProperty('--text-main', `hsl(${h}, 20%, 95%)`);  // Near White
         html.style.setProperty('--text-muted', `hsl(${h}, 15%, 70%)`); // Softened
-        html.style.setProperty('--accent', `hsl(${h}, 95%, 70%)`);     // Vivid Pop
-        html.style.setProperty('--accent-light', `hsla(${h}, 95%, 70%, 0.2)`);
         html.style.setProperty('--border-color', `hsl(${h}, 30%, 20%)`);
 
         if (heart) {
@@ -506,7 +496,33 @@ function updateThemeIcon(theme) {
 /**
  * 5. EASTER EGG LOGIC & TRIGGERS
  */
+function triggerForceSurge() {
+    initAudio();
+    addExperience(100); // This now handles UI updates, sounds, and bar filling
+}
+
+function triggerMagicXP() {
+    initAudio();
+    addExperience(50);
+}
+
+// Visual Effect for Level 101+
+function triggerForceEffects(lvl) {
+    const badge = document.getElementById('level-badge');
+    if (badge) {
+        badge.classList.add('force-glow');
+        // Remove after 2 seconds unless it's a persistent rank
+        setTimeout(() => badge.classList.remove('force-glow'), 2000);
+    }
+}
+
 function triggerSecretUnlock(type) {
+    const eggId = `secret_${type}`;
+
+    // 1. Check if this is a NEW discovery
+    const isNewUnlock = !unlockedEggs.includes(eggId);
+
+    // 2. Trigger the Visual Effects (Always trigger these)
     if (type === 'gravity') {
         activateGravityEffect();
     } else if (type === 'matrix') {
@@ -514,7 +530,26 @@ function triggerSecretUnlock(type) {
     } else if (type === 'konami') {
         activateKonami();
     }
-    unlockEgg(`secret_${type}`);
+
+    // 3. Only process XP and Save if it's the first time
+    if (isNewUnlock) {
+        // Update the array and save to localStorage
+        unlockedEggs.push(eggId);
+        localStorage.setItem('unlockedEggs', JSON.stringify(unlockedEggs));
+
+        // Assign XP based on difficulty
+        if (type === 'konami') {
+            addExperience(500); // Massive bonus for the long code
+        } else if (type === 'gravity' || type === 'matrix') {
+            addExperience(45);  // 1 full level
+        } else {
+            addExperience(75);  // 2 full levels
+        }
+
+        console.log(`✨ Secret Unlocked: ${eggId}`);
+    } else {
+        console.log(`Secret ${eggId} already discovered. No extra XP granted.`);
+    }
 }
 
 const konamiCode = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a'];
@@ -816,76 +851,103 @@ document.addEventListener('DOMContentLoaded', () => {
 /**
  * 9. ENHANCED XP & SKILL MINING SYSTEM
  */
-
-async function addExperience(amount) {
-    if (document.getElementById('dev-tools')?.getAttribute('data-lock') === 'true') return;
-
-    currentXP += amount;
-
-    // Check if we have enough XP to level up
-    while (currentXP >= 45 && currentLevel < 200) {
-        // 1. Force the bar to 100% manually first
-        renderXP(45);
-
-        // 2. Wait for the CSS transition to finish (matches your transition speed)
-        await new Promise(resolve => setTimeout(resolve, 300));
-
-        // 3. Perform the actual Level Up
-        currentXP -= 45;
-        currentLevel++;
-
-        playSound('levelUp');
-        showLevelUpNotification(getRank(currentLevel));
-
-        // 4. Momentarily disable transitions to reset bar to 0% without sliding back
-        const pb = document.getElementById('level-progress');
-        if (pb) {
-            pb.style.transition = 'none';
-            renderXP(0);
-            void pb.offsetWidth; // Force a reflow
-            pb.style.transition = 'width 0.3s ease-in-out';
-        }
-    }
-
-    // 5. Save and Render final state
-    localStorage.setItem('userLevel', currentLevel);
-    localStorage.setItem('userXP', currentXP);
-    updateGameUI();
-}
-
-// Helper to update just the bar width
 function renderXP(value) {
     const pb = document.getElementById('level-progress');
     if (pb) {
-        const percent = Math.min((value / 45) * 100, 100);
+        // Ensure we don't exceed 100%
+        const percent = Math.min((value / XP_PER_LEVEL) * 100, 100);
         pb.style.width = `${percent}%`;
     }
 }
 
 
-function createFloatingXP(event, type = "skill") {
-    const float = document.createElement('div');
-    const levelIndex = unlockedEggs.length;
-    const rankColor = LEVELS[levelIndex]?.color || '#06b6d4';
+async function addExperience(amount) {
+    if (document.getElementById('dev-tools')?.getAttribute('data-lock') === 'true') return;
 
-    float.innerText = type === "maintenance" ? "+5 XP (MAINT)" : "+1 XP";
+    // 1. Force everything to be a clean number to prevent negative/NaN math
+    let xpToAdd = Number(amount) || 0;
+    currentXP = Number(currentXP) || 0;
+    currentLevel = Number(currentLevel) || 0;
 
-    float.style.cssText = `
-        position: fixed;
-        left: ${event.clientX}px;
-        top: ${event.clientY}px;
-        color: ${rankColor};
-        font-family: 'JetBrains Mono', monospace;
-        font-weight: 900;
-        font-size: ${type === "maintenance" ? '14px' : '12px'};
-        pointer-events: none;
-        z-index: 10000;
-        animation: float-up 0.8s ease-out forwards;
-    `;
+    currentXP += xpToAdd;
 
-    document.body.appendChild(float);
-    setTimeout(() => float.remove(), 800);
+    // 2. Level Up Loop
+    while (currentXP >= XP_PER_LEVEL && currentLevel < 200) {
+        // Visual fill to end
+        renderXP(XP_PER_LEVEL);
+        await new Promise(r => setTimeout(r, 300));
+
+        // The Math: Subtract 45 and increment level
+        currentXP -= XP_PER_LEVEL;
+        currentLevel++;
+
+        // Safety: Ensure XP never drops below 0
+        currentXP = Math.max(0, currentXP);
+
+        // Reset bar visually for next level in the loop
+        const pb = document.getElementById('level-progress');
+        if (pb) {
+            pb.style.transition = 'none';
+            renderXP(0);
+            void pb.offsetWidth;
+            pb.style.transition = 'width 0.3s ease-in-out';
+        }
+
+        const rank = getRank(currentLevel);
+        showLevelUpNotification(rank);
+        playSound('levelUp');
+    }
+
+    // 3. Save clean numbers back to storage
+    localStorage.setItem('userLevel', currentLevel.toString());
+    localStorage.setItem('userXP', currentXP.toString());
+
+    updateGameUI();
 }
+
+function updateGameUI() {
+    const lvl = Number(currentLevel) || 0;
+    const rank = getRank(lvl);
+
+    // Update the Name and its Color
+    const nameLabel = document.getElementById('level-name');
+    if (nameLabel) {
+        nameLabel.innerText = rank.name;
+        nameLabel.style.color = rank.color; // This applies the array color
+    }
+
+    // Update the Badge Background
+    const badge = document.getElementById('level-badge');
+    if (badge) {
+        badge.innerText = rank.emoji;
+        badge.style.backgroundColor = rank.color;
+    }
+
+    // Update the Number and XP
+    if (document.getElementById('level-number')) {
+        document.getElementById('level-number').innerText = lvl;
+    }
+
+    if (document.getElementById('total-xp-display')) {
+        document.getElementById('total-xp-display').innerText = `${currentXP} / ${XP_PER_LEVEL}`;
+    }
+
+    renderXP(currentXP);
+}
+
+function initSkillMining() {
+    // Select all your skill badges/tags
+    const skillTags = document.querySelectorAll('.skill-tag, .experience-badge');
+
+    skillTags.forEach(tag => {
+        // Remove old listeners to prevent double-firing
+        tag.removeEventListener('mouseenter', createXPPopup);
+        tag.addEventListener('mouseenter', createXPPopup);
+    });
+}
+
+// Run this on page load
+document.addEventListener('DOMContentLoaded', initSkillMining);
 
 function initSkillXP() {
     const skills = document.querySelectorAll('.skill-item');
@@ -925,66 +987,8 @@ function addMaintenanceXP() {
     }
 }
 
-/**
- * MAGIC XP HANDLER
- */
-function triggerMagicXP() {
-    // 1. Play the high-pitched secret sound
-    playSound('secret');
 
-    // Check if function exists
-    if (typeof addExperience === "function") {
-        addExperience(100);
-        console.log("Magic XP Injected");
-    } else {
-        console.error("Critical Error: addExperience function not found!");
-    }
 
-    // 3. Visual "Magic" Flare on the badge
-    const badge = document.getElementById('level-badge');
-    if (badge) {
-        badge.style.filter = "drop-shadow(0 0 20px #a855f7) brightness(1.5)";
-        badge.animate([
-            { transform: 'scale(1) rotate(0deg)' },
-            { transform: 'scale(2) rotate(180deg)', offset: 0.5 },
-            { transform: 'scale(1) rotate(360deg)' }
-        ], {
-            duration: 800,
-            easing: 'ease-out'
-        });
-
-        // Reset filter after animation
-        setTimeout(() => {
-            badge.style.filter = "none";
-        }, 800);
-    }
-
-    // 4. Console feedback
-    console.log("%c ✨ Magic XP Cast! +100 XP added to the void.", "color: #a855f7; font-weight: bold;");
-}
-
-function triggerForceSurge() {
-    playSound('secret');
-
-    // 1. Add XP via the engine (which handles the math)
-    addExperience(100);
-
-    // 2. Show a specific "Force" notification manually if you want
-    // We get the rank object FIRST to avoid passing a raw number
-    const currentRank = getRank(currentLevel);
-    showLevelUpNotification(currentRank);
-
-    // 3. Visuals
-    const badge = document.getElementById('level-badge');
-    if (badge) {
-        badge.classList.add('force-glow');
-        setTimeout(() => badge.classList.remove('force-glow'), 2000);
-    }
-}
-
-/**
- * SYSTEM LEVEL JUMP
- */
 
 function jumpToLevel() {
     const input = document.getElementById('jump-lvl');

@@ -35,7 +35,7 @@ layout: false
             <div class="skills-list">
               {% for skill in skills %}
                 <span class="skill-item">
-                  <span>{{ skill }}</span>
+                  <span onmouseenter="createFloatingXP(event)" class="skill-tag cursor-crosshair">{{ skill }}</span>
                 </span>
               {% endfor %}
             </div>

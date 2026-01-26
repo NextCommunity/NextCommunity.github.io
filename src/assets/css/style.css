@@ -5,10 +5,10 @@
   --bg-page: #f0f4f8;
   --bg-card: #ffffff;
   --bg-footer: #e2e8f0;
-  --text-main: #1a202c;
+  --text-main: #1e293b; /* Default Light */
   --text-muted: #4a5568;
   --border-color: #cbd5e0;
-  --accent: #2563eb;
+  --accent: #94a3b8; /* Default */
   --accent-light: #eff6ff;
   --accent-rgb: 37, 99, 235;
   --danger: #dc2626;
@@ -17,9 +17,9 @@
 
 .dark {
   --bg-page: #05070a;
-  --bg-card: #0f172a;
+  --bg-card: #1e293b;
   --bg-footer: #020617;
-  --text-main: #f1f5f9;
+  --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --border-color: #1e293b;
   --accent: #38bdf8;
@@ -412,10 +412,6 @@ body[data-level="6"]::after {
     pointer-events: none;
     opacity: 0.2; /* Very subtle scanlines */
 }
-#total-xp-display {
-    display: inline-block;
-    transition: transform 0.1s ease;
-}
 
 /* Added via JS when XP increases */
 .xp-pulse {
@@ -463,20 +459,86 @@ body[data-level="6"]::after {
     --glow-color: #ef4444; /* Sith Red */
 }
 
-/* Force Shadow ripple for the container */
-.force-glow::after {
-    content: "";
-    position: absolute;
-    inset: -10px;
-    border-radius: 50%;
-    background: var(--glow-color);
-    opacity: 0.2;
-    filter: blur(15px);
-    z-index: -1;
-}
+/* Override the Tailwind duration-1000 for a better feel */
 #level-progress {
-    height: 100%;
-    width: 0%; /* Initial state */
-    transition: width 0.3s ease-in-out; /* This makes it "fill" instead of "jump" */
-    box-shadow: 0 0 10px var(--accent);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+
+/* Force Glow for the Badge */
+@keyframes force-pulse {
+    0% { filter: drop-shadow(0 0 2px var(--accent)); transform: scale(1); }
+    50% { filter: drop-shadow(0 0 15px var(--accent)); transform: scale(1.1); }
+    100% { filter: drop-shadow(0 0 2px var(--accent)); transform: scale(1); }
+}
+
+.force-glow {
+    animation: force-pulse 1.5s infinite ease-in-out;
+}
+#level-name {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+
+    /* Remove any existing filters that cause fuzziness */
+    filter: none !important;
+    transition: color 0.3s ease;
+}
+
+/* Adjust the stroke for Dark/Random themes to keep it crisp */
+.dark #level-name {
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+}
+
+#level-badge {
+    transition: background-color 0.4s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Ensure the XP numbers are always legible */
+#total-xp-display {
+    color: var(--text-main);
+    filter: brightness(1.2); /* Pops slightly more in dark mode */
+}
+
+/* Progress bar should always have a high-contrast background */
+.xp-bar-container {
+    background: rgba(0, 0, 0, 0.1);
+}
+.dark .xp-bar-container {
+    background: rgba(255, 255, 255, 0.1);
+}
+.xp-popup {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9999;
+    animation: floatUp 1s ease-out forwards;
+    color: var(--accent); /* This uses our dynamic level color! */
+    font-size: 0.75rem;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+}
+@keyframes xpFloat {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-40px) scale(1.2);
+        opacity: 0;
+    }
+}
+
+.animate-xp-float {
+    animation: xpFloat 1s ease-out forwards;
+    /* This makes sure the text is crisp on light/dark themes */
+    text-shadow: 0 0 4px rgba(0,0,0,0.3);
 }
