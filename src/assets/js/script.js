@@ -18,8 +18,6 @@ const LEVELS = [
 let unlockedEggs = JSON.parse(localStorage.getItem('unlockedEggs')) || [];
 let surpriseClickCount = 0;
 let matrixActive = false;
-let konamiPosition = 0;
-const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 
 /**
  * 2. GAME ENGINE
@@ -148,26 +146,34 @@ function scrollToRandomUser() {
 }
 
 // EGG 2: Konami Code -> Barrel Roll
-document.addEventListener('keydown', (e) => {
-    if (e.key === konamiCode[konamiPosition]) {
-        konamiPosition++;
-        if (konamiPosition === konamiCode.length) {
-            unlockEgg('konami');
-            activateKonamiMode();
-            konamiPosition = 0;
-        }
-    } else { konamiPosition = 0; }
+const konamiCode = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a'];
+let konamiPosition = 0;
+
+window.addEventListener('keydown', (e) => {
+  const key = e.key.toLowerCase();
+
+  if (key === konamiCode[konamiPosition]) {
+    konamiPosition++;
+    if (konamiPosition === konamiCode.length) {
+      activateKonami();
+      konamiPosition = 0;
+    }
+  } else {
+    // Reset, but check if the wrong key was actually the start of a new attempt
+    konamiPosition = (key === 'arrowup') ? 1 : 0;
+  }
 });
 
-function activateKonamiMode() {
-    document.body.classList.add('konami-roll');
-    const title = document.querySelector('h1');
-    if (title) {
-        const originalText = title.innerText;
-        title.innerText = "1337_D3V_CR3W";
-        setTimeout(() => { title.innerText = originalText; }, 5000);
-    }
-    setTimeout(() => document.body.classList.remove('konami-roll'), 2000);
+function activateKonami() {
+  // Apply to documentElement (html) so the sticky header spins too
+  document.documentElement.classList.add('konami-roll');
+
+  // Call your level up / egg unlock logic here
+  if (typeof unlockEgg === 'function') unlockEgg('konami');
+
+  setTimeout(() => {
+    document.documentElement.classList.remove('konami-roll');
+  }, 2000);
 }
 
 // EGG 3: Gravity Glitch -> Build Hash Click
