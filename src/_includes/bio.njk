@@ -23,6 +23,24 @@
         <p class="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Viewing Profile</p>
         <p class="font-bold text-sm">{{ name }}</p>
       </div>
+      <div id="game-stats" class="flex items-center gap-4 px-5 py-3 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-3xl shadow-lg">
+        <div id="level-badge" class="flex items-center justify-center w-12 h-12 rounded-2xl text-2xl shadow-md transition-all duration-700 transform hover:scale-110">
+            </div>
+
+            <div class="flex flex-col">
+                <div class="flex items-center gap-2">
+                    <span id="level-name" class="text-sm font-black uppercase tracking-widest leading-none">---</span>
+
+                    <span class="text-[10px] bg-black/10 dark:bg-white/10 px-2 py-1 rounded-md font-bold text-[var(--text-main)] opacity-80 border border-[var(--border-color)]">
+                        LVL <span id="level-number">0</span>
+                    </span>
+                </div>
+
+                <div class="w-32 h-1.5 bg-black/5 dark:bg-white/5 rounded-full mt-2 overflow-hidden border border-[var(--border-color)]">
+                    <div id="level-progress" class="h-full bg-accent transition-all duration-1000 shadow-[0_0_8px_var(--accent)]" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
       <button onclick="toggleTheme()" class="p-2.5 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] shadow-sm">
         <span id="theme-icon">🌙</span>
       </button>

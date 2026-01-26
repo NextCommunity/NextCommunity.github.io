@@ -3,44 +3,39 @@
 
     <div class="text-center md:text-left">
       <p class="text-[var(--text-main)] font-bold text-sm uppercase tracking-widest">Developer Directory</p>
-      <p class="text-[var(--text-muted)] text-xs mt-1 mb-4">© 2026 Powered by the open-source community</p>
-
-      <div class="flex items-center justify-center md:justify-start gap-3">
-        <a href="https://www.11ty.dev/" target="_blank" rel="noopener"
-           class="text-[10px] font-bold px-2 py-1 rounded bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-muted)] hover:text-accent hover:border-accent transition-all flex items-center gap-1">
-          <span>🎈</span> 11ty
-        </a>
-        <a href="https://tailwindcss.com/" target="_blank" rel="noopener"
-           class="text-[10px] font-bold px-2 py-1 rounded bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-muted)] hover:text-accent hover:border-accent transition-all flex items-center gap-1">
-          <span class="text-sky-400">🌊</span> Tailwind
-        </a>
+      <div class="flex items-center justify-center md:justify-start gap-3 mt-3">
+        <a href="https://www.11ty.dev/" target="_blank" class="text-[10px] font-bold px-2 py-1 rounded bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-muted)] hover:text-accent transition-all">🎈 11ty</a>
+        <a href="https://tailwindcss.com/" target="_blank" class="text-[10px] font-bold px-2 py-1 rounded bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-muted)] hover:text-accent transition-all">🌊 Tailwind</a>
       </div>
     </div>
 
     <div class="flex flex-col items-center md:items-end gap-2">
       <div class="flex items-center gap-3">
         <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-        <span class="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">
-          Last Build: {{ build.timestamp }}
-        </span>
+        <span class="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">Build: {{ build.timestamp }}</span>
       </div>
 
-      <a href="{{ build.repoUrl }}/commit/{{ build.hash }}"
-         target="_blank"
-         rel="noopener"
-         class="group flex items-center gap-2 bg-[var(--bg-card)] border border-[var(--border-color)] px-3 py-1.5 rounded-lg hover:border-accent transition-colors">
-        <span class="text-[var(--text-muted)] text-[10px] font-mono">Build Hash:</span>
-        <span class="text-accent font-mono text-[10px] font-bold underline decoration-dotted">{{ build.hash }}</span>
-        <span class="text-[var(--text-muted)] group-hover:text-accent transition-transform group-hover:translate-x-0.5">↗</span>
-      </a>
+      <div class="flex items-center bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg overflow-hidden shadow-sm">
+        <button onclick="triggerGravity(event)" class="px-3 py-1.5 text-[10px] font-mono hover:bg-red-500/10 transition-colors group/hash">
+          <span class="text-[var(--text-muted)] group-hover/hash:text-red-500">Hash:</span>
+          <span class="text-accent font-bold underline decoration-dotted">{{ build.hash }}</span>
+        </button>
+
+        <a href="{{ build.repoUrl }}/commit/{{ build.hash }}"
+           target="_blank"
+           rel="noopener"
+           class="px-3 py-1.5 border-l border-[var(--border-color)] bg-[var(--bg-footer)] hover:text-accent transition-colors"
+           title="View Commit on GitHub">
+          <span>↗</span>
+        </a>
+      </div>
     </div>
 
   </div>
 </footer>
-<div id="matrix-overlay" class="fixed inset-0 z-[100] hidden bg-black overflow-hidden">
-    <canvas id="matrix-canvas"></canvas>
-    <button onclick="closeMatrix()" class="fixed top-8 right-8 z-[101] bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full font-mono text-sm border border-white/30 backdrop-blur-md transition-all">
+<div id="matrix-overlay" class="fixed inset-0 bg-black hidden z-[9999]">
+    <canvas id="matrix-canvas" class="block"></canvas>
+    <button onclick="closeMatrix()" class="fixed top-8 right-8 z-[10000] bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full font-mono text-xs border border-white/30 backdrop-blur-md">
         [ESC] EXIT_SIMULATION
     </button>
 </div>
-

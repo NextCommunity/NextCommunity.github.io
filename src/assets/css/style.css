@@ -57,3 +57,30 @@ body {
 }
 
 html { scroll-behavior: smooth; }
+
+/* Easter Egg: The Barrel Roll */
+.konami-roll {
+  transition: transform 2s cubic-bezier(0.65, 0, 0.35, 1);
+  transform: rotate(360deg);
+}
+
+/* Optional: Fun font change for the title */
+.leet-mode h1 {
+  font-family: "Courier New", monospace !important;
+  color: #00ff00 !important;
+  text-shadow: 2px 2px #ff0000;
+}
+
+#matrix-overlay {
+    background-color: black;
+    /* Ensure it's high, but lower than the Level Up notification (z-2000) */
+    z-index: 1500;
+}
+
+/* Make sure the canvas fills the whole screen even if scrolling */
+#matrix-canvas {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
