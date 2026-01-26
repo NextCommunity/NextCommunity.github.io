@@ -2,7 +2,6 @@
  * 1. THEME VARIABLES & CORE RESET
  */
 :root {
-  /* LIGHT: "Crystal Blue" - Clean, high-contrast, airy */
   --bg-page: #f0f4f8;
   --bg-card: #ffffff;
   --bg-footer: #e2e8f0;
@@ -11,19 +10,19 @@
   --border-color: #cbd5e0;
   --accent: #2563eb;
   --accent-light: #eff6ff;
+  --accent-rgb: 37, 99, 235;
   --danger: #dc2626;
   --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .dark {
-  /* DARK: "Deep Space" - Deep navy/black with glowing accents */
   --bg-page: #05070a;
   --bg-card: #0f172a;
   --bg-footer: #020617;
   --text-main: #f1f5f9;
   --text-muted: #94a3b8;
   --border-color: #1e293b;
-  --accent: #38bdf8; /* Brighter Cyan for Dark Mode */
+  --accent: #38bdf8;
   --accent-light: rgba(56, 189, 248, 0.1);
   --danger: #f87171;
   --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
@@ -38,34 +37,78 @@ html, body {
   scroll-behavior: smooth;
 }
 
+
+
 /**
- * 2. USER CARDS & LEGIBILITY
+ * 2. USER CARDS - DYNAMIC & STATIC
  */
-.user-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--card-shadow);
-  transition: transform 0.2s ease, border-color 0.2s ease;
+.user-card h2 {
+  /* Dynamic color from theme logic */
+  color: var(--accent) !important;
+  font-weight: 800;
+  transition: color 0.3s ease; /* Only animate the color fade, not movement */
+  margin-bottom: 0.5rem;
 }
 
-.user-card h2 {
-  color: #1e40af !important;
+/* Hover state: No movement, just a slight brightness shift */
+.user-card:hover h2 {
+  filter: brightness(1.1);
+}
+
+/**
+ * 3. PROFILE LINKS - THEMED
+ */
+.profile-link,
+.user-card a[href*="github"],
+.user-card a[href*="linkedin"] {
+  color: var(--accent) !important;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.profile-link:hover,
+.user-card a:hover {
+  text-decoration: underline;
+  opacity: 0.8; /* Subtle visual feedback instead of moving */
+}
+
+/* If your links look like tags/pills */
+.link-pill {
+  background-color: var(--accent-light) !important;
+  color: var(--accent) !important;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  border: 1px solid transparent;
+}
+
+.link-pill:hover {
+  border-color: var(--accent);
+}
+
+
+
+/* If you have a specific button-style profile link */
+.profile-btn {
+  background-color: var(--accent-light) !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--accent);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   font-weight: 800;
   transition: all 0.3s ease;
 }
 
-.dark .user-card h2 {
-  color: #60a5fa !important;
+.profile-btn:hover {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px var(--accent-light);
 }
 
-.user-card:hover h2 {
-  color: var(--accent) !important;
-  transform: translateX(4px);
-}
-
-/**
- * 3. PILL-SHAPED INTERACTIVES
- */
 .skill-item {
   position: relative;
   overflow: hidden;
@@ -83,6 +126,7 @@ html, body {
   text-transform: uppercase;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   line-height: 1;
+  isolation: isolate;
 }
 
 .skill-item:hover {
@@ -91,225 +135,11 @@ html, body {
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.4);
 }
-/**
- * FIXED SURPRISE BUTTON & SKILL SHIMMER
- */
-.surprise-btn, .skill-item {
-  position: relative; /* REQUIRED to contain the ::after element */
-  overflow: hidden;    /* REQUIRED to hide the diagonal ribbon outside the button */
-  isolation: isolate;  /* Prevents z-index bleeding */
-}
-
-/* Ensure the ribbon starts off-screen and is actually a gradient, not a solid block */
-.surprise-btn::after, .skill-item::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%; /* Start much further left */
-  width: 100%; /* Match width of parent */
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
-  transform: skewX(-20deg); /* Use skew instead of rotate for better clipping */
-  transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.surprise-btn:hover::after, .skill-item:hover::after {
-  left: 150%; /* Slide all the way across */
-}
 
 /**
- * 4. DEVELOPER TOOLS - PINNED TO TOP
- */
-#dev-tools {
-  position: fixed !important;
-  top: 1rem;
-  right: 1rem;
-  width: 280px;
-  max-height: 80vh;
-  overflow-y: auto;
-
-  /* Glassmorphism Effect */
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-left: 4px solid var(--accent); /* Accent strip */
-  padding: 1.25rem;
-  border-radius: 12px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-
-  z-index: 99999;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
-}
-
-/* NUCLEAR LOCK: Forces console to stay in your literal eyeballs */
-html body #dev-tools[data-lock="true"] {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-
-    /* Stick to the screen, not the page content */
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-
-    /* Ensure it is ABOVE the glitch/shake layers */
-    z-index: 2147483647 !important;
-
-    /* Stop it from flying away or shaking */
-    transform: none !important;
-    animation: none !important;
-
-    border-color: #ef4444 !important;
-    box-shadow: 0 0 40px rgba(239, 68, 68, 0.6) !important;
-}
-
-/* Custom Scrollbar for the console */
-#dev-tools::-webkit-scrollbar {
-  width: 4px;
-}
-#dev-tools::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 10px;
-}
-#dev-tools button {
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.75rem;
-  background: rgba(255, 255, 255, 0.03);
-  color: #e2e8f0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  margin-bottom: 0.5rem;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.2s ease;
-}
-
-#dev-tools button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--accent);
-  transform: translateX(-4px); /* Slide slightly left toward the center */
-}
-/* Console Neon Overrides */
-#dev-tools button[onclick*="matrix"] { color: #00ff41 !important; border-color: rgba(0, 255, 65, 0.4) !important; }
-#dev-tools button[onclick*="konami"] { color: #ffcc00 !important; border-color: rgba(255, 204, 0, 0.4) !important; }
-#dev-tools button[onclick*="gravity"] { color: #ff3333 !important; border-color: rgba(255, 51, 51, 0.4) !important; }
-#dev-tools button[onclick*="badge_click"] { color: #bc13fe !important; border-color: rgba(188, 19, 254, 0.4) !important; }
-#dev-tools button[onclick*="resetPlayer"] { color: #f97316 !important; border-color: rgba(249, 115, 22, 0.4) !important; }
-
-#dev-tools button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 15px currentColor;
-  transform: translateX(4px);
-}
-
-/**
- * 5. SELF DESTRUCT & PROGRESS BARS
- */
-#self-destruct-btn.is-destructing {
-    background: linear-gradient(270deg, #2563eb, #f97316, #ef4444) !important;
-    background-size: 400% 400% !important;
-    animation: heat-up 2s linear infinite !important;
-    color: white !important;
-    border: 2px solid white !important;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-#destruct-bar-container {
-    width: 100%;
-    height: 14px;
-    background: #000;
-    border: 2px solid #333;
-    margin-top: 15px;
-    border-radius: 4px;
-}
-
-#destruct-bar-progress {
-    height: 100%;
-    width: 0%;
-    background: #22c55e;
-    transition: width 1s linear, background-color 0.3s;
-}
-
-/* Fix for the Ribbon Artifact */
-#destruct-bar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 4px;
-    width: 0%;
-    background-color: transparent;
-    transition: width 1s linear, background-color 0.5s ease;
-    z-index: 10;
-    pointer-events: none;
-}
-
-/**
- * 6. ANIMATIONS
- */
-@keyframes heat-up {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes shake-anim {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(3px, -3px); }
-  50% { transform: translate(-3px, 3px); }
-  100% { transform: translate(0, 0); }
-}
-
-.glitch-shake {
-    animation: shake-anim 0.1s infinite;
-    overflow: hidden;
-}
-
-.bar-jitter { animation: jitter 0.1s infinite; }
-
-@keyframes jitter {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(2px); filter: brightness(1.5); }
-    100% { transform: translateX(-1px); }
-}
-
-#repair-btn {
-  background-color: var(--danger) !important;
-  color: #fff !important;
-  border: 4px solid #fff;
-  border-radius: 9999px;
-  padding: 1.5rem 3rem;
-  font-weight: 900;
-  box-shadow: 0 0 60px rgba(239, 68, 68, 0.6);
-  z-index: 10001;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#level-progress { box-shadow: 0 0 10px var(--accent); transition: width 1s ease; }
-
-/* Ensure Hash Button remains top-level */
-button[onclick*="gravity"] {
-    position: relative;
-    z-index: 10;
-}
-/**
- * RE-ASSERTING SURPRISE BUTTON BLUE
+ * 3. BUTTONS & SHIMMER EFFECTS
  */
 .surprise-btn {
-  /* Explicitly use the blue hex if the variable is failing */
   background-color: #2563eb !important;
   color: #ffffff !important;
   display: inline-flex !important;
@@ -328,11 +158,7 @@ button[onclick*="gravity"] {
   overflow: hidden;
 }
 
-/* Ensure Dark Mode uses its specific blue/accent */
-.dark .surprise-btn {
-  background-color: var(--accent) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
+.dark .surprise-btn { background-color: var(--accent) !important; }
 
 .surprise-btn:hover {
   transform: translateY(-2px);
@@ -340,44 +166,128 @@ button[onclick*="gravity"] {
   filter: brightness(1.1);
 }
 
-/* The "Shimmer" fix from before to prevent the gray ribbon */
-.surprise-btn::after {
+.surprise-btn::after, .skill-item::after {
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
+  left: -150%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  transition: 0.5s;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-20deg);
+  transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.surprise-btn:hover::after {
-  left: 100%;
+.surprise-btn:hover::after, .skill-item:hover::after { left: 150%; }
+
+/**
+ * 4. DEVELOPER TOOLS - INDESTRUCTIBLE VIEWPORT PANEL
+ */
+#dev-tools {
+  position: fixed !important;
+  top: 1rem;
+  right: 1rem;
+  width: 280px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  z-index: 2147483647 !important;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateZ(0); /* Force layer isolation */
 }
 
-/* Konami Secret Animation */
-.konami-roll {
-    animation: konami-barrel-roll 2s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-    overflow: hidden; /* Prevents scrollbars during rotation */
+/* NUCLEAR LOCK: Forces stability during page-wide glitches */
+#dev-tools[data-lock="true"],
+html body #dev-tools[data-lock="true"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    top: 1rem !important;
+    right: 1rem !important;
+    transform: none !important;
+    animation: none !important;
+    border-left-color: #ef4444 !important;
+    box-shadow: 0 0 40px rgba(239, 68, 68, 0.6) !important;
 }
+
+#dev-tools button {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+#dev-tools button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px currentColor;
+  transform: translateX(-4px);
+}
+
+/* Console Neon Overrides */
+#dev-tools button[onclick*="matrix"] { color: #00ff41 !important; }
+#dev-tools button[onclick*="konami"] { color: #ffcc00 !important; }
+#dev-tools button[onclick*="gravity"] { color: #ff3333 !important; }
+#dev-tools button[onclick*="badge_click"] { color: #bc13fe !important; }
+
+/**
+ * 5. SELF DESTRUCT & REPAIR
+ */
+#destruct-bar-container {
+    width: 100%; height: 14px; background: #000;
+    border: 2px solid #333; margin-top: 15px; border-radius: 4px;
+}
+
+#destruct-bar-progress {
+    height: 100%; width: 0%; background: #22c55e;
+    transition: width 1s linear, background-color 0.3s;
+}
+
+#repair-btn {
+  background-color: #2563eb !important; /* Restore to Blue */
+  color: #fff !important;
+  border: 4px solid #fff;
+  border-radius: 9999px;
+  padding: 1.5rem 3rem;
+  font-weight: 900;
+  box-shadow: 0 0 60px rgba(37, 99, 235, 0.6);
+  z-index: 10001;
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/**
+ * 6. ANIMATIONS
+ */
+@keyframes shake-anim {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(3px, -3px); }
+  50% { transform: translate(-3px, 3px); }
+  100% { transform: translate(0, 0); }
+}
+
+.glitch-shake { animation: shake-anim 0.1s infinite; overflow: hidden; }
 
 @keyframes konami-barrel-roll {
-    0% {
-        transform: rotate(0deg) scale(1);
-        filter: hue-rotate(0deg);
-    }
-    50% {
-        transform: rotate(180deg) scale(0.8);
-        filter: hue-rotate(180deg);
-    }
-    100% {
-        transform: rotate(360deg) scale(1);
-        filter: hue-rotate(360deg);
-    }
+    0% { transform: rotate(0deg) scale(1); filter: hue-rotate(0deg); }
+    50% { transform: rotate(180deg) scale(0.8); filter: hue-rotate(180deg); }
+    100% { transform: rotate(360deg) scale(1); filter: hue-rotate(360deg); }
 }
+
+.konami-roll { animation: konami-barrel-roll 2s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
