@@ -174,8 +174,9 @@ function applyTheme(theme) {
     const heart = document.getElementById('footer-heart');
     localStorage.setItem('theme', theme);
 
+    // Reset classes
     html.classList.remove('dark');
-    const props = ['--bg-page', '--bg-card', '--bg-footer', '--text-main', '--text-muted', '--border-color', '--accent'];
+    const props = ['--bg-page', '--bg-card', '--bg-footer', '--text-main', '--text-muted', '--border-color', '--accent', '--accent-light'];
     props.forEach(p => html.style.removeProperty(p));
 
     if (theme === 'dark') {
@@ -183,21 +184,28 @@ function applyTheme(theme) {
         if (heart) heart.innerText = '💜';
     }
     else if (theme === 'random') {
+        // Generate a random Hue (0-360)
         const h = Math.floor(Math.random() * 360);
-        html.style.setProperty('--bg-page', `hsl(${h}, 40%, 8%)`);
-        html.style.setProperty('--bg-card', `hsl(${h}, 35%, 12%)`);
-        html.style.setProperty('--bg-footer', `hsl(${h}, 35%, 10%)`);
+
+        // VIBRANT NEON LOGIC: Keep saturation high and lightness balanced
+        html.style.setProperty('--bg-page', `hsl(${h}, 45%, 7%)`);     // Very Dark
+        html.style.setProperty('--bg-card', `hsl(${h}, 35%, 12%)`);    // Slightly lighter
+        html.style.setProperty('--bg-footer', `hsl(${h}, 40%, 5%)`);   // Deepest
+        html.style.setProperty('--text-main', `hsl(${h}, 20%, 95%)`);  // Near White
+        html.style.setProperty('--text-muted', `hsl(${h}, 15%, 70%)`); // Softened
+        html.style.setProperty('--accent', `hsl(${h}, 90%, 60%)`);     // Vivid Pop
+        html.style.setProperty('--accent-light', `hsla(${h}, 90%, 60%, 0.15)`);
         html.style.setProperty('--border-color', `hsl(${h}, 30%, 20%)`);
-        html.style.setProperty('--text-main', `hsl(${h}, 20%, 95%)`);
-        html.style.setProperty('--text-muted', `hsl(${h}, 15%, 60%)`);
-        html.style.setProperty('--accent', `hsl(${(h + 150) % 360}, 80%, 65%)`);
 
         if (heart) {
-            const hearts = ['💚', '💙', '💛', '🧡', '🤍', '🤎', '🖤', '💎', '🌈', '✨'];
-            heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+            const symbols = ['💎', '🌈', '✨', '🔥', '🌀', '🧬'];
+            heart.innerText = symbols[Math.floor(Math.random() * symbols.length)];
         }
     }
-    else if (heart) { heart.innerText = '❤️'; }
+    else {
+        if (heart) heart.innerText = '❤️';
+    }
+
     updateThemeIcon(theme);
 }
 

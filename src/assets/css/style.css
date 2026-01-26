@@ -2,27 +2,31 @@
  * 1. THEME VARIABLES & CORE RESET
  */
 :root {
-  --bg-page: #f8fafc;
+  /* LIGHT: "Crystal Blue" - Clean, high-contrast, airy */
+  --bg-page: #f0f4f8;
   --bg-card: #ffffff;
-  --bg-footer: #f1f5f9;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border-color: #e2e8f0;
+  --bg-footer: #e2e8f0;
+  --text-main: #1a202c;
+  --text-muted: #4a5568;
+  --border-color: #cbd5e0;
   --accent: #2563eb;
-  --accent-light: #dbeafe;
-  --accent-rgb: 37, 99, 235;
-  --danger: #ef4444;
+  --accent-light: #eff6ff;
+  --danger: #dc2626;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .dark {
-  --bg-page: #020617;
+  /* DARK: "Deep Space" - Deep navy/black with glowing accents */
+  --bg-page: #05070a;
   --bg-card: #0f172a;
-  --bg-footer: #1e293b50;
-  --text-main: #f8fafc;
+  --bg-footer: #020617;
+  --text-main: #f1f5f9;
   --text-muted: #94a3b8;
   --border-color: #1e293b;
-  --accent: #60a5fa;
-  --accent-light: rgba(96, 165, 250, 0.15);
+  --accent: #38bdf8; /* Brighter Cyan for Dark Mode */
+  --accent-light: rgba(56, 189, 248, 0.1);
+  --danger: #f87171;
+  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
 }
 
 html, body {
@@ -37,6 +41,13 @@ html, body {
 /**
  * 2. USER CARDS & LEGIBILITY
  */
+.user-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
 .user-card h2 {
   color: #1e40af !important;
   font-weight: 800;
@@ -112,49 +123,73 @@ html, body {
 }
 
 /**
- * 4. DEVELOPER TOOLS & CONSOLE LOCK
+ * 4. DEVELOPER TOOLS - PINNED TO TOP
  */
 #dev-tools {
-  backdrop-filter: blur(20px);
-  background-color: rgba(15, 23, 42, 0.95);
-  border: 2px solid var(--accent);
-  padding: 1.5rem;
-  border-radius: 1rem;
-  z-index: 99999 !important;
   position: fixed !important;
+  top: 1rem;
+  right: 1rem;
+  width: 280px;
+  max-height: 80vh;
+  overflow-y: auto;
+
+  /* Glassmorphism Effect */
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--accent); /* Accent strip */
+  padding: 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  z-index: 99999;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
 }
 
-/* NUCLEAR LOCK: Keeps console visible during Self Destruct & Shake */
+/* NUCLEAR LOCK: Override during Self Destruct */
 html body #dev-tools[data-lock="true"] {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    z-index: 2147483647 !important;
+    top: 1rem !important;
+    right: 1rem !important;
+    border-left-color: var(--danger) !important;
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+    animation: none !important; /* Prevent it from shaking with the body */
     transform: none !important;
-    transition: none !important;
-    pointer-events: auto !important;
-    border-color: var(--danger);
-    box-shadow: 0 0 50px rgba(239, 68, 68, 0.4);
 }
 
+/* Custom Scrollbar for the console */
+#dev-tools::-webkit-scrollbar {
+  width: 4px;
+}
+#dev-tools::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
 #dev-tools button {
-  font-family: 'Courier New', monospace;
-  background: rgba(0, 0, 0, 0.4);
-  color: white;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: #e2e8f0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
-  padding: 0.6rem 0.8rem;
+  padding: 0.5rem 0.75rem;
   margin-bottom: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: 0.2s;
-  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
 }
 
+#dev-tools button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent);
+  transform: translateX(-4px); /* Slide slightly left toward the center */
+}
 /* Console Neon Overrides */
 #dev-tools button[onclick*="matrix"] { color: #00ff41 !important; border-color: rgba(0, 255, 65, 0.4) !important; }
 #dev-tools button[onclick*="konami"] { color: #ffcc00 !important; border-color: rgba(255, 204, 0, 0.4) !important; }
