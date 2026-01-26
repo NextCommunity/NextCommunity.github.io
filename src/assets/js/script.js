@@ -104,22 +104,26 @@ function updateGameUI() {
     const levelIndex = Math.min(eggCount, LEVELS.length - 1);
     const rank = LEVELS[levelIndex];
 
+    // 1. Level Elements
     const badge = document.getElementById('level-badge');
     const nameLabel = document.getElementById('level-name');
     const numLabel = document.getElementById('level-number');
     const progressBar = document.getElementById('level-progress');
 
+    // 2. XP Display Element
+    const xpDisplay = document.getElementById('total-xp-display');
+    if (xpDisplay) {
+        // Show current XP toward next level (or cumulative if you prefer)
+        xpDisplay.innerText = currentXP;
+    }
+
     if (levelIndex >= 10) {
         document.body.classList.add('level-architect');
-    } else {
-        document.body.classList.remove('level-architect');
     }
 
     if (badge) {
         badge.innerText = rank.emoji;
         badge.style.backgroundColor = rank.color;
-        badge.classList.add('animate-bounce');
-        setTimeout(() => badge.classList.remove('animate-bounce'), 1000);
     }
 
     if (nameLabel) {
@@ -130,7 +134,9 @@ function updateGameUI() {
     if (numLabel) numLabel.innerText = levelIndex;
 
     if (progressBar) {
-        const progressPercent = (levelIndex / (LEVELS.length - 1)) * 100;
+        // Logic for progress bar between levels
+        // currentXP / XP_PER_LEVEL gives the % toward NEXT level
+        const progressPercent = (currentXP / XP_PER_LEVEL) * 100;
         progressBar.style.width = `${progressPercent}%`;
         progressBar.style.backgroundColor = rank.color;
     }
@@ -214,6 +220,9 @@ function toggleTheme() {
     const current = localStorage.getItem('theme') || 'light';
     const next = current === 'light' ? 'dark' : (current === 'dark' ? 'random' : 'light');
     applyTheme(next);
+
+    // Maintenance XP Trigger
+    addMaintenanceXP();
 }
 
 function updateThemeIcon(theme) {
@@ -535,12 +544,18 @@ document.addEventListener('DOMContentLoaded', () => {
  * 9. ENHANCED XP & SKILL MINING SYSTEM
  */
 let currentXP = JSON.parse(localStorage.getItem('userXP')) || 0;
-const XP_PER_LEVEL = 20; // Adjust this to make leveling harder/easier
+const XP_PER_LEVEL = 45; // Adjust this to make leveling harder/easier
 
 function addExperience(amount) {
     // Stop XP if at Max Level or if system is locked (Self-Destruct)
     const isLocked = document.getElementById('dev-tools')?.hasAttribute('data-lock');
     if (unlockedEggs.length >= LEVELS.length - 1 || isLocked) return;
+
+    const xpNum = document.getElementById('total-xp-display');
+    if (xpNum) {
+        xpNum.classList.add('xp-pulse');
+        setTimeout(() => xpNum.classList.remove('xp-pulse'), 100);
+    }
 
     currentXP += amount;
 
@@ -555,24 +570,24 @@ function addExperience(amount) {
     updateGameUI();
 }
 
-function createFloatingXP(event) {
+function createFloatingXP(event, type = "skill") {
     const float = document.createElement('div');
-    // Color matches Level 5 "Data Miner" Cyan
-    const levelColor = LEVELS[unlockedEggs.length]?.color || '#06b6d4';
+    const levelIndex = unlockedEggs.length;
+    const rankColor = LEVELS[levelIndex]?.color || '#06b6d4';
 
-    float.innerText = '+1 XP';
+    float.innerText = type === "maintenance" ? "+5 XP (MAINT)" : "+1 XP";
+
     float.style.cssText = `
         position: fixed;
         left: ${event.clientX}px;
         top: ${event.clientY}px;
-        color: ${levelColor};
-        font-family: monospace;
+        color: ${rankColor};
+        font-family: 'JetBrains Mono', monospace;
         font-weight: 900;
-        font-size: 14px;
+        font-size: ${type === "maintenance" ? '14px' : '12px'};
         pointer-events: none;
         z-index: 10000;
         animation: float-up 0.8s ease-out forwards;
-        text-shadow: 0 0 10px rgba(0,0,0,0.5);
     `;
 
     document.body.appendChild(float);
@@ -602,3 +617,17 @@ function initSkillXP() {
 
 // Re-initialize skills after Surprise scroll or any DOM changes
 window.addEventListener('DOMContentLoaded', initSkillXP);
+
+/**
+ * SYS ADMIN XP (Level 6 Mechanic)
+ */
+function addMaintenanceXP() {
+    // Sys Admins get more XP for system-level interactions
+    const bonus = unlockedEggs.length >= 6 ? 5 : 2;
+    addExperience(bonus);
+
+    // Console log for that "hacker" feel
+    if (unlockedEggs.length >= 6) {
+        console.log("%c [SYS_ADMIN] System optimized: +5 XP", "color: #ec4899; font-weight: bold;");
+    }
+}
