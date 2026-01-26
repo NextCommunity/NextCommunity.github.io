@@ -34,9 +34,11 @@
 
     <div class="flex items-center gap-3 md:gap-4">
       {% if page.url == "/" %}
-        <button onclick="scrollToRandomUser()"
-                class="surprise-btn px-4 py-2 md:px-6 md:py-3 bg-accent text-white text-[10px] md:text-[11px] font-black uppercase tracking-widest rounded-xl hover:brightness-110 hover:-translate-y-0.5 transition-all shadow-lg shadow-accent/20">
-          ✨ Surprise
+        <button
+          onclick="scrollToRandomUser()"
+          class="surprise-btn bg-blue-600 text-white px-8 py-3 rounded-full font-black uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-blue-500/30"
+        >
+          ✨ Surprise Me
         </button>
       {% endif %}
 
