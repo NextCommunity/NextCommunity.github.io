@@ -193,8 +193,8 @@ function applyTheme(theme) {
         html.style.setProperty('--bg-footer', `hsl(${h}, 40%, 5%)`);   // Deepest
         html.style.setProperty('--text-main', `hsl(${h}, 20%, 95%)`);  // Near White
         html.style.setProperty('--text-muted', `hsl(${h}, 15%, 70%)`); // Softened
-        html.style.setProperty('--accent', `hsl(${h}, 90%, 65%)`);     // Vivid Pop
-        html.style.setProperty('--accent-light', `hsla(${h}, 90%, 65%, 0.15)`);
+        html.style.setProperty('--accent', `hsl(${h}, 95%, 70%)`);     // Vivid Pop
+        html.style.setProperty('--accent-light', `hsla(${h}, 95%, 70%, 0.2)`);
         html.style.setProperty('--border-color', `hsl(${h}, 30%, 20%)`);
 
         if (heart) {
@@ -439,31 +439,80 @@ window.startSelfDestruct = function() {
 function scrollToRandomUser() {
     playSound('click');
 
-    // 1. Secret Unlock Logic
     surpriseClickCount++;
     if (surpriseClickCount >= 5) {
         surpriseClickCount = 0;
-        // This triggers the Matrix overlay
         triggerSecretUnlock('matrix');
-    }
-
-    // 2. Scrolling Logic
-    const cards = document.querySelectorAll('.user-card');
-    if (cards.length === 0) {
-        console.warn("No .user-card elements found to scroll to.");
         return;
     }
 
-    // Clear previous highlights
-    cards.forEach(c => c.classList.remove('highlight-pulse'));
+    const cards = document.querySelectorAll('.user-card');
+    if (cards.length === 0) return;
 
-    // Pick a random card and scroll
+    // Clean up previous selection
+    cards.forEach(c => {
+        c.classList.remove('selected-fancy');
+        const oldTrace = c.querySelector('.border-trace');
+        if (oldTrace) oldTrace.remove();
+    });
+
     const randomCard = cards[Math.floor(Math.random() * cards.length)];
-    randomCard.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Changed to center for better visibility
+    randomCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-    // Add the pulse animation
-    randomCard.classList.add('highlight-pulse');
+    setTimeout(() => {
+        playSound('levelUp');
+        randomCard.classList.add('selected-fancy');
+
+        // Inject the Tracing SVG
+        const svgNamespace = "http://www.w3.org/2000/svg";
+        const svg = document.createElementNS(svgNamespace, "svg");
+        const rect = document.createElementNS(svgNamespace, "rect");
+
+        svg.setAttribute("class", "border-trace");
+        rect.setAttribute("fill", "none");
+        rect.setAttribute("width", "100%");
+        rect.setAttribute("height", "100%");
+
+        svg.appendChild(rect);
+        randomCard.appendChild(svg);
+
+        // Remove trace and fancy class after the 7.5s animation ends
+        setTimeout(() => {
+            randomCard.classList.remove('selected-fancy');
+            svg.remove();
+        }, 7500);
+    }, 400);
 }
+
+/**
+ * UTILITY: SCREENSHOT MODE
+ */
+window.toggleScreenshotMode = function() {
+    const devPanel = document.getElementById('dev-tools');
+    const header = document.querySelector('header');
+    const footer = document.querySelector('footer');
+    const gameStats = document.getElementById('game-stats');
+
+    // Hide everything
+    [devPanel, header, footer, gameStats].forEach(el => {
+        if(el) el.style.opacity = '0';
+        if(el) el.style.pointerEvents = 'none';
+    });
+
+    // Show a tiny notification that it's active
+    const toast = document.createElement('div');
+    toast.style.cssText = "position:fixed; bottom:20px; left:50%; transform:translateX(-50%); color:var(--text-muted); font-family:monospace; font-size:10px; z-index:9999;";
+    toast.innerText = "SCREENSHOT MODE ACTIVE - RESTORING IN 5S";
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        [devPanel, header, footer, gameStats].forEach(el => {
+            if(el) el.style.opacity = '1';
+            if(el) el.style.pointerEvents = 'auto';
+        });
+        toast.remove();
+    }, 5000);
+};
 
 /**
  * 8. INITIALIZATION
