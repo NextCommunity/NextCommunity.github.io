@@ -455,15 +455,22 @@ function applyTheme(theme) {
         if (heart) heart.innerText = '💜';
     }
     else if (theme === 'random') {
-        // Generate a random Hue (0-360)
         const h = Math.floor(Math.random() * 360);
+        // The "Secret Sauce": A second hue for accents (180 degrees away or +40)
+        const accentHue = (h + 160) % 360;
 
-        // VIBRANT NEON LOGIC: Keep saturation high and lightness balanced
-        html.style.setProperty('--bg-page', `hsl(${h}, 45%, 7%)`);     // Very Dark
-        html.style.setProperty('--bg-card', `hsl(${h}, 35%, 12%)`);    // Slightly lighter
-        html.style.setProperty('--bg-footer', `hsl(${h}, 40%, 5%)`);   // Deepest
-        html.style.setProperty('--text-main', `hsl(${h}, 20%, 95%)`);  // Near White
-        html.style.setProperty('--text-muted', `hsl(${h}, 15%, 70%)`); // Softened
+        // Backgrounds (Consistent and Dark)
+        html.style.setProperty('--bg-page', `hsl(${h}, 45%, 7%)`);
+        html.style.setProperty('--bg-card', `hsl(${h}, 35%, 12%)`);
+        html.style.setProperty('--bg-footer', `hsl(${h}, 40%, 5%)`);
+
+        // Typography
+        html.style.setProperty('--text-main', `hsl(${h}, 10%, 98%)`);  // Crisp White
+        html.style.setProperty('--text-muted', `hsl(${h}, 20%, 70%)`); // Readable Muted
+
+        // The Pop Colors (The ones you were missing!)
+        html.style.setProperty('--accent', `hsl(${accentHue}, 90%, 65%)`);
+        html.style.setProperty('--accent-light', `hsl(${accentHue}, 90%, 40%)`);
         html.style.setProperty('--border-color', `hsl(${h}, 30%, 20%)`);
 
         if (heart) {
@@ -949,8 +956,8 @@ function initSkillMining() {
 
     skillTags.forEach(tag => {
         // Remove old listeners to prevent double-firing
-        tag.removeEventListener('mouseenter', createXPPopup);
-        tag.addEventListener('mouseenter', createXPPopup);
+        tag.removeEventListener('mouseenter', createFloatingXP);
+        tag.addEventListener('mouseenter', createFloatingXP);
     });
 }
 
