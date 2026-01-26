@@ -853,11 +853,19 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function renderXP(value) {
     const pb = document.getElementById('level-progress');
-    if (pb) {
-        // Ensure we don't exceed 100%
-        const percent = Math.min((value / XP_PER_LEVEL) * 100, 100);
-        pb.style.width = `${percent}%`;
-    }
+    if (!pb) return;
+
+    // 1. Ensure 'value' is a clean number
+    const currentXPNum = Number(value) || 0;
+
+    // 2. Calculate percentage (current / 45 * 100)
+    const percentage = Math.min((currentXPNum / 45) * 100, 100);
+
+    // 3. Apply to style
+    pb.style.width = `${percentage}%`;
+
+    // Debugging: uncomment this to see the math in your console
+    // console.log(`XP: ${currentXPNum}, Percent: ${percentage}%`);
 }
 
 

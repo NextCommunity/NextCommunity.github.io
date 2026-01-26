@@ -459,11 +459,20 @@ body[data-level="6"]::after {
     --glow-color: #ef4444; /* Sith Red */
 }
 
-/* Override the Tailwind duration-1000 for a better feel */
-#level-progress {
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+/* Ensure the parent container has a background so you can see the 'empty' part */
+#game-stats .bg-black\/10 {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    min-width: 80px; /* Ensure it hasn't collapsed to 0 width */
+    height: 6px;
 }
 
+/* Ensure the progress bar itself has a height and a visible color */
+#level-progress {
+    height: 100%;
+    background-color: var(--accent); /* This is the level color */
+    transition: width 0.3s ease-in-out !important; /* Make it smooth */
+    display: block !important;
+}
 
 /* Force Glow for the Badge */
 @keyframes force-pulse {
