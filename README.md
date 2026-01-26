@@ -397,12 +397,4 @@ This project is licensed under the **GNU General Public License v3.0** - see the
 - **Ask questions**: [Start a discussion](https://github.com/jbampton/NextCommunity.github.io/discussions)
 - **Maintainer**: [@jbampton](https://github.com/jbampton)
 
----
 
-<div align="center">
-
-### Made with ❤️ by the open-source community
-
-**[⭐ Star this repository](https://github.com/jbampton/NextCommunity.github.io)** if you find it helpful!
-
-</div>
