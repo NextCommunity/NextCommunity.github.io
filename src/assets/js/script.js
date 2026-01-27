@@ -1015,13 +1015,13 @@ function updateInventoryCounts(lvl) {
 
   // Inject counts into the Tooltip DOM
   const elements = {
-    'count-common': counts.common,
-    'count-uncommon': counts.uncommon,
-    'count-rare': counts.rare,
-    'count-epic': counts.epic,
-    'count-legendary': counts.legendary,
-    'count-mythic': counts.mythic,
-    'count-absolute': counts.absolute,
+    "count-common": counts.common,
+    "count-uncommon": counts.uncommon,
+    "count-rare": counts.rare,
+    "count-epic": counts.epic,
+    "count-legendary": counts.legendary,
+    "count-mythic": counts.mythic,
+    "count-absolute": counts.absolute,
   };
 
   for (const [id, val] of Object.entries(elements)) {
@@ -1031,31 +1031,31 @@ function updateInventoryCounts(lvl) {
 }
 
 function updateLevelUI(levelData) {
-    // ... your existing code to update level-name and level-number ...
+  // ... your existing code to update level-name and level-number ...
 
-    const tooltipDesc = document.getElementById('tooltip-desc');
-    const tooltipRarity = document.getElementById('tooltip-rarity');
-    const tooltipCard = document.getElementById('level-tooltip');
+  const tooltipDesc = document.getElementById("tooltip-desc");
+  const tooltipRarity = document.getElementById("tooltip-rarity");
+  const tooltipCard = document.getElementById("level-tooltip");
 
-    // Update Text
-    tooltipDesc.innerText = levelData.description;
-    tooltipRarity.innerText = levelData.rarity;
+  // Update Text
+  tooltipDesc.innerText = levelData.description;
+  tooltipRarity.innerText = levelData.rarity;
 
-    // Optional: Dynamic Color based on rarity
-    const rarityColors = {
-        common: "var(--rarity-common)",
-        uncommon: "var(--rarity-uncommon)",
-        rare: "var(--rarity-rare)",
-        epic: "var(--rarity-epic)",
-        legendary: "var(--rarity-legendary)",
-        mythic: "var(--rarity-mythic)",
-        absolute: "var(--rarity-absolute)"
-    };
+  // Optional: Dynamic Color based on rarity
+  const rarityColors = {
+    common: "var(--rarity-common)",
+    uncommon: "var(--rarity-uncommon)",
+    rare: "var(--rarity-rare)",
+    epic: "var(--rarity-epic)",
+    legendary: "var(--rarity-legendary)",
+    mythic: "var(--rarity-mythic)",
+    absolute: "var(--rarity-absolute)",
+  };
 
-    const color = rarityColors[levelData.rarity] || "var(--accent)";
-    tooltipRarity.style.backgroundColor = `${color}20`; // 20 is hex alpha for transparency
-    tooltipRarity.style.color = color;
-    tooltipCard.style.borderColor = `${color}40`; // Subtle border glow
+  const color = rarityColors[levelData.rarity] || "var(--accent)";
+  tooltipRarity.style.backgroundColor = `${color}20`; // 20 is hex alpha for transparency
+  tooltipRarity.style.color = color;
+  tooltipCard.style.borderColor = `${color}40`; // Subtle border glow
 }
 
 function updateGameUI() {
@@ -1238,18 +1238,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const container = document.getElementById("matrix-console-container");
-    const reopenBtn = document.getElementById("reopen-console-btn");
+  const reopenBtn = document.getElementById("reopen-console-btn");
 
-    // Force closed state on load
-    if (container) {
-        container.classList.add("hidden");
-        container.style.opacity = "0";
-        container.style.transform = "translateY(20px)";
-    }
+  // Force closed state on load
+  if (container) {
+    container.classList.add("hidden");
+    container.style.opacity = "0";
+    container.style.transform = "translateY(20px)";
+  }
 
-    if (reopenBtn) {
-        reopenBtn.classList.remove("hidden");
-    }
+  if (reopenBtn) {
+    reopenBtn.classList.remove("hidden");
+  }
 
   initDotEasterEgg();
   initSkillMining();
