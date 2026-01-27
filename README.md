@@ -1,7 +1,9 @@
 # 🌐 NextCommunity Developer Directory
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Built with Eleventy](https://img.shields.io/badge/Built%20with-Eleventy-black)](https://www.11ty.dev/)
+[![Run JavaScript Everywhere](https://img.shields.io/badge/Run%20JavaScript%20Everywhere-yellow)](https://nodejs.org/en)
+[![Built with Tailwind CSS](https://img.shields.io/badge/Built%20with-Tailwind-blue)](https://tailwindcss.com/)
 
 > A vibrant community directory showcasing open-source developers and software engineers from around the world.
 
