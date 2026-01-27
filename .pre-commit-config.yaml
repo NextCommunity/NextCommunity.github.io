@@ -27,12 +27,29 @@ repos:
     rev: v6.0.0
     hooks:
       - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
       - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+        name: run fix-byte-order-marker
+        description: removes UTF-8 byte order marker
+      - id: forbid-submodules
+        name: run forbid-submodules
+        description: forbids any submodules in the repository
       - id: check-yaml
       - id: check-added-large-files
       - id: check-json
       - id: check-merge-conflict
       - id: check-case-conflict
+      - id: check-vcs-permalinks
+        name: run check-vcs-permalinks
+        description: ensures that links to vcs websites are permalinks
+      - id: detect-aws-credentials
+        name: run detect-aws-credentials
+        description: checks for the existence of AWS secrets that you have set up with the AWS CLI
+        args: [--allow-missing-credentials]
+      - id: detect-private-key
+        name: run detect-private-key
+        description: checks for the existence of private keys
       - id: mixed-line-ending
 
   - repo: https://github.com/pre-commit/mirrors-prettier

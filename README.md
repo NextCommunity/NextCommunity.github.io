@@ -23,7 +23,9 @@
 
 ## 🎯 About the Project
 
-NextCommunity is a static site directory built with [Eleventy (11ty)](https://www.11ty.dev/) that celebrates the global developer community. Each developer gets their own profile page showcasing their skills, bio, and social links.
+NextCommunity is a static site directory built with [Eleventy (11ty)](https://www.11ty.dev/), styled with
+[TailwindCSS](https://tailwindcss.com/) and made interactive with JavaScript. NextCommunity celebrates the global
+developer community. Each developer gets their own profile page showcasing their skills, bio, and social links.
 
 ### 🛠️ Tech Stack
 
@@ -153,19 +155,19 @@ git push origin main
 | `github`    | Your GitHub username (without @)     | `jbampton`                 |
 | `country`   | Your country                         | `Australia`                |
 | `location`  | Your city                            | `Brisbane`                 |
-| `role`      | Your professional title              | `Frontend Developer`       |
-| `languages` | Space-separated list of technologies | `JavaScript React Node.js` |
+| `role`      | Your professional title              | `Scrum Master`             |
+| `languages` | Space-separated list of technologies | `JavaScript, Python, Ruby` |
 | `bio`       | Multi-line biography                 | See template above         |
 
 ### Optional Fields
 
 | Field       | Description                | Example                            |
 | ----------- | -------------------------- | ---------------------------------- |
-| `website`   | Your personal website URL  | `https://yoursite.com`             |
 | `email`     | Your email address         | `you@example.com`                  |
 | `instagram` | Full Instagram profile URL | `https://instagram.com/username`   |
-| `twitter`   | Full Twitter/X profile URL | `https://twitter.com/username`     |
 | `linkedin`  | Full LinkedIn profile URL  | `https://linkedin.com/in/username` |
+| `twitter`   | Full Twitter/X profile URL | `https://twitter.com/username`     |
+| `website`   | Your personal website URL  | `https://yoursite.com`             |
 
 ### Field Guidelines
 
@@ -227,7 +229,7 @@ Want to contribute to the project code or test your profile locally? Here's how 
 
 ```bash
 # Clone the repository
-git clone https://github.com/jbampton/NextCommunity.github.io.git
+git clone https://github.com/NextCommunity/NextCommunity.github.io.git
 cd NextCommunity.github.io
 
 # Install dependencies
@@ -407,6 +409,6 @@ This project is licensed under the **GNU General Public License v3.0** - see the
 
 ## 📞 Contact & Support
 
-- **Report bugs**: [Open an issue](https://github.com/jbampton/NextCommunity.github.io/issues)
-- **Ask questions**: [Start a discussion](https://github.com/jbampton/NextCommunity.github.io/discussions)
+- **Report bugs**: [Open an issue](https://github.com/NextCommunity/NextCommunity.github.io/issues)
+- **Ask questions**: [Start a discussion](https://github.com/NextCommunity/NextCommunity.github.io/discussions)
 - **Maintainer**: [@jbampton](https://github.com/jbampton)
