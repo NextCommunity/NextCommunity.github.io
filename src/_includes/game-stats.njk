@@ -11,10 +11,7 @@
             🐣
         </div>
 
-        <div class="hidden sm:flex flex-col">
-            <div class="flex items-center gap-2">
-
-                <div class="relative group">
+        <div class="hidden sm:flex flex-col items-center"> <div class="flex items-center gap-2 mb-1"> <div class="relative group">
                     <span id="level-name" class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[var(--text-main)] cursor-help hover:text-accent transition-colors">
                         Newbie
                     </span>
@@ -43,10 +40,7 @@
                                 <span id="count-common" class="opacity-60 font-mono">0</span>
                             </div>
                             <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-1.5">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>
-                                    Uncommon
-                                </div>
+                                <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span> Uncommon</div>
                                 <span id="count-uncommon" class="opacity-60 font-mono">0</span>
                             </div>
                             <div class="flex items-center justify-between">
@@ -61,14 +55,12 @@
                                 <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#fbbf24]"></span> Legend</div>
                                 <span id="count-legendary" class="opacity-60 font-mono">0</span>
                             </div>
-
                             <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#ef4444]"></span> Mythic</div>
+                                <div class="flex items-center gap-1.5"><span class="w.1.5 h-1.5 rounded-full bg-[#ef4444]"></span> Mythic</div>
                                 <span id="count-mythic" class="opacity-60 font-mono">0</span>
                             </div>
-
                             <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#ffffff] shadow-[0_0_5px_#fff]"></span> Absolute</div>
+                                <div class="flex items-center gap-1.5"><span class="w.1.5 h-1.5 rounded-full bg-[#ffffff] shadow-[0_0_5px_#fff]"></span> Absolute</div>
                                 <span id="count-absolute" class="opacity-60 font-mono">0</span>
                             </div>
                         </div>
@@ -77,7 +69,8 @@
                 </div>
 
             </div>
-            <div class="w-full h-1 md:h-1.5 bg-black/10 dark:bg-white/10 rounded-full mt-1.5 md:mt-2 overflow-hidden">
+
+            <div class="w-24 md:w-32 h-1 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
                 <div id="level-progress" class="h-full bg-accent transition-all duration-1000" style="width: 0%"></div>
             </div>
         </div>
