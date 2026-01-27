@@ -14,6 +14,14 @@
   --danger: #dc2626;
   --card-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* Default Rarity Colors */
+  --rarity-common: #94a3b8;
+  --rarity-uncommon: #64748b; /* Adjusted from pure black for better theme compatibility */
+  --rarity-rare: #3b82f6;
+  --rarity-epic: #a855f7;
+  --rarity-legendary: #fbbf24;
+  --rarity-mythic: #ef4444;
+  --rarity-absolute: #ffffff;
 }
 
 .dark {
@@ -27,6 +35,14 @@
   --accent-light: rgba(56, 189, 248, 0.1);
   --danger: #f87171;
   --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --rarity-absolute: #ffffff;
+  --rarity-uncommon: #cbd5e1;
+}
+
+/* Light Mode specific overrides if needed */
+.light {
+  --rarity-absolute: #0f172a; /* Make absolute dark on light themes so it's visible */
+  --rarity-uncommon: #1e293b;
 }
 
 html,
