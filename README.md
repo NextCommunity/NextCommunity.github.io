@@ -26,6 +26,7 @@
 NextCommunity is a static site directory built with [Eleventy (11ty)](https://www.11ty.dev/) that celebrates the global developer community. Each developer gets their own profile page showcasing their skills, bio, and social links.
 
 ### 🛠️ Tech Stack
+
 - **Static Site Generator**: Eleventy (11ty)
 - **Templating**: Nunjucks
 - **Styling**: TailwindCSS
@@ -33,6 +34,7 @@ NextCommunity is a static site directory built with [Eleventy (11ty)](https://ww
 - **Deployment**: GitHub Pages
 
 ### ✨ Features
+
 - 🎲 Randomized display of developer profiles
 - 🌓 Dark/Light theme support
 - 📱 Fully responsive design
@@ -86,7 +88,7 @@ bio: |
   Write your professional bio here.
   You can use multiple lines.
   Share your experience, interests, and what you're passionate about.
-  
+
   Add your skills, projects, or anything else you'd like to highlight!
 ```
 
@@ -123,11 +125,13 @@ git push origin main
 2. Click the **"Contribute"** button, then **"Open Pull Request"**
 3. Write a clear title: `Add [Your Name] to directory`
 4. In the description, mention:
-   ```
+
+   ```markdown
    Fixes #213
-   
+
    Adding my profile to the NextCommunity developer directory.
    ```
+
 5. Click **"Create Pull Request"**
 
 ### Step 8: Wait for Review ⏳
@@ -143,25 +147,25 @@ git push origin main
 
 ### Required Fields
 
-| Field | Description | Example |
-|-------|-------------|---------|
-| `name` | Your full name | `John Bampton` |
-| `github` | Your GitHub username (without @) | `jbampton` |
-| `country` | Your country | `Australia` |
-| `location` | Your city | `Brisbane` |
-| `role` | Your professional title | `Frontend Developer` |
+| Field       | Description                          | Example                    |
+| ----------- | ------------------------------------ | -------------------------- |
+| `name`      | Your full name                       | `John Bampton`             |
+| `github`    | Your GitHub username (without @)     | `jbampton`                 |
+| `country`   | Your country                         | `Australia`                |
+| `location`  | Your city                            | `Brisbane`                 |
+| `role`      | Your professional title              | `Frontend Developer`       |
 | `languages` | Space-separated list of technologies | `JavaScript React Node.js` |
-| `bio` | Multi-line biography | See template above |
+| `bio`       | Multi-line biography                 | See template above         |
 
 ### Optional Fields
 
-| Field | Description | Example |
-|-------|-------------|---------|
-| `website` | Your personal website URL | `https://yoursite.com` |
-| `email` | Your email address | `you@example.com` |
-| `instagram` | Full Instagram profile URL | `https://instagram.com/username` |
-| `twitter` | Full Twitter/X profile URL | `https://twitter.com/username` |
-| `linkedin` | Full LinkedIn profile URL | `https://linkedin.com/in/username` |
+| Field       | Description                | Example                            |
+| ----------- | -------------------------- | ---------------------------------- |
+| `website`   | Your personal website URL  | `https://yoursite.com`             |
+| `email`     | Your email address         | `you@example.com`                  |
+| `instagram` | Full Instagram profile URL | `https://instagram.com/username`   |
+| `twitter`   | Full Twitter/X profile URL | `https://twitter.com/username`     |
+| `linkedin`  | Full LinkedIn profile URL  | `https://linkedin.com/in/username` |
 
 ### Field Guidelines
 
@@ -174,6 +178,7 @@ git push origin main
 ### 📚 Real Examples
 
 **Example 1: Minimal Profile**
+
 ```yaml
 name: Jane Smith
 github: janesmith
@@ -187,6 +192,7 @@ bio: |
 ```
 
 **Example 2: Complete Profile**
+
 ```yaml
 name: Carlos Rodriguez
 github: carlosr
@@ -200,7 +206,7 @@ role: Full Stack Engineer
 languages: TypeScript React Node.js AWS
 bio: |
   Full-stack engineer specializing in modern web technologies.
-  
+
   Currently building cloud-native applications and contributing to open source.
   Passionate about clean code, testing, and developer experience.
 ```
@@ -245,7 +251,7 @@ npm run build
 
 ### Project Structure
 
-```
+```text
 NextCommunity.github.io/
 ├── src/
 │   ├── _data/              # Site-wide data files
@@ -281,12 +287,14 @@ We're committed to providing a welcoming and inclusive environment. Please be re
 ### What Gets Approved?
 
 ✅ **Yes:**
+
 - Complete, valid YAML files
 - Professional bios and appropriate content
 - Real GitHub profiles
 - Accurate information
 
 ❌ **No:**
+
 - Spam or promotional content
 - Offensive or inappropriate material
 - Fake or duplicate profiles
@@ -295,6 +303,7 @@ We're committed to providing a welcoming and inclusive environment. Please be re
 ### CI/CD Checks
 
 Every pull request runs automated checks:
+
 - **Linting**: Ensures YAML syntax is correct
 - **Build Test**: Verifies the site builds successfully
 - **Pre-commit Hooks**: Checks code quality
@@ -311,7 +320,8 @@ If checks fail, you'll see error messages in the PR. Fix the issues and push aga
 
 **Problem**: Your YAML file has syntax errors.
 
-**Solution**: 
+**Solution**:
+
 - Check for proper indentation (use spaces, not tabs)
 - Ensure colons have a space after them (`name: John`, not `name:John`)
 - Use `|` for multi-line bio text
@@ -321,7 +331,8 @@ If checks fail, you'll see error messages in the PR. Fix the issues and push aga
 
 **Problem**: The `github` field doesn't match a real GitHub profile.
 
-**Solution**: 
+**Solution**:
+
 - Ensure you're using your exact GitHub username
 - Check for typos
 - Username is case-sensitive in this field
@@ -331,6 +342,7 @@ If checks fail, you'll see error messages in the PR. Fix the issues and push aga
 **Problem**: File naming or format issue.
 
 **Solution**:
+
 - File must be in `src/users/` directory
 - File must be named `username.yaml` (lowercase, with `.yaml` extension)
 - All required fields must be filled in
@@ -340,6 +352,7 @@ If checks fail, you'll see error messages in the PR. Fix the issues and push aga
 **Problem**: Code quality checks didn't pass.
 
 **Solution**:
+
 ```bash
 # Install pre-commit
 pip install pre-commit
@@ -350,22 +363,22 @@ pre-commit run --all-files
 
 ### FAQ
 
-**Q: Can I update my profile after it's merged?**  
+**Q: Can I update my profile after it's merged?**
 A: Yes! Just create a new PR with updates to your YAML file.
 
-**Q: How long does review take?**  
+**Q: How long does review take?**
 A: Usually within 24-48 hours, depending on maintainer availability.
 
-**Q: Can I add multiple social links?**  
+**Q: Can I add multiple social links?**
 A: Yes, all social fields (twitter, linkedin, instagram) are optional and independent.
 
-**Q: What if I don't have a personal website?**  
+**Q: What if I don't have a personal website?**
 A: No problem! Just omit the `website` field or set it to your GitHub profile.
 
-**Q: Can I use emojis in my profile?**  
+**Q: Can I use emojis in my profile?**
 A: Yes, emojis are supported in the `name` and `bio` fields! 🎉
 
-**Q: Is there a character limit for the bio?**  
+**Q: Is there a character limit for the bio?**
 A: No hard limit, but keep it concise (2-4 paragraphs recommended).
 
 ---
@@ -374,7 +387,8 @@ A: No hard limit, but keep it concise (2-4 paragraphs recommended).
 
 This project is licensed under the **GNU General Public License v3.0** - see the [LICENSE](LICENSE) file for details.
 
-### What this means:
+### What this means
+
 - ✅ You can freely use, modify, and distribute this code
 - ✅ You must disclose source code when distributing
 - ✅ Changes must also be GPL-3.0 licensed
@@ -396,5 +410,3 @@ This project is licensed under the **GNU General Public License v3.0** - see the
 - **Report bugs**: [Open an issue](https://github.com/jbampton/NextCommunity.github.io/issues)
 - **Ask questions**: [Start a discussion](https://github.com/jbampton/NextCommunity.github.io/discussions)
 - **Maintainer**: [@jbampton](https://github.com/jbampton)
-
-
