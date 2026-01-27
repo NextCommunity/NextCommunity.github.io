@@ -371,7 +371,7 @@ const LEVELS = [
 ];
 
 const XP_PER_LEVEL = 45;
-
+const NUM_LEVELS = 300;
 // Load saved level or start at 0
 let currentLevel = Number(localStorage.getItem("userLevel")) || 0;
 
@@ -1347,7 +1347,7 @@ async function addExperience(amount) {
   // 3. Process Level Ups one by one
   // Using a while loop ensures that if you gain 100 XP,
   // it processes Level 1, then Level 2, with the remainder left over.
-  while (currentXP >= XP_THRESHOLD && currentLevel < 200) {
+  while (currentXP >= XP_THRESHOLD && currentLevel < NUM_LEVELS) {
     currentXP -= XP_THRESHOLD;
     currentLevel++;
     // 1. Trigger the Visual Toast (Top of screen)
@@ -1476,8 +1476,8 @@ function jumpToLevel() {
 
   let targetLvl = parseInt(input.value);
 
-  // Clamp between 0 and 200
-  targetLvl = Math.max(0, Math.min(200, targetLvl));
+  // Clamp between 0 and NUM_LEVELS
+  targetLvl = Math.max(0, Math.min(NUM_LEVELS, targetLvl));
 
   // Update the GLOBAL variables
   currentLevel = targetLvl;
