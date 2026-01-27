@@ -256,10 +256,122 @@ const LEVELS = [
   { level: 198, name: "The Father", emoji: "⚖️", color: "#fbbf24" },
   { level: 199, name: "The Whills", emoji: "👁️", color: "#5eead4" },
   { level: 200, name: "One With The Force", emoji: "🌌", color: "#ffffff" },
+  // --- CYBERPUNK & FUTURE TECH (201-225) ---
+  { level: 201, name: "Chrome Junkie", emoji: "🦾", color: "#64748b" },
+  { level: 202, name: "Data Courier", emoji: "💾", color: "#94a3b8" },
+  { level: 203, name: "Street Samurai", emoji: "⚔️", color: "#f43f5e" },
+  { level: 204, name: "Braindance Tuner", emoji: "🧠", color: "#a855f7" },
+  { level: 205, name: "Ripperdoc Apprentice", emoji: "💉", color: "#10b981" },
+  { level: 206, name: "Neural Linker", emoji: "🕸️", color: "#22d3ee" },
+  { level: 207, name: "Grid Runner", emoji: "🏃", color: "#38bdf8" },
+  { level: 208, name: "Sub-Grid Ghost", emoji: "👻", color: "#6366f1" },
+  { level: 209, name: "Black Ice Specialist", emoji: "🧊", color: "#1d4ed8" },
+  { level: 210, name: "Netrunner", emoji: "🔌", color: "#06b6d4" },
+  { level: 211, name: "System Infiltrator", emoji: "🔓", color: "#fbbf24" },
+  { level: 212, name: "Mainframe Ghost", emoji: "💻", color: "#f8fafc" },
+  { level: 213, name: "Cyberdeck Modder", emoji: "🛠️", color: "#475569" },
+  { level: 214, name: "Neon Nomad", emoji: "🏜️", color: "#f59e0b" },
+  { level: 215, name: "Night City Fixer", emoji: "📞", color: "#ec4899" },
+  { level: 216, name: "Corporate Saboteur", emoji: "💼", color: "#1e293b" },
+  { level: 217, name: "Technomancer", emoji: "🪄", color: "#8b5e3c" },
+  { level: 218, name: "Synthwave Rider", emoji: "🌅", color: "#f472b6" },
+  { level: 219, name: "Memory Dealer", emoji: "🧠", color: "#a78bfa" },
+  { level: 220, name: "Glitch Hunter", emoji: "👾", color: "#22c55e" },
+  { level: 221, name: "Firewall Breaker", emoji: "🔥", color: "#ef4444" },
+  { level: 222, name: "Protocol Enforcer", emoji: "🛡️", color: "#3b82f6" },
+  { level: 223, name: "AI Whisperer", emoji: "🤖", color: "#f97316" },
+  { level: 224, name: "Bio-Hacker", emoji: "🧬", color: "#84cc16" },
+  { level: 225, name: "The Ghost in the Shell", emoji: "🐚", color: "#ffffff" },
+
+  // --- THE MATRIX & SIMULATION (226-250) ---
+  { level: 226, name: "Blue Pill Resident", emoji: "💊", color: "#3b82f6" },
+  { level: 227, name: "Red Pill Awakened", emoji: "💊", color: "#ef4444" },
+  { level: 228, name: "Zion Operator", emoji: "🎧", color: "#166534" },
+  { level: 229, name: "Code Construct", emoji: "🏗️", color: "#22c55e" },
+  { level: 230, name: "Sentinel Dodger", emoji: "🦑", color: "#475569" },
+  { level: 231, name: "Nebuchadnezzar Crew", emoji: "🚢", color: "#94a3b8" },
+  { level: 232, name: "Simulation Glitch", emoji: "📺", color: "#a855f7" },
+  { level: 233, name: "Bullet-Time Master", emoji: "🔫", color: "#ffffff" },
+  { level: 234, name: "Agent Program", emoji: "🕶️", color: "#111827" },
+  { level: 235, name: "Rogue Program", emoji: "🚫", color: "#991b1b" },
+  { level: 236, name: "The Keymaker", emoji: "🔑", color: "#fbbf24" },
+  { level: 237, name: "Merovingian Guard", emoji: "🍷", color: "#7f1d1d" },
+  { level: 238, name: "The Oracle's Pupil", emoji: "🍪", color: "#d97706" },
+  { level: 239, name: "Seraph's Equal", emoji: "🕊️", color: "#f8fafc" },
+  { level: 240, name: "Source Architect", emoji: "🏛️", color: "#ffffff" },
+  { level: 241, name: "Logic Bomb", emoji: "💣", color: "#000000" },
+  { level: 242, name: "Digital Messiah", emoji: "✨", color: "#6366f1" },
+  { level: 243, name: "Binary Sovereign", emoji: "🔢", color: "#22c55e" },
+  { level: 244, name: "Hardware Overlord", emoji: "🔌", color: "#4b5563" },
+  { level: 245, name: "Recursive Soul", emoji: "🌀", color: "#8b5e3c" },
+  { level: 246, name: "Data Streamer", emoji: "🌊", color: "#0ea5e9" },
+  { level: 247, name: "Packet Sniffer", emoji: "👃", color: "#64748b" },
+  { level: 248, name: "Root Admin", emoji: "🌳", color: "#15803d" },
+  { level: 249, name: "The One", emoji: "🕴️", color: "#000000" },
+  { level: 250, name: "The Source", emoji: "🔆", color: "#ffffff" },
+
+  // --- ANIME: THE SHONEN PATH (251-275) ---
+  { level: 251, name: "Academy Student", emoji: "🎒", color: "#f97316" },
+  { level: 252, name: "Leaf Village Genin", emoji: "🍃", color: "#16a34a" },
+  { level: 253, name: "Chunin Candidate", emoji: "📜", color: "#b45309" },
+  { level: 254, name: "Jonin Elite", emoji: "🧥", color: "#14532d" },
+  { level: 255, name: "Anbu Black Ops", emoji: "🎭", color: "#334155" },
+  { level: 256, name: "Sannin Successor", emoji: "🐸", color: "#22c55e" },
+  { level: 257, name: "Kage", emoji: "🏮", color: "#dc2626" },
+  { level: 258, name: "Tailed Beast Host", emoji: "🦊", color: "#f97316" },
+  { level: 259, name: "Sage Mode", emoji: "👁️", color: "#fbbf24" },
+  { level: 260, name: "Super Saiyan", emoji: "👱", color: "#facc15" },
+  { level: 261, name: "Ascended Saiyan", emoji: "⚡", color: "#ffffff" },
+  { level: 262, name: "Z-Fighter", emoji: "🥋", color: "#ea580c" },
+  { level: 263, name: "Namekian Healer", emoji: "💊", color: "#16a34a" },
+  { level: 264, name: "Gravity Trainer", emoji: "🏋️", color: "#475569" },
+  { level: 265, name: "Spirit Bomb User", emoji: "🔵", color: "#3b82f6" },
+  { level: 266, name: "God of Destruction", emoji: "🟣", color: "#a855f7" },
+  { level: 267, name: "Ultra Instinct", emoji: "🥈", color: "#e2e8f0" },
+  { level: 268, name: "Soul Reaper", emoji: "💀", color: "#000000" },
+  { level: 269, name: "Shikai Awakened", emoji: "⚔️", color: "#94a3b8" },
+  { level: 270, name: "Bankai Master", emoji: "💥", color: "#991b1b" },
+  { level: 271, name: "Captain of Squad 13", emoji: "🧥", color: "#ffffff" },
+  { level: 272, name: "Hollow Mask", emoji: "👹", color: "#dc2626" },
+  { level: 273, name: "Quincy Archer", emoji: "🏹", color: "#38bdf8" },
+  { level: 274, name: "Espada Rank", emoji: "🔢", color: "#1e293b" },
+  { level: 275, name: "Number One Protector", emoji: "🛡️", color: "#facc15" },
+
+  // --- ANIME: GRAND LINE VOYAGERS (276-300) ---
+  { level: 276, name: "East Blue Cabin Boy", emoji: "🧹", color: "#94a3b8" },
+  { level: 277, name: "Devil Fruit Eater", emoji: "🍇", color: "#a855f7" },
+  { level: 278, name: "Grand Line Navigator", emoji: "🧭", color: "#3b82f6" },
+  { level: 279, name: "Sniper King", emoji: "👺", color: "#facc15" },
+  { level: 280, name: "Black Leg Chef", emoji: "🍳", color: "#1e293b" },
+  { level: 281, name: "Santoryu Master", emoji: "⚔️", color: "#16a34a" },
+  { level: 282, name: "Cyborg Shipwright", emoji: "🔧", color: "#06b6d4" },
+  { level: 283, name: "Archaeologist", emoji: "🏺", color: "#8b5e3c" },
+  {
+    level: 284,
+    name: "Doctor of Cherry Blossoms",
+    emoji: "🌸",
+    color: "#f472b6",
+  },
+  { level: 285, name: "Warlord of the Sea", emoji: "🏴‍☠️", color: "#7f1d1d" },
+  { level: 286, name: "Haki User", emoji: "🌑", color: "#334155" },
+  { level: 287, name: "Conqueror's Spirit", emoji: "👑", color: "#991b1b" },
+  { level: 288, name: "Supernova", emoji: "🌟", color: "#fbbf24" },
+  { level: 289, name: "Revolutionary", emoji: "🚩", color: "#dc2626" },
+  { level: 290, name: "Yonko Commander", emoji: "🎖️", color: "#4c0519" },
+  { level: 291, name: "Emperor of the Sea", emoji: "🍷", color: "#7f1d1d" },
+  { level: 292, name: "Ancient Weapon Seeker", emoji: "🔱", color: "#22d3ee" },
+  { level: 293, name: "Gear Second", emoji: "💨", color: "#f87171" },
+  { level: 294, name: "Gear Fourth", emoji: "🦍", color: "#991b1b" },
+  { level: 295, name: "Joy Boy Heir", emoji: "🌞", color: "#ffffff" },
+  { level: 296, name: "Logia Intangible", emoji: "🌫️", color: "#e2e8f0" },
+  { level: 297, name: "Admiral of the Fleet", emoji: "⚓", color: "#ffffff" },
+  { level: 298, name: "Laugh Tale Voyager", emoji: "🗺️", color: "#fbbf24" },
+  { level: 299, name: "Pirate King", emoji: "🏴‍☠️", color: "#ef4444" },
+  { level: 300, name: "King of the World", emoji: "🌎", color: "#ffffff" },
 ];
 
 const XP_PER_LEVEL = 45;
-
+const NUM_LEVELS = 300;
 // Load saved level or start at 0
 let currentLevel = Number(localStorage.getItem("userLevel")) || 0;
 
@@ -1235,7 +1347,7 @@ async function addExperience(amount) {
   // 3. Process Level Ups one by one
   // Using a while loop ensures that if you gain 100 XP,
   // it processes Level 1, then Level 2, with the remainder left over.
-  while (currentXP >= XP_THRESHOLD && currentLevel < 200) {
+  while (currentXP >= XP_THRESHOLD && currentLevel < NUM_LEVELS) {
     currentXP -= XP_THRESHOLD;
     currentLevel++;
     // 1. Trigger the Visual Toast (Top of screen)
@@ -1364,8 +1476,8 @@ function jumpToLevel() {
 
   let targetLvl = parseInt(input.value);
 
-  // Clamp between 0 and 200
-  targetLvl = Math.max(0, Math.min(200, targetLvl));
+  // Clamp between 0 and NUM_LEVELS
+  targetLvl = Math.max(0, Math.min(NUM_LEVELS, targetLvl));
 
   // Update the GLOBAL variables
   currentLevel = targetLvl;
