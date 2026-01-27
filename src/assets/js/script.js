@@ -491,9 +491,6 @@ function initDotEasterEgg() {
   };
 }
 
-// Call the function once the DOM is ready
-document.addEventListener("DOMContentLoaded", initDotEasterEgg);
-
 const konamiCode = [
   "arrowup",
   "arrowup",
@@ -860,23 +857,6 @@ window.toggleScreenshotMode = function () {
 };
 
 /**
- * 8. INITIALIZATION
- */
-document.addEventListener("DOMContentLoaded", () => {
-  const devToolsVisible = localStorage.getItem("devToolsVisible") === "true";
-  const devPanel = document.getElementById("dev-tools");
-  // Add this to your initialization script
-  let skillHoverCount = 0;
-
-  if (devToolsVisible && devPanel) {
-    devPanel.classList.remove("hidden");
-  }
-
-  applyTheme(localStorage.getItem("theme") || "light");
-  updateGameUI();
-});
-
-/**
  * 9. ENHANCED XP & SKILL MINING SYSTEM
  */
 function renderXP(value) {
@@ -1051,8 +1031,50 @@ function initSkillMining() {
   });
 }
 
-// Run this on page load
-document.addEventListener("DOMContentLoaded", initSkillMining);
+/**
+ * Tracks profile views via localStorage and updates the header.
+ * Displays current view count and the associated level from the LEVELS array.
+ */
+function initProfileTracker() {
+  // 1. Target the specific span class from your template
+  const headerSpan = document.querySelector(".header-gtd");
+  if (!headerSpan) return;
+
+  // 2. Create the counter element
+  // Using a wrapper to ensure it sits nicely under the span
+  const statsContainer = document.createElement("div");
+  statsContainer.id = "profile-stats-display";
+  statsContainer.style.cssText =
+    "font-size: 0.7rem; font-weight: normal; margin-top: 2px; opacity: 0.8; display: block;";
+
+  // Append it right after the span or inside the parent container
+  headerSpan.parentElement.appendChild(statsContainer);
+
+  // 3. UI Update Logic
+  const refreshStats = () => {
+    const count = parseInt(localStorage.getItem("profile_view_count") || 0);
+    statsContainer.innerHTML = `
+            <span style="letter-spacing: 1px;">VIEWS: ${count}</span>
+        `;
+  };
+
+  // Initial render
+  refreshStats();
+
+  // 4. Listen for clicks on any "Profile" links
+  document.addEventListener("click", (e) => {
+    const targetLink = e.target.closest("a");
+
+    // Only increment if the link text contains "Profile"
+    if (targetLink && targetLink.textContent.includes("Profile")) {
+      let currentCount = parseInt(
+        localStorage.getItem("profile_view_count") || 0,
+      );
+      localStorage.setItem("profile_view_count", currentCount + 1);
+      refreshStats();
+    }
+  });
+}
 
 function initSkillXP() {
   const skills = document.querySelectorAll(".skill-item");
@@ -1077,9 +1099,6 @@ function initSkillXP() {
     });
   });
 }
-
-// Re-initialize skills after Surprise scroll or any DOM changes
-window.addEventListener("DOMContentLoaded", initSkillXP);
 
 /**
  * SYS ADMIN XP (Level 6 Mechanic)
@@ -1125,3 +1144,28 @@ function jumpToLevel() {
     triggerForceSurge();
   }
 }
+
+// Re-initialize skills after Surprise scroll or any DOM changes
+window.addEventListener("DOMContentLoaded", initSkillXP);
+
+/**
+ * INITIALIZATION
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  const devToolsVisible = localStorage.getItem("devToolsVisible") === "true";
+  const devPanel = document.getElementById("dev-tools");
+  // Add this to your initialization script
+  let skillHoverCount = 0;
+
+  if (devToolsVisible && devPanel) {
+    devPanel.classList.remove("hidden");
+  }
+
+  initDotEasterEgg();
+  initSkillMining();
+  // Initialize the profile counter
+  initProfileTracker();
+
+  applyTheme(localStorage.getItem("theme") || "light");
+  updateGameUI();
+});
