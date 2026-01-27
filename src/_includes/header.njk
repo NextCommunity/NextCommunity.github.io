@@ -32,40 +32,7 @@
       </p>
     </div>
 
-    <div class="flex items-center gap-3 md:gap-4">
-      {% if page.url == "/" %}
-        <button
-          onclick="scrollToRandomUser()"
-          class="surprise-btn bg-blue-600 text-white px-8 py-3 rounded-full font-black uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-blue-500/30"
-        >
-          ✨ Surprise Me
-        </button>
-      {% endif %}
+    {% include "game-stats.njk" %}
 
-      <div id="game-stats" class="flex items-center gap-3 md:gap-4 px-3 py-1.5 md:px-4 md:py-2 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl shadow-sm">
-         <div id="level-badge" onclick="handleLevelClick()" class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-xl text-lg md:text-xl bg-black/5 dark:bg-white/5 relative">
-            🐣
-        </div>
-
-        <div class="hidden sm:flex flex-col">
-            <div class="flex items-center gap-2">
-                <span id="level-name" class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[var(--text-main)]">Newbie</span>
-                <span class="text-[8px] font-mono font-bold text-accent bg-accent/10 px-1.5 py-0.5 rounded">
-                    XP: <span id="total-xp-display">0 / 45</span>
-                </span>
-                <span class="text-[8px] md:text-[9px] opacity-60 font-bold bg-black/5 dark:bg-white/10 px-1.5 py-0.5 rounded">
-                    LVL <span id="level-number">0</span>
-                </span>
-            </div>
-            <div class="w-20 md:w-28 h-1 md:h-1.5 bg-black/10 dark:bg-white/10 rounded-full mt-1.5 md:mt-2 overflow-hidden">
-                <div id="level-progress" class="h-full bg-accent transition-all duration-1000" style="width: 0%"></div>
-            </div>
-        </div>
-
-          <div class="w-px h-6 md:h-8 bg-[var(--border-color)]"></div>
-
-          <button onclick="toggleTheme()" class="text-base md:text-lg p-1 md:p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-full transition-all" id="theme-icon">🌙</button>
-      </div>
-    </div>
   </div>
 </header>
