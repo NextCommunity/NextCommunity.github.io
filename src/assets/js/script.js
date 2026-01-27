@@ -1340,8 +1340,6 @@ function initSkillXP() {
 
 // Re-initialize skills after Surprise scroll or any DOM changes
 window.addEventListener("DOMContentLoaded", initSkillXP);
-// Call the function once the DOM is ready
-document.addEventListener("DOMContentLoaded", initDotEasterEgg);
 
 /**
  * SYS ADMIN XP (Level 6 Mechanic)
