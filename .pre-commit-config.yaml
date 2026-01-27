@@ -12,7 +12,13 @@ exclude: |
   )
 
 repos:
-  # Standard pre-commit hooks for basic file checks
+  - repo: meta
+    hooks:
+      - id: identity
+        name: Run identity
+        description: Run the identity check
+      - id: check-hooks-apply
+        name: Check hooks apply to the repository
   - repo: local
     hooks:
       - id: check-zip-file-is-not-committed
@@ -23,6 +29,38 @@ repos:
           Zip files are not allowed in the repository as they are hard to
           track and have security implications. Please remove the zip file from the repository.
         files: (?i)\.zip$
+      - id: npm-ci
+        name: Install Node dependencies
+        entry: npm ci
+        language: system
+        pass_filenames: false
+      - id: eleventy-build-check
+        name: Eleventy build and output check
+        entry: npm run build
+        language: system
+        pass_filenames: false
+      - id: npm-audit
+        name: Run npm-audit
+        description: Run npm audit
+        entry: npm audit --audit-level=high
+        language: system
+        pass_filenames: false
+  # GO-based
+  # - repo: https://github.com/gitleaks/gitleaks
+  #   rev: v8.30.0
+  #   hooks:
+  #     - id: gitleaks
+  #       name: Run gitleaks
+  #       description: Check for secrets with gitleaks
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.5.5
+    hooks:
+      - id: chmod
+        name: Set file permissions
+        description: Does not run on Windows so setup as a manual hook
+        args: ["644"]
+        files: \.md$
+        stages: [manual]
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
