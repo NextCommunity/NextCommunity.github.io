@@ -699,6 +699,8 @@ function triggerSecretUnlock(type) {
       addExperience(500); // Massive bonus for the long code
     } else if (type === "gravity" || type === "matrix") {
       addExperience(45); // 1 full level
+    } else if (type === "pulse") {
+      addExperience(180); // 4 levels
     } else {
       addExperience(75); // 2 full levels
     }
@@ -709,6 +711,48 @@ function triggerSecretUnlock(type) {
     console.log(`Secret ${eggId} already discovered. No extra XP granted.`);
   }
 }
+
+/**
+ * Initialize the Easter Egg functionality for the talent directory status dot.
+ */
+function initDotEasterEgg() {
+  const dot = document.querySelector(".animate-pulse");
+
+  if (!dot) return; // Exit if the dot isn't found
+
+  dot.style.cursor = "pointer";
+
+  // Define the hover behavior
+  dot.onmouseover = function () {
+    this.style.backgroundColor = "#fbbf24"; // Change to a "gold" color
+    this.classList.remove("animate-pulse");
+    this.style.transform = "scale(2.5)";
+    this.style.transition = "transform 0.2s ease-in-out";
+  };
+
+  dot.onmouseout = function () {
+    this.style.backgroundColor = ""; // Reset to original green
+    this.style.transform = "scale(1)";
+    this.classList.add("animate-pulse");
+  };
+
+  // Define the click behavior (The Easter Egg)
+  dot.onclick = function () {
+    console.log("Easter egg triggered pulse egg active!");
+    // Example: Rotate the dot 360 degrees and change the text nearby
+    this.animate(
+      [{ transform: "rotate(0)" }, { transform: "rotate(360deg)" }],
+      { duration: 500 },
+    );
+
+    // Bonus: You could trigger a custom event or reveal hidden content here
+    // document.body.classList.add("pulse-egg-active");
+    triggerSecretUnlock("pulse");
+  };
+}
+
+// Call the function once the DOM is ready
+document.addEventListener("DOMContentLoaded", initDotEasterEgg);
 
 const konamiCode = [
   "arrowup",
@@ -1296,6 +1340,8 @@ function initSkillXP() {
 
 // Re-initialize skills after Surprise scroll or any DOM changes
 window.addEventListener("DOMContentLoaded", initSkillXP);
+// Call the function once the DOM is ready
+document.addEventListener("DOMContentLoaded", initDotEasterEgg);
 
 /**
  * SYS ADMIN XP (Level 6 Mechanic)
