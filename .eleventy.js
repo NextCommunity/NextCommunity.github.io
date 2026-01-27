@@ -1,6 +1,6 @@
 const yaml = require("js-yaml");
 
-module.exports = function(eleventyConfig) {
+module.exports = function (eleventyConfig) {
   // Add this line to copy your external assets
   eleventyConfig.addPassthroughCopy("src/assets");
   // 1. Recognize YAML as a template format
@@ -20,11 +20,11 @@ module.exports = function(eleventyConfig) {
       const fs = require("fs/promises");
       const content = await fs.readFile(inputPath, "utf-8");
       return yaml.load(content);
-    }
+    },
   });
 
   // 2. The Randomized Collection
-  eleventyConfig.addCollection("randomPeople", function(collectionApi) {
+  eleventyConfig.addCollection("randomPeople", function (collectionApi) {
     // Grab all yaml files from the users folder
     const people = collectionApi.getFilteredByGlob("src/users/*.yaml");
 
@@ -44,7 +44,7 @@ module.exports = function(eleventyConfig) {
     dir: {
       input: "src",
       output: "_site",
-      includes: "_includes"
-    }
+      includes: "_includes",
+    },
   };
 };

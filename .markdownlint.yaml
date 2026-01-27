@@ -1,0 +1,5 @@
+# Markdownlint configuration
+# Disable line length rule for long URLs and badges
+MD013: false
+# Allow emphasis for styled section labels
+MD036: false
