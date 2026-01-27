@@ -6,12 +6,8 @@
   <title>{{ name }} | {{ role }}</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/assets/css/style.css">
-  <script>
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark') document.documentElement.classList.add('dark');
-  </script>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen scroll-smooth bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-300"">
 
   {% include "header.njk" %}
 

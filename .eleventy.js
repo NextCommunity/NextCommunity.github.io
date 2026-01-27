@@ -1,6 +1,9 @@
 const yaml = require("js-yaml");
 
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addShortcode("currentYear", function () {
+    return new Date().getFullYear();
+  });
   // Add this line to copy your external assets
   eleventyConfig.addPassthroughCopy("src/assets");
   // 1. Recognize YAML as a template format
