@@ -8,7 +8,6 @@
 [![Super-Linter](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml)
 [![pre-commit](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml)
 
-
 > A vibrant community directory showcasing open-source developers and software engineers from around the world.
 
 **🔗 Live Site:** [https://nextcommunity.github.io](https://nextcommunity.github.io)
