@@ -7,6 +7,6 @@ updates:
     groups:
       github-dependencies:
         patterns:
-          - '*'
+          - "*"
     cooldown:
       default-days: 7
