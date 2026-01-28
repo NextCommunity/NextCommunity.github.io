@@ -6,9 +6,9 @@ country: India
 location: Banglore
 role: Student
 languages: HTML Css JavaScript Python 
-bio: | 
-  Hi! I'm Preethi Yadav, a software engineering student 
-  passionate about building web applications and solving real-world problems with code. 
+bio: 
+  Hi! I'm Preethi Yadav, a software engineering student
+  passionate about building web applications and solving real-world problems with code.
   I have experience in JavaScript, React, Node.js, and Python, and I enjoy exploring open-source projects
   and contributing to collaborative workflows. I’m particularly interested in full-stack development,
   creating intuitive user experiences, and learning new technologies to continuously grow as a developer.
