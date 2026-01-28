@@ -43,8 +43,8 @@ showcasing their skills, bio, and social links.
 
 ### ✨ Features
 
-- 🎲 Randomized display of developer profiles
-- 🌓 Dark/Light theme support
+- 🎲 Randomized display of developer profiles on build
+- 🌓 Dark/Light/Random theme support
 - 📱 Fully responsive design
 - 🔍 Individual profile pages for each developer
 - 🎨 Modern, premium UI with smooth animations
@@ -417,4 +417,3 @@ This project is licensed under the **GNU General Public License v3.0** - see the
 
 - **Report bugs**: [Open an issue](https://github.com/NextCommunity/NextCommunity.github.io/issues)
 - **Ask questions**: [Start a discussion](https://github.com/NextCommunity/NextCommunity.github.io/discussions)
-- **Maintainer**: [@jbampton](https://github.com/jbampton)
