@@ -5,6 +5,9 @@
 [![Run JavaScript Everywhere](https://img.shields.io/badge/Run%20JavaScript%20Everywhere-yellow)](https://nodejs.org/en)
 [![Built with Nunjucks](https://img.shields.io/badge/Built%20with-Nunjucks-darkgreen)](https://mozilla.github.io/nunjucks/)
 [![Built with Tailwind CSS](https://img.shields.io/badge/Built%20with-Tailwind-blue)](https://tailwindcss.com/)
+[![Super-Linter](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml)
+[![pre-commit](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml)
+
 
 > A vibrant community directory showcasing open-source developers and software engineers from around the world.
 
