@@ -1,14 +1,19 @@
-name: Lint
+name: Super-Linter
 
 on: [pull_request]
 
 jobs:
   build:
-    name: GitHub Super-Linter
+    name: Run Super-Linter
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: github/super-linter@v4.6.0
+      - uses: actions/checkout@v6
+        with:
+          # super-linter needs the full git history to get the
+          # list of files that changed across commits
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: super-linter/super-linter@v8.3.2
         env:
           ERROR_ON_MISSING_EXEC_BIT: true
           VALIDATE_EDITORCONFIG: true
