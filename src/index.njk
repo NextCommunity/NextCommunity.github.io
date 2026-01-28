@@ -25,9 +25,12 @@ layout: false
               <h2 class="text-2xl font-bold group-hover:text-accent transition-colors">{{ person.data.name }}</h2>
               <p class="text-accent font-semibold text-sm uppercase tracking-wider">{{ person.data.role }}</p>
             </div>
+            {% set location = person.data.location %}
+            {% if location %}
             <span class="shrink-0 text-[10px] bg-[var(--bg-footer)] text-[var(--text-muted)] px-2 py-1 rounded font-bold uppercase border border-[var(--border-color)]">
-              {{ person.data.location }}
+              {{ location }}
             </span>
+            {% endif %}
           </div>
 
           <div class="mt-6 flex flex-wrap gap-2">
@@ -35,7 +38,10 @@ layout: false
             {% include "skills-list.njk" %}
           </div>
 
-          <p class="mt-4 text-[var(--text-muted)] text-sm italic line-clamp-3">"{{ person.data.bio | truncate(120) }}"</p>
+          {% set bio = person.data.bio %}
+          {% if bio %}
+          <p class="mt-4 text-[var(--text-muted)] text-sm italic line-clamp-3">"{{ bio | truncate(120) }}"</p>
+          {% endif %}
         </div>
 
         <div class="mt-auto p-4 flex justify-between items-center px-6 bg-black/5 dark:bg-white/5 border-t border-[var(--border-color)]">
