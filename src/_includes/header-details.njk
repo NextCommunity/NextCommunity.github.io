@@ -1,0 +1,30 @@
+<div class="flex flex-col items-center lg:items-start group">
+
+  <div class="flex items-center">
+    {% if page.url == "/" %}
+      <h1 class="text-3xl md:text-5xl font-black tracking-tighter text-[var(--text-main)] uppercase italic leading-none transition-all">
+        Our Developers
+      </h1>
+    {% else %}
+      <a href="/" class="group/back flex items-center gap-3">
+        <span class="text-2xl md:text-4xl text-accent transition-transform group-hover/back:-translate-x-2">←</span>
+        <h1 class="text-3xl md:text-5xl font-black tracking-tighter text-[var(--text-main)] uppercase italic leading-none transition-all group-hover/back:text-accent">
+          Directory
+        </h1>
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="mt-2 text-accent font-mono text-sm md:text-base font-bold tracking-tight">
+    <span class="opacity-100">{{ collections.randomPeople.length }}</span> Active Profiles
+  </div>
+
+  <p class="hidden md:flex text-[var(--text-muted)] text-[9px] font-mono uppercase tracking-[0.3em] mt-1 items-center gap-2">
+    {% if page.url == "/" %}
+      <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+      <span class="header-gtd">Global Talent Directory</span>
+    {% else %}
+      Viewing Profile Details
+    {% endif %}
+  </p>
+</div>

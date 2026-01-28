@@ -32,13 +32,7 @@ layout: false
 
           <div class="mt-6 flex flex-wrap gap-2">
             {% set skills = person.data.languages.split(' ') %}
-            <div class="skills-list">
-              {% for skill in skills %}
-                <span class="skill-item">
-                  <span onmouseenter="createFloatingXP(event)" class="skill-tag cursor-crosshair">{{ skill }}</span>
-                </span>
-              {% endfor %}
-            </div>
+            {% include "skills-list.njk" %}
           </div>
 
           <p class="mt-4 text-[var(--text-muted)] text-sm italic line-clamp-3">"{{ person.data.bio | truncate(120) }}"</p>

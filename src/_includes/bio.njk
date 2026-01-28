@@ -85,11 +85,7 @@
           <h2 class="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-6">Technologies</h2>
           <div class="flex flex-wrap gap-3">
             {% set skills = languages.split(' ') %}
-            {% for skill in skills %}
-              <span class="px-4 py-2 bg-accent text-white text-xs font-black rounded-xl uppercase tracking-widest shadow-sm">
-                {{ skill }}
-              </span>
-            {% endfor %}
+            {% include "skills-list.njk" %}
           </div>
         </div>
       </div>
