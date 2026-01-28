@@ -29,14 +29,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jbampton/NextCommunity.github.io.git"
+    "url": "git+https://github.com/NextCommunity/NextCommunity.github.io.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/jbampton/NextCommunity.github.io/issues"
+    "url": "https://github.com/NextCommunity/NextCommunity.github.io/issues"
   },
-  "homepage": "https://github.com/jbampton/NextCommunity.github.io#readme"
+  "homepage": "https://github.com/NextCommunity/NextCommunity.github.io#readme"
 }
