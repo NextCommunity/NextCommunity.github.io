@@ -18,7 +18,9 @@ repos:
         name: Run identity
         description: Run the identity check
       - id: check-hooks-apply
-        name: Check hooks apply to the repository
+        name: run check-hooks-apply
+        description: check that all the hooks apply to the repository
+
   - repo: local
     hooks:
       - id: check-zip-file-is-not-committed
@@ -30,21 +32,24 @@ repos:
           track and have security implications. Please remove the zip file from the repository.
         files: (?i)\.zip$
       - id: npm-ci
-        name: Install Node dependencies
+        name: run npm-ci
+        description: Install Node dependencies
         entry: npm ci
         language: system
         pass_filenames: false
       - id: eleventy-build-check
-        name: Eleventy build and output check
+        name: run eleventy-build-check
+        description: Eleventy build and output check
         entry: npm run build
         language: system
         pass_filenames: false
       - id: npm-audit
-        name: Run npm-audit
+        name: run npm-audit
         description: Run npm audit
         entry: npm audit --audit-level=high
         language: system
         pass_filenames: false
+
   # GO-based
   # - repo: https://github.com/gitleaks/gitleaks
   #   rev: v8.30.0
@@ -52,6 +57,7 @@ repos:
   #     - id: gitleaks
   #       name: Run gitleaks
   #       description: Check for secrets with gitleaks
+
   - repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: v1.5.6
     hooks:
@@ -61,12 +67,17 @@ repos:
         args: ["644"]
         files: \.md$
         stages: [manual]
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
       - id: trailing-whitespace
+        name: run trailing-whitespace
+        description: trims trailing whitespace
         args: [--markdown-linebreak-ext=md]
       - id: end-of-file-fixer
+        name: run end-of-file-fixer
+        description: makes sure files end in a newline and only a newline
       - id: fix-byte-order-marker
         name: run fix-byte-order-marker
         description: removes UTF-8 byte order marker
@@ -74,10 +85,20 @@ repos:
         name: run forbid-submodules
         description: forbids any submodules in the repository
       - id: check-yaml
+        name: run check-yaml
+        description: attempts to load all yaml files to verify syntax
       - id: check-added-large-files
+        name: run check-added-large-files
+        description: prevent giant files from being committed
       - id: check-json
+        name: run check-json
+        description: check JSON files for syntax errors
       - id: check-merge-conflict
+        name: run check-merge-conflict
+        description: check for merge conflict markers
       - id: check-case-conflict
+        name: run check-case-conflict
+        description: check for case conflicts in file names
       - id: check-vcs-permalinks
         name: run check-vcs-permalinks
         description: ensures that links to vcs websites are permalinks
@@ -89,6 +110,8 @@ repos:
         name: run detect-private-key
         description: checks for the existence of private keys
       - id: mixed-line-ending
+        name: run mixed-line-ending
+        description: replaces or checks mixed line ending
 
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v4.0.0-alpha.8
