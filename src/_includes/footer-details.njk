@@ -20,7 +20,14 @@
 
     <div class="flex flex-col items-center md:items-end gap-2">
       <div class="flex items-center gap-3">
-        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        <button
+          id="footer-surge-button"
+          onclick="handleFooterDotClick()"
+          class="relative flex h-6 w-6 items-center justify-center focus:outline-none group cursor-pointer"
+        >
+          <span id="footer-dot-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 transition-colors duration-500"></span>
+          <span id="footer-dot-core" class="relative inline-flex rounded-full h-4 w-4 bg-green-500 transition-colors duration-500"></span>
+        </button>
         <span class="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">Build: {{ build.timestamp }}</span>
       </div>
 

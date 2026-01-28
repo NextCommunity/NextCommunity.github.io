@@ -539,8 +539,8 @@ body[data-level="6"]::after {
   --glow-color: #38bdf8; /* Default Jedi Blue */
   position: relative;
   z-index: 10;
-  transition: all 0.3s ease;
-  animation: force-pulse 5s infinite ease-in-out;
+  transition: all 0.5s ease;
+  animation: force-pulse 10s infinite ease-in-out;
 }
 
 /* Sith Variant (Red Glow) */
@@ -581,9 +581,6 @@ body[data-level="6"]::after {
   }
 }
 
-.force-glow {
-  animation: force-pulse 1.5s infinite ease-in-out;
-}
 #level-name {
   font-weight: 900;
   text-transform: uppercase;
