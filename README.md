@@ -25,17 +25,18 @@
 
 ## 🎯 About the Project
 
-NextCommunity is a static site directory built with [Eleventy (11ty)](https://www.11ty.dev/), styled with
-[TailwindCSS](https://tailwindcss.com/) and made interactive with JavaScript. NextCommunity celebrates the global
-developer community. Each developer gets their own profile page showcasing their skills, bio, and social links.
+NextCommunity is a static site directory built with Eleventy (11ty), JavaScript, Nunjucks and TailwindCSS.
+NextCommunity celebrates the global developer community. Each developer gets their own profile page
+showcasing their skills, bio, and social links.
 
 ### 🛠️ Tech Stack
 
-- **Static Site Generator**: Eleventy (11ty)
-- **Templating**: Nunjucks
-- **Styling**: TailwindCSS
-- **Data Format**: YAML
-- **Deployment**: GitHub Pages
+- **Interactivity**: [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- **Static Site Generator**: [Eleventy (11ty)](https://www.11ty.dev/)
+- **Styling**: [TailwindCSS](https://tailwindcss.com/)
+- **Templating**: [Nunjucks](https://mozilla.github.io/nunjucks/)
+- **Data Format**: [JSON](https://www.json.org/json-en.html) / [YAML](https://yaml.org/)
+- **Deployment**: [GitHub Pages](https://docs.github.com/en/pages)
 
 ### ✨ Features
 
