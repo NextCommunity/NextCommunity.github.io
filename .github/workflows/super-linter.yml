@@ -1,14 +1,14 @@
-name: Lint
+name: Super-Linter
 
 on: [pull_request]
 
 jobs:
   build:
-    name: GitHub Super-Linter
+    name: Run Super-Linter
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: github/super-linter@v4.6.0
+      - uses: actions/checkout@v6
+      - uses: github/super-linter@v8
         env:
           ERROR_ON_MISSING_EXEC_BIT: true
           VALIDATE_EDITORCONFIG: true
