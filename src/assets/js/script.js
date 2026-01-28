@@ -6,6 +6,8 @@ let currentLevel = Number(localStorage.getItem("userLevel")) || 0;
 // Load saved XP or start at 0
 let currentXP = parseInt(localStorage.getItem("userXP")) || 0;
 
+let isSurging = false;
+
 function getContrastYIQ(hexcolor) {
   hexcolor = hexcolor.replace("#", "");
   var r = parseInt(hexcolor.substr(0, 2), 16);
@@ -393,8 +395,16 @@ function updateThemeIcon(theme) {
  * 5. EASTER EGG LOGIC & TRIGGERS
  */
 function triggerForceSurge() {
+  if (isSurging) return; // Prevent overlapping surges
+
+  isSurging = true;
   initAudio();
-  addExperience(100); // This now handles UI updates, sounds, and bar filling
+  addExperience(1000);
+
+  // Reset after the animation duration (e.g., 1 second)
+  setTimeout(() => {
+    isSurging = false;
+  }, 10000);
 }
 
 function triggerMagicXP() {
@@ -403,12 +413,15 @@ function triggerMagicXP() {
 }
 
 // Visual Effect for Level 101+
-function triggerForceEffects(lvl) {
+function triggerForceEffects() {
   const badge = document.getElementById("level-badge");
   if (badge) {
     badge.classList.add("force-glow");
     // Remove after 2 seconds unless it's a persistent rank
-    setTimeout(() => badge.classList.remove("force-glow"), 2000);
+    setTimeout(() => badge.classList.remove("force-glow"), 5000);
+    console.log("Trigger Force Effects");
+  } else {
+    console.log("Badge not found");
   }
 }
 
@@ -980,7 +993,6 @@ async function addExperience(amount) {
 
     console.log(`Leveled Up to ${currentLevel}!`);
   }
-
   // 4. Persistence: Save clean numbers
   localStorage.setItem("userLevel", currentLevel.toString());
   localStorage.setItem("userXP", currentXP.toString());
@@ -1092,7 +1104,6 @@ function updateGameUI() {
     document.getElementById("total-xp-display").innerText =
       `${currentXP} / ${XP_PER_LEVEL}`;
   }
-
   renderXP(currentXP);
 }
 
@@ -1215,14 +1226,70 @@ function jumpToLevel() {
 
   const rank = getRank(currentLevel);
   showLevelUpNotification(rank);
+}
 
-  if (currentLevel >= 101) {
+function handleFooterDotClick() {
+  // 1. Get the current list of unlocked eggs
+  const rawEggs = localStorage.getItem("unlockedEggs") || "[]";
+  const unlockedEggs = JSON.parse(rawEggs);
+
+  // 2. Exit if already unlocked
+  if (unlockedEggs.includes("footer_surge")) return;
+
+  let clicks = parseInt(localStorage.getItem("footerDotClicks")) || 0;
+  clicks++;
+
+  const core = document.getElementById("footer-dot-core");
+  const ping = document.getElementById("footer-dot-ping");
+
+  if (clicks >= 10) {
+    // Trigger the main function
     triggerForceSurge();
+
+    // 3. Update the global unlockedEggs array
+    unlockedEggs.push("footer_surge");
+    localStorage.setItem("unlockedEggs", JSON.stringify(unlockedEggs));
+
+    // Cleanup temporary click counter
+    localStorage.removeItem("footerDotClicks");
+
+    finalizeFooterDot(core, ping);
+  } else {
+    updateFooterDotVisuals(clicks, core, ping);
+    localStorage.setItem("footerDotClicks", clicks);
   }
 }
 
+function updateFooterDotVisuals(count, core, ping) {
+  if (count >= 4 && count < 8) {
+    core.classList.replace("bg-green-500", "bg-yellow-500");
+    ping.classList.replace("bg-green-400", "bg-yellow-400");
+  } else if (count >= 8) {
+    core.classList.replace("bg-yellow-500", "bg-red-500");
+    ping.classList.replace("bg-yellow-400", "bg-red-400");
+  }
+}
+
+function finalizeFooterDot(core, ping) {
+  // Switch to a "spent" state (Indigo)
+  core.classList.remove("bg-red-500", "bg-green-500", "bg-yellow-500");
+  core.classList.add("bg-indigo-500");
+  ping.classList.add("hidden");
+  document.getElementById("footer-surge-button").style.cursor = "default";
+}
+
 // Re-initialize skills after Surprise scroll or any DOM changes
-window.addEventListener("DOMContentLoaded", initSkillXP);
+window.addEventListener("DOMContentLoaded", () => {
+  initSkillXP();
+
+  const unlockedEggs = JSON.parse(localStorage.getItem("unlockedEggs") || "[]");
+  if (unlockedEggs.includes("footer_surge")) {
+    finalizeFooterDot(
+      document.getElementById("footer-dot-core"),
+      document.getElementById("footer-dot-ping"),
+    );
+  }
+});
 
 /**
  * INITIALIZATION
