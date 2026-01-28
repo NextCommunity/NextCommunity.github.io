@@ -8,9 +8,13 @@ linkedin: https://linkedin.com/nikul-panchal-90795b34
 country: India
 location: Gujarat, Ahmedabad
 role: Software Developer
-languages: PHP,Golang,React,Node
-bio:   
-    14+ years of experience in PHP, React.js, Node.js, Golang, and AWS.
-    Strong background in database design, API development, and cloud infrastructure.
-    Passionate about building clean, maintainable, and efficient code.
-    Contributor to open-source projects and always exploring new technologies.
+languages:
+  - PHP
+  - Golang
+  - React
+  - Node
+bio: |
+  14+ years of experience in PHP, React.js, Node.js, Golang, and AWS.
+  Strong background in database design, API development, and cloud infrastructure.
+  Passionate about building clean, maintainable, and efficient code.
+  Contributor to open-source projects and always exploring new technologies.
