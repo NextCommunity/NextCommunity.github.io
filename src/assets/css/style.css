@@ -534,22 +534,6 @@ body[data-level="6"]::after {
   }
 }
 
-/* The Active Class */
-.force-glow {
-  --glow-color: #38bdf8; /* Default Jedi Blue */
-  position: relative;
-  z-index: 10;
-  transition: all 0.5s ease;
-  animation: force-pulse 10s infinite ease-in-out;
-}
-
-/* Sith Variant (Red Glow) */
-[data-level^="13"],
-[data-level^="14"],
-[data-level^="15"] .force-glow {
-  --glow-color: #ef4444; /* Sith Red */
-}
-
 /* Ensure the parent container has a background so you can see the 'empty' part */
 #game-stats .bg-black\/10 {
   background-color: rgba(0, 0, 0, 0.1) !important;
@@ -872,4 +856,59 @@ a:hover {
 /* Prevents the terminal text from getting highlighted while you move the window */
 #matrix-console-container.is-dragging {
   user-select: none;
+}
+
+/* Full-screen Force Field */
+.force-field-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 999999 !important;
+  background: radial-gradient(
+    circle,
+    rgba(0, 150, 255, 0.1) 0%,
+    rgba(0, 0, 50, 0.6) 100%
+  );
+  pointer-events: none;
+  box-shadow: inset 0 0 150px rgba(0, 190, 255, 0.5);
+  backdrop-filter: blur(2px) contrast(1.2);
+  animation: force-throb 4s ease-in-out infinite;
+}
+
+@keyframes force-throb {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Bright Lightning Arcs */
+.lightning-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 1000000;
+  pointer-events: none;
+  background: white;
+  opacity: 0;
+}
+
+@keyframes bolt {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    background: #99f6ff;
+  }
+  20% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.8;
+  }
+  30% {
+    opacity: 0;
+  }
 }
