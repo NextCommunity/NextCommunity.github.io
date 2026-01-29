@@ -114,7 +114,7 @@ repos:
         description: replaces or checks mixed line ending
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: "v0.1.0"
+    rev: "v0.6.1"
     hooks:
       - id: biome-check
         name: run biome-check
