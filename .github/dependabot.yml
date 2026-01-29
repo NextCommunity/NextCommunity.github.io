@@ -10,3 +10,14 @@ updates:
           - "*"
     cooldown:
       default-days: 7
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    groups:
+      github-dependencies:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 7
