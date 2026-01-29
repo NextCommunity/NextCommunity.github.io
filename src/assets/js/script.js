@@ -16,12 +16,6 @@ function getContrastYIQ(hexcolor) {
   var yiq = (r * 299 + g * 587 + b * 114) / 1000;
   return yiq >= 128 ? "black" : "white";
 }
-
-function isEggUnlocked(eggId) {
-  // Returns true if the ID exists in the array, false otherwise
-  return unlockedEggs.includes(eggId);
-}
-
 /**
  * 1. RETRO SOUND ENGINE
  */
@@ -263,25 +257,6 @@ window.createFloatingXP = function (e) {
   setTimeout(() => popup.remove(), 800);
 };
 
-// Re-attach listeners to your skill tags
-function attachSkillListeners() {
-  const skillTags = document.querySelectorAll(".skill-tag"); // Use your actual class name
-  skillTags.forEach((tag) => {
-    // Use 'mouseenter' for a clean single-pop on hover
-    tag.addEventListener("mouseenter", createXPPopup);
-  });
-}
-
-function unlockEgg(eggId) {
-  if (!unlockedEggs.includes(eggId)) {
-    unlockedEggs.push(eggId);
-    localStorage.setItem("unlockedEggs", JSON.stringify(unlockedEggs));
-    playSound("levelUp");
-    showLevelUpNotification(unlockedEggs.length);
-    updateGameUI();
-  }
-}
-
 function handleLevelClick() {
   triggerSecretUnlock("badge_click");
 }
@@ -412,19 +387,6 @@ function triggerMagicXP() {
   addExperience(50);
 }
 
-// Visual Effect for Level 101+
-function triggerForceEffects() {
-  const badge = document.getElementById("level-badge");
-  if (badge) {
-    badge.classList.add("force-glow");
-    // Remove after 2 seconds unless it's a persistent rank
-    setTimeout(() => badge.classList.remove("force-glow"), 5000);
-    console.log("Trigger Force Effects");
-  } else {
-    console.log("Badge not found");
-  }
-}
-
 function triggerSecretUnlock(type) {
   const eggId = `secret_${type}`;
 
@@ -450,11 +412,16 @@ function triggerSecretUnlock(type) {
     // Assign XP based on difficulty
     if (type === "konami") {
       addExperience(500); // Massive bonus for the long code
-    } else if (type === "gravity" || type === "matrix") {
-      addExperience(45); // 1 full level
+    } else if (type === "gravity") {
+      addExperience(250); // 1 full level
     } else if (type === "pulse") {
       addExperience(180); // 4 levels
+    } else if (type === "footer_surge") {
+      addExperience(1000); // 4 levels
+    } else if (type === "badge_click") {
+      addExperience(45); // 4 levels
     } else {
+      // matrix
       addExperience(75); // 2 full levels
     }
 
@@ -1243,13 +1210,14 @@ function handleFooterDotClick() {
   const ping = document.getElementById("footer-dot-ping");
 
   if (clicks >= 10) {
-    // Trigger the main function
-    triggerForceSurge();
-
     // 3. Update the global unlockedEggs array
-    unlockedEggs.push("footer_surge");
-    localStorage.setItem("unlockedEggs", JSON.stringify(unlockedEggs));
+    if (!unlockedEggs.includes("secret_footer_surge")) {
+      // Trigger the main function
+      triggerForceSurge();
 
+      unlockedEggs.push("secret_footer_surge");
+      localStorage.setItem("unlockedEggs", JSON.stringify(unlockedEggs));
+    }
     // Cleanup temporary click counter
     localStorage.removeItem("footerDotClicks");
 
@@ -1297,8 +1265,6 @@ window.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const devToolsVisible = localStorage.getItem("devToolsVisible") === "true";
   const devPanel = document.getElementById("dev-tools");
-  // Add this to your initialization script
-  let skillHoverCount = 0;
 
   if (devToolsVisible && devPanel) {
     devPanel.classList.remove("hidden");
