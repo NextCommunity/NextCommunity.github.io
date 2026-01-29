@@ -1214,7 +1214,7 @@ function initSkillXP() {
         .getElementById("dev-tools")
         ?.hasAttribute("data-lock");
       if (!isLocked) {
-        addExperience(1);
+        addExperience(XP_MOUSE_HOVER);
         createFloatingXP(e);
 
         // Fancy scale-up on hover
