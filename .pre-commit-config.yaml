@@ -120,7 +120,6 @@ repos:
         name: run biome-check
         description: Run Biome linter and formatter for JSON files
         additional_dependencies: ["@biomejs/biome"]
-        args: ["--files-ignore-unknown=true"]
 
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v4.0.0-alpha.8
