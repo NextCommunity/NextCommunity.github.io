@@ -66,7 +66,7 @@ body {
 .user-card h2,
 .profile-link,
 .user-card a {
-  color: var(--accent) !important;
+  color: var(--accent);
   font-weight: 800;
   text-decoration: none;
   /* Animate ONLY the color property when theme changes */
@@ -88,16 +88,16 @@ body {
 
 /* Button to trigger Screenshot Mode in the Dev Panel */
 .screenshot-btn {
-  border-color: var(--text-muted) !important;
-  color: var(--text-muted) !important;
-  font-size: 0.6rem !important;
+  border-color: var(--text-muted);
+  color: var(--text-muted);
+  font-size: 0.6rem;
   margin-top: 10px;
 }
 
 /* If your links look like tags/pills */
 .link-pill {
-  background-color: var(--accent-light) !important;
-  color: var(--accent) !important;
+  background-color: var(--accent-light);
+  color: var(--accent);
   padding: 0.2rem 0.6rem;
   border-radius: 6px;
   font-size: 0.8rem;
@@ -110,8 +110,8 @@ body {
 
 /* If you have a specific button-style profile link */
 .profile-btn {
-  background-color: var(--accent-light) !important;
-  color: var(--accent) !important;
+  background-color: var(--accent-light);
+  color: var(--accent);
   border: 1px solid var(--accent);
   padding: 0.5rem 1rem;
   border-radius: 8px;
@@ -120,8 +120,8 @@ body {
 }
 
 .profile-btn:hover {
-  background-color: var(--accent) !important;
-  color: #ffffff !important;
+  background-color: var(--accent);
+  color: #ffffff;
   box-shadow: 0 4px 15px var(--accent-light);
 }
 
@@ -133,8 +133,8 @@ body {
   justify-content: center;
   gap: 0.4rem;
   padding: 0.4rem 0.9rem;
-  background-color: var(--accent-light) !important;
-  color: var(--accent) !important;
+  background-color: var(--accent-light);
+  color: var(--accent);
   border: 1px solid rgba(var(--accent-rgb), 0.2);
   border-radius: 9999px;
   font-size: 0.7rem;
@@ -146,8 +146,8 @@ body {
 }
 
 .skill-item:hover {
-  background-color: var(--accent) !important;
-  color: #ffffff !important;
+  background-color: var(--accent);
+  color: #ffffff;
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.4);
 }
@@ -156,9 +156,9 @@ body {
  * 3. BUTTONS & SHIMMER EFFECTS
  */
 .surprise-btn {
-  background-color: #2563eb !important;
-  color: #ffffff !important;
-  display: inline-flex !important;
+  background-color: #2563eb;
+  color: #ffffff;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.6rem 1.5rem;
@@ -175,7 +175,7 @@ body {
 }
 
 .dark .surprise-btn {
-  background-color: var(--accent) !important;
+  background-color: var(--accent);
 }
 
 .surprise-btn:hover {
@@ -211,7 +211,7 @@ body {
  * 4. DEVELOPER TOOLS - INDESTRUCTIBLE VIEWPORT PANEL
  */
 #dev-tools {
-  position: fixed !important;
+  position: fixed;
   top: 1rem;
   right: 1rem;
   width: 280px;
@@ -225,7 +225,7 @@ body {
   padding: 1.25rem;
   border-radius: 12px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-  z-index: 2147483647 !important;
+  z-index: 2147483647;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform: translateZ(0); /* Force layer isolation */
 }
@@ -233,16 +233,16 @@ body {
 /* NUCLEAR LOCK: Forces stability during page-wide glitches */
 #dev-tools[data-lock="true"],
 html body #dev-tools[data-lock="true"] {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: fixed !important;
-  top: 1rem !important;
-  right: 1rem !important;
-  transform: none !important;
-  animation: none !important;
-  border-left-color: #ef4444 !important;
-  box-shadow: 0 0 40px rgba(239, 68, 68, 0.6) !important;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  transform: none;
+  animation: none;
+  border-left-color: #ef4444;
+  box-shadow: 0 0 40px rgba(239, 68, 68, 0.6);
 }
 
 #dev-tools button {
@@ -268,16 +268,16 @@ html body #dev-tools[data-lock="true"] {
 
 /* Console Neon Overrides */
 #dev-tools button[onclick*="matrix"] {
-  color: #00ff41 !important;
+  color: #00ff41;
 }
 #dev-tools button[onclick*="konami"] {
-  color: #ffcc00 !important;
+  color: #ffcc00;
 }
 #dev-tools button[onclick*="gravity"] {
-  color: #ff3333 !important;
+  color: #ff3333;
 }
 #dev-tools button[onclick*="badge_click"] {
-  color: #bc13fe !important;
+  color: #bc13fe;
 }
 
 /**
@@ -302,8 +302,8 @@ html body #dev-tools[data-lock="true"] {
 }
 
 #repair-btn {
-  background-color: #2563eb !important; /* Restore to Blue */
-  color: #fff !important;
+  background-color: #2563eb; /* Restore to Blue */
+  color: #fff;
   border: 4px solid #fff;
   border-radius: 9999px;
   padding: 1.5rem 3rem;
@@ -375,7 +375,7 @@ html body #dev-tools[data-lock="true"] {
 /* Ensure the card can show the trace glow */
 .user-card.selected-fancy {
   z-index: 50;
-  overflow: visible !important;
+  overflow: visible;
   transform: scale(1.02);
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -420,8 +420,8 @@ html body #dev-tools[data-lock="true"] {
 
 /* Special styling for those who have reached Level 5 (Data Miner) */
 body[data-level="5"] .skill-item {
-  border-color: #06b6d4 !important; /* Data Miner Cyan */
-  background: rgba(6, 182, 212, 0.1) !important;
+  border-color: #06b6d4; /* Data Miner Cyan */
+  background: rgba(6, 182, 212, 0.1);
   position: relative;
   overflow: hidden;
 }
@@ -466,8 +466,8 @@ body[data-level="5"] .skill-item::before {
 /* Level 5 Specific Visual Perk */
 .level-architect .skill-item,
 body[data-level="5"] .skill-item {
-  border-color: #06b6d4 !important;
-  background: rgba(6, 182, 212, 0.1) !important;
+  border-color: #06b6d4;
+  background: rgba(6, 182, 212, 0.1);
   box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
 }
 
@@ -496,7 +496,7 @@ body[data-level="6"]::after {
 /* Added via JS when XP increases */
 .xp-pulse {
   transform: scale(1.3);
-  color: white !important;
+  color: white;
 }
 #jump-lvl {
   font-family: "Courier New", monospace;
@@ -505,18 +505,18 @@ body[data-level="6"]::after {
 #jump-lvl {
   appearance: textfield; /* Removes default arrows */
   -webkit-appearance: none;
-  line-height: 30px !important;
+  line-height: 30px;
 }
 
 #jump-lvl::placeholder {
-  color: rgba(0, 255, 204, 0.3) !important;
+  color: rgba(0, 255, 204, 0.3);
 }
 
 /* Force standard text color even on focus */
 #jump-lvl:focus {
-  outline: 2px solid #00ffcc !important;
-  background-color: #000 !important;
-  color: #00ffcc !important;
+  outline: 2px solid #00ffcc;
+  background-color: #000;
+  color: #00ffcc;
 }
 /* Base Force Aura Animation */
 @keyframes force-pulse {
@@ -536,7 +536,7 @@ body[data-level="6"]::after {
 
 /* Ensure the parent container has a background so you can see the 'empty' part */
 #game-stats .bg-black\/10 {
-  background-color: rgba(0, 0, 0, 0.1) !important;
+  background-color: rgba(0, 0, 0, 0.1);
   min-width: 80px; /* Ensure it hasn't collapsed to 0 width */
   height: 6px;
 }
@@ -545,8 +545,8 @@ body[data-level="6"]::after {
 #level-progress {
   height: 100%;
   background-color: var(--accent); /* This is the level color */
-  transition: width 0.3s ease-in-out !important; /* Make it smooth */
-  display: block !important;
+  transition: width 0.3s ease-in-out; /* Make it smooth */
+  display: block;
 }
 
 /* Force Glow for the Badge */
@@ -571,7 +571,7 @@ body[data-level="6"]::after {
   letter-spacing: 0.02em;
 
   /* Remove any existing filters that cause fuzziness */
-  filter: none !important;
+  filter: none;
   transition: color 0.3s ease;
 }
 
@@ -814,12 +814,12 @@ a:hover {
 }
 /* Maximize State */
 .console-maximized {
-  width: 90vw !important;
-  height: auto !important;
-  bottom: 5vh !important;
-  right: 5vw !important;
-  left: 5vw !important;
-  z-index: 2000 !important;
+  width: 90vw;
+  height: auto;
+  bottom: 5vh;
+  right: 5vw;
+  left: 5vw;
+  z-index: 2000;
 }
 
 #matrix-console-output {
@@ -860,9 +860,9 @@ a:hover {
 
 /* Full-screen Force Field */
 .force-field-overlay {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 999999 !important;
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
   background: radial-gradient(
     circle,
     rgba(0, 150, 255, 0.1) 0%,
