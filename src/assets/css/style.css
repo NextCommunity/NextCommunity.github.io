@@ -918,6 +918,11 @@ a:hover {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 9999;
-  pointer-events: none; /* Allow clicks to pass through to the site if needed */
+  z-index: 9999; /* Ensures it sits ABOVE your website content */
+  pointer-events: none; /* Let's start with none so it doesn't block the heart */
+}
+
+/* Ensure the canvas itself fills the container */
+#phaser-container canvas {
+  display: block;
 }

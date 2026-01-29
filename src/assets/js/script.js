@@ -1337,41 +1337,6 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-let heartClickCount = 0;
-let phaserStarted = false;
-
-const heart = document.getElementById("footer-heart");
-
-heart.addEventListener("click", () => {
-  heartClickCount++;
-
-  // 1. Grow the heart with each click
-  const scaleAmount = 1 + heartClickCount * 0.3;
-  heart.style.transform = `scale(${scaleAmount})`;
-  heart.style.display = "inline-block"; // Ensuring transform works
-  heart.style.transition =
-    "transform 0.1s cubic-bezier(0.17, 0.67, 0.83, 0.67)";
-
-  // 2. The Big Swap at 5 clicks
-  if (heartClickCount === 5 && !phaserStarted) {
-    phaserStarted = true;
-
-    // Visual "Pop" effect
-    heart.innerHTML = "🎮"; // Swap to gamer emoji
-    heart.style.transform = "scale(1.5)"; // Slight bounce
-
-    // Give the user a split second to see the emoji before Phaser starts
-    setTimeout(() => {
-      // Optional: make the emoji float away or disappear
-      heart.classList.add("animate-ping"); // Uses Tailwind's built-in animation
-
-      initPhaserGame();
-
-      // Optional: Hide the emoji after Phaser covers the screen
-      // setTimeout(() => { heart.style.opacity = '0'; }, 500);
-    }, 300);
-  }
-});
 /**
  * INITIALIZATION
  */
