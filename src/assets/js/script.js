@@ -104,7 +104,7 @@ function playSound(type) {
   }
 }
 
-let unlockedEggs = JSON.parse(localStorage.getItem("unlockedEggs")) || [];
+const unlockedEggs = JSON.parse(localStorage.getItem("unlockedEggs")) || [];
 let surpriseClickCount = 0;
 let matrixActive = false;
 let destructInterval;
@@ -233,7 +233,7 @@ function reopenConsole() {
 let isProcessingXP = false;
 
 // Ensure this is in the GLOBAL scope (not hidden inside another function)
-window.createFloatingXP = function (e) {
+window.createFloatingXP = (e) => {
   // Prevent "spam" firing from high-speed mouse movement
   if (isProcessingXP) return;
   isProcessingXP = true;
@@ -758,7 +758,7 @@ document
 /**
  * 7. SELF DESTRUCT ENGINE
  */
-window.startSelfDestruct = function () {
+window.startSelfDestruct = () => {
   const btn = document.getElementById("self-destruct-btn");
   const devPanel = document.getElementById("dev-tools");
 
@@ -886,7 +886,7 @@ function scrollToRandomUser() {
 /**
  * UTILITY: SCREENSHOT MODE
  */
-window.toggleScreenshotMode = function () {
+window.toggleScreenshotMode = () => {
   const devPanel = document.getElementById("dev-tools");
   const header = document.querySelector("header");
   const footer = document.querySelector("footer");
@@ -1002,7 +1002,7 @@ document.addEventListener("keydown", (e) => {
 
 async function addExperience(amount) {
   // 1. Force strict numeric types to prevent "1" + "1" = "11"
-  let xpToAdd = Number(amount) || 0;
+  const xpToAdd = Number(amount) || 0;
   currentXP = Number(currentXP) || 0;
   currentLevel = Number(currentLevel) || 0;
   const XP_THRESHOLD = 45;
@@ -1064,7 +1064,7 @@ function updateInventoryCounts(lvl) {
     const levelEntry = LEVELS[i];
     if (levelEntry && levelEntry.rarity) {
       const r = levelEntry.rarity.toLowerCase();
-      if (counts.hasOwnProperty(r)) {
+      if (Object.hasOwn(counts, r)) {
         counts[r]++;
       }
     }
@@ -1199,7 +1199,7 @@ function initProfileTracker() {
 
     // Only increment if the link text contains "Profile"
     if (targetLink && targetLink.textContent.includes("Profile")) {
-      let currentCount = parseInt(
+      const currentCount = parseInt(
         localStorage.getItem("profile_view_count") || 0,
       );
       localStorage.setItem("profile_view_count", currentCount + 1);

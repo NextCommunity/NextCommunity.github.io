@@ -1,9 +1,7 @@
 const yaml = require("js-yaml");
 
-module.exports = function (eleventyConfig) {
-  eleventyConfig.addShortcode("currentYear", function () {
-    return new Date().getFullYear();
-  });
+module.exports = (eleventyConfig) => {
+  eleventyConfig.addShortcode("currentYear", () => new Date().getFullYear());
   // Add this line to copy your external assets
   eleventyConfig.addPassthroughCopy("src/assets");
   // 1. Recognize YAML as a template format
@@ -27,12 +25,12 @@ module.exports = function (eleventyConfig) {
   });
 
   // 2. The Randomized Collection
-  eleventyConfig.addCollection("randomPeople", function (collectionApi) {
+  eleventyConfig.addCollection("randomPeople", (collectionApi) => {
     // Grab all yaml files from the users folder
     const people = collectionApi.getFilteredByGlob("src/users/*.yaml");
 
     // Create a copy of the array to avoid mutating the original global collection
-    let shuffled = [...people];
+    const shuffled = [...people];
 
     // Fisher-Yates Shuffle
     for (let i = shuffled.length - 1; i > 0; i--) {
