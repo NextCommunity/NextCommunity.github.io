@@ -26,5 +26,6 @@ jobs:
           VALIDATE_EDITORCONFIG: true
           VALIDATE_MARKDOWN: true
           VALIDATE_YAML: true
+          VALIDATE_JSON: true
           VALIDATE_BIOME: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
