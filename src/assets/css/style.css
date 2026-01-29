@@ -5,75 +5,93 @@
   --bg-page: #f0f4f8;
   --bg-card: #ffffff;
   --bg-footer: #e2e8f0;
-  --text-main: #1a202c;
+  --text-main: #1e293b; /* Default Light */
   --text-muted: #4a5568;
   --border-color: #cbd5e0;
-  --accent: #2563eb;
+  --accent: #94a3b8; /* Default */
   --accent-light: #eff6ff;
   --accent-rgb: 37, 99, 235;
   --danger: #dc2626;
-  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --card-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* Default Rarity Colors */
+  --rarity-common: #94a3b8;
+  --rarity-uncommon: #64748b; /* Adjusted from pure black for better theme compatibility */
+  --rarity-rare: #3b82f6;
+  --rarity-epic: #a855f7;
+  --rarity-legendary: #fbbf24;
+  --rarity-mythic: #ef4444;
+  --rarity-absolute: #ffffff;
 }
 
 .dark {
   --bg-page: #05070a;
-  --bg-card: #0f172a;
+  --bg-card: #1e293b;
   --bg-footer: #020617;
-  --text-main: #f1f5f9;
+  --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --border-color: #1e293b;
   --accent: #38bdf8;
   --accent-light: rgba(56, 189, 248, 0.1);
   --danger: #f87171;
   --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --rarity-absolute: #ffffff;
+  --rarity-uncommon: #cbd5e1;
 }
 
-html, body {
+/* Light Mode specific overrides if needed */
+.light {
+  --rarity-absolute: #0f172a; /* Make absolute dark on light themes so it's visible */
+  --rarity-uncommon: #1e293b;
+}
+
+html,
+body {
   overflow-x: clip;
   min-height: 100%;
   background-color: var(--bg-page);
   color: var(--text-main);
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
   scroll-behavior: smooth;
 }
-
-
 
 /**
  * 2. USER CARDS - DYNAMIC & STATIC
  */
-.user-card h2 {
-  /* Dynamic color from theme logic */
+/**
+ * DYNAMIC COLORING (NO ANIMATION)
+ */
+.user-card h2,
+.profile-link,
+.user-card a {
   color: var(--accent) !important;
   font-weight: 800;
-  transition: color 0.3s ease; /* Only animate the color fade, not movement */
-  margin-bottom: 0.5rem;
-}
-
-/* Hover state: No movement, just a slight brightness shift */
-.user-card:hover h2 {
-  filter: brightness(1.1);
-}
-
-/**
- * 3. PROFILE LINKS - THEMED
- */
-.profile-link,
-.user-card a[href*="github"],
-.user-card a[href*="linkedin"] {
-  color: var(--accent) !important;
-  font-weight: 700;
   text-decoration: none;
-  transition: opacity 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
+  /* Animate ONLY the color property when theme changes */
+  transition:
+    color 0.4s ease,
+    opacity 0.2s ease;
+}
+
+/* Static Hover: No movement */
+.user-card:hover h2 {
+  filter: brightness(1.2);
 }
 
 .profile-link:hover,
 .user-card a:hover {
   text-decoration: underline;
-  opacity: 0.8; /* Subtle visual feedback instead of moving */
+  opacity: 0.8;
+}
+
+/* Button to trigger Screenshot Mode in the Dev Panel */
+.screenshot-btn {
+  border-color: var(--text-muted) !important;
+  color: var(--text-muted) !important;
+  font-size: 0.6rem !important;
+  margin-top: 10px;
 }
 
 /* If your links look like tags/pills */
@@ -89,8 +107,6 @@ html, body {
 .link-pill:hover {
   border-color: var(--accent);
 }
-
-
 
 /* If you have a specific button-style profile link */
 .profile-btn {
@@ -158,7 +174,9 @@ html, body {
   overflow: hidden;
 }
 
-.dark .surprise-btn { background-color: var(--accent) !important; }
+.dark .surprise-btn {
+  background-color: var(--accent) !important;
+}
 
 .surprise-btn:hover {
   transform: translateY(-2px);
@@ -166,19 +184,28 @@ html, body {
   filter: brightness(1.1);
 }
 
-.surprise-btn::after, .skill-item::after {
-  content: '';
+.surprise-btn::after,
+.skill-item::after {
+  content: "";
   position: absolute;
   top: 0;
   left: -150%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
   transform: skewX(-20deg);
   transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.surprise-btn:hover::after, .skill-item:hover::after { left: 150%; }
+.surprise-btn:hover::after,
+.skill-item:hover::after {
+  left: 150%;
+}
 
 /**
  * 4. DEVELOPER TOOLS - INDESTRUCTIBLE VIEWPORT PANEL
@@ -206,20 +233,20 @@ html, body {
 /* NUCLEAR LOCK: Forces stability during page-wide glitches */
 #dev-tools[data-lock="true"],
 html body #dev-tools[data-lock="true"] {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: fixed !important;
-    top: 1rem !important;
-    right: 1rem !important;
-    transform: none !important;
-    animation: none !important;
-    border-left-color: #ef4444 !important;
-    box-shadow: 0 0 40px rgba(239, 68, 68, 0.6) !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: fixed !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  transform: none !important;
+  animation: none !important;
+  border-left-color: #ef4444 !important;
+  box-shadow: 0 0 40px rgba(239, 68, 68, 0.6) !important;
 }
 
 #dev-tools button {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 0.75rem;
   background: rgba(255, 255, 255, 0.03);
   color: #e2e8f0;
@@ -240,22 +267,38 @@ html body #dev-tools[data-lock="true"] {
 }
 
 /* Console Neon Overrides */
-#dev-tools button[onclick*="matrix"] { color: #00ff41 !important; }
-#dev-tools button[onclick*="konami"] { color: #ffcc00 !important; }
-#dev-tools button[onclick*="gravity"] { color: #ff3333 !important; }
-#dev-tools button[onclick*="badge_click"] { color: #bc13fe !important; }
+#dev-tools button[onclick*="matrix"] {
+  color: #00ff41 !important;
+}
+#dev-tools button[onclick*="konami"] {
+  color: #ffcc00 !important;
+}
+#dev-tools button[onclick*="gravity"] {
+  color: #ff3333 !important;
+}
+#dev-tools button[onclick*="badge_click"] {
+  color: #bc13fe !important;
+}
 
 /**
  * 5. SELF DESTRUCT & REPAIR
  */
 #destruct-bar-container {
-    width: 100%; height: 14px; background: #000;
-    border: 2px solid #333; margin-top: 15px; border-radius: 4px;
+  width: 100%;
+  height: 14px;
+  background: #000;
+  border: 2px solid #333;
+  margin-top: 15px;
+  border-radius: 4px;
 }
 
 #destruct-bar-progress {
-    height: 100%; width: 0%; background: #22c55e;
-    transition: width 1s linear, background-color 0.3s;
+  height: 100%;
+  width: 0%;
+  background: #22c55e;
+  transition:
+    width 1s linear,
+    background-color 0.3s;
 }
 
 #repair-btn {
@@ -268,7 +311,8 @@ html body #dev-tools[data-lock="true"] {
   box-shadow: 0 0 60px rgba(37, 99, 235, 0.6);
   z-index: 10001;
   position: fixed;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
@@ -276,18 +320,556 @@ html body #dev-tools[data-lock="true"] {
  * 6. ANIMATIONS
  */
 @keyframes shake-anim {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(3px, -3px); }
-  50% { transform: translate(-3px, 3px); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(3px, -3px);
+  }
+  50% {
+    transform: translate(-3px, 3px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
-.glitch-shake { animation: shake-anim 0.1s infinite; overflow: hidden; }
+.glitch-shake {
+  animation: shake-anim 0.1s infinite;
+  overflow: hidden;
+}
 
 @keyframes konami-barrel-roll {
-    0% { transform: rotate(0deg) scale(1); filter: hue-rotate(0deg); }
-    50% { transform: rotate(180deg) scale(0.8); filter: hue-rotate(180deg); }
-    100% { transform: rotate(360deg) scale(1); filter: hue-rotate(360deg); }
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+    filter: hue-rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    filter: hue-rotate(360deg);
+  }
 }
 
-.konami-roll { animation: konami-barrel-roll 2s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
+.konami-roll {
+  animation: konami-barrel-roll 2s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+/**
+ * FANCY USER SELECTION EFFECT
+ */
+@keyframes fancy-ping {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(var(--accent-rgb), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0);
+  }
+}
+/* Ensure the card can show the trace glow */
+.user-card.selected-fancy {
+  z-index: 50;
+  overflow: visible !important;
+  transform: scale(1.02);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.border-trace {
+  position: absolute;
+  inset: -2px; /* Slightly outside the card border */
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  pointer-events: none;
+  fill: none;
+}
+
+.border-trace rect {
+  stroke-width: 4px;
+  stroke-linecap: round;
+  /* Perimeter length - 2500px is a safe bet for these cards */
+  stroke-dasharray: 2500;
+  stroke-dashoffset: 2500;
+  animation: retrace-sequence 7.5s linear forwards;
+}
+
+@keyframes retrace-sequence {
+  0% {
+    stroke-dashoffset: 2500;
+    stroke: var(--accent);
+    filter: drop-shadow(0 0 8px var(--accent));
+  }
+  100% {
+    stroke-dashoffset: 0;
+    /* Cycle through colors while drawing */
+    stroke: var(--accent);
+    filter: drop-shadow(0 0 12px var(--accent)) hue-rotate(360deg);
+  }
+}
+/* Visual feedback when hovering a skill to gain XP */
+.mining-xp {
+  filter: brightness(1.5);
+  box-shadow: 0 0 15px var(--accent);
+  transition: all 0.2s ease;
+}
+
+/* Special styling for those who have reached Level 5 (Data Miner) */
+body[data-level="5"] .skill-item {
+  border-color: #06b6d4 !important; /* Data Miner Cyan */
+  background: rgba(6, 182, 212, 0.1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add a gem-like sparkle to skills at Level 5 */
+body[data-level="5"] .skill-item::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: gem-shimmer 3s infinite;
+}
+
+@keyframes gem-shimmer {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+@keyframes float-up {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50px);
+    opacity: 0;
+  }
+}
+
+/* Level 5 Specific Visual Perk */
+.level-architect .skill-item,
+body[data-level="5"] .skill-item {
+  border-color: #06b6d4 !important;
+  background: rgba(6, 182, 212, 0.1) !important;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+}
+
+.skill-item {
+  cursor: crosshair; /* Makes it feel like you are "mining" */
+}
+/* Level 6 Visuals */
+body[data-level="6"] .user-card {
+  border-color: rgba(236, 72, 153, 0.3);
+}
+
+body[data-level="6"]::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+  background-size: 100% 4px;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.2; /* Very subtle scanlines */
+}
+
+/* Added via JS when XP increases */
+.xp-pulse {
+  transform: scale(1.3);
+  color: white !important;
+}
+#jump-lvl {
+  font-family: "Courier New", monospace;
+  text-shadow: 0 0 5px var(--accent);
+} /* Ensure the text inside the jump box is always visible */
+#jump-lvl {
+  appearance: textfield; /* Removes default arrows */
+  -webkit-appearance: none;
+  line-height: 30px !important;
+}
+
+#jump-lvl::placeholder {
+  color: rgba(0, 255, 204, 0.3) !important;
+}
+
+/* Force standard text color even on focus */
+#jump-lvl:focus {
+  outline: 2px solid #00ffcc !important;
+  background-color: #000 !important;
+  color: #00ffcc !important;
+}
+/* Base Force Aura Animation */
+@keyframes force-pulse {
+  0% {
+    transform: scale(1);
+    filter: brightness(1) drop-shadow(0 0 5px var(--glow-color));
+  }
+  50% {
+    transform: scale(1.1);
+    filter: brightness(1.4) drop-shadow(0 0 20px var(--glow-color));
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1) drop-shadow(0 0 5px var(--glow-color));
+  }
+}
+
+/* The Active Class */
+.force-glow {
+  --glow-color: #38bdf8; /* Default Jedi Blue */
+  position: relative;
+  z-index: 10;
+  transition: all 0.5s ease;
+  animation: force-pulse 10s infinite ease-in-out;
+}
+
+/* Sith Variant (Red Glow) */
+[data-level^="13"],
+[data-level^="14"],
+[data-level^="15"] .force-glow {
+  --glow-color: #ef4444; /* Sith Red */
+}
+
+/* Ensure the parent container has a background so you can see the 'empty' part */
+#game-stats .bg-black\/10 {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  min-width: 80px; /* Ensure it hasn't collapsed to 0 width */
+  height: 6px;
+}
+
+/* Ensure the progress bar itself has a height and a visible color */
+#level-progress {
+  height: 100%;
+  background-color: var(--accent); /* This is the level color */
+  transition: width 0.3s ease-in-out !important; /* Make it smooth */
+  display: block !important;
+}
+
+/* Force Glow for the Badge */
+@keyframes force-pulse {
+  0% {
+    filter: drop-shadow(0 0 2px var(--accent));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px var(--accent));
+    transform: scale(1.1);
+  }
+  100% {
+    filter: drop-shadow(0 0 2px var(--accent));
+    transform: scale(1);
+  }
+}
+
+#level-name {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+
+  /* Remove any existing filters that cause fuzziness */
+  filter: none !important;
+  transition: color 0.3s ease;
+}
+
+/* Adjust the stroke for Dark/Random themes to keep it crisp */
+.dark #level-name {
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+}
+
+#level-badge {
+  transition:
+    background-color 0.4s ease,
+    transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Ensure the XP numbers are always legible */
+#total-xp-display {
+  color: var(--text-main);
+  filter: brightness(1.2); /* Pops slightly more in dark mode */
+}
+
+/* Progress bar should always have a high-contrast background */
+.xp-bar-container {
+  background: rgba(0, 0, 0, 0.1);
+}
+.dark .xp-bar-container {
+  background: rgba(255, 255, 255, 0.1);
+}
+.xp-popup {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+  animation: floatUp 1s ease-out forwards;
+  color: var(--accent); /* This uses our dynamic level color! */
+  font-size: 0.75rem;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+@keyframes xpFloat {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-40px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.animate-xp-float {
+  animation: xpFloat 1s ease-out forwards;
+  /* This makes sure the text is crisp on light/dark themes */
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Username: Big, bold, and using the random accent */
+.developer-name,
+h1 {
+  color: var(--accent);
+  text-shadow: 0 0 20px hsla(var(--accent-hue), 90%, 65%, 0.3);
+}
+
+/* Skills: Give them a 'glass' look using the random background */
+.skill-tag {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.skill-tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 15px var(--accent);
+}
+
+/* Links: Make them pop! */
+a {
+  color: var(--accent);
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  filter: brightness(1.2);
+  text-decoration: underline;
+}
+
+@keyframes badgePop {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.4);
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+.animate-badge-pop {
+  animation: badgePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  z-index: 101; /* Ensure it pops above the header bar */
+}
+
+/* Optional: Add a glow to the level number too */
+#level-number {
+  transition: all 0.3s ease;
+}
+.animate-badge-pop #level-number {
+  color: white;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+}
+
+.level-up-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.9); /* Dark background for contrast */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.5),
+    0 0 15px var(--accent); /* Glow matches current level */
+  z-index: 1000;
+  animation: slideDownIn 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.toast-emoji {
+  font-size: 2rem;
+}
+
+.toast-title {
+  color: #94a3b8;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1rem;
+  margin: 0;
+}
+
+.toast-rank {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+@keyframes slideDownIn {
+  from {
+    transform: translate(-50%, -100px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translate(-50%, -20px);
+  transition: all 0.5s ease;
+}
+.matrix-alert {
+  position: fixed;
+  bottom: 20%;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  border-left: 4px solid #10b981;
+  color: #10b981;
+  padding: 15px;
+  font-family: "Courier New", monospace;
+  z-index: 2000;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+  animation: matrixSlideIn 0.3s ease-out;
+}
+
+@keyframes matrixSlideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+#matrix-console-output {
+  /* Subtle green glow on text */
+  text-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom scrollbar for the terminal */
+#matrix-console-output::-webkit-scrollbar {
+  width: 3px;
+}
+#matrix-console-output::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.3);
+}
+
+/* The Matrix Line Animation */
+.matrix-line {
+  border-left: 2px solid #10b981;
+  padding-left: 8px;
+  margin-bottom: 4px;
+  animation: matrixLineFade 0.3s ease-out;
+}
+
+@keyframes matrixLineFade {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* Maximize State */
+.console-maximized {
+  width: 90vw !important;
+  height: auto !important;
+  bottom: 5vh !important;
+  right: 5vw !important;
+  left: 5vw !important;
+  z-index: 2000 !important;
+}
+
+#matrix-console-output {
+  scrollbar-width: thin;
+  scrollbar-color: #10b981 transparent;
+}
+
+/* Add a scanline effect for that retro terminal feel */
+#matrix-console-output::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  z-index: 10;
+  background-size:
+    100% 2px,
+    3px 100%;
+  pointer-events: none;
+}
+.cursor-grab:active {
+  cursor: grabbing;
+}
+
+/* Prevents the terminal text from getting highlighted while you move the window */
+#matrix-console-container.is-dragging {
+  user-select: none;
+}

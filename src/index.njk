@@ -25,23 +25,23 @@ layout: false
               <h2 class="text-2xl font-bold group-hover:text-accent transition-colors">{{ person.data.name }}</h2>
               <p class="text-accent font-semibold text-sm uppercase tracking-wider">{{ person.data.role }}</p>
             </div>
+            {% set location = person.data.location %}
+            {% if location %}
             <span class="shrink-0 text-[10px] bg-[var(--bg-footer)] text-[var(--text-muted)] px-2 py-1 rounded font-bold uppercase border border-[var(--border-color)]">
-              {{ person.data.location }}
+              {{ location }}
             </span>
+            {% endif %}
           </div>
 
           <div class="mt-6 flex flex-wrap gap-2">
             {% set skills = person.data.languages.split(' ') %}
-            <div class="skills-list">
-              {% for skill in skills %}
-                <span class="skill-item">
-                  <span>{{ skill }}</span>
-                </span>
-              {% endfor %}
-            </div>
+            {% include "skills-list.njk" %}
           </div>
 
-          <p class="mt-4 text-[var(--text-muted)] text-sm italic line-clamp-3">"{{ person.data.bio | truncate(120) }}"</p>
+          {% set bio = person.data.bio %}
+          {% if bio %}
+          <p class="mt-4 text-[var(--text-muted)] text-sm italic line-clamp-3">"{{ bio | truncate(120) }}"</p>
+          {% endif %}
         </div>
 
         <div class="mt-auto p-4 flex justify-between items-center px-6 bg-black/5 dark:bg-white/5 border-t border-[var(--border-color)]">
@@ -66,11 +66,5 @@ layout: false
 
   {% include "footer.njk" %}
 
-  <div id="matrix-overlay" class="fixed inset-0 bg-black hidden z-[9999]">
-      <canvas id="matrix-canvas"></canvas>
-      <button onclick="closeMatrix()" class="fixed top-8 right-8 z-[10000] bg-white/10 text-white px-4 py-2 rounded-full border border-white/20 backdrop-blur-md text-xs">EXIT [ESC]</button>
-  </div>
-
-  <script src="/assets/js/script.js"></script>
 </body>
 </html>

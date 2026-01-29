@@ -1,0 +1,91 @@
+<div class="flex items-center gap-3 md:gap-4">
+    {% if page.url == "/" %}
+    <button onclick="scrollToRandomUser()" class="surprise-btn bg-blue-600 text-white px-8 py-3 rounded-full font-black uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-blue-500/30">
+        ✨ Surprise Me
+    </button>
+    {% endif %}
+
+    <div id="game-stats" class="flex items-center gap-3 md:gap-4 px-3 py-1.5 md:px-4 md:py-2 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl shadow-sm">
+
+        <div id="level-badge" onclick="handleLevelClick()" class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-xl text-lg md:text-xl bg-black/5 dark:bg-white/5 relative cursor-pointer hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
+            🐣
+        </div>
+
+        <div class="hidden sm:flex flex-col">
+            <div class="flex items-center gap-2">
+
+                <div class="relative group">
+                    <span id="level-name" class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[var(--text-main)] cursor-help hover:text-accent transition-colors">
+                        Newbie
+                    </span>
+
+                    <div id="level-tooltip" class="absolute top-full left-0 mt-2 w-56 p-3 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-xl opacity-0 scale-95 -translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0 z-50">
+                        <div id="tooltip-rarity" class="text-[7px] font-black uppercase tracking-tighter px-1.5 py-0.5 rounded mb-1.5 inline-block bg-accent/10 text-accent border border-current/20">Common</div>
+                        <p id="tooltip-desc" class="text-[10px] leading-relaxed text-[var(--text-main)] opacity-70 italic">Just starting your cosmic journey.</p>
+                        <div class="absolute -top-1 left-4 w-2 h-2 bg-[var(--bg-card)] border-l border-t border-[var(--border-color)] rotate-45"></div>
+                    </div>
+                </div>
+
+                <span class="text-[8px] font-mono font-bold text-accent bg-accent/10 px-1.5 py-0.5 rounded">
+                    XP: <span id="total-xp-display">0 / 45</span>
+                </span>
+
+                <div class="relative group">
+                    <span class="text-[8px] md:text-[9px] opacity-60 font-bold bg-black/5 dark:bg-white/10 px-1.5 py-0.5 rounded cursor-help hover:text-accent transition-colors">
+                        LVL <span id="level-number">0</span>
+                    </span>
+
+                    <div class="absolute top-full right-0 mt-2 w-44 p-3 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-xl opacity-0 scale-95 -translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0 z-50">
+                        <div class="text-[8px] font-black uppercase tracking-widest mb-2 opacity-50 border-b border-[var(--border-color)] pb-1">Collection</div>
+                        <div class="grid grid-cols-1 gap-1.5 text-[9px] font-bold">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#94a3b8]"></span> Common</div>
+                                <span id="count-common" class="opacity-60 font-mono">0</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>
+                                    Uncommon
+                                </div>
+                                <span id="count-uncommon" class="opacity-60 font-mono">0</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#3b82f6]"></span> Rare</div>
+                                <span id="count-rare" class="opacity-60 font-mono">0</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span> Epic</div>
+                                <span id="count-epic" class="opacity-60 font-mono">0</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#fbbf24]"></span> Legend</div>
+                                <span id="count-legendary" class="opacity-60 font-mono">0</span>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#ef4444]"></span> Mythic</div>
+                                <span id="count-mythic" class="opacity-60 font-mono">0</span>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#ffffff] shadow-[0_0_5px_#fff]"></span> Absolute</div>
+                                <span id="count-absolute" class="opacity-60 font-mono">0</span>
+                            </div>
+                        </div>
+                        <div class="absolute -top-1 right-4 w-2 h-2 bg-[var(--bg-card)] border-l border-t border-[var(--border-color)] rotate-45"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="w-full h-1 md:h-1.5 bg-black/10 dark:bg-white/10 rounded-full mt-1.5 md:mt-2 overflow-hidden">
+                <div id="level-progress" class="h-full bg-accent transition-all duration-1000" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div class="w-px h-6 md:h-8 bg-[var(--border-color)] ml-1"></div>
+
+        <button onclick="toggleTheme()" class="text-base md:text-lg p-1 md:p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-full transition-all" id="theme-icon">
+            🌙
+        </button>
+    </div>
+</div>

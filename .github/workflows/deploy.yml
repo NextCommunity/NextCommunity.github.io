@@ -7,9 +7,10 @@ on:
 
 jobs:
   deployment:
+    if: github.repository == 'NextCommunity/NextCommunity.github.io'
     permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -25,7 +26,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: '_site' # The directory that contains the deployable files
+          path: "_site" # The directory that contains the deployable files
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

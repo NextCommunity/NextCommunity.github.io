@@ -1,62 +1,9 @@
 <header class="sticky top-0 z-[100] w-full bg-[var(--bg-page)]/80 backdrop-blur-md border-b-2 border-[var(--border-color)]">
   <div class="max-w-7xl mx-auto px-4 py-4 md:py-6 flex flex-col lg:flex-row items-center justify-between gap-6">
 
-    <div class="flex flex-col items-center lg:items-start group">
+    {% include "header-details.njk" %}
 
-      <div class="flex items-center">
-        {% if page.url == "/" %}
-          <h1 class="text-3xl md:text-5xl font-black tracking-tighter text-[var(--text-main)] uppercase italic leading-none transition-all">
-            Our Developers
-          </h1>
-        {% else %}
-          <a href="/" class="group/back flex items-center gap-3">
-            <span class="text-2xl md:text-4xl text-accent transition-transform group-hover/back:-translate-x-2">←</span>
-            <h1 class="text-3xl md:text-5xl font-black tracking-tighter text-[var(--text-main)] uppercase italic leading-none transition-all group-hover/back:text-accent">
-              Directory
-            </h1>
-          </a>
-        {% endif %}
-      </div>
+    {% include "game-stats.njk" %}
 
-      <div class="mt-2 text-accent font-mono text-sm md:text-base font-bold tracking-tight">
-        <span class="opacity-100">{{ collections.developer.length or 60 }}</span> Active Profiles
-      </div>
-
-      <p class="hidden md:flex text-[var(--text-muted)] text-[9px] font-mono uppercase tracking-[0.3em] mt-1 items-center gap-2">
-        {% if page.url == "/" %}
-          <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-          Global Talent Directory
-        {% else %}
-          Viewing Profile Details
-        {% endif %}
-      </p>
-    </div>
-
-    <div class="flex items-center gap-3 md:gap-4">
-      {% if page.url == "/" %}
-        <button onclick="scrollToRandomUser()"
-                class="surprise-btn px-4 py-2 md:px-6 md:py-3 bg-accent text-white text-[10px] md:text-[11px] font-black uppercase tracking-widest rounded-xl hover:brightness-110 hover:-translate-y-0.5 transition-all shadow-lg shadow-accent/20">
-          ✨ Surprise
-        </button>
-      {% endif %}
-
-      <div id="game-stats" class="flex items-center gap-3 md:gap-4 px-3 py-1.5 md:px-4 md:py-2 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl shadow-sm">
-          <div id="level-badge" onclick="handleLevelClick()" class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-xl text-lg md:text-xl bg-black/5 dark:bg-white/5">🐣</div>
-
-          <div class="hidden sm:flex flex-col">
-              <div class="flex items-center gap-2">
-                  <span id="level-name" class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[var(--text-main)]">Newbie</span>
-                  <span class="text-[8px] md:text-[9px] opacity-60 font-bold bg-black/5 dark:bg-white/10 px-1.5 py-0.5 rounded">LVL <span id="level-number">0</span></span>
-              </div>
-              <div class="w-20 md:w-28 h-1 md:h-1.5 bg-black/10 dark:bg-white/10 rounded-full mt-1.5 md:mt-2 overflow-hidden">
-                  <div id="level-progress" class="h-full bg-accent transition-all duration-1000" style="width: 0%"></div>
-              </div>
-          </div>
-
-          <div class="w-px h-6 md:h-8 bg-[var(--border-color)]"></div>
-
-          <button onclick="toggleTheme()" class="text-base md:text-lg p-1 md:p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-full transition-all" id="theme-icon">🌙</button>
-      </div>
-    </div>
   </div>
 </header>

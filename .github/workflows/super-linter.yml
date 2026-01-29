@@ -1,17 +1,30 @@
-name: Lint
+name: Super-Linter
 
 on: [pull_request]
 
+permissions: {}
+
 jobs:
   build:
-    name: GitHub Super-Linter
+    name: Run Super-Linter
     runs-on: ubuntu-latest
+    permissions:
+      # contents permission to clone the repository
+      contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: super-linter/super-linter@v7.2.1
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          # super-linter needs the full git history to get the
+          # list of files that changed across commits
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Super-Linter
+        uses: super-linter/super-linter@v7.2.1
         env:
           ERROR_ON_MISSING_EXEC_BIT: true
           VALIDATE_EDITORCONFIG: true
+          VALIDATE_MARKDOWN: true
           VALIDATE_YAML: true
           VALIDATE_BIOME: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
