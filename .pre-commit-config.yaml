@@ -113,7 +113,6 @@ repos:
         name: run mixed-line-ending
         description: replaces or checks mixed line ending
 
-
   - repo: https://github.com/biomejs/pre-commit
     rev: "v0.1.0"
     hooks:
