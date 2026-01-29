@@ -1,4 +1,5 @@
 const yaml = require("js-yaml");
+const fs = require("node:fs/promises");
 
 module.exports = (eleventyConfig) => {
   eleventyConfig.addShortcode("currentYear", () => new Date().getFullYear());
@@ -18,7 +19,6 @@ module.exports = (eleventyConfig) => {
       };
     },
     getData: async (inputPath) => {
-      const fs = require("fs/promises");
       const content = await fs.readFile(inputPath, "utf-8");
       return yaml.load(content);
     },

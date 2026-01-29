@@ -17,7 +17,7 @@ const NUM_LEVELS = LEVELS.length;
 let currentLevel = Number(localStorage.getItem("userLevel")) || 0;
 
 // Load saved XP or start at 0
-let currentXP = parseInt(localStorage.getItem("userXP")) || 0;
+let currentXP = parseInt(localStorage.getItem("userXP"), 10) || 0;
 
 let isSurging = false;
 
@@ -174,7 +174,7 @@ document.addEventListener("mouseup", () => {
   dragHeader.style.cursor = "grab";
 });
 
-function minimizeConsole() {
+function _minimizeConsole() {
   // Toggles the height of the output area
   if (consoleOutput.style.display === "none") {
     consoleOutput.style.display = "block";
@@ -185,7 +185,7 @@ function minimizeConsole() {
   }
 }
 
-function maximizeConsole() {
+function _maximizeConsole() {
   // Toggles a full-screen-ish mode
   consoleContainer.classList.toggle("console-maximized");
 
@@ -270,7 +270,7 @@ window.createFloatingXP = (e) => {
   setTimeout(() => popup.remove(), 800);
 };
 
-function handleLevelClick() {
+function _handleLevelClick() {
   triggerSecretUnlock("badge_click");
 }
 
@@ -327,7 +327,9 @@ function applyTheme(theme) {
     "--accent",
     "--accent-light",
   ];
-  props.forEach((p) => html.style.removeProperty(p));
+  props.forEach((p) => {
+    html.style.removeProperty(p);
+  });
 
   if (theme === "dark") {
     html.classList.add("dark");
@@ -362,7 +364,7 @@ function applyTheme(theme) {
   updateThemeIcon(theme);
 }
 
-function toggleTheme() {
+function _toggleTheme() {
   playSound("click");
   const current = localStorage.getItem("theme") || "light";
   const next =
@@ -460,7 +462,7 @@ function triggerForceSurge() {
   }, 8000);
 }
 
-function triggerMagicXP() {
+function _triggerMagicXP() {
   initAudio();
   addExperience(XP_MAGIC_BONUS);
 }
@@ -692,7 +694,7 @@ function initMatrix() {
     ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#0F0";
-    ctx.font = fontSize + "px monospace";
+    ctx.font = `${fontSize}px monospace`;
 
     for (let i = 0; i < rainDrops.length; i++) {
       const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
@@ -835,7 +837,7 @@ window.startSelfDestruct = () => {
   }, 1000);
 };
 
-function scrollToRandomUser() {
+function _scrollToRandomUser() {
   playSound("click");
 
   surpriseClickCount++;
@@ -1062,7 +1064,7 @@ function updateInventoryCounts(lvl) {
   // We use i <= lvl because currentLevel is the index reached
   for (let i = 0; i <= lvl; i++) {
     const levelEntry = LEVELS[i];
-    if (levelEntry && levelEntry.rarity) {
+    if (levelEntry?.rarity) {
       const r = levelEntry.rarity.toLowerCase();
       if (Object.hasOwn(counts, r)) {
         counts[r]++;
@@ -1184,7 +1186,7 @@ function initProfileTracker() {
 
   // 3. UI Update Logic
   const refreshStats = () => {
-    const count = parseInt(localStorage.getItem("profile_view_count") || 0);
+    const count = parseInt(localStorage.getItem("profile_view_count") || 0, 10);
     statsContainer.innerHTML = `
             <span style="letter-spacing: 1px;">VIEWS: ${count}</span>
         `;
@@ -1198,9 +1200,10 @@ function initProfileTracker() {
     const targetLink = e.target.closest("a");
 
     // Only increment if the link text contains "Profile"
-    if (targetLink && targetLink.textContent.includes("Profile")) {
+    if (targetLink?.textContent.includes("Profile")) {
       const currentCount = parseInt(
         localStorage.getItem("profile_view_count") || 0,
+        10,
       );
       localStorage.setItem("profile_view_count", currentCount + 1);
       refreshStats();
@@ -1249,11 +1252,11 @@ function addMaintenanceXP() {
   }
 }
 
-function jumpToLevel() {
+function _jumpToLevel() {
   const input = document.getElementById("jump-lvl");
   if (!input || input.value === "") return;
 
-  let targetLvl = parseInt(input.value);
+  let targetLvl = parseInt(input.value, 10);
 
   // Clamp between 0 and NUM_LEVELS
   targetLvl = Math.max(0, Math.min(NUM_LEVELS, targetLvl));
@@ -1273,7 +1276,7 @@ function jumpToLevel() {
   showLevelUpNotification(rank);
 }
 
-function handleFooterDotClick() {
+function _handleFooterDotClick() {
   // 1. Get the current list of unlocked eggs
   const rawEggs = localStorage.getItem("unlockedEggs") || "[]";
   const unlockedEggs = JSON.parse(rawEggs);
@@ -1281,7 +1284,7 @@ function handleFooterDotClick() {
   // 2. Exit if already unlocked
   if (unlockedEggs.includes("footer_surge")) return;
 
-  let clicks = parseInt(localStorage.getItem("footerDotClicks")) || 0;
+  let clicks = parseInt(localStorage.getItem("footerDotClicks"), 10) || 0;
   clicks++;
 
   const core = document.getElementById("footer-dot-core");

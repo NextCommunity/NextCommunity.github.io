@@ -39,7 +39,7 @@ const emojiBurst = [
 
 let heartClickCount = 0;
 let phaserStarted = false;
-let gameInstance;
+let _gameInstance;
 let player;
 let cursors;
 let aliens;
@@ -110,7 +110,7 @@ function initPhaserGame() {
     },
   };
 
-  gameInstance = new Phaser.Game(config);
+  _gameInstance = new Phaser.Game(config);
 }
 
 // 4. PHASER SCENE FUNCTIONS
