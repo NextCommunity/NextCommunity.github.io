@@ -1,16 +1,16 @@
 const XP_PER_LEVEL = 45;
 
 // XP rewards for events and secrets
-const XP_MOUSE_HOVER = 1;           // Base XP for mouse interactions
-const XP_FORCE_SURGE_TICK = 10;     // XP per tick during Force Surge
-const XP_FORCE_SURGE_TOTAL = 1000;  // Total XP from Force Surge event
-const XP_MAGIC_BONUS = 50;          // Magic XP bonus
-const XP_MATRIX_SECRET = 75;        // Matrix easter egg unlock
-const XP_PULSE_SECRET = 180;        // Pulse dot easter egg
-const XP_GRAVITY_SECRET = 250;      // Gravity effect easter egg
-const XP_KONAMI_SECRET = 500;       // Konami code easter egg
-const XP_FOOTER_SURGE = 1000;       // Footer surge secret
-const XP_BADGE_CLICK = 45;          // Badge click reward
+const XP_MOUSE_HOVER = 1; // Base XP for mouse interactions
+const XP_FORCE_SURGE_TICK = 10; // XP per tick during Force Surge
+const XP_FORCE_SURGE_TOTAL = 1000; // Total XP from Force Surge event
+const XP_MAGIC_BONUS = 50; // Magic XP bonus
+const XP_MATRIX_SECRET = 75; // Matrix easter egg unlock
+const XP_PULSE_SECRET = 180; // Pulse dot easter egg
+const XP_GRAVITY_SECRET = 250; // Gravity effect easter egg
+const XP_KONAMI_SECRET = 500; // Konami code easter egg
+const XP_FOOTER_SURGE = 1000; // Footer surge secret
+const XP_BADGE_CLICK = 45; // Badge click reward
 
 const NUM_LEVELS = LEVELS.length;
 // Load saved level or start at 0
@@ -625,10 +625,12 @@ function activateGravityEffect() {
     );
     targets.forEach((el) => {
       const dist = window.innerHeight + 1000;
-      el.style.transition = `transform ${1 + Math.random()
-        }s ease-in, opacity 1s`;
-      el.style.transform = `translateY(${dist}px) rotate(${Math.random() * 60 - 30
-        }deg)`;
+      el.style.transition = `transform ${
+        1 + Math.random()
+      }s ease-in, opacity 1s`;
+      el.style.transform = `translateY(${dist}px) rotate(${
+        Math.random() * 60 - 30
+      }deg)`;
       el.style.opacity = "0";
       el.style.pointerEvents = "none";
     });
