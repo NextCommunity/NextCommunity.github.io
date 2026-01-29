@@ -369,17 +369,82 @@ function updateThemeIcon(theme) {
 /**
  * 5. EASTER EGG LOGIC & TRIGGERS
  */
-function triggerForceSurge() {
-  if (isSurging) return; // Prevent overlapping surges
-
-  isSurging = true;
+function playForceSoundtrack(duration = 8000) {
   initAudio();
-  addExperience(1000);
+  if (!audioCtx) return;
 
-  // Reset after the animation duration (e.g., 1 second)
+  // 1. Create a Master Compressor to prevent distortion
+  const compressor = audioCtx.createDynamicsCompressor();
+  compressor.threshold.setValueAtTime(-24, audioCtx.currentTime);
+  compressor.knee.setValueAtTime(40, audioCtx.currentTime);
+  compressor.ratio.setValueAtTime(12, audioCtx.currentTime);
+  compressor.attack.setValueAtTime(0, audioCtx.currentTime);
+  compressor.release.setValueAtTime(0.25, audioCtx.currentTime);
+  compressor.connect(audioCtx.destination);
+
+  const now = audioCtx.currentTime;
+  const masterGain = audioCtx.createGain();
+  masterGain.connect(compressor);
+
+  // Smooth volume swell
+  masterGain.gain.setValueAtTime(0, now);
+  masterGain.gain.linearRampToValueAtTime(0.6, now + 1.5);
+  masterGain.gain.setValueAtTime(0.6, now + duration / 1000 - 2);
+  masterGain.gain.exponentialRampToValueAtTime(0.001, now + duration / 1000);
+
+  // Create the "Harmonic Stack" (Multiple notes for a rich sound)
+  [55, 110, 164.81].forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    osc.type = i === 0 ? "sawtooth" : "triangle"; // Mix textures
+    osc.frequency.setValueAtTime(freq, now);
+
+    // Add a slight "wobble" (detune) for realism
+    osc.detune.setValueAtTime(i * 5, now);
+
+    osc.connect(masterGain);
+    osc.start(now);
+    osc.stop(now + duration / 1000);
+  });
+}
+
+function triggerForceSurge() {
+  if (isSurging) return;
+  isSurging = true;
+
+  // 1. Audio
+  playForceSoundtrack(8000);
+
+  // 2. Add Overlay
+  const overlay = document.createElement("div");
+  overlay.className = "force-field-overlay";
+  document.body.appendChild(overlay);
+
+  // 3. Lightning Bolts (Flash every 1.5 seconds)
+  const flash = document.createElement("div");
+  flash.className = "lightning-flash";
+  document.body.appendChild(flash);
+
+  const boltInterval = setInterval(() => {
+    flash.style.animation = "none";
+    void flash.offsetWidth; // Reset animation
+    flash.style.animation = "bolt 0.4s ease-out";
+  }, 1800);
+
+  // 4. XP Logic
+  let currentXPAdded = 0;
+  const xpInt = setInterval(() => {
+    addExperience(10);
+    currentXPAdded += 10;
+    if (currentXPAdded >= 1000) clearInterval(xpInt);
+  }, 50);
+
+  // 5. Cleanup
   setTimeout(() => {
+    clearInterval(boltInterval);
+    overlay.remove();
+    flash.remove();
     isSurging = false;
-  }, 10000);
+  }, 8000);
 }
 
 function triggerMagicXP() {
