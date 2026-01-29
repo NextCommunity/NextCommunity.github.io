@@ -1,4 +1,17 @@
 const XP_PER_LEVEL = 45;
+
+// XP rewards for events and secrets
+const XP_MOUSE_HOVER = 1; // Base XP for mouse interactions
+const XP_FORCE_SURGE_TICK = 10; // XP per tick during Force Surge
+const XP_FORCE_SURGE_TOTAL = 1000; // Total XP from Force Surge event
+const XP_MAGIC_BONUS = 50; // Magic XP bonus
+const XP_MATRIX_SECRET = 75; // Matrix easter egg unlock
+const XP_PULSE_SECRET = 180; // Pulse dot easter egg
+const XP_GRAVITY_SECRET = 250; // Gravity effect easter egg
+const XP_KONAMI_SECRET = 500; // Konami code easter egg
+const XP_FOOTER_SURGE = 1000; // Footer surge secret
+const XP_BADGE_CLICK = 45; // Badge click reward
+
 const NUM_LEVELS = LEVELS.length;
 // Load saved level or start at 0
 let currentLevel = Number(localStorage.getItem("userLevel")) || 0;
@@ -236,7 +249,7 @@ window.createFloatingXP = function (e) {
   // 2. Styling (Tailwind classes + Inline for positioning)
   popup.className =
     "fixed pointer-events-none z-[999] font-black text-sm tracking-tighter animate-xp-float";
-  popup.innerText = "+1 XP";
+  popup.innerText = `+${XP_MOUSE_HOVER} XP`;
 
   // 3. Get current Rank color for the "Pop"
   const rank = getRank(currentLevel);
@@ -250,7 +263,7 @@ window.createFloatingXP = function (e) {
 
   // 5. Award XP and update that "Newbie" header
   if (typeof addExperience === "function") {
-    addExperience(1);
+    addExperience(XP_MOUSE_HOVER);
   }
 
   // 6. Cleanup
@@ -433,9 +446,9 @@ function triggerForceSurge() {
   // 4. XP Logic
   let currentXPAdded = 0;
   const xpInt = setInterval(() => {
-    addExperience(10);
-    currentXPAdded += 10;
-    if (currentXPAdded >= 1000) clearInterval(xpInt);
+    addExperience(XP_FORCE_SURGE_TICK);
+    currentXPAdded += XP_FORCE_SURGE_TICK;
+    if (currentXPAdded >= XP_FORCE_SURGE_TOTAL) clearInterval(xpInt);
   }, 50);
 
   // 5. Cleanup
@@ -449,7 +462,7 @@ function triggerForceSurge() {
 
 function triggerMagicXP() {
   initAudio();
-  addExperience(50);
+  addExperience(XP_MAGIC_BONUS);
 }
 
 function triggerSecretUnlock(type) {
@@ -476,18 +489,18 @@ function triggerSecretUnlock(type) {
 
     // Assign XP based on difficulty
     if (type === "konami") {
-      addExperience(500); // Massive bonus for the long code
+      addExperience(XP_KONAMI_SECRET);
     } else if (type === "gravity") {
-      addExperience(250); // 1 full level
+      addExperience(XP_GRAVITY_SECRET);
     } else if (type === "pulse") {
-      addExperience(180); // 4 levels
+      addExperience(XP_PULSE_SECRET);
     } else if (type === "footer_surge") {
-      addExperience(1000); // 4 levels
+      addExperience(XP_FOOTER_SURGE);
     } else if (type === "badge_click") {
-      addExperience(45); // 4 levels
+      addExperience(XP_BADGE_CLICK);
     } else {
       // matrix
-      addExperience(75); // 2 full levels
+      addExperience(XP_MATRIX_SECRET);
     }
 
     console.log(`✨ Secret Unlocked: ${eggId}`);
@@ -726,7 +739,7 @@ function triggerBadgeLevelUp() {
     playSound("secret");
 
     // Force a level up for the "first time" experience
-    addExperience(45); // Assuming 45 XP = 1 Level
+    addExperience(XP_PER_LEVEL);
 
     hasTriggeredFirstLevel = true;
 
@@ -1203,7 +1216,7 @@ function initSkillXP() {
         .getElementById("dev-tools")
         ?.hasAttribute("data-lock");
       if (!isLocked) {
-        addExperience(1);
+        addExperience(XP_MOUSE_HOVER);
         createFloatingXP(e);
 
         // Fancy scale-up on hover
