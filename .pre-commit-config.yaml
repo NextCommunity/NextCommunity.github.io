@@ -118,7 +118,8 @@ repos:
     hooks:
       - id: biome-check
         name: run biome-check
-        description: Run Biome linter and formatter for JS, CSS, and JSON files
+        description: Run Biome linter and formatter for JS and JSON files
+        types_or: [javascript, json]
         additional_dependencies: ["@biomejs/biome"]
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
