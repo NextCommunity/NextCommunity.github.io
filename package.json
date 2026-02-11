@@ -6,7 +6,7 @@
   "dependencies": {
     "@11ty/eleventy": "^3.1.2",
     "detect-libc": "^2.1.2",
-    "enhanced-resolve": "^5.18.4",
+    "enhanced-resolve": "^5.19.0",
     "graceful-fs": "^4.2.11",
     "is-extglob": "^2.1.1",
     "is-glob": "^4.0.3",
