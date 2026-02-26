@@ -20,7 +20,7 @@
     "picocolors": "^1.1.1",
     "picomatch": "^4.0.3",
     "source-map-js": "^1.2.1",
-    "tailwindcss": "^4.1.18",
+    "tailwindcss": "^4.2.0",
     "tapable": "^2.3.0"
   },
   "scripts": {
