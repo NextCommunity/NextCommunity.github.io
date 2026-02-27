@@ -1,4 +1,4 @@
-const { execSync } = require("child_process");
+const { execSync } = require("node:child_process");
 
 module.exports = () => {
   const now = new Date();
@@ -13,7 +13,7 @@ module.exports = () => {
   try {
     // Get the short git hash (first 7 characters)
     gitHash = execSync("git rev-parse --short HEAD").toString().trim();
-  } catch (e) {
+  } catch (_e) {
     console.warn("Could not fetch git hash, defaulting to 'development'");
   }
 

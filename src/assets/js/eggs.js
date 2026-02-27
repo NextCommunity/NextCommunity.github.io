@@ -39,7 +39,7 @@ const emojiBurst = [
 
 let heartClickCount = 0;
 let phaserStarted = false;
-let gameInstance;
+let _gameInstance;
 let player;
 let cursors;
 let aliens;
@@ -110,7 +110,7 @@ function initPhaserGame() {
     },
   };
 
-  gameInstance = new Phaser.Game(config);
+  _gameInstance = new Phaser.Game(config);
 }
 
 // 4. PHASER SCENE FUNCTIONS
@@ -187,23 +187,18 @@ function spawnExplosion(scene) {
 }
 
 function setupSpaceInvaders() {
-  const scene = this;
-
   // Player Rocket
-  player = scene.add.text(
-    window.innerWidth / 2,
-    window.innerHeight - 80,
-    "🚀",
-    { fontSize: "50px" },
-  );
-  scene.physics.add.existing(player);
+  player = this.add.text(window.innerWidth / 2, window.innerHeight - 80, "🚀", {
+    fontSize: "50px",
+  });
+  this.physics.add.existing(player);
   player.body.setCollideWorldBounds(true);
 
   // Bullets
-  bullets = scene.physics.add.group();
+  bullets = this.physics.add.group();
 
   // Aliens Grid - Adjusted for smaller size
-  aliens = scene.physics.add.group();
+  aliens = this.physics.add.group();
   const rows = 5;
   const cols = 10;
   const spacingX = 50; // Tighter horizontal spacing
@@ -211,16 +206,16 @@ function setupSpaceInvaders() {
 
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
-      let alienEmoji = ["👾", "👽", "🛸", "🐙", "👾"][y];
+      const alienEmoji = ["👾", "👽", "🛸", "🐙", "👾"][y];
       // Shrink from 35px to 24px
-      let alien = scene.add.text(
+      const alien = this.add.text(
         x * spacingX + 80,
         y * spacingY + 80,
         alienEmoji,
         { fontSize: "24px" },
       );
 
-      scene.physics.add.existing(alien);
+      this.physics.add.existing(alien);
       alien.body.setAllowGravity(false);
       // Shrink the collision box to match the smaller emoji
       alien.body.setSize(24, 24);
@@ -230,16 +225,16 @@ function setupSpaceInvaders() {
   }
 
   // Alien Movement Timer
-  scene.alienDirection = 1;
-  scene.time.addEvent({
+  this.alienDirection = 1;
+  this.time.addEvent({
     delay: 800,
     callback: moveAliens,
-    callbackScope: scene,
+    callbackScope: this,
     loop: true,
   });
 
   // Collisions
-  scene.physics.add.overlap(bullets, aliens, (bullet, alien) => {
+  this.physics.add.overlap(bullets, aliens, (bullet, alien) => {
     bullet.destroy();
     alien.destroy();
     if (aliens.countActive() === 0) {
@@ -248,7 +243,7 @@ function setupSpaceInvaders() {
     }
   });
 
-  cursors = scene.input.keyboard.createCursorKeys();
+  cursors = this.input.keyboard.createCursorKeys();
 }
 
 function moveAliens() {
