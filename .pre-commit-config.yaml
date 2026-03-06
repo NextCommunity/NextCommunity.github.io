@@ -1,5 +1,5 @@
 default_stages: [pre-commit, pre-push]
-minimum_prek_version: "0.2.22"
+minimum_pre_commit_version: "0.2.22"
 default_language_version:
   python: python3
   node: 24.13.0
@@ -118,16 +118,9 @@ repos:
     hooks:
       - id: biome-check
         name: run biome-check
-        description: Run Biome linter and formatter for JSON files
+        description: Run Biome linter and formatter for JS and JSON files
+        types_or: [javascript, json]
         additional_dependencies: ["@biomejs/biome"]
-
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v4.0.0-alpha.8
-    hooks:
-      - id: prettier
-        name: run prettier
-        types_or: [css, html, javascript, json, markdown, yaml]
-        additional_dependencies: ["prettier@3.8.1"]
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.47.0
