@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: "daily"
     groups:
-      github-dependencies:
+      github-actions-dependencies:
         patterns:
           - "*"
     cooldown:
@@ -16,7 +16,7 @@ updates:
     schedule:
       interval: "daily"
     groups:
-      github-dependencies:
+      npm-dependencies:
         patterns:
           - "*"
     cooldown:
