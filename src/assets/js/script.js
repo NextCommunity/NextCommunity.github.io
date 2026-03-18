@@ -168,15 +168,12 @@ dragHeader.addEventListener("mousedown", (e) => {
 document.addEventListener("mousemove", (e) => {
   if (!isDragging) return;
 
-  // Calculate new position
   let x = e.clientX - offsetLeft;
   let y = e.clientY - offsetTop;
 
-  // Boundary Check (Optional: keeps it inside the screen)
   x = Math.max(0, Math.min(x, window.innerWidth - dragContainer.offsetWidth));
   y = Math.max(0, Math.min(y, window.innerHeight - dragContainer.offsetHeight));
 
-  // Apply position and remove Tailwind's 'bottom' and 'right' so they don't fight the 'top'/'left'
   dragContainer.style.bottom = "auto";
   dragContainer.style.right = "auto";
   dragContainer.style.left = `${x}px`;
@@ -225,7 +222,6 @@ document.addEventListener('mousemove', (e) => {
   const dy = e.clientY - resizeStartY;
   const dir = resizeDirection;
 
-  // Horizontal
   if (dir.includes('e')) {
     dragContainer.style.width = `${Math.max(MIN_CONSOLE_WIDTH, resizeStartWidth + dx)}px`;
   }
@@ -237,7 +233,6 @@ document.addEventListener('mousemove', (e) => {
     }
   }
 
-  // Vertical — only the output area grows/shrinks, header stays fixed
   if (dir.includes('s')) {
     consoleOutput.style.height = `${Math.max(MIN_OUTPUT_HEIGHT, resizeStartOutputHeight + dy)}px`;
   }
@@ -256,12 +251,10 @@ document.addEventListener('mouseup', () => {
   resizeDirection = '';
   document.body.style.userSelect = '';
   document.body.style.cursor = '';
-  // Restore CSS transition
   dragContainer.classList.add('transition-all', 'duration-300', 'ease-in-out');
 });
 
 function minimizeConsole() {
-  // Toggles the height of the output area
   if (consoleOutput.style.display === "none") {
     consoleOutput.style.display = "block";
     consoleContainer.style.width = "20rem"; // w-80
@@ -272,10 +265,8 @@ function minimizeConsole() {
 }
 
 function maximizeConsole() {
-  // Toggles a full-screen-ish mode
   consoleContainer.classList.toggle("console-maximized");
 
-  // Adjust height when maximized
   if (consoleContainer.classList.contains("console-maximized")) {
     consoleOutput.style.height = "70vh";
     consoleOutput.style.display = "block";
@@ -303,16 +294,13 @@ function reopenConsole() {
   const container = document.getElementById("matrix-console-container");
   const reopenBtn = document.getElementById("reopen-console-btn");
 
-  // Show the console
   container.classList.remove("hidden");
 
-  // Trigger reflow for animation
   void container.offsetWidth;
 
   container.style.opacity = "1";
   container.style.transform = "translateY(0)";
 
-  // Hide the reopen button
   if (reopenBtn) reopenBtn.classList.add("hidden");
 }
 
