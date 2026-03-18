@@ -1,3 +1,34 @@
+// Variables
+let isResizing = false;
+let resizeDirection = '';
+let resizeStartX = 0;
+let resizeStartY = 0;
+let resizeStartWidth = 0;
+let resizeStartOutputHeight = 0;
+let resizeStartLeft = 0;
+let resizeStartTop = 0;
+// Load saved level or start at 0
+let currentLevel = Number(localStorage.getItem("userLevel")) || 0;
+
+// Load saved XP or start at 0
+let currentXP = parseInt(localStorage.getItem("userXP")) || 0;
+
+let isSurging = false;
+
+let audioCtx;
+
+let unlockedEggs = JSON.parse(localStorage.getItem("unlockedEggs")) || [];
+let surpriseClickCount = 0;
+let matrixActive = false;
+let destructInterval;
+
+let isDragging = false;
+let offsetLeft = 0;
+let offsetTop = 0;
+
+// Const Variables
+const MIN_CONSOLE_WIDTH = 200;
+const MIN_OUTPUT_HEIGHT = 50;
 const XP_PER_LEVEL = 45;
 
 // XP rewards for events and secrets
@@ -13,13 +44,6 @@ const XP_FOOTER_SURGE = 1000; // Footer surge secret
 const XP_BADGE_CLICK = 45; // Badge click reward
 
 const NUM_LEVELS = LEVELS.length;
-// Load saved level or start at 0
-let currentLevel = Number(localStorage.getItem("userLevel")) || 0;
-
-// Load saved XP or start at 0
-let currentXP = parseInt(localStorage.getItem("userXP")) || 0;
-
-let isSurging = false;
 
 function getContrastYIQ(hexcolor) {
   hexcolor = hexcolor.replace("#", "");
@@ -29,11 +53,10 @@ function getContrastYIQ(hexcolor) {
   var yiq = (r * 299 + g * 587 + b * 114) / 1000;
   return yiq >= 128 ? "black" : "white";
 }
+
 /**
  * 1. RETRO SOUND ENGINE
  */
-let audioCtx;
-
 function initAudio() {
   try {
     if (!audioCtx) {
@@ -104,11 +127,6 @@ function playSound(type) {
   }
 }
 
-let unlockedEggs = JSON.parse(localStorage.getItem("unlockedEggs")) || [];
-let surpriseClickCount = 0;
-let matrixActive = false;
-let destructInterval;
-
 function getRank(lvl) {
   const numericLevel = Number(lvl) || 0;
 
@@ -131,10 +149,6 @@ const consoleOutput = document.getElementById("matrix-console-output");
 
 const dragContainer = document.getElementById("matrix-console-container");
 const dragHeader = dragContainer.querySelector(".bg-green-500\\/10"); // Selects the header bar
-
-let isDragging = false;
-let offsetLeft = 0;
-let offsetTop = 0;
 
 dragHeader.addEventListener("mousedown", (e) => {
   // Prevent dragging when clicking the minimize/close buttons
@@ -172,6 +186,78 @@ document.addEventListener("mousemove", (e) => {
 document.addEventListener("mouseup", () => {
   isDragging = false;
   dragHeader.style.cursor = "grab";
+});
+
+dragContainer.querySelectorAll('.resize-handle').forEach(handle => {
+  handle.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    isResizing = true;
+
+    resizeDirection = [...handle.classList]
+      .find(c => c.startsWith('resize-handle-') && c !== 'resize-handle')
+      ?.replace('resize-handle-', '') || 'se';
+
+    const rect = dragContainer.getBoundingClientRect();
+    resizeStartX = e.clientX;
+    resizeStartY = e.clientY;
+    resizeStartWidth = rect.width;
+    resizeStartLeft = rect.left;
+    resizeStartTop = rect.top;
+    resizeStartOutputHeight = consoleOutput.offsetHeight;
+
+    dragContainer.style.bottom = 'auto';
+    dragContainer.style.right = 'auto';
+    dragContainer.style.left = `${rect.left}px`;
+    dragContainer.style.top = `${rect.top}px`;
+
+    dragContainer.classList.remove('transition-all', 'duration-300', 'ease-in-out');
+    document.body.style.userSelect = 'none';
+    document.body.style.cursor = handle.style.cursor;
+  });
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isResizing) return;
+
+  const dx = e.clientX - resizeStartX;
+  const dy = e.clientY - resizeStartY;
+  const dir = resizeDirection;
+
+  // Horizontal
+  if (dir.includes('e')) {
+    dragContainer.style.width = `${Math.max(MIN_CONSOLE_WIDTH, resizeStartWidth + dx)}px`;
+  }
+  if (dir.includes('w')) {
+    const newW = resizeStartWidth - dx;
+    if (newW >= MIN_CONSOLE_WIDTH) {
+      dragContainer.style.width = `${newW}px`;
+      dragContainer.style.left = `${resizeStartLeft + dx}px`;
+    }
+  }
+
+  // Vertical — only the output area grows/shrinks, header stays fixed
+  if (dir.includes('s')) {
+    consoleOutput.style.height = `${Math.max(MIN_OUTPUT_HEIGHT, resizeStartOutputHeight + dy)}px`;
+  }
+  if (dir.includes('n')) {
+    const newH = resizeStartOutputHeight - dy;
+    if (newH >= MIN_OUTPUT_HEIGHT) {
+      consoleOutput.style.height = `${newH}px`;
+      dragContainer.style.top = `${resizeStartTop + dy}px`;
+    }
+  }
+});
+
+document.addEventListener('mouseup', () => {
+  if (!isResizing) return;
+  isResizing = false;
+  resizeDirection = '';
+  document.body.style.userSelect = '';
+  document.body.style.cursor = '';
+  // Restore CSS transition
+  dragContainer.classList.add('transition-all', 'duration-300', 'ease-in-out');
 });
 
 function minimizeConsole() {
