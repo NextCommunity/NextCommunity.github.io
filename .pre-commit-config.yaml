@@ -2,7 +2,7 @@ default_stages: [pre-commit, pre-push]
 minimum_prek_version: "0.2.22"
 default_language_version:
   python: python3
-  node: 24.13.0
+  node: 24.14.0
 exclude: |
   (?x)^(
     \.git/|
