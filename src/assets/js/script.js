@@ -1,6 +1,6 @@
 // Variables
 let isResizing = false;
-let resizeDirection = '';
+let resizeDirection = "";
 let resizeStartX = 0;
 let resizeStartY = 0;
 let resizeStartWidth = 0;
@@ -185,16 +185,17 @@ document.addEventListener("mouseup", () => {
   dragHeader.style.cursor = "grab";
 });
 
-dragContainer.querySelectorAll('.resize-handle').forEach(handle => {
-  handle.addEventListener('mousedown', (e) => {
+dragContainer.querySelectorAll(".resize-handle").forEach((handle) => {
+  handle.addEventListener("mousedown", (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     isResizing = true;
 
-    resizeDirection = [...handle.classList]
-      .find(c => c.startsWith('resize-handle-') && c !== 'resize-handle')
-      ?.replace('resize-handle-', '') || 'se';
+    resizeDirection =
+      [...handle.classList]
+        .find((c) => c.startsWith("resize-handle-") && c !== "resize-handle")
+        ?.replace("resize-handle-", "") || "se";
 
     const rect = dragContainer.getBoundingClientRect();
     resizeStartX = e.clientX;
@@ -204,28 +205,32 @@ dragContainer.querySelectorAll('.resize-handle').forEach(handle => {
     resizeStartTop = rect.top;
     resizeStartOutputHeight = consoleOutput.offsetHeight;
 
-    dragContainer.style.bottom = 'auto';
-    dragContainer.style.right = 'auto';
+    dragContainer.style.bottom = "auto";
+    dragContainer.style.right = "auto";
     dragContainer.style.left = `${rect.left}px`;
     dragContainer.style.top = `${rect.top}px`;
 
-    dragContainer.classList.remove('transition-all', 'duration-300', 'ease-in-out');
-    document.body.style.userSelect = 'none';
+    dragContainer.classList.remove(
+      "transition-all",
+      "duration-300",
+      "ease-in-out",
+    );
+    document.body.style.userSelect = "none";
     document.body.style.cursor = handle.style.cursor;
   });
 });
 
-document.addEventListener('mousemove', (e) => {
+document.addEventListener("mousemove", (e) => {
   if (!isResizing) return;
 
   const dx = e.clientX - resizeStartX;
   const dy = e.clientY - resizeStartY;
   const dir = resizeDirection;
 
-  if (dir.includes('e')) {
+  if (dir.includes("e")) {
     dragContainer.style.width = `${Math.max(MIN_CONSOLE_WIDTH, resizeStartWidth + dx)}px`;
   }
-  if (dir.includes('w')) {
+  if (dir.includes("w")) {
     const newW = resizeStartWidth - dx;
     if (newW >= MIN_CONSOLE_WIDTH) {
       dragContainer.style.width = `${newW}px`;
@@ -233,10 +238,10 @@ document.addEventListener('mousemove', (e) => {
     }
   }
 
-  if (dir.includes('s')) {
+  if (dir.includes("s")) {
     consoleOutput.style.height = `${Math.max(MIN_OUTPUT_HEIGHT, resizeStartOutputHeight + dy)}px`;
   }
-  if (dir.includes('n')) {
+  if (dir.includes("n")) {
     const newH = resizeStartOutputHeight - dy;
     if (newH >= MIN_OUTPUT_HEIGHT) {
       consoleOutput.style.height = `${newH}px`;
@@ -245,13 +250,13 @@ document.addEventListener('mousemove', (e) => {
   }
 });
 
-document.addEventListener('mouseup', () => {
+document.addEventListener("mouseup", () => {
   if (!isResizing) return;
   isResizing = false;
-  resizeDirection = '';
-  document.body.style.userSelect = '';
-  document.body.style.cursor = '';
-  dragContainer.classList.add('transition-all', 'duration-300', 'ease-in-out');
+  resizeDirection = "";
+  document.body.style.userSelect = "";
+  document.body.style.cursor = "";
+  dragContainer.classList.add("transition-all", "duration-300", "ease-in-out");
 });
 
 function minimizeConsole() {
