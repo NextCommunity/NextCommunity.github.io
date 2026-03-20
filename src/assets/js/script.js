@@ -1141,7 +1141,7 @@ function updateInventoryCounts(lvl) {
   // We use i <= lvl because currentLevel is the index reached
   for (let i = 0; i <= lvl; i++) {
     const levelEntry = LEVELS[i];
-    if (levelEntry && levelEntry.rarity) {
+    if (levelEntry?.rarity) {
       const r = levelEntry.rarity.toLowerCase();
       if (counts.hasOwnProperty(r)) {
         counts[r]++;
@@ -1277,7 +1277,7 @@ function initProfileTracker() {
     const targetLink = e.target.closest("a");
 
     // Only increment if the link text contains "Profile"
-    if (targetLink && targetLink.textContent.includes("Profile")) {
+    if (targetLink?.textContent?.includes("Profile")) {
       let currentCount = parseInt(
         localStorage.getItem("profile_view_count") || 0,
       );
