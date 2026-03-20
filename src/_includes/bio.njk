@@ -82,15 +82,16 @@
           </div>
         </div>
 
+        {% if languages is defined and languages is not null %}
         <div class="user-card p-8 rounded-3xl">
           <h2 class="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-6">Technologies</h2>
           <div class="flex flex-wrap gap-3">
-            {% set skills = languages.split(' ') %}
-            {% include "skills-list.njk" %}
+              {% set skills = languages.split(' ') %}
+              {% include "skills-list.njk" %}
           </div>
         </div>
+       {% endif %}
       </div>
-
     </div>
   </main>
 
