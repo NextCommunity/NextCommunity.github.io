@@ -35,8 +35,10 @@ layout: false
           </div>
 
           <div class="mt-6 flex flex-wrap gap-2">
-            {% set skills = person.data.languages.split(' ') %}
-            {% include "skills-list.njk" %}
+            {% if person.data.languages is defined and person.data.languages is not null  %}
+              {% set skills = person.data.languages.split(' ') %}
+              {% include "skills-list.njk" %}
+            {% endif %}
           </div>
 
           {% set bio = person.data.bio %}
