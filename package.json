@@ -37,5 +37,8 @@
   "bugs": {
     "url": "https://github.com/NextCommunity/NextCommunity.github.io/issues"
   },
-  "homepage": "https://github.com/NextCommunity/NextCommunity.github.io#readme"
+  "homepage": "https://github.com/NextCommunity/NextCommunity.github.io#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  }
 }
