@@ -20,7 +20,7 @@
     "picomatch": "^4.0.4",
     "source-map-js": "^1.2.1",
     "tailwindcss": "^4.2.2",
-    "tapable": "^2.3.0"
+    "tapable": "^2.3.2"
   },
   "scripts": {
     "start": "eleventy --serve",
