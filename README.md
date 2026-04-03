@@ -87,7 +87,7 @@ github: your-github-username
 website: https://yourwebsite.com
 email: your.email@example.com
 instagram: https://instagram.com/yourusername
-twitter: https://twitter.com/yourhandle
+twitter: https://x.com/yourhandle
 linkedin: https://linkedin.com/in/yourprofile
 country: Your Country
 location: Your City
@@ -173,7 +173,7 @@ git push origin main
 | `email`     | Your email address         | `you@example.com`                  |
 | `instagram` | Full Instagram profile URL | `https://instagram.com/username`   |
 | `linkedin`  | Full LinkedIn profile URL  | `https://linkedin.com/in/username` |
-| `twitter`   | Full Twitter/X profile URL | `https://twitter.com/username`     |
+| `twitter`   | Full Twitter/X profile URL | `https://x.com/username`     |
 | `website`   | Your personal website URL  | `https://yoursite.com`             |
 
 ### Field Guidelines
@@ -207,7 +207,7 @@ name: Carlos Rodriguez
 github: carlosr
 website: https://carlos.dev
 email: carlos@example.com
-twitter: https://twitter.com/carlos_codes
+twitter: https://x.com/carlos_codes
 linkedin: https://linkedin.com/in/carlosrodriguez
 country: Spain
 location: Barcelona
