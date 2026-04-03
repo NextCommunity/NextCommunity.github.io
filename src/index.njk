@@ -8,7 +8,6 @@ layout: false
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Developer Directory</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.90.0/phaser.min.js"></script>
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="min-h-screen scroll-smooth bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-300">
@@ -19,7 +18,10 @@ layout: false
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {# We use collections.developer (or whichever tag you use in your .md files) #}
       {% for person in collections.randomPeople %}
-      <div class="user-card group bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl overflow-hidden flex flex-col scroll-mt-32 transition-all hover:shadow-2xl hover:-translate-y-1">
+      <div class="user-card group bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl overflow-hidden flex flex-col scroll-mt-32 transition-all hover:shadow-2xl hover:-translate-y-1"
+        data-name="{{ person.data.name }}"
+        data-role="{{ person.data.role }}"
+        data-skills="{{ person.data.languages }}">
         <div class="p-8">
           <div class="flex justify-between items-start gap-4">
             <div class="flex-1">
@@ -61,6 +63,12 @@ layout: false
             <span>Profile</span>
             <span class="inline-block ml-1 transition-transform group-hover/link:translate-x-1">→</span>
           </a>
+          <button
+            onclick="startDuelFromCard(this.closest('.user-card'))"
+            class="font-bold text-[10px] uppercase px-3 py-1.5 rounded-lg bg-accent/10 text-accent border border-accent/30 hover:bg-accent/20 transition-colors opacity-0 group-hover:opacity-100"
+            title="Duel this developer!">
+            ⚔️ Duel
+          </button>
         </div>
       </div>
       {% endfor %}
