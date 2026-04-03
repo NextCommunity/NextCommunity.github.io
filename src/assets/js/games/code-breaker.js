@@ -15,7 +15,7 @@
 
 const CodeBreaker = (function () {
   const GAME_ID = "code-breaker";
-  const TILE_SPEED_BASE = 80;
+  const TILE_SPEED_BASE = 180;
   const TILE_SPEED_INC = 8; // extra px/s per collected tile
   const LIVES = 3;
   const TILE_FONT_SIZE = "16px";
