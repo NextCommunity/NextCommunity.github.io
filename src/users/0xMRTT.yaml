@@ -9,5 +9,5 @@ facebook:
 country: Universe
 location: Earth
 role: Web Developer
-languages: js golang ts css sass sh docker
+languages: js go ts css sass sh docker
 bio: I love linux, cli, web dev

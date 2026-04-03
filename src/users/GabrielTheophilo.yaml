@@ -9,6 +9,6 @@ facebook:
 country: Brazil
 location: Rio de Janeiro
 role: Web Developer
-languages: c c++ java python postgresql js css html
+languages: c cpp java py postgresql js css html
 bio: |
   Web developer learning Java/Js and postgresql for the web, C++ in software development and automation with Python

@@ -92,7 +92,7 @@ linkedin: https://linkedin.com/in/yourprofile
 country: Your Country
 location: Your City
 role: Your Professional Title
-languages: JavaScript Python Go Rust
+languages: js py go rust
 bio: |
   Write your professional bio here.
   You can use multiple lines.
@@ -212,7 +212,7 @@ linkedin: https://linkedin.com/in/carlosrodriguez
 country: Spain
 location: Barcelona
 role: Full Stack Engineer
-languages: TypeScript React Node.js AWS
+languages: ts react.js node.js aws
 bio: |
   Full-stack engineer specializing in modern web technologies.
 
