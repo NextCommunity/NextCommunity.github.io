@@ -46,7 +46,7 @@ repos:
       - id: npm-audit
         name: run npm-audit
         description: Run npm audit
-        entry: npm audit --audit-level=high
+        entry: npm audit
         language: system
         pass_filenames: false
 
