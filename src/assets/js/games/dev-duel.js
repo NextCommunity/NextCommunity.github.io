@@ -34,6 +34,12 @@ const DevDuel = (function () {
     const W = Math.min(window.innerWidth, 900);
     const H = Math.min(window.innerHeight, 520);
 
+    // Destroy any previous game instance BEFORE building the new overlay so
+    // that GameManager.destroy() (which removes "#game-canvas-{id}") doesn't
+    // rip out the canvas wrapper we are about to create.
+    GameManager.destroy(GAME_ID);
+    GameManager.destroyOverlay(GAME_ID);
+
     const overlay = GameManager.createOverlay(GAME_ID);
 
     const titleBar = document.createElement("div");
@@ -43,8 +49,10 @@ const DevDuel = (function () {
     titleBar.textContent = "⚔️ DEVELOPER DUEL";
     overlay.appendChild(titleBar);
 
+    // Canvas container — intentionally has NO id matching "game-canvas-{GAME_ID}"
+    // to avoid being removed by a subsequent GameManager.destroy() call before
+    // Phaser has a chance to mount inside it.
     const canvasWrap = document.createElement("div");
-    canvasWrap.id = "game-canvas-" + GAME_ID;
     overlay.appendChild(canvasWrap);
 
     const config = {
@@ -60,7 +68,10 @@ const DevDuel = (function () {
       },
     };
 
-    GameManager.create(GAME_ID, config);
+    // Register the instance directly so destroy() can still clean it up,
+    // but skip the internal destroy() pre-call (already done above).
+    var instance = new Phaser.Game(config);
+    GameManager.instances[GAME_ID] = instance;
   }
 
   // ─── Scene ───────────────────────────────────────────────────────────────

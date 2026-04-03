@@ -39,6 +39,12 @@ const CodeBreaker = (function () {
     const W = Math.min(window.innerWidth, 900);
     const H = Math.min(window.innerHeight, 600);
 
+    // Destroy any previous game instance BEFORE building the new overlay so
+    // that GameManager.destroy() (which removes "#game-canvas-{id}") doesn't
+    // rip out the canvas wrapper we are about to create.
+    GameManager.destroy(GAME_ID);
+    GameManager.destroyOverlay(GAME_ID);
+
     const overlay = GameManager.createOverlay(GAME_ID);
 
     // Title bar above the canvas
@@ -50,9 +56,11 @@ const CodeBreaker = (function () {
       "⌨️ CODE BREAKER" + (devName ? " — " + devName : "");
     overlay.appendChild(titleBar);
 
-    // Canvas container
+    // Canvas container — intentionally has NO id matching "game-canvas-{GAME_ID}"
+    // so that future GameManager.destroy() calls don't remove it before Phaser
+    // has a chance to mount its canvas inside it.  Cleanup is handled by
+    // destroyOverlay() which removes the entire overlay (including this wrapper).
     const canvasWrap = document.createElement("div");
-    canvasWrap.id = "game-canvas-" + GAME_ID;
     canvasWrap.style.cssText = "position:relative;";
     overlay.appendChild(canvasWrap);
 
@@ -76,7 +84,10 @@ const CodeBreaker = (function () {
       },
     };
 
-    GameManager.create(GAME_ID, config);
+    // Register the instance directly so destroy() can still clean it up,
+    // but skip the internal destroy() pre-call (already done above).
+    var instance = new Phaser.Game(config);
+    GameManager.instances[GAME_ID] = instance;
   }
 
   // ─── Scene ───────────────────────────────────────────────────────────────
@@ -179,8 +190,10 @@ const CodeBreaker = (function () {
       _spawnTile(scene, getGameTheme(), scene.scale.width);
     }
 
-    // Check if any tile fell off the bottom
-    scene.cb_tiles.getChildren().forEach(function (tile) {
+    // Check if any tile fell off the bottom.
+    // Use .slice() to iterate over a copy — destroying tiles inside forEach
+    // mutates the live getChildren() array and causes tiles to be skipped.
+    scene.cb_tiles.getChildren().slice().forEach(function (tile) {
       if (tile.y > scene.scale.height + 40) {
         tile.destroy();
         _loseLife(scene);
@@ -197,20 +210,25 @@ const CodeBreaker = (function () {
       scene.cb_skills[Phaser.Math.Between(0, scene.cb_skills.length - 1)];
     const rarity = skillRarity(skill);
     const color = RARITY_COLORS[rarity] || "#94a3b8";
-    const hexColor = parseInt(color.replace("#", "0x"));
+    const hexColor = parseInt(color.replace("#", ""), 16);
+    const textureKey = "cb_tile_" + skill;
 
     const x = Phaser.Math.Between(60, W - 60);
 
-    // Background pill
-    const bg = scene.add.graphics();
-    bg.fillStyle(hexColor, 0.25);
-    bg.fillRoundedRect(-50, -14, 100, 28, 6);
-    bg.lineStyle(1, hexColor, 0.8);
-    bg.strokeRoundedRect(-50, -14, 100, 28, 6);
-    bg.generateTexture("tile_" + skill, 100, 28);
-    bg.destroy();
+    // Generate the pill background texture only once per unique skill name.
+    // Generating again with the same key would be rejected by Phaser's
+    // TextureManager and break subsequent tile rendering.
+    if (!scene.textures.exists(textureKey)) {
+      const bg = scene.add.graphics();
+      bg.fillStyle(hexColor, 0.25);
+      bg.fillRoundedRect(-50, -14, 100, 28, 6);
+      bg.lineStyle(1, hexColor, 0.8);
+      bg.strokeRoundedRect(-50, -14, 100, 28, 6);
+      bg.generateTexture(textureKey, 100, 28);
+      bg.destroy();
+    }
 
-    const tile = scene.physics.add.image(x, -20, "tile_" + skill);
+    const tile = scene.physics.add.image(x, -20, textureKey);
     tile.body.setAllowGravity(false);
     tile.body.setVelocityY(scene.cb_tileSpeed);
     tile.setData("skill", skill);
