@@ -1,14 +1,14 @@
 name: Umunnakwe Ephraim Ekene
 github: leo-chan01
-website:
+website: 
 email: ephraimleo16@gmail.com
-# instagram: your.favourite.developer
-# twitter: u_ephraim
-# linkedin: Ephraim Umunnakwe
-# facebook: Ephraim leo
+instagram:
+twitter:
+linkedin:
+facebook:
 country: Nigeria
 location: Ebonyi
-languages:
 role: Mobile Developer
+languages: 
 bio: |
   I have good experience in building mobile apps with authentication integration using firebase, payment methods, NFC and optimizations.
