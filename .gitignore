@@ -3,3 +3,4 @@ _site
 node_modules
 vendor
 .venv
+src/assets/css/tailwind.css

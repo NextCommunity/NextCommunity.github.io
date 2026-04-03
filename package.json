@@ -5,6 +5,7 @@
   "main": "script.js",
   "dependencies": {
     "@11ty/eleventy": "^3.1.5",
+    "@tailwindcss/postcss": "^4.2.2",
     "detect-libc": "^2.1.2",
     "enhanced-resolve": "^5.20.1",
     "graceful-fs": "^4.2.11",
@@ -25,14 +26,16 @@
     "tapable": "^2.3.2"
   },
   "devDependencies": {
-    "npm-run-all": "^4.1.5"
+    "autoprefixer": "^10.4.20",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^11.0.0"
   },
   "scripts": {
-    "css:build": "tailwindcss -i ./src/assets/css/tailwind-input.css -o ./src/assets/css/tailwind.css",
-    "css:watch": "tailwindcss -i ./src/assets/css/tailwind-input.css -o ./src/assets/css/tailwind.css --watch",
+    "css:build": "npx postcss ./src/assets/css/tailwind-input.css -o ./src/assets/css/tailwind.css",
+    "css:watch": "npx postcss ./src/assets/css/tailwind-input.css -o ./src/assets/css/tailwind.css --watch",
     "start": "npm-run-all --parallel css:watch eleventy:serve",
-    "eleventy:serve": "eleventy --serve",
-    "build": "npm run css:build && eleventy"
+    "eleventy:serve": "npx eleventy --serve",
+    "build": "npm run css:build && npx eleventy"
   },
   "repository": {
     "type": "git",
