@@ -173,7 +173,7 @@ git push origin main
 | `email`     | Your email address         | `you@example.com`                  |
 | `instagram` | Full Instagram profile URL | `https://instagram.com/username`   |
 | `linkedin`  | Full LinkedIn profile URL  | `https://linkedin.com/in/username` |
-| `x`   | Full Twitter/X profile URL | `https://x.com/username`     |
+| `x`   | Full X profile URL | `https://x.com/username`     |
 | `website`   | Your personal website URL  | `https://yoursite.com`             |
 
 ### Field Guidelines
