@@ -1,0 +1,11 @@
+{#
+  game-modal.njk — Reusable game overlay anchor element.
+
+  GameManager.createOverlay(id) builds the actual overlay dynamically in JS,
+  but this element provides a static placeholder that is always present in the
+  DOM so games have a guaranteed mount target if needed.
+
+  Usage: {% include "game-modal.njk" %}
+#}
+
+<div id="game-modal-root" aria-live="polite" aria-atomic="true"></div>

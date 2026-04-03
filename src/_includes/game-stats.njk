@@ -80,6 +80,14 @@
             <div class="w-full h-1 md:h-1.5 bg-black/10 dark:bg-white/10 rounded-full mt-1.5 md:mt-2 overflow-hidden">
                 <div id="level-progress" class="h-full bg-accent transition-all duration-1000" style="width: 0%"></div>
             </div>
+
+            {# Per-game high score mini-strip (hidden on xs) #}
+            <div class="hidden md:flex items-center gap-3 mt-1.5">
+                <span class="text-[7px] font-mono text-[var(--text-muted)] uppercase tracking-widest opacity-60">HS:</span>
+                <span class="text-[7px] font-mono font-bold text-[var(--text-muted)]">👾 <span id="hs-si" class="text-accent">—</span></span>
+                <span class="text-[7px] font-mono font-bold text-[var(--text-muted)]">⌨️ <span id="hs-cb" class="text-accent">—</span></span>
+                <span class="text-[7px] font-mono font-bold text-[var(--text-muted)]">⚔️ <span id="hs-dd" class="text-accent">—</span></span>
+            </div>
         </div>
 
         <div class="w-px h-6 md:h-8 bg-[var(--border-color)] ml-1"></div>
@@ -87,5 +95,41 @@
         <button onclick="toggleTheme()" class="text-base md:text-lg p-1 md:p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-full transition-all" id="theme-icon">
             🌙
         </button>
+
+        {# Achievement badges — shown when earned, read from localStorage #}
+        <div id="achievement-badges" class="hidden sm:flex items-center gap-1 ml-1">
+        </div>
     </div>
 </div>
+
+<script>
+(function refreshGameStats() {
+  // High scores
+  var hs = {
+    "hs-si": localStorage.getItem("hs_space-invaders"),
+    "hs-cb": localStorage.getItem("hs_code-breaker"),
+    "hs-dd": localStorage.getItem("hs_dev-duel"),
+  };
+  Object.keys(hs).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el && hs[id]) el.textContent = hs[id];
+  });
+
+  // Achievement badges
+  var badgeContainer = document.getElementById("achievement-badges");
+  if (!badgeContainer) return;
+  var earned = {};
+  try { earned = JSON.parse(localStorage.getItem("gameAchievements") || "{}"); } catch (_) {}
+  var icons = { first_blood: "🩸", code_wizard: "🧙", duelist: "⚔️" };
+  var labels = { first_blood: "First Blood", code_wizard: "Code Wizard", duelist: "Duelist" };
+  Object.keys(icons).forEach(function (id) {
+    if (earned[id]) {
+      var badge = document.createElement("span");
+      badge.title = labels[id];
+      badge.className = "text-sm cursor-help";
+      badge.textContent = icons[id];
+      badgeContainer.appendChild(badge);
+    }
+  });
+})();
+</script>
