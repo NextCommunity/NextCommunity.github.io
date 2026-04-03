@@ -24,7 +24,8 @@
   },
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy"
+    "build": "eleventy",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -40,5 +41,9 @@
   "homepage": "https://github.com/NextCommunity/NextCommunity.github.io#readme",
   "engines": {
     "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
   }
 }
