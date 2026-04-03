@@ -653,10 +653,11 @@ window.addEventListener("keydown", (e) => {
   if (key === "d") {
     e.preventDefault();
 
-    const systemDash = document.getElementById("dev-tools"); // Adjust ID as needed
+    const systemDash = document.getElementById("dev-tools");
+    if (!systemDash) return;
     const isOpening = systemDash.classList.contains("hidden");
 
-    localStorage.setItem("devToolsVisible", !isOpening);
+    localStorage.setItem("devToolsVisible", isOpening);
     playSound(isOpening ? "secret" : "click");
 
     if (isOpening) {
