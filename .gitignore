@@ -3,3 +3,10 @@ _site
 node_modules
 vendor
 .venv
+
+# Generated CSS (compiled from TailwindCSS)
+src/assets/css/tailwind.css
+
+# Generated JS (bundled by esbuild)
+src/assets/js/phaser.bundle.js
+src/assets/js/bundle.js
