@@ -219,11 +219,15 @@ const CodeBreaker = (function () {
     // Generating again with the same key would be rejected by Phaser's
     // TextureManager and break subsequent tile rendering.
     if (!scene.textures.exists(textureKey)) {
+      // Draw the pill starting at (0, 0) so the entire shape is captured by
+      // the 100×28 generateTexture call.  Drawing at (-50, -14) would place
+      // the rect outside the capture region and produce a mostly-transparent
+      // (effectively invisible) texture.
       const bg = scene.add.graphics();
       bg.fillStyle(hexColor, 0.25);
-      bg.fillRoundedRect(-50, -14, 100, 28, 6);
+      bg.fillRoundedRect(0, 0, 100, 28, 6);
       bg.lineStyle(1, hexColor, 0.8);
-      bg.strokeRoundedRect(-50, -14, 100, 28, 6);
+      bg.strokeRoundedRect(0, 0, 100, 28, 6);
       bg.generateTexture(textureKey, 100, 28);
       bg.destroy();
     }
