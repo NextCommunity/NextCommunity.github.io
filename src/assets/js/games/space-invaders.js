@@ -1,0 +1,349 @@
+/**
+ * space-invaders.js — The classic Space Invaders Easter Egg game.
+ *
+ * Trigger: 5 clicks on the footer heart (handled by eggs.js).
+ * API:     SpaceInvaders.launch()
+ *
+ * Migrated from eggs.js into its own module so it can be managed by
+ * GameManager and lazy-loaded alongside the other mini-games.
+ */
+
+const SpaceInvaders = (function () {
+  // ─── Emoji assets ────────────────────────────────────────────────────────
+
+  const BURST_EMOJIS = [
+    "🎮",
+    "🕹️",
+    "👾",
+    "🚀",
+    "✨",
+    "⭐",
+    "🔥",
+    "💥",
+    "🌈",
+    "🎉",
+    "💖",
+    "💎",
+    "🤖",
+    "👻",
+    "🦄",
+    "🍄",
+    "🌍",
+    "⚡",
+    "🏆",
+    "🎯",
+    "🛸",
+    "👽",
+    "👾",
+    "🐙",
+    "🦖",
+    "🪐",
+    "🌌",
+    "🌠",
+    "☄️",
+    "🌙",
+  ];
+
+  const ALIEN_ROWS = ["👾", "👽", "🛸", "🐙", "👾"];
+  const GAME_ID = "space-invaders";
+
+  // ─── Public entry-point ──────────────────────────────────────────────────
+
+  /**
+   * Lazily loads Phaser then starts the Space Invaders experience.
+   * Calling this while an instance is already running restarts it.
+   */
+  function launch() {
+    GameManager.loadPhaser(_init);
+  }
+
+  // ─── Initialisation ──────────────────────────────────────────────────────
+
+  function _init() {
+    // Full-screen transparent canvas placed over the page
+    const canvas = document.createElement("canvas");
+    canvas.id = "game-canvas-" + GAME_ID;
+    Object.assign(canvas.style, {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      width: "100vw",
+      height: "100vh",
+      zIndex: "10000",
+      pointerEvents: "none", // non-interactive until explosion is done
+    });
+    document.body.appendChild(canvas);
+
+    const config = {
+      type: Phaser.CANVAS,
+      canvas: canvas,
+      width: window.innerWidth,
+      height: window.innerHeight,
+      transparent: true,
+      physics: {
+        default: "arcade",
+        arcade: { gravity: { y: 0 }, debug: false },
+      },
+      scene: {
+        preload: function () {},
+        create: _onCreate,
+        update: _onUpdate,
+      },
+    };
+
+    GameManager.create(GAME_ID, config);
+  }
+
+  // ─── Scene callbacks ─────────────────────────────────────────────────────
+
+  function _onCreate() {
+    // 'this' = Phaser scene
+    const scene = this;
+    const particles = _spawnExplosion(scene);
+
+    // After 5 s, fade out the explosion and start the real game
+    scene.time.delayedCall(5000, function () {
+      scene.tweens.add({
+        targets: particles.getChildren(),
+        alpha: 0,
+        duration: 1000,
+        onComplete: function () {
+          particles.clear(true, true);
+
+          const canvas = document.getElementById("game-canvas-" + GAME_ID);
+          if (canvas) canvas.style.pointerEvents = "auto";
+
+          _setupGame(scene);
+        },
+      });
+    });
+  }
+
+  function _onUpdate() {
+    // 'this' = Phaser scene
+    const scene = this;
+    if (!scene.si_player || !scene.si_player.body) return;
+
+    if (scene.si_cursors.left.isDown) {
+      scene.si_player.body.setVelocityX(-400);
+    } else if (scene.si_cursors.right.isDown) {
+      scene.si_player.body.setVelocityX(400);
+    } else {
+      scene.si_player.body.setVelocityX(0);
+    }
+
+    if (scene.si_cursors.space.isDown) {
+      _fireBullet(scene);
+    }
+  }
+
+  // ─── Game setup ──────────────────────────────────────────────────────────
+
+  function _spawnExplosion(scene) {
+    const heartEl = document.getElementById("footer-heart");
+    const rect = heartEl
+      ? heartEl.getBoundingClientRect()
+      : { left: window.innerWidth / 2, top: window.innerHeight - 60 };
+
+    const group = scene.add.group();
+
+    for (let i = 0; i < 40; i++) {
+      const emoji = Phaser.Utils.Array.GetRandom(BURST_EMOJIS);
+      const p = scene.add.text(rect.left, rect.top, emoji, {
+        fontSize: "32px",
+      });
+
+      scene.physics.add.existing(p);
+      p.body.setVelocity(
+        Phaser.Math.Between(-400, 400),
+        Phaser.Math.Between(-600, -1200),
+      );
+      p.body.setBounce(0.6);
+      p.body.setCollideWorldBounds(true);
+      p.body.setAngularVelocity(Phaser.Math.Between(-200, 200));
+      group.add(p);
+    }
+
+    return group;
+  }
+
+  function _setupGame(scene) {
+    // Player rocket
+    scene.si_player = scene.add.text(
+      window.innerWidth / 2,
+      window.innerHeight - 80,
+      "🚀",
+      { fontSize: "50px" },
+    );
+    scene.physics.add.existing(scene.si_player);
+    scene.si_player.body.setCollideWorldBounds(true);
+
+    // Bullet pool
+    scene.si_bullets = scene.physics.add.group();
+
+    // Alien grid
+    scene.si_aliens = scene.physics.add.group();
+    scene.si_lastFired = 0;
+
+    const rows = 5;
+    const cols = 10;
+    const spacingX = 50;
+    const spacingY = 45;
+
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const alien = scene.add.text(
+          x * spacingX + 80,
+          y * spacingY + 80,
+          ALIEN_ROWS[y],
+          { fontSize: "24px" },
+        );
+        scene.physics.add.existing(alien);
+        alien.body.setAllowGravity(false);
+        alien.body.setSize(24, 24);
+        scene.si_aliens.add(alien);
+      }
+    }
+
+    // Alien movement timer
+    scene.si_alienDirection = 1;
+    scene.time.addEvent({
+      delay: 800,
+      callback: _moveAliens,
+      callbackScope: scene,
+      loop: true,
+    });
+
+    // Collision: bullet hits alien
+    scene.physics.add.overlap(
+      scene.si_bullets,
+      scene.si_aliens,
+      function (bullet, alien) {
+        bullet.destroy();
+        alien.destroy();
+
+        if (scene.si_aliens.countActive() === 0) {
+          _onVictory(scene);
+        }
+      },
+    );
+
+    scene.si_cursors = scene.input.keyboard.createCursorKeys();
+
+    // HUD hint
+    scene.add.text(
+      window.innerWidth / 2,
+      window.innerHeight - 30,
+      "← → MOVE    SPACE SHOOT    ESC QUIT",
+      { fontSize: "13px", fill: "#ffffff", alpha: 0.6 },
+    ).setOrigin(0.5);
+
+    // ESC to quit
+    scene.input.keyboard.once("keydown-ESC", function () {
+      _cleanup();
+    });
+  }
+
+  // ─── Game logic helpers ───────────────────────────────────────────────────
+
+  /** Called with `callbackScope: scene` so `this` = scene. */
+  function _moveAliens() {
+    const scene = this;
+    const padding = 60;
+    let hitEdge = false;
+    const children = scene.si_aliens.getChildren();
+
+    children.forEach(function (alien) {
+      if (scene.si_alienDirection === 1 && alien.x > window.innerWidth - padding)
+        hitEdge = true;
+      if (scene.si_alienDirection === -1 && alien.x < padding) hitEdge = true;
+    });
+
+    if (hitEdge) {
+      scene.si_alienDirection *= -1;
+      children.forEach(function (alien) {
+        alien.y += 40;
+        alien.x += scene.si_alienDirection * 10;
+      });
+    } else {
+      children.forEach(function (alien) {
+        alien.x += 25 * scene.si_alienDirection;
+      });
+    }
+  }
+
+  function _fireBullet(scene) {
+    const now = scene.time.now;
+    if (now - scene.si_lastFired < 400) return;
+
+    const bullet = scene.add.text(
+      scene.si_player.x + scene.si_player.width / 2 - 10,
+      scene.si_player.y - 20,
+      "🔥",
+      { fontSize: "20px" },
+    );
+
+    scene.physics.add.existing(bullet);
+    scene.si_bullets.add(bullet);
+    bullet.body.setAllowGravity(false);
+    bullet.body.setVelocityY(-600);
+    bullet.body.isCircle = true;
+
+    scene.si_lastFired = now;
+  }
+
+  // ─── Victory / cleanup ────────────────────────────────────────────────────
+
+  function _onVictory(scene) {
+    const w = scene.scale.width;
+    const h = scene.scale.height;
+
+    // Award XP
+    GameManager.awardXP(XP_SPACE_INVADERS_WIN);
+
+    // Track wins and check achievement
+    const wins = GameManager.incrementStat("space_invaders_wins");
+    if (wins === 1) GameManager.grantAchievement("first_blood");
+
+    // Update high score (score = wins × 100)
+    GameManager.setHighScore(GAME_ID, wins * 100);
+
+    // Victory overlay
+    scene.add
+      .text(w / 2, h / 2 - 60, "🎉 INVADERS REPELLED! 🎉", {
+        fontSize: "40px",
+        fontStyle: "bold",
+        fill: "#fbbf24",
+        stroke: "#000000",
+        strokeThickness: 6,
+      })
+      .setOrigin(0.5);
+
+    scene.add
+      .text(w / 2, h / 2 + 10, "+" + XP_SPACE_INVADERS_WIN + " XP Earned!", {
+        fontSize: "28px",
+        fill: "#10b981",
+        stroke: "#000000",
+        strokeThickness: 4,
+      })
+      .setOrigin(0.5);
+
+    scene.add
+      .text(w / 2, h / 2 + 70, "Click anywhere to continue", {
+        fontSize: "16px",
+        fill: "#ffffff",
+        alpha: 0.7,
+      })
+      .setOrigin(0.5);
+
+    scene.input.once("pointerdown", _cleanup);
+  }
+
+  function _cleanup() {
+    GameManager.destroy(GAME_ID);
+  }
+
+  // ─── Public API ──────────────────────────────────────────────────────────
+
+  return { launch: launch };
+})();
