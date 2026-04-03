@@ -135,8 +135,6 @@ git push origin main
 4. In the description, mention:
 
    ```markdown
-   Fixes #213
-
    Adding my profile to the NextCommunity developer directory.
    ```
 
@@ -162,7 +160,7 @@ git push origin main
 | `country`   | Your country                         | `Australia`                |
 | `location`  | Your city                            | `Brisbane`                 |
 | `role`      | Your professional title              | `Scrum Master`             |
-| `languages` | Space-separated list of technologies | `JavaScript, Python, Ruby` |
+| `languages` | Space-separated list of technologies | `JavaScript Python Ruby` |
 | `bio`       | Multi-line biography                 | See template above         |
 
 ### Optional Fields
