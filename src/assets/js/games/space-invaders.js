@@ -8,7 +8,7 @@
  * GameManager and lazy-loaded alongside the other mini-games.
  */
 
-const SpaceInvaders = (function () {
+const SpaceInvaders = (() => {
   // ─── Emoji assets ────────────────────────────────────────────────────────
 
   const BURST_EMOJIS = [
@@ -85,7 +85,7 @@ const SpaceInvaders = (function () {
         arcade: { gravity: { y: 0 }, debug: false },
       },
       scene: {
-        preload: function () {},
+        preload: () => {},
         create: _onCreate,
         update: _onUpdate,
       },
@@ -97,43 +97,39 @@ const SpaceInvaders = (function () {
   // ─── Scene callbacks ─────────────────────────────────────────────────────
 
   function _onCreate() {
-    // 'this' = Phaser scene
-    const scene = this;
-    const particles = _spawnExplosion(scene);
+    const particles = _spawnExplosion(this);
 
     // After 5 s, fade out the explosion and start the real game
-    scene.time.delayedCall(5000, function () {
-      scene.tweens.add({
+    this.time.delayedCall(5000, () => {
+      this.tweens.add({
         targets: particles.getChildren(),
         alpha: 0,
         duration: 1000,
-        onComplete: function () {
+        onComplete: () => {
           particles.clear(true, true);
 
           const canvas = document.getElementById("game-canvas-" + GAME_ID);
           if (canvas) canvas.style.pointerEvents = "auto";
 
-          _setupGame(scene);
+          _setupGame(this);
         },
       });
     });
   }
 
   function _onUpdate() {
-    // 'this' = Phaser scene
-    const scene = this;
-    if (!scene.si_player || !scene.si_player.body) return;
+    if (!this.si_player || !this.si_player.body) return;
 
-    if (scene.si_cursors.left.isDown) {
-      scene.si_player.body.setVelocityX(-400);
-    } else if (scene.si_cursors.right.isDown) {
-      scene.si_player.body.setVelocityX(400);
+    if (this.si_cursors.left.isDown) {
+      this.si_player.body.setVelocityX(-400);
+    } else if (this.si_cursors.right.isDown) {
+      this.si_player.body.setVelocityX(400);
     } else {
-      scene.si_player.body.setVelocityX(0);
+      this.si_player.body.setVelocityX(0);
     }
 
-    if (scene.si_cursors.space.isDown) {
-      _fireBullet(scene);
+    if (this.si_cursors.space.isDown) {
+      _fireBullet(this);
     }
   }
 
@@ -218,7 +214,7 @@ const SpaceInvaders = (function () {
     scene.physics.add.overlap(
       scene.si_bullets,
       scene.si_aliens,
-      function (bullet, alien) {
+      (bullet, alien) => {
         bullet.destroy();
         alien.destroy();
 
@@ -231,15 +227,17 @@ const SpaceInvaders = (function () {
     scene.si_cursors = scene.input.keyboard.createCursorKeys();
 
     // HUD hint
-    scene.add.text(
-      window.innerWidth / 2,
-      window.innerHeight - 30,
-      "← → MOVE    SPACE SHOOT    ESC QUIT",
-      { fontSize: "13px", fill: "#ffffff", alpha: 0.6 },
-    ).setOrigin(0.5);
+    scene.add
+      .text(
+        window.innerWidth / 2,
+        window.innerHeight - 30,
+        "← → MOVE    SPACE SHOOT    ESC QUIT",
+        { fontSize: "13px", fill: "#ffffff", alpha: 0.6 },
+      )
+      .setOrigin(0.5);
 
     // ESC to quit
-    scene.input.keyboard.once("keydown-ESC", function () {
+    scene.input.keyboard.once("keydown-ESC", () => {
       _cleanup();
     });
   }
@@ -248,26 +246,25 @@ const SpaceInvaders = (function () {
 
   /** Called with `callbackScope: scene` so `this` = scene. */
   function _moveAliens() {
-    const scene = this;
     const padding = 60;
     let hitEdge = false;
-    const children = scene.si_aliens.getChildren();
+    const children = this.si_aliens.getChildren();
 
-    children.forEach(function (alien) {
-      if (scene.si_alienDirection === 1 && alien.x > window.innerWidth - padding)
+    children.forEach((alien) => {
+      if (this.si_alienDirection === 1 && alien.x > window.innerWidth - padding)
         hitEdge = true;
-      if (scene.si_alienDirection === -1 && alien.x < padding) hitEdge = true;
+      if (this.si_alienDirection === -1 && alien.x < padding) hitEdge = true;
     });
 
     if (hitEdge) {
-      scene.si_alienDirection *= -1;
-      children.forEach(function (alien) {
+      this.si_alienDirection *= -1;
+      children.forEach((alien) => {
         alien.y += 40;
-        alien.x += scene.si_alienDirection * 10;
+        alien.x += this.si_alienDirection * 10;
       });
     } else {
-      children.forEach(function (alien) {
-        alien.x += 25 * scene.si_alienDirection;
+      children.forEach((alien) => {
+        alien.x += 25 * this.si_alienDirection;
       });
     }
   }

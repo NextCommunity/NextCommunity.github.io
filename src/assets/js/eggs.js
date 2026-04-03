@@ -7,7 +7,7 @@
  * Trigger: 5 clicks on the footer ❤️ → SpaceInvaders.launch()
  */
 
-(function () {
+(() => {
   let heartClickCount = 0;
   let phaserStarted = false;
 
@@ -17,7 +17,7 @@
   heart.style.cursor = "pointer";
   heart.style.display = "inline-block";
 
-  heart.addEventListener("click", function () {
+  heart.addEventListener("click", () => {
     if (phaserStarted) return;
 
     heartClickCount++;
@@ -26,14 +26,14 @@
     const scaleAmount = 1 + heartClickCount * 0.3;
     heart.style.transition =
       "transform 0.1s cubic-bezier(0.17, 0.67, 0.83, 0.67)";
-    heart.style.transform = "scale(" + scaleAmount + ")";
+    heart.style.transform = `scale(${scaleAmount})`;
 
     if (heartClickCount === 5) {
       phaserStarted = true;
       heart.innerHTML = "🎮";
       heart.style.transform = "scale(1.5)";
 
-      setTimeout(function () {
+      setTimeout(() => {
         heart.style.opacity = "0";
         SpaceInvaders.launch();
       }, 300);

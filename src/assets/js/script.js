@@ -11,7 +11,7 @@ let resizeStartTop = 0;
 let currentLevel = Number(localStorage.getItem("userLevel")) || 0;
 
 // Load saved XP or start at 0
-let currentXP = parseInt(localStorage.getItem("userXP")) || 0;
+let currentXP = parseInt(localStorage.getItem("userXP"), 10) || 0;
 
 let isSurging = false;
 
@@ -43,9 +43,9 @@ const XP_KONAMI_SECRET = 500; // Konami code easter egg
 const XP_FOOTER_SURGE = 1000; // Footer surge secret
 const XP_BADGE_CLICK = 45; // Badge click reward
 const XP_SPACE_INVADERS_WIN = 200; // Defeat all Space Invaders
-const XP_CODE_BREAKER_WIN = 100; // Win a Code Breaker round
-const XP_DEV_DUEL_PLAY = 25; // Play a Developer Duel
-const XP_DEV_DUEL_WIN = 50; // Win a Developer Duel
+const _XP_CODE_BREAKER_WIN = 100; // Win a Code Breaker round
+const _XP_DEV_DUEL_PLAY = 25; // Play a Developer Duel
+const _XP_DEV_DUEL_WIN = 50; // Win a Developer Duel
 
 const NUM_LEVELS = LEVELS.length;
 
@@ -410,7 +410,9 @@ function applyTheme(theme) {
     "--accent",
     "--accent-light",
   ];
-  props.forEach((p) => html.style.removeProperty(p));
+  props.forEach((p) => {
+    html.style.removeProperty(p);
+  });
 
   if (theme === "dark") {
     html.classList.add("dark");
@@ -776,7 +778,7 @@ function initMatrix() {
     ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#0F0";
-    ctx.font = fontSize + "px monospace";
+    ctx.font = `${fontSize}px monospace`;
 
     for (let i = 0; i < rainDrops.length; i++) {
       const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
@@ -1268,7 +1270,7 @@ function initProfileTracker() {
 
   // 3. UI Update Logic
   const refreshStats = () => {
-    const count = parseInt(localStorage.getItem("profile_view_count") || 0);
+    const count = parseInt(localStorage.getItem("profile_view_count") || 0, 10);
     statsContainer.innerHTML = `
             <span style="letter-spacing: 1px;">VIEWS: ${count}</span>
         `;
@@ -1285,6 +1287,7 @@ function initProfileTracker() {
     if (targetLink?.textContent?.includes("Profile")) {
       const currentCount = parseInt(
         localStorage.getItem("profile_view_count") || 0,
+        10,
       );
       localStorage.setItem("profile_view_count", currentCount + 1);
       refreshStats();
@@ -1337,7 +1340,7 @@ function jumpToLevel() {
   const input = document.getElementById("jump-lvl");
   if (!input || input.value === "") return;
 
-  let targetLvl = parseInt(input.value);
+  let targetLvl = parseInt(input.value, 10);
 
   // Clamp between 0 and NUM_LEVELS
   targetLvl = Math.max(0, Math.min(NUM_LEVELS, targetLvl));
@@ -1365,7 +1368,7 @@ function handleFooterDotClick() {
   // 2. Exit if already unlocked
   if (unlockedEggs.includes("footer_surge")) return;
 
-  let clicks = parseInt(localStorage.getItem("footerDotClicks")) || 0;
+  let clicks = parseInt(localStorage.getItem("footerDotClicks"), 10) || 0;
   clicks++;
 
   const core = document.getElementById("footer-dot-core");
