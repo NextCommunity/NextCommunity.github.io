@@ -8,7 +8,7 @@
  *  - Persisting per-game high scores and achievement flags in localStorage
  */
 
-const GameManager = (function () {
+const GameManager = (() => {
   /** Active Phaser.Game instances keyed by game id. */
   const _instances = {};
 
@@ -35,15 +35,15 @@ const GameManager = (function () {
 
     const script = document.createElement("script");
     script.src = PHASER_CDN_URL;
-    script.onload = function () {
+    script.onload = () => {
       _phaserLoading = false;
       const cbs = _phaserCallbacks.slice();
       _phaserCallbacks = [];
-      cbs.forEach(function (cb) {
+      cbs.forEach((cb) => {
         cb();
       });
     };
-    script.onerror = function () {
+    script.onerror = () => {
       console.error("[GameManager] Failed to load Phaser from CDN.");
       _phaserLoading = false;
       _phaserCallbacks = [];
@@ -196,12 +196,11 @@ const GameManager = (function () {
    * Displays a bottom-right achievement toast for 5 seconds.
    */
   function _showAchievementToast(achievementId) {
-    const meta =
-      ACHIEVEMENT_META[achievementId] || {
-        emoji: "🏆",
-        name: achievementId,
-        desc: "Achievement unlocked!",
-      };
+    const meta = ACHIEVEMENT_META[achievementId] || {
+      emoji: "🏆",
+      name: achievementId,
+      desc: "Achievement unlocked!",
+    };
 
     const toast = document.createElement("div");
     toast.className =
@@ -224,9 +223,9 @@ const GameManager = (function () {
 
     document.body.appendChild(toast);
 
-    setTimeout(function () {
+    setTimeout(() => {
       toast.style.opacity = "0";
-      setTimeout(function () {
+      setTimeout(() => {
         toast.remove();
       }, 500);
     }, 5000);
@@ -262,7 +261,7 @@ const GameManager = (function () {
       "position:absolute;top:1rem;right:1rem;padding:0.5rem 1rem;" +
       "background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);" +
       "border-radius:0.5rem;cursor:pointer;font-weight:bold;font-size:0.75rem;z-index:1;";
-    closeBtn.addEventListener("click", function () {
+    closeBtn.addEventListener("click", () => {
       destroy(id);
       destroyOverlay(id);
     });

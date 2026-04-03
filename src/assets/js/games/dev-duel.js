@@ -12,7 +12,7 @@
  * Theme-aware: reads the current dark/light mode at startup.
  */
 
-const DevDuel = (function () {
+const DevDuel = (() => {
   const GAME_ID = "dev-duel";
 
   // ─── Public entry-point ──────────────────────────────────────────────────
@@ -22,7 +22,7 @@ const DevDuel = (function () {
    * @param {{ name:string, role:string, skills:string[] }} opponent
    */
   function launch(challenger, opponent) {
-    GameManager.loadPhaser(function () {
+    GameManager.loadPhaser(() => {
       _init(challenger, opponent);
     });
   }
@@ -106,11 +106,27 @@ const DevDuel = (function () {
       .setOrigin(0.5);
 
     // Power bars
-    _drawPowerBar(scene, challenger.name, cPower, W * 0.02, H - 90, W * 0.44, theme);
-    _drawPowerBar(scene, opponent.name, oPower, W * 0.54, H - 90, W * 0.44, theme);
+    _drawPowerBar(
+      scene,
+      challenger.name,
+      cPower,
+      W * 0.02,
+      H - 90,
+      W * 0.44,
+      theme,
+    );
+    _drawPowerBar(
+      scene,
+      opponent.name,
+      oPower,
+      W * 0.54,
+      H - 90,
+      W * 0.44,
+      theme,
+    );
 
     // Animate the battle after a short delay
-    scene.time.delayedCall(800, function () {
+    scene.time.delayedCall(800, () => {
       _animateBattle(scene, challenger, opponent, cPower, oPower, W, H, theme);
     });
   }
@@ -160,7 +176,7 @@ const DevDuel = (function () {
 
     // Top skills (up to 5)
     const skills = (dev.skills || []).slice(0, 5);
-    skills.forEach(function (skill, i) {
+    skills.forEach((skill, i) => {
       const rarity = skillRarity(skill);
       const color = RARITY_COLORS[rarity] || "#94a3b8";
       scene.add
@@ -199,7 +215,7 @@ const DevDuel = (function () {
       w: barW,
       duration: 800,
       ease: "Power2",
-      onUpdate: function (tween, target) {
+      onUpdate: (tween, target) => {
         fillGfx.clear();
         fillGfx.fillStyle(0x38bdf8, 1);
         fillGfx.fillRoundedRect(x, y + 14, target.w, 10, 3);
@@ -215,14 +231,23 @@ const DevDuel = (function () {
 
   // ─── Battle animation ─────────────────────────────────────────────────────
 
-  function _animateBattle(scene, challenger, opponent, cPower, oPower, W, H, theme) {
+  function _animateBattle(
+    scene,
+    challenger,
+    opponent,
+    cPower,
+    oPower,
+    W,
+    H,
+    theme,
+  ) {
     // Flash attacks back and forth
     let round = 0;
     const maxRounds = 5;
 
-    const attackFlash = function () {
+    const attackFlash = () => {
       if (round >= maxRounds) {
-        scene.time.delayedCall(400, function () {
+        scene.time.delayedCall(400, () => {
           _showResult(scene, challenger, opponent, cPower, oPower, W, H, theme);
         });
         return;
@@ -242,7 +267,7 @@ const DevDuel = (function () {
         x: endX,
         duration: 350,
         ease: "Power2",
-        onComplete: function () {
+        onComplete: () => {
           bolt.destroy();
           scene.cameras.main.shake(120, 0.008);
           scene.time.delayedCall(200, attackFlash);
@@ -255,7 +280,16 @@ const DevDuel = (function () {
 
   // ─── Result screen ────────────────────────────────────────────────────────
 
-  function _showResult(scene, challenger, opponent, cPower, oPower, W, H, theme) {
+  function _showResult(
+    scene,
+    challenger,
+    opponent,
+    cPower,
+    oPower,
+    W,
+    H,
+    theme,
+  ) {
     const challengerWins = cPower >= oPower;
     const winner = challengerWins ? challenger : opponent;
 
@@ -291,12 +325,10 @@ const DevDuel = (function () {
 
     const powerDiff = Math.abs(cPower - oPower);
     scene.add
-      .text(
-        W / 2,
-        H / 2 + 5,
-        "Power advantage: +" + powerDiff + " pts",
-        { fontSize: "14px", fill: "#94a3b8" },
-      )
+      .text(W / 2, H / 2 + 5, "Power advantage: +" + powerDiff + " pts", {
+        fontSize: "14px",
+        fill: "#94a3b8",
+      })
       .setOrigin(0.5);
 
     scene.add
@@ -326,7 +358,7 @@ const DevDuel = (function () {
    */
   function _calcPower(skills) {
     if (!skills || skills.length === 0) return 1;
-    return skills.reduce(function (total, skill) {
+    return skills.reduce((total, skill) => {
       const rarity = skillRarity(skill);
       return total + (RARITY_WEIGHTS[rarity] || 1);
     }, 0);
@@ -355,10 +387,7 @@ function getCardData(cardEl) {
   return {
     name: (cardEl.dataset.name || "").trim(),
     role: (cardEl.dataset.role || "").trim(),
-    skills: (cardEl.dataset.skills || "")
-      .trim()
-      .split(/\s+/)
-      .filter(Boolean),
+    skills: (cardEl.dataset.skills || "").trim().split(/\s+/).filter(Boolean),
   };
 }
 
@@ -369,10 +398,10 @@ function getCardData(cardEl) {
  * @param {HTMLElement} challengerCard  The card element that was clicked.
  */
 function startDuelFromCard(challengerCard) {
-  const allCards = Array.from(document.querySelectorAll(".user-card[data-name]"));
-  const others = allCards.filter(function (c) {
-    return c !== challengerCard;
-  });
+  const allCards = Array.from(
+    document.querySelectorAll(".user-card[data-name]"),
+  );
+  const others = allCards.filter((c) => c !== challengerCard);
 
   if (others.length === 0) return;
 
