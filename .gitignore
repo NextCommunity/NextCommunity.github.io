@@ -4,3 +4,4 @@ node_modules
 vendor
 .venv
 src/assets/css/tailwind.css
+src/assets/js/bundle.js

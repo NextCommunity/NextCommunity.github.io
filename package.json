@@ -27,15 +27,18 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
+    "esbuild": "^0.21.5",
     "npm-run-all": "^4.1.5",
     "postcss-cli": "^11.0.0"
   },
   "scripts": {
-    "css:build": "npx postcss ./src/assets/css/tailwind-input.css -o ./src/assets/css/tailwind.css",
-    "css:watch": "npx postcss ./src/assets/css/tailwind-input.css -o ./src/assets/css/tailwind.css --watch",
-    "start": "npm-run-all --parallel css:watch eleventy:serve",
-    "eleventy:serve": "npx eleventy --serve",
-    "build": "npm run css:build && npx eleventy"
+    "css:build": "postcss ./src/assets/css/tailwind-input.css -o ./src/assets/css/tailwind.css",
+    "css:watch": "postcss ./src/assets/css/tailwind-input.css -o ./src/assets/css/tailwind.css --watch",
+    "js:build": "esbuild ./src/assets/js/init.js --bundle --outfile=./src/assets/js/bundle.js --external:fs",
+    "js:watch": "esbuild ./src/assets/js/init.js --bundle --outfile=./src/assets/js/bundle.js --watch --external:fs",
+    "start": "npm run js:build && npm-run-all --parallel css:watch js:watch eleventy:serve",
+    "eleventy:serve": "eleventy --serve",
+    "build": "npm run css:build && npm run js:build && eleventy"
   },
   "repository": {
     "type": "git",
