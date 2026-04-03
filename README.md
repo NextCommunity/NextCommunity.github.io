@@ -7,6 +7,7 @@
 [![Built with Tailwind CSS](https://img.shields.io/badge/Built%20with-Tailwind-blue)](https://tailwindcss.com/)
 [![Super-Linter](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml)
 [![pre-commit](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml)
+[![Easter Eggs](https://img.shields.io/badge/Easter-Eggs-ff69b4?labelColor=9b59b6)](#)
 
 > A vibrant community directory showcasing open-source developers and software engineers from around the world.
 
