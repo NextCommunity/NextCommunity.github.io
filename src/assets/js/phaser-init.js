@@ -1,2 +1,2 @@
-import Phaser from 'phaser';
+const Phaser = require("phaser");
 window.Phaser = Phaser;

@@ -52,7 +52,7 @@ const CodeBreaker = (() => {
     titleBar.style.cssText =
       "color:#fff;font-size:0.85rem;font-weight:900;text-transform:uppercase;" +
       "letter-spacing:0.15em;margin-bottom:0.5rem;opacity:0.8;";
-    titleBar.textContent = "⌨️ CODE BREAKER" + (devName ? " — " + devName : "");
+    titleBar.textContent = `⌨️ CODE BREAKER${devName ? ` — ${devName}` : ""}`;
     overlay.appendChild(titleBar);
 
     // Canvas container — intentionally has NO id matching "game-canvas-{GAME_ID}"
@@ -332,7 +332,7 @@ const CodeBreaker = (() => {
     if (!scene.cb_active) return;
     scene.cb_active = false;
 
-    GameManager.awardXP(XP_CODE_BREAKER_WIN);
+    GameManager.awardXP(_XP_CODE_BREAKER_WIN);
     const wins = GameManager.incrementStat("code_breaker_wins");
     if (wins >= 10) GameManager.grantAchievement("code_wizard");
     GameManager.setHighScore(GAME_ID, scene.cb_score);
@@ -343,7 +343,7 @@ const CodeBreaker = (() => {
       H,
       "⌨️ SKILLS MASTERED!",
       "#fbbf24",
-      "+" + XP_CODE_BREAKER_WIN + " XP",
+      "+" + _XP_CODE_BREAKER_WIN + " XP",
     );
   }
 

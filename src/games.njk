@@ -62,7 +62,7 @@ permalink: /games/
       <div class="user-card p-8 rounded-3xl flex flex-col gap-4">
         <div class="text-4xl">⌨️</div>
         <h3 class="text-xl font-black">Code Breaker</h3>
-        <p class="text-sm text-[var(--text-muted)] flex-1">Catch falling tech skills before they hit the ground. Uses generic skills here — visit any profile page for that developer's own skill set. Earn <span class="text-accent font-bold">+{{ XP_CODE_BREAKER_WIN or 100 }} XP</span> on win.</p>
+        <p class="text-sm text-[var(--text-muted)] flex-1">Catch falling tech skills before they hit the ground. Uses generic skills here — visit any profile page for that developer's own skill set. Earn <span class="text-accent font-bold">+{{ _XP_CODE_BREAKER_WIN or 100 }} XP</span> on win.</p>
         <button onclick="CodeBreaker.launch(null, 'Arcade Mode')"
           class="mt-auto px-5 py-3 rounded-xl bg-accent text-white font-black uppercase tracking-wider text-sm hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-accent/30">
           ⌨️ Play
@@ -73,7 +73,7 @@ permalink: /games/
       <div class="user-card p-8 rounded-3xl flex flex-col gap-4">
         <div class="text-4xl">⚔️</div>
         <h3 class="text-xl font-black">Developer Duel</h3>
-        <p class="text-sm text-[var(--text-muted)] flex-1">Pit two random developers against each other in a skill-power battle. Find the Duel button on any card in the <a href="/" class="text-accent hover:underline">Directory</a>. Earn <span class="text-accent font-bold">+{{ XP_DEV_DUEL_PLAY or 25 }} XP</span> just for playing.</p>
+        <p class="text-sm text-[var(--text-muted)] flex-1">Pit two random developers against each other in a skill-power battle. Find the Duel button on any card in the <a href="/" class="text-accent hover:underline">Directory</a>. Earn <span class="text-accent font-bold">+{{ _XP_DEV_DUEL_PLAY or 25 }} XP</span> just for playing.</p>
         <a href="/"
           class="mt-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[var(--bg-footer)] text-[var(--text-main)] font-black uppercase tracking-wider text-sm border border-[var(--border-color)] hover:border-accent transition-all">
           ← Go to Directory

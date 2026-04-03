@@ -299,7 +299,7 @@ const DevDuel = (() => {
     dimGfx.fillRect(0, 0, W, H);
 
     // Award XP for playing (all players earn this) and track stats
-    GameManager.awardXP(XP_DEV_DUEL_PLAY);
+    GameManager.awardXP(_XP_DEV_DUEL_PLAY);
     const duels = GameManager.incrementStat("dev_duel_plays");
     if (duels >= 5) GameManager.grantAchievement("duelist");
     GameManager.setHighScore(GAME_ID, Math.max(cPower, oPower));
@@ -332,7 +332,7 @@ const DevDuel = (() => {
       .setOrigin(0.5);
 
     scene.add
-      .text(W / 2, H / 2 + 35, "+" + XP_DEV_DUEL_PLAY + " XP for playing!", {
+      .text(W / 2, H / 2 + 35, "+" + _XP_DEV_DUEL_PLAY + " XP for playing!", {
         fontSize: "18px",
         fill: "#10b981",
         fontStyle: "bold",
