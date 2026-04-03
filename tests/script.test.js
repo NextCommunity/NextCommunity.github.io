@@ -417,7 +417,7 @@ describe("levels.json data integrity", () => {
       "legendary",
       "mythic",
       "absolute",
-      // NOTE: '#ffffff' appears in the data as a known anomaly (a colour
+      // NOTE: '#ffffff' appears in the data as a known anomaly (a color
       // value accidentally used as a rarity field).  It is included here to
       // prevent future regressions while the underlying data is corrected.
       "#ffffff",
