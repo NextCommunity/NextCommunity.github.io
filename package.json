@@ -15,7 +15,7 @@
     "lightningcss": "^1.32.0",
     "magic-string": "^0.30.21",
     "mri": "^1.2.0",
-    "node-addon-api": "^8.6.0",
+    "node-addon-api": "^8.7.0",
     "picocolors": "^1.1.1",
     "picomatch": "^4.0.4",
     "source-map-js": "^1.2.1",
