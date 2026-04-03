@@ -51,12 +51,12 @@ repos:
         pass_filenames: false
 
   # GO-based
-  # - repo: https://github.com/gitleaks/gitleaks
-  #   rev: v8.30.0
-  #   hooks:
-  #     - id: gitleaks
-  #       name: Run gitleaks
-  #       description: Check for secrets with gitleaks
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+        name: Run gitleaks
+        description: Check for secrets with gitleaks
 
   - repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: v1.5.6
