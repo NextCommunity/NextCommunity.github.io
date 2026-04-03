@@ -225,15 +225,16 @@ const CodeBreaker = (function () {
     }).setOrigin(0.5);
 
     // Keep label synced with the physics body each frame
-    scene.events.on("update", function () {
+    function syncLabel() {
       if (tile.active) {
         label.x = tile.x;
         label.y = tile.y;
       } else {
         label.destroy();
-        scene.events.off("update", arguments.callee);
+        scene.events.off("update", syncLabel);
       }
-    });
+    }
+    scene.events.on("update", syncLabel);
 
     scene.cb_tiles.add(tile);
     scene.cb_spawnDelay = Math.max(600, scene.cb_spawnDelay - 20);

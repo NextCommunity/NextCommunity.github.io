@@ -247,14 +247,13 @@ const DevDuel = (function () {
   function _showResult(scene, challenger, opponent, cPower, oPower, W, H, theme) {
     const challengerWins = cPower >= oPower;
     const winner = challengerWins ? challenger : opponent;
-    const xpEarned = XP_DEV_DUEL_WIN;
 
     // Dim overlay
     const dimGfx = scene.add.graphics();
     dimGfx.fillStyle(0x000000, 0.6);
     dimGfx.fillRect(0, 0, W, H);
 
-    // Award XP and track stats
+    // Award XP for playing (all players earn this) and track stats
     GameManager.awardXP(XP_DEV_DUEL_PLAY);
     const duels = GameManager.incrementStat("dev_duel_plays");
     if (duels >= 5) GameManager.grantAchievement("duelist");
@@ -290,7 +289,7 @@ const DevDuel = (function () {
       .setOrigin(0.5);
 
     scene.add
-      .text(W / 2, H / 2 + 35, "+" + xpEarned + " XP for playing!", {
+      .text(W / 2, H / 2 + 35, "+" + XP_DEV_DUEL_PLAY + " XP for playing!", {
         fontSize: "18px",
         fill: "#10b981",
         fontStyle: "bold",
@@ -346,10 +345,8 @@ function getCardData(cardEl) {
     name: (cardEl.dataset.name || "").trim(),
     role: (cardEl.dataset.role || "").trim(),
     skills: (cardEl.dataset.skills || "")
-      .split(",")
-      .map(function (s) {
-        return s.trim();
-      })
+      .trim()
+      .split(/\s+/)
       .filter(Boolean),
   };
 }
