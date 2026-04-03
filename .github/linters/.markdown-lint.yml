@@ -5,3 +5,6 @@ MD013: false
 
 # MD036/no-emphasis-as-heading Emphasis used instead of a heading
 MD036: false
+
+# MD042/no-empty-links No empty links
+MD042: false
