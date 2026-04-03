@@ -3,6 +3,12 @@
 
     {% include "header-details.njk" %}
 
+    <nav class="flex items-center gap-2">
+      <a href="/games/" class="text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg border border-[var(--border-color)] text-[var(--text-muted)] hover:text-accent hover:border-accent transition-all{% if page.url == '/games/' %} border-accent text-accent{% endif %}">
+        🕹️ Arcade
+      </a>
+    </nav>
+
     {% include "game-stats.njk" %}
 
   </div>

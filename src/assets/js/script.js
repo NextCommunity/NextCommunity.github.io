@@ -42,6 +42,10 @@ const XP_GRAVITY_SECRET = 250; // Gravity effect easter egg
 const XP_KONAMI_SECRET = 500; // Konami code easter egg
 const XP_FOOTER_SURGE = 1000; // Footer surge secret
 const XP_BADGE_CLICK = 45; // Badge click reward
+const XP_SPACE_INVADERS_WIN = 200; // Defeat all Space Invaders
+const XP_CODE_BREAKER_WIN = 100; // Win a Code Breaker round
+const XP_DEV_DUEL_PLAY = 25; // Play a Developer Duel
+const XP_DEV_DUEL_WIN = 50; // Win a Developer Duel
 
 const NUM_LEVELS = LEVELS.length;
 
@@ -649,10 +653,11 @@ window.addEventListener("keydown", (e) => {
   if (key === "d") {
     e.preventDefault();
 
-    const systemDash = document.getElementById("dev-tools"); // Adjust ID as needed
+    const systemDash = document.getElementById("dev-tools");
+    if (!systemDash) return;
     const isOpening = systemDash.classList.contains("hidden");
 
-    localStorage.setItem("devToolsVisible", !isOpening);
+    localStorage.setItem("devToolsVisible", isOpening);
     playSound(isOpening ? "secret" : "click");
 
     if (isOpening) {

@@ -1,0 +1,160 @@
+---
+layout: false
+permalink: /games/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arcade | Developer Directory</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="min-h-screen scroll-smooth bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-300">
+
+  {% include "header.njk" %}
+
+  <main class="max-w-5xl mx-auto px-4 py-12">
+
+    <div class="mb-10 text-center">
+      <h2 class="text-4xl md:text-5xl font-black uppercase italic tracking-tighter text-[var(--text-main)]">🕹️ Arcade</h2>
+      <p class="mt-2 text-[var(--text-muted)] text-sm font-mono">Earn XP · Collect achievements · Climb the ranks</p>
+    </div>
+
+    {# ── High-score strip ── #}
+    <div id="hs-strip" class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+      <div class="user-card p-5 rounded-2xl text-center">
+        <p class="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Space Invaders</p>
+        <p class="text-2xl font-black text-accent" id="hs-space-invaders">—</p>
+        <p class="text-[9px] text-[var(--text-muted)] mt-1">High Score</p>
+      </div>
+      <div class="user-card p-5 rounded-2xl text-center">
+        <p class="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Code Breaker</p>
+        <p class="text-2xl font-black text-accent" id="hs-code-breaker">—</p>
+        <p class="text-[9px] text-[var(--text-muted)] mt-1">High Score</p>
+      </div>
+      <div class="user-card p-5 rounded-2xl text-center">
+        <p class="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Dev Duel</p>
+        <p class="text-2xl font-black text-accent" id="hs-dev-duel">—</p>
+        <p class="text-[9px] text-[var(--text-muted)] mt-1">High Score</p>
+      </div>
+    </div>
+
+    {# ── Game cards ── #}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+
+      {# Space Invaders #}
+      <div class="user-card p-8 rounded-3xl flex flex-col gap-4">
+        <div class="text-4xl">👾</div>
+        <h3 class="text-xl font-black">Space Invaders</h3>
+        <p class="text-sm text-[var(--text-muted)] flex-1">The classic Easter Egg — defend the directory from alien invaders! Earn <span class="text-accent font-bold">+{{ XP_SPACE_INVADERS_WIN or 200 }} XP</span> for victory.</p>
+        <div class="text-[10px] font-mono text-[var(--text-muted)]">
+          Trigger: click the footer ❤️ five times
+        </div>
+        <button onclick="SpaceInvaders.launch()"
+          class="mt-auto px-5 py-3 rounded-xl bg-accent text-white font-black uppercase tracking-wider text-sm hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-accent/30">
+          🚀 Launch
+        </button>
+      </div>
+
+      {# Code Breaker #}
+      <div class="user-card p-8 rounded-3xl flex flex-col gap-4">
+        <div class="text-4xl">⌨️</div>
+        <h3 class="text-xl font-black">Code Breaker</h3>
+        <p class="text-sm text-[var(--text-muted)] flex-1">Catch falling tech skills before they hit the ground. Uses generic skills here — visit any profile page for that developer's own skill set. Earn <span class="text-accent font-bold">+{{ XP_CODE_BREAKER_WIN or 100 }} XP</span> on win.</p>
+        <button onclick="CodeBreaker.launch(null, 'Arcade Mode')"
+          class="mt-auto px-5 py-3 rounded-xl bg-accent text-white font-black uppercase tracking-wider text-sm hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-accent/30">
+          ⌨️ Play
+        </button>
+      </div>
+
+      {# Dev Duel #}
+      <div class="user-card p-8 rounded-3xl flex flex-col gap-4">
+        <div class="text-4xl">⚔️</div>
+        <h3 class="text-xl font-black">Developer Duel</h3>
+        <p class="text-sm text-[var(--text-muted)] flex-1">Pit two random developers against each other in a skill-power battle. Find the Duel button on any card in the <a href="/" class="text-accent hover:underline">Directory</a>. Earn <span class="text-accent font-bold">+{{ XP_DEV_DUEL_PLAY or 25 }} XP</span> just for playing.</p>
+        <a href="/"
+          class="mt-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[var(--bg-footer)] text-[var(--text-main)] font-black uppercase tracking-wider text-sm border border-[var(--border-color)] hover:border-accent transition-all">
+          ← Go to Directory
+        </a>
+      </div>
+
+    </div>
+
+    {# ── Achievements ── #}
+    <div class="user-card p-8 rounded-3xl">
+      <h3 class="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-6 flex items-center gap-2">
+        <span class="w-8 h-[2px] bg-accent"></span> Achievements
+      </h3>
+      <div id="achievements-list" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="achievement-card flex items-center gap-4 p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-footer)]" data-id="first_blood">
+          <span class="text-3xl">🩸</span>
+          <div>
+            <p class="font-black text-sm">First Blood</p>
+            <p class="text-[10px] text-[var(--text-muted)]">Defeat the Space Invaders once</p>
+          </div>
+          <span class="ml-auto achievement-status text-[10px] font-black uppercase text-[var(--text-muted)]">Locked</span>
+        </div>
+        <div class="achievement-card flex items-center gap-4 p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-footer)]" data-id="code_wizard">
+          <span class="text-3xl">🧙</span>
+          <div>
+            <p class="font-black text-sm">Code Wizard</p>
+            <p class="text-[10px] text-[var(--text-muted)]">Win Code Breaker 10 times</p>
+          </div>
+          <span class="ml-auto achievement-status text-[10px] font-black uppercase text-[var(--text-muted)]">Locked</span>
+        </div>
+        <div class="achievement-card flex items-center gap-4 p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-footer)]" data-id="duelist">
+          <span class="text-3xl">⚔️</span>
+          <div>
+            <p class="font-black text-sm">Duelist</p>
+            <p class="text-[10px] text-[var(--text-muted)]">Play 5 Developer Duels</p>
+          </div>
+          <span class="ml-auto achievement-status text-[10px] font-black uppercase text-[var(--text-muted)]">Locked</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  {% include "game-modal.njk" %}
+  {% include "footer.njk" %}
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Populate high scores
+      var scores = {
+        "space-invaders": document.getElementById("hs-space-invaders"),
+        "code-breaker": document.getElementById("hs-code-breaker"),
+        "dev-duel": document.getElementById("hs-dev-duel"),
+      };
+      Object.keys(scores).forEach(function (id) {
+        var val = parseInt(localStorage.getItem("hs_" + id)) || 0;
+        if (scores[id]) scores[id].textContent = val > 0 ? val : "—";
+      });
+
+      // Populate achievements
+      var achievements = {};
+      try {
+        achievements = JSON.parse(localStorage.getItem("gameAchievements") || "{}");
+      } catch (_) {}
+
+      document.querySelectorAll(".achievement-card").forEach(function (card) {
+        var id = card.dataset.id;
+        var statusEl = card.querySelector(".achievement-status");
+        if (achievements[id]) {
+          card.classList.add("border-accent");
+          card.style.opacity = "1";
+          if (statusEl) {
+            statusEl.textContent = "Earned ✓";
+            statusEl.style.color = "var(--accent)";
+          }
+        } else {
+          card.style.opacity = "0.5";
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
