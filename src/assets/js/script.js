@@ -948,8 +948,7 @@ function scrollToRandomUser() {
     playSound("levelUp");
     randomCard.classList.add("selected-fancy");
 
-    // Inject the Tracing SVG
-    const svgNamespace = "http://www.w3.org/2000/svg";
+    const svgNamespace = "https://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgNamespace, "svg");
     const rect = document.createElementNS(svgNamespace, "rect");
 
@@ -961,7 +960,6 @@ function scrollToRandomUser() {
     svg.appendChild(rect);
     randomCard.appendChild(svg);
 
-    // Remove trace and fancy class after the 7.5s animation ends
     setTimeout(() => {
       randomCard.classList.remove("selected-fancy");
       svg.remove();
@@ -978,13 +976,11 @@ window.toggleScreenshotMode = () => {
   const footer = document.querySelector("footer");
   const gameStats = document.getElementById("game-stats");
 
-  // Hide everything
   [devPanel, header, footer, gameStats].forEach((el) => {
     if (el) el.style.opacity = "0";
     if (el) el.style.pointerEvents = "none";
   });
 
-  // Show a tiny notification that it's active
   const toast = document.createElement("div");
   toast.style.cssText =
     "position:fixed; bottom:20px; left:50%; transform:translateX(-50%); color:var(--text-muted); font-family:monospace; font-size:10px; z-index:9999;";
@@ -1007,26 +1003,17 @@ function renderXP(value) {
   const pb = document.getElementById("level-progress");
   if (!pb) return;
 
-  // 1. Ensure 'value' is a clean number
   const currentXPNum = Number(value) || 0;
 
-  // 2. Calculate percentage (current / 45 * 100)
   const percentage = Math.min((currentXPNum / 45) * 100, 100);
 
-  // 3. Apply to style
   pb.style.width = `${percentage}%`;
-
-  // Debugging: uncomment this to see the math in your console
-  // console.log(`XP: ${currentXPNum}, Percent: ${percentage}%`);
 }
 
 function showLevelUpToast(rank) {
-  // 1. Create the container
   const toast = document.createElement("div");
   toast.className = "level-up-toast";
 
-  // 2. Build the inner content
-  // We use the rank color for the name and emoji to make it feel custom
   toast.innerHTML = `
         <div class="toast-content">
             <span class="toast-emoji">${rank.emoji}</span>
@@ -1039,7 +1026,6 @@ function showLevelUpToast(rank) {
 
   document.body.appendChild(toast);
 
-  // 3. Auto-remove after animation
   setTimeout(() => {
     toast.classList.add("fade-out");
     setTimeout(() => toast.remove(), 500);
@@ -1049,7 +1035,6 @@ function showLevelUpToast(rank) {
 function matrixConsoleLog(level) {
   const rank = getRank(level);
 
-  // This looks awesome in the F12 Dev Console
   console.log(
     `%c [SYSTEM] %c LEVEL UP: %c ${rank.name.toUpperCase()} %c [LVL ${level}] `,
     "color: #10b981; font-weight: bold; background: #064e3b; padding: 2px;",
@@ -1058,20 +1043,17 @@ function matrixConsoleLog(level) {
     "color: #94a3b8; background: #1e293b; padding: 2px;",
   );
 
-  // 3. If you have an on-screen Matrix Console element, push there too:
   const matrixConsole = document.getElementById("matrix-console-output");
   if (matrixConsole) {
     const line = document.createElement("p");
     line.className = "matrix-line text-xs font-mono mb-1";
     line.innerHTML = `<span class="text-green-500">>></span> Rank Updated: <span style="color: ${rank.color}">${rank.name}</span>`;
     matrixConsole.appendChild(line);
-    // Auto-scroll to bottom
     matrixConsole.scrollTop = matrixConsole.scrollHeight;
   }
 }
 
 document.addEventListener("keydown", (e) => {
-  // Check if user pressed 'L' (for Log) and isn't typing in an input field
   if (
     e.key.toLowerCase() === "l" &&
     e.target.tagName !== "INPUT" &&
@@ -1087,53 +1069,38 @@ document.addEventListener("keydown", (e) => {
 });
 
 async function addExperience(amount) {
-  // 1. Force strict numeric types to prevent "1" + "1" = "11"
   const xpToAdd = Number(amount) || 0;
   currentXP = Number(currentXP) || 0;
   currentLevel = Number(currentLevel) || 0;
   const XP_THRESHOLD = 45;
 
-  // 2. Add the new XP
   currentXP += xpToAdd;
 
-  // 3. Process Level Ups one by one
-  // Using a while loop ensures that if you gain 100 XP,
-  // it processes Level 1, then Level 2, with the remainder left over.
   while (currentXP >= XP_THRESHOLD && currentLevel < NUM_LEVELS) {
     currentXP -= XP_THRESHOLD;
     currentLevel++;
-    // 1. Trigger the Visual Toast (Top of screen)
     if (typeof showLevelUpToast === "function") {
       showLevelUpToast(getRank(currentLevel));
     }
 
-    // 2. Trigger the "Matrix" Console Log
     matrixConsoleLog(currentLevel);
 
-    // --- THE POPUP TRIGGER ---
     const badge = document.getElementById("level-badge");
     if (badge) {
-      // Remove the class if it exists (to reset animation)
       badge.classList.remove("animate-badge-pop");
-      // Trigger a "reflow" (magic trick to allow re-animation)
       void badge.offsetWidth;
-      // Re-add the class
       badge.classList.add("animate-badge-pop");
     }
-    // --------------------------
 
     console.log(`Leveled Up to ${currentLevel}!`);
   }
-  // 4. Persistence: Save clean numbers
   localStorage.setItem("userLevel", currentLevel.toString());
   localStorage.setItem("userXP", currentXP.toString());
 
-  // 5. Update UI
   updateGameUI();
 }
 
 function updateInventoryCounts(lvl) {
-  // Initialize counts
   const counts = {
     common: 0,
     uncommon: 0,
@@ -1144,8 +1111,6 @@ function updateInventoryCounts(lvl) {
     absolute: 0,
   };
 
-  // Loop through LEVELS array up to current unlocked level
-  // We use i <= lvl because currentLevel is the index reached
   for (let i = 0; i <= lvl; i++) {
     const levelEntry = LEVELS[i];
     if (levelEntry?.rarity) {
@@ -1156,7 +1121,6 @@ function updateInventoryCounts(lvl) {
     }
   }
 
-  // Inject counts into the Tooltip DOM
   const elements = {
     "count-common": counts.common,
     "count-uncommon": counts.uncommon,
@@ -1174,17 +1138,13 @@ function updateInventoryCounts(lvl) {
 }
 
 function updateLevelUI(levelData) {
-  // ... your existing code to update level-name and level-number ...
-
   const tooltipDesc = document.getElementById("tooltip-desc");
   const tooltipRarity = document.getElementById("tooltip-rarity");
   const tooltipCard = document.getElementById("level-tooltip");
 
-  // Update Text
   tooltipDesc.innerText = levelData.description;
   tooltipRarity.innerText = levelData.rarity;
 
-  // Optional: Dynamic Color based on rarity
   const rarityColors = {
     common: "var(--rarity-common)",
     uncommon: "var(--rarity-uncommon)",
@@ -1205,25 +1165,20 @@ function updateGameUI() {
   const lvl = Number(currentLevel) || 0;
   const rank = getRank(lvl);
 
-  // 1. Update the Description Tooltip
   updateLevelUI(rank);
 
-  // 2. Calculate and Update the Inventory Tooltip
   updateInventoryCounts(lvl);
 
-  // Update the Name and its Color
   const nameLabel = document.getElementById("level-name");
   if (nameLabel) {
     nameLabel.innerText = rank.name;
     nameLabel.style.color = rank.color;
   }
 
-  // Update the Badge
   const badge = document.getElementById("level-badge");
   if (badge) {
     badge.innerText = rank.emoji;
     badge.style.backgroundColor = rank.color;
-    // Set contrast text color for the emoji/background
     badge.style.color = getContrastYIQ(rank.color);
   }
 
