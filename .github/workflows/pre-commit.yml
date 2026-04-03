@@ -7,8 +7,11 @@ on: [pull_request]
 
 jobs:
   pre-commit:
-    name: 🏃🏼 Pre-commit
-    runs-on: ubuntu-latest
+    name: 🏃🏼 Pre-commit on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     steps:
       - name: Checkout Code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
