@@ -1,7 +1,8 @@
 _site
-.jekyll-cache
 node_modules
 vendor
+.idea
+.jekyll-cache
 .venv
 
 # Generated CSS (compiled from TailwindCSS)
