@@ -14,3 +14,6 @@ MD041: false
 
 # MD042/no-empty-links No empty links
 MD042: false
+
+# MD060/table-column-style Table column style
+MD060: false
