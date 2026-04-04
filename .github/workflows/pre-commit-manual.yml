@@ -1,5 +1,5 @@
 # https://github.com/j178/prek
-name: Standard hooks
+name: Manual hooks
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   pre-commit:
-    name: 🏃🏿‍♂️‍➡️ Run prek on ${{ matrix.os }}
+    name: 🏃‍♂️‍➡️ prek on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -24,4 +24,6 @@ jobs:
       - name: Run prek-action
         uses: j178/prek-action@53276d8b0d10f8b6672aa85b4588c6921d0370cc # v2.0.1
         with:
-          extra-args: --all-files
+          install-only: true
+      - name: Run manual prek hooks
+        run: prek run --all-files --hook-stage manual

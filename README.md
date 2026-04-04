@@ -1,17 +1,24 @@
-# 🌐 NextCommunity Developer Directory
+<div align="center">
+<h1>🌐 NextCommunity Developer Directory</h1>
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Built with Eleventy](https://img.shields.io/badge/Built%20with-Eleventy-black)](https://www.11ty.dev/)
 [![Run JavaScript Everywhere](https://img.shields.io/badge/Run%20JavaScript%20Everywhere-yellow)](https://nodejs.org/en)
 [![Built with Nunjucks](https://img.shields.io/badge/Built%20with-Nunjucks-darkgreen)](https://mozilla.github.io/nunjucks/)
 [![Built with Tailwind CSS](https://img.shields.io/badge/Built%20with-Tailwind-blue)](https://tailwindcss.com/)
-[![Super-Linter](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml)
-[![pre-commit](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml)
-[![Easter Eggs](https://img.shields.io/badge/Easter-Eggs-ff69b4?labelColor=9b59b6)](#)
+
+[![Super-Linter](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml?query=branch%3Amain)
+[![Audit hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-audit.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-audit.yml?query=branch%3Amain)
+[![Manual hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-manual.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-manual.yml?query=branch%3Amain)
+[![Standard hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml?query=branch%3Amain)
+
+[![Easter Eggs](https://img.shields.io/badge/Easter-Eggs-ff69b4?labelColor=9b59b6)](https://nextcommunity.github.io)
 
 > A vibrant community directory showcasing open-source developers and software engineers from around the world.
 
 **🔗 Live Site:** [https://nextcommunity.github.io](https://nextcommunity.github.io)
+
+</div>
 
 ---
 
@@ -21,6 +28,8 @@
 - [How to Add Yourself](#-how-to-add-yourself)
 - [YAML File Format](#-yaml-file-format)
 - [Local Development](#-local-development-optional)
+- [Git Workflow & Keeping in Sync](#-git-workflow--keeping-in-sync)
+- [Contributing with GitHub CLI](#-contributing-with-github-cli)
 - [Contribution Guidelines](#-contribution-guidelines)
 - [Troubleshooting](#-troubleshooting--faq)
 - [License](#-license)
@@ -61,23 +70,46 @@ Adding yourself to the directory is simple! Just follow these steps:
 1. Click the **"Fork"** button at the top-right of this repository
 2. This creates a copy of the repository under your GitHub account
 
-### Step 2: Clone Your Fork
+### Step 2: Clone Your Fork and Set Up Upstream
 
 ```bash
+# Clone your fork
 git clone https://github.com/YOUR-USERNAME/NextCommunity.github.io.git
 cd NextCommunity.github.io
+
+# Add the original repo as "upstream" so you can sync future changes
+git remote add upstream https://github.com/NextCommunity/NextCommunity.github.io.git
+
+# Verify your remotes (you should see both origin and upstream)
+git remote -v
 ```
 
 Replace `YOUR-USERNAME` with your actual GitHub username.
 
-### Step 3: Create Your Profile File
+### Step 3: Create a Feature Branch
+
+**Never commit directly to `main`.** Always work on a dedicated feature branch:
+
+```bash
+# Make sure your local main is up to date first
+git checkout main
+git pull upstream main
+
+# Create and switch to a new feature branch
+git checkout -b my-feature-branch
+```
+
+Use a descriptive branch name that reflects your change, e.g. `add-jbampton` or `fix-yaml-typo`.
+Replace `your-github-username` in every example below with the actual branch name you chose here.
+
+### Step 4: Create Your Profile File
 
 1. Navigate to the `src/users/` directory
 2. Create a new file named `your-github-username.yaml`
    - **Important**: Use your actual GitHub username in lowercase
    - Example: If your GitHub username is `JohnDoe`, create `johndoe.yaml`
 
-### Step 4: Fill In Your Details
+### Step 5: Fill In Your Details
 
 Copy the template below and customize it with your information:
 
@@ -103,7 +135,7 @@ bio: |
 
 > 💡 **Tip**: Check out existing files in `src/users/` for real examples!
 
-### Step 5: Test Locally (Optional but Recommended)
+### Step 6: Test Locally (Optional but Recommended)
 
 ```bash
 # Install dependencies
@@ -115,7 +147,7 @@ npm start
 
 Visit `http://localhost:8080` to preview your profile before submitting.
 
-### Step 6: Commit Your Changes
+### Step 7: Commit Your Changes
 
 ```bash
 # Add your new file
@@ -124,16 +156,18 @@ git add src/users/your-github-username.yaml
 # Commit with a descriptive message
 git commit -m "Add [Your Name] to developer directory"
 
-# Push to your fork
-git push origin main
+# Push your feature branch to your fork (NOT main!)
+# Replace 'my-feature-branch' with the branch name you created in Step 3
+git push origin my-feature-branch
 ```
 
-### Step 7: Create a Pull Request
+### Step 8: Create a Pull Request
 
 1. Go to your forked repository on GitHub
 2. Click the **"Contribute"** button, then **"Open Pull Request"**
-3. Write a clear title: `Add [Your Name] to directory`
-4. In the description, mention:
+3. Make sure the **base** branch is `main` on `NextCommunity/NextCommunity.github.io` and the **compare** branch is your feature branch
+4. Write a clear title: `Add [Your Name] to directory`
+5. In the description, mention:
 
    ```markdown
    Fixes #213
@@ -141,9 +175,9 @@ git push origin main
    Adding my profile to the NextCommunity developer directory.
    ```
 
-5. Click **"Create Pull Request"**
+6. Click **"Create Pull Request"**
 
-### Step 8: Wait for Review ⏳
+### Step 9: Wait for Review ⏳
 
 - The maintainers will review your PR
 - Automated checks will verify your YAML file
@@ -263,20 +297,353 @@ npm run build
 ```text
 NextCommunity.github.io/
 ├── src/
-│   ├── _data/              # Site-wide data files
-│   ├── _includes/          # Reusable templates (header, footer, bio page)
+│   ├── _data/                      # Site-wide data files
+│   │   ├── build.js                # Build metadata injected into templates
+│   │   └── levels.json             # XP level definitions for the gamification system
+│   ├── _includes/                  # Reusable Nunjucks templates
+│   │   ├── bio.njk                 # Individual developer profile page layout
+│   │   ├── footer.njk              # Site footer wrapper
+│   │   ├── footer-details.njk      # Footer content (links, credits)
+│   │   ├── game-modal.njk          # Modal overlay for mini-games
+│   │   ├── game-stats.njk          # In-game XP / stats display
+│   │   ├── header.njk              # Site header wrapper
+│   │   ├── header-details.njk      # Header content (nav, theme toggle)
+│   │   ├── matrix-overlay.njk      # Matrix rain easter egg overlay
+│   │   ├── scripts.njk             # JS <script> tags included by footer
+│   │   ├── skills-list.njk         # Renders a developer's skills/languages
+│   │   ├── system-log.njk          # Scrolling system-log UI element
+│   │   └── system-override.njk     # "System override" easter egg UI
 │   ├── assets/
-│   │   ├── css/           # Stylesheets
-│   │   └── js/            # JavaScript files
-│   ├── users/             # 👈 User YAML files go here
+│   │   ├── css/
+│   │   │   ├── style.css           # Compiled / custom CSS
+│   │   │   └── tailwind-input.css  # Tailwind CSS entry point
+│   │   ├── img/
+│   │   │   └── next.jpeg           # Site logo / avatar image
+│   │   └── js/
+│   │       ├── eggs.js             # Easter egg interactions (Konami code, etc.)
+│   │       ├── phaser-init.js      # Phaser game engine bootstrap
+│   │       ├── script.js           # Core interactivity & XP system
+│   │       └── games/              # Mini-game modules (lazy-loaded via Phaser)
+│   │           ├── config.js       # Shared game constants & CDN URL
+│   │           ├── game-manager.js # Game lifecycle (load, create, destroy)
+│   │           ├── space-invaders.js
+│   │           ├── code-breaker.js
+│   │           └── dev-duel.js
+│   ├── users/                      # 👈 Developer profile YAML files go here
+│   │   ├── users.json              # Eleventy data file that aggregates all YAMLs
 │   │   ├── jbampton.yaml
-│   │   ├── ayush.yaml
-│   │   └── ...
-│   └── index.njk          # Homepage template
-├── .eleventy.js           # Eleventy configuration
-├── package.json           # Node.js dependencies
-└── README.md              # This file
+│   │   └── ...                     # One <github-username>.yaml per developer
+│   ├── games.njk                   # Games page template
+│   └── index.njk                   # Homepage template
+├── .eleventy.js                    # Eleventy configuration
+├── biome.json                      # Biome formatter / linter config
+├── postcss.config.js               # PostCSS / Tailwind build config
+├── package.json                    # Node.js dependencies & scripts
+└── README.md                       # This file
 ```
+
+---
+
+## 🔀 Git Workflow & Keeping in Sync
+
+Working with a forked repository means your copy can fall behind the upstream (the original NextCommunity repo) over time. This section explains the complete feature-branch workflow and the essential git commands every contributor should know.
+
+### The Golden Rules
+
+> 🚫 **Never push directly to `main`** in your fork.
+> ✅ **Always work on a feature branch** and open a Pull Request.
+
+---
+
+### 🛠️ Essential Git Commands for Contributors
+
+---
+
+#### 1. `git remote` — Manage your remote connections
+
+Your fork is connected to your own GitHub account (`origin`). To stay in sync with the original project, you also need a connection to the upstream repo.
+
+```bash
+# View all configured remotes
+git remote -v
+
+# Add the upstream remote (do this once, right after cloning)
+git remote add upstream https://github.com/NextCommunity/NextCommunity.github.io.git
+
+# After running the above, git remote -v should output:
+# origin    https://github.com/YOUR-USERNAME/NextCommunity.github.io.git (fetch)
+# origin    https://github.com/YOUR-USERNAME/NextCommunity.github.io.git (push)
+# upstream  https://github.com/NextCommunity/NextCommunity.github.io.git (fetch)
+# upstream  https://github.com/NextCommunity/NextCommunity.github.io.git (push)
+```
+
+---
+
+#### 2. `git fetch` — Download changes without merging
+
+`git fetch` downloads new commits and branches from a remote but does **not** touch your working files. It's a safe way to inspect what's changed upstream before deciding what to do.
+
+```bash
+# Fetch everything from the upstream repo
+git fetch upstream
+
+# Now you can inspect what changed without affecting your local branches
+git log HEAD..upstream/main --oneline
+```
+
+---
+
+#### 3. `git pull` — Fetch and integrate in one step
+
+`git pull` is shorthand for `git fetch` followed by `git merge` (or `git rebase`, depending on your config). Use it to bring your local branch up to date.
+
+```bash
+# Sync your local main with upstream/main
+git checkout main
+git pull upstream main
+
+# Keep your fork's main in sync too (pushes updated main to your fork on GitHub)
+git push origin main
+```
+
+> 💡 **Tip**: Run this before creating every new feature branch so you always start from the latest code.
+
+---
+
+#### 4. `git checkout -b` — Create and switch to a feature branch
+
+A feature branch isolates your work so that `main` stays clean and ready to sync. The `-b` flag creates the branch and switches to it in one command.
+
+```bash
+# Create a new branch and switch to it
+git checkout -b my-feature-branch
+
+# List all local branches (the active branch is marked with *)
+git branch
+
+# Switch between existing branches
+git checkout main
+git checkout my-feature-branch
+```
+
+Branch naming conventions used in this project:
+
+| Prefix | When to use | Example |
+|---|---|---|
+| `add-` | Adding a new profile | `add-jbampton` |
+| `fix-` | Fixing a bug or typo | `fix-yaml-typo` |
+| `feat-` | Adding a new site feature | `feat-dark-mode` |
+| `docs-` | Documentation changes | `docs-contributing-guide` |
+
+---
+
+#### 5. `git rebase` — Replay your commits on top of the latest upstream
+
+When `main` has moved forward since you created your branch, `git rebase` re-applies your commits on top of the latest changes instead of creating a messy merge commit. This keeps the project history clean and linear.
+
+```bash
+# First, fetch the latest upstream changes
+git fetch upstream
+
+# Rebase your feature branch on top of upstream/main
+git checkout my-feature-branch
+git rebase upstream/main
+```
+
+If conflicts arise during a rebase:
+
+```bash
+# 1. Open the conflicting file(s), resolve the conflict markers (<<<<, ====, >>>>)
+# 2. Stage the resolved file(s)
+git add src/users/your-github-username.yaml
+
+# 3. Continue the rebase
+git rebase --continue
+
+# If you want to abort and go back to before the rebase started
+git rebase --abort
+```
+
+After rebasing, you'll need to force-push your feature branch because the commit history was rewritten:
+
+```bash
+# Force push — only safe on your own feature branch, NEVER on main
+git push origin my-feature-branch --force-with-lease
+```
+
+> ⚠️ `--force-with-lease` is safer than `--force`: it fails if someone else has pushed to your branch since you last fetched, preventing accidental data loss.
+
+---
+
+#### 6. `git stash` — Save work-in-progress without committing
+
+If you need to switch branches but aren't ready to commit your changes, `git stash` temporarily shelves them.
+
+```bash
+# Save all uncommitted changes
+git stash
+
+# Switch to another branch, do some work, then come back
+git checkout main
+git pull upstream main
+git checkout my-feature-branch
+
+# Restore your stashed changes
+git stash pop
+
+# View all stashes
+git stash list
+
+# Apply a specific stash without removing it from the stash list
+git stash apply stash@{0}
+```
+
+---
+
+#### 7. `git log` — Explore commit history
+
+`git log` lets you understand what has changed and when. It's invaluable for debugging and understanding the project timeline.
+
+```bash
+# View the last 10 commits in a compact format
+git log --oneline -10
+
+# See a visual branch graph
+git log --oneline --graph --decorate --all
+
+# See all commits by a specific author
+git log --author="Your Name" --oneline
+
+# See what changed in the last commit
+git log -1 --stat
+```
+
+---
+
+### 🔄 Full Day-to-Day Sync Workflow
+
+Here's the complete workflow to follow every time you start a new contribution:
+
+```bash
+# 1. Switch to main and pull the latest upstream changes
+git checkout main
+git fetch upstream
+git merge upstream/main   # or: git pull upstream main
+
+# 2. Push the updated main to your fork so GitHub is also up to date
+git push origin main
+
+# 3. Create a new feature branch from the freshly synced main
+git checkout -b my-feature-branch
+
+# 4. Make your changes, then stage and commit them
+git add src/users/your-github-username.yaml
+git commit -m "Add [Your Name] to developer directory"
+
+# 5. Push your feature branch to your fork on GitHub
+git push origin my-feature-branch
+
+# 6. Open a Pull Request on GitHub from your feature branch → NextCommunity/main
+```
+
+If your feature branch gets out of date while you're working on it (because `main` received new commits), sync it with rebase:
+
+```bash
+git fetch upstream
+git rebase upstream/main
+git push origin my-feature-branch --force-with-lease
+```
+
+---
+
+## 🖥️ Contributing with GitHub CLI
+
+Prefer the terminal over the browser? The [GitHub CLI (`gh`)](https://cli.github.com/) lets you complete the entire contribution workflow without leaving your command line. Install it from <https://cli.github.com/> and authenticate once with `gh auth login`.
+
+### Step 1: Fork the Repository
+
+```bash
+# Fork the repo and clone it locally in one command
+gh repo fork NextCommunity/NextCommunity.github.io --clone=true --remote=true
+cd NextCommunity.github.io
+```
+
+The `--remote=true` flag automatically adds the original repo as an `upstream` remote, so you stay in sync without any extra setup.
+
+### Step 2: Create a Feature Branch
+
+```bash
+# Make sure your local main is up to date first
+git checkout main
+git pull upstream main
+
+# Create and switch to a new feature branch
+git checkout -b add-your-github-username
+```
+
+Use a descriptive branch name such as `add-jbampton` or `fix-yaml-typo`.
+
+### Step 3: Create Your Profile File
+
+```bash
+# Navigate to the users directory and create your YAML file
+cp src/users/_template.yaml src/users/your-github-username.yaml
+```
+
+Open `src/users/your-github-username.yaml` in your editor and fill in your details (see [YAML File Format](#-yaml-file-format) for the full field reference).
+
+### Step 4: Test Locally (Optional but Recommended)
+
+```bash
+npm install
+npm start
+```
+
+Visit `http://localhost:8080` to preview your profile before submitting.
+
+### Step 5: Commit and Push
+
+```bash
+# Stage your new profile file
+git add src/users/your-github-username.yaml
+
+# Commit with a descriptive message
+git commit -m "Add [Your Name] to developer directory"
+
+# Push your feature branch to your fork
+git push origin add-your-github-username
+```
+
+### Step 6: Open a Pull Request with `gh`
+
+```bash
+gh pr create \
+  --repo NextCommunity/NextCommunity.github.io \
+  --base main \
+  --title "Add [Your Name] to directory" \
+  --body "Fixes #213
+
+Adding my profile to the NextCommunity developer directory."
+```
+
+The command prints a URL to the newly created PR. That's it — no browser required!
+
+### Step 7: Monitor CI and Respond to Feedback
+
+```bash
+# Watch the status of checks on your PR
+gh pr checks
+
+# View any review comments left by maintainers
+gh pr view --comments
+
+# If changes are requested, edit your file, then commit and push again
+git add src/users/your-github-username.yaml
+git commit -m "Address review feedback"
+git push origin add-your-github-username
+```
+
+Once all checks pass and a maintainer approves the PR, it will be merged and your profile will go live! 🎉
 
 ---
 
