@@ -118,3 +118,16 @@ function buildGameConfig(overrides) {
     overrides || {},
   );
 }
+
+// Export for testing (Node.js / Vitest)
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    PHASER_CDN_URL,
+    RARITY_WEIGHTS,
+    RARITY_COLORS,
+    GENERIC_SKILLS,
+    skillRarity,
+    getGameTheme,
+    buildGameConfig,
+  };
+}
