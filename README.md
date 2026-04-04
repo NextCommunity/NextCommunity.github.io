@@ -95,7 +95,7 @@ git checkout main
 git pull upstream main
 
 # Create and switch to a new feature branch
-git checkout -b add-your-github-username
+git checkout -b my-feature-branch
 ```
 
 Use a descriptive branch name that reflects your change, e.g. `add-jbampton` or `fix-yaml-typo`.
@@ -156,8 +156,8 @@ git add src/users/your-github-username.yaml
 git commit -m "Add [Your Name] to developer directory"
 
 # Push your feature branch to your fork (NOT main!)
-# Replace 'add-your-github-username' with the branch name you created in Step 3
-git push origin add-your-github-username
+# Replace 'my-feature-branch' with the branch name you created in Step 3
+git push origin my-feature-branch
 ```
 
 ### Step 8: Create a Pull Request
@@ -415,14 +415,14 @@ A feature branch isolates your work so that `main` stays clean and ready to sync
 
 ```bash
 # Create a new branch and switch to it
-git checkout -b add-your-github-username
+git checkout -b my-feature-branch
 
 # List all local branches (the active branch is marked with *)
 git branch
 
 # Switch between existing branches
 git checkout main
-git checkout add-your-github-username
+git checkout my-feature-branch
 ```
 
 Branch naming conventions used in this project:
@@ -445,7 +445,7 @@ When `main` has moved forward since you created your branch, `git rebase` re-app
 git fetch upstream
 
 # Rebase your feature branch on top of upstream/main
-git checkout add-your-github-username
+git checkout my-feature-branch
 git rebase upstream/main
 ```
 
@@ -467,7 +467,7 @@ After rebasing, you'll need to force-push your feature branch because the commit
 
 ```bash
 # Force push — only safe on your own feature branch, NEVER on main
-git push origin add-your-github-username --force-with-lease
+git push origin my-feature-branch --force-with-lease
 ```
 
 > ⚠️ `--force-with-lease` is safer than `--force`: it fails if someone else has pushed to your branch since you last fetched, preventing accidental data loss.
@@ -485,7 +485,7 @@ git stash
 # Switch to another branch, do some work, then come back
 git checkout main
 git pull upstream main
-git checkout add-your-github-username
+git checkout my-feature-branch
 
 # Restore your stashed changes
 git stash pop
@@ -533,14 +533,14 @@ git merge upstream/main   # or: git pull upstream main
 git push origin main
 
 # 3. Create a new feature branch from the freshly synced main
-git checkout -b add-your-github-username
+git checkout -b my-feature-branch
 
 # 4. Make your changes, then stage and commit them
 git add src/users/your-github-username.yaml
 git commit -m "Add [Your Name] to developer directory"
 
 # 5. Push your feature branch to your fork on GitHub
-git push origin add-your-github-username
+git push origin my-feature-branch
 
 # 6. Open a Pull Request on GitHub from your feature branch → NextCommunity/main
 ```
@@ -550,7 +550,7 @@ If your feature branch gets out of date while you're working on it (because `mai
 ```bash
 git fetch upstream
 git rebase upstream/main
-git push origin add-your-github-username --force-with-lease
+git push origin my-feature-branch --force-with-lease
 ```
 
 ---
