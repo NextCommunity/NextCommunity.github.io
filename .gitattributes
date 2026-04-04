@@ -1,0 +1,10 @@
+# Enforce LF line endings for all text files to ensure consistent
+# behavior across platforms (fixes yamllint new-lines failures on Windows).
+* text=auto eol=lf
+
+# Binary files
+*.jpeg binary
+*.jpg binary
+*.png binary
+*.gif binary
+*.ico binary
