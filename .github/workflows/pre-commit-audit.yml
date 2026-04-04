@@ -1,7 +1,10 @@
 # https://github.com/j178/prek
 name: Audit hooks
 
-on: [pull_request]
+on:
+  pull_request:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
