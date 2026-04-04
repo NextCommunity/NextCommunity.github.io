@@ -1,0 +1,31 @@
+default_stages: [pre-commit, pre-push]
+minimum_prek_version: "0.2.22"
+default_language_version:
+  python: python3
+  node: 24.14.0
+exclude: |
+  (?x)^(
+    \.git/|
+    _site/|
+    node_modules/|
+    package-lock\.json$
+  )
+
+repos:
+  - repo: meta
+    hooks:
+      - id: identity
+        name: Run identity
+        description: Run the identity check
+      - id: check-hooks-apply
+        name: run check-hooks-apply
+        description: check that all the hooks apply to the repository
+
+  - repo: local
+    hooks:
+      - id: npm-audit
+        name: run npm-audit
+        description: Run npm audit
+        entry: npm audit
+        language: system
+        pass_filenames: false
