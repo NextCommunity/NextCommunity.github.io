@@ -5,6 +5,9 @@ on:
     - cron: "0 0 * * *" # every day at midnight UTC
   workflow_dispatch: # allow manual runs
 
+permissions:
+  contents: read
+
 jobs:
   leaderboard:
     if: github.repository == 'NextCommunity/NextCommunity.github.io'
