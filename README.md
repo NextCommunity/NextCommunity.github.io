@@ -100,7 +100,6 @@ git checkout -b my-feature-branch
 ```
 
 Use a descriptive branch name that reflects your change, e.g. `add-jbampton` or `fix-yaml-typo`.
-Replace `your-github-username` in every example below with the actual branch name you chose here.
 
 ### Step 4: Create Your Profile File
 
