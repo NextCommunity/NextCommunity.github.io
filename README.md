@@ -28,6 +28,7 @@
 - [How to Add Yourself](#-how-to-add-yourself)
 - [YAML File Format](#-yaml-file-format)
 - [Local Development](#-local-development-optional)
+- [Contributing with GitHub CLI](#-contributing-with-github-cli)
 - [Git Workflow & Keeping in Sync](#-git-workflow--keeping-in-sync)
 - [Contribution Guidelines](#-contribution-guidelines)
 - [Troubleshooting](#-troubleshooting--faq)
@@ -182,6 +183,97 @@ git push origin my-feature-branch
 - Automated checks will verify your YAML file
 - You may receive feedback or requested changes
 - Once approved, your profile will be merged and live! 🎉
+
+---
+
+## 🖥️ Contributing with GitHub CLI
+
+Prefer the terminal over the browser? The [GitHub CLI (`gh`)](https://cli.github.com/) lets you complete the entire contribution workflow without leaving your command line. Install it from <https://cli.github.com/> and authenticate once with `gh auth login`.
+
+### Step 1: Fork the Repository
+
+```bash
+# Fork the repo and clone it locally in one command
+gh repo fork NextCommunity/NextCommunity.github.io --clone=true --remote=true
+cd NextCommunity.github.io
+```
+
+The `--remote=true` flag automatically adds the original repo as an `upstream` remote, so you stay in sync without any extra setup.
+
+### Step 2: Create a Feature Branch
+
+```bash
+# Make sure your local main is up to date first
+git checkout main
+git pull upstream main
+
+# Create and switch to a new feature branch
+git checkout -b add-your-github-username
+```
+
+Use a descriptive branch name such as `add-jbampton` or `fix-yaml-typo`.
+
+### Step 3: Create Your Profile File
+
+```bash
+# Navigate to the users directory and create your YAML file
+cp src/users/_template.yaml src/users/your-github-username.yaml
+```
+
+Open `src/users/your-github-username.yaml` in your editor and fill in your details (see [YAML File Format](#-yaml-file-format) below for the full field reference).
+
+### Step 4: Test Locally (Optional but Recommended)
+
+```bash
+npm install
+npm start
+```
+
+Visit `http://localhost:8080` to preview your profile before submitting.
+
+### Step 5: Commit and Push
+
+```bash
+# Stage your new profile file
+git add src/users/your-github-username.yaml
+
+# Commit with a descriptive message
+git commit -m "Add [Your Name] to developer directory"
+
+# Push your feature branch to your fork
+git push origin add-your-github-username
+```
+
+### Step 6: Open a Pull Request with `gh`
+
+```bash
+gh pr create \
+  --repo NextCommunity/NextCommunity.github.io \
+  --base main \
+  --title "Add [Your Name] to directory" \
+  --body "Fixes #213
+
+Adding my profile to the NextCommunity developer directory."
+```
+
+The command prints a URL to the newly created PR. That's it — no browser required!
+
+### Step 7: Monitor CI and Respond to Feedback
+
+```bash
+# Watch the status of checks on your PR
+gh pr checks
+
+# View any review comments left by maintainers
+gh pr view --comments
+
+# If changes are requested, edit your file, then commit and push again
+git add src/users/your-github-username.yaml
+git commit -m "Address review feedback"
+git push origin add-your-github-username
+```
+
+Once all checks pass and a maintainer approves the PR, it will be merged and your profile will go live! 🎉
 
 ---
 
