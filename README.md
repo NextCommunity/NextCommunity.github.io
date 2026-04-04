@@ -270,19 +270,49 @@ npm run build
 ```text
 NextCommunity.github.io/
 ├── src/
-│   ├── _data/              # Site-wide data files
-│   ├── _includes/          # Reusable templates (header, footer, bio page)
+│   ├── _data/                      # Site-wide data files
+│   │   ├── build.js                # Build metadata injected into templates
+│   │   └── levels.json             # XP level definitions for the gamification system
+│   ├── _includes/                  # Reusable Nunjucks templates
+│   │   ├── bio.njk                 # Individual developer profile page layout
+│   │   ├── footer.njk              # Site footer wrapper
+│   │   ├── footer-details.njk      # Footer content (links, credits)
+│   │   ├── game-modal.njk          # Modal overlay for mini-games
+│   │   ├── game-stats.njk          # In-game XP / stats display
+│   │   ├── header.njk              # Site header wrapper
+│   │   ├── header-details.njk      # Header content (nav, theme toggle)
+│   │   ├── matrix-overlay.njk      # Matrix rain easter egg overlay
+│   │   ├── scripts.njk             # JS <script> tags included by footer
+│   │   ├── skills-list.njk         # Renders a developer's skills/languages
+│   │   ├── system-log.njk          # Scrolling system-log UI element
+│   │   └── system-override.njk     # "System override" easter egg UI
 │   ├── assets/
-│   │   ├── css/           # Stylesheets
-│   │   └── js/            # JavaScript files
-│   ├── users/             # 👈 User YAML files go here
+│   │   ├── css/
+│   │   │   ├── style.css           # Compiled / custom CSS
+│   │   │   └── tailwind-input.css  # Tailwind CSS entry point
+│   │   ├── img/
+│   │   │   └── next.jpeg           # Site logo / avatar image
+│   │   └── js/
+│   │       ├── eggs.js             # Easter egg interactions (Konami code, etc.)
+│   │       ├── phaser-init.js      # Phaser game engine bootstrap
+│   │       ├── script.js           # Core interactivity & XP system
+│   │       └── games/              # Mini-game modules (lazy-loaded via Phaser)
+│   │           ├── config.js       # Shared game constants & CDN URL
+│   │           ├── game-manager.js # Game lifecycle (load, create, destroy)
+│   │           ├── space-invaders.js
+│   │           ├── code-breaker.js
+│   │           └── dev-duel.js
+│   ├── users/                      # 👈 Developer profile YAML files go here
+│   │   ├── users.json              # Eleventy data file that aggregates all YAMLs
 │   │   ├── jbampton.yaml
-│   │   ├── ayush.yaml
-│   │   └── ...
-│   └── index.njk          # Homepage template
-├── .eleventy.js           # Eleventy configuration
-├── package.json           # Node.js dependencies
-└── README.md              # This file
+│   │   └── ...                     # One <github-username>.yaml per developer
+│   ├── games.njk                   # Games page template
+│   └── index.njk                   # Homepage template
+├── .eleventy.js                    # Eleventy configuration
+├── biome.json                      # Biome formatter / linter config
+├── postcss.config.js               # PostCSS / Tailwind build config
+├── package.json                    # Node.js dependencies & scripts
+└── README.md                       # This file
 ```
 
 ---
