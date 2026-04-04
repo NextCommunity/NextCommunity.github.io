@@ -1,0 +1,26 @@
+# https://github.com/j178/prek
+name: Audit hooks
+
+on: [pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  pre-commit:
+    name: 🏃‍♂️‍➡️ prek on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - name: "Checkout ${{ github.ref }} ( ${{ github.sha }} )"
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - name: Run prek-action
+        uses: j178/prek-action@53276d8b0d10f8b6672aa85b4588c6921d0370cc # v2.0.1
+        with:
+          install-only: true
+      - name: Run manual prek hooks
+        run: prek run --all-files --config .pre-commit-config-audit.yaml
