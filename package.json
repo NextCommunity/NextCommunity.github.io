@@ -5,6 +5,7 @@
   "main": "script.js",
   "dependencies": {
     "@11ty/eleventy": "^3.1.5",
+    "@tailwindcss/postcss": "^4.2.2",
     "detect-libc": "^2.1.2",
     "enhanced-resolve": "^5.20.1",
     "graceful-fs": "^4.2.11",
@@ -16,15 +17,31 @@
     "magic-string": "^0.30.21",
     "mri": "^1.2.0",
     "node-addon-api": "^8.7.0",
+    "phaser": "^3.90.0",
     "picocolors": "^1.1.1",
     "picomatch": "^4.0.4",
+    "postcss": "^8.4.45",
     "source-map-js": "^1.2.1",
     "tailwindcss": "^4.2.2",
     "tapable": "^2.3.2"
   },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^11.0.0"
+  },
   "scripts": {
-    "start": "eleventy --serve",
-    "build": "eleventy",
+    "css:build": "postcss ./src/assets/css/tailwind-input.css -o ./src/assets/css/tailwind.css",
+    "css:watch": "postcss ./src/assets/css/tailwind-input.css -o ./src/assets/css/tailwind.css --watch",
+    "js:build": "esbuild ./src/assets/js/phaser-init.js --bundle --outfile=./src/assets/js/phaser.bundle.js",
+    "js:watch": "esbuild ./src/assets/js/phaser-init.js --bundle --outfile=./src/assets/js/phaser.bundle.js --watch",
+    "eleventy:build": "eleventy",
+    "eleventy:serve": "eleventy --serve",
+    "dev:watch": "npm-run-all --parallel css:watch js:watch eleventy:serve",
+    "start": "npm-run-all --sequential js:build css:build dev:watch",
+    "build": "npm-run-all --sequential js:build css:build eleventy:build",
     "test": "jest"
   },
   "repository": {
@@ -41,9 +58,5 @@
   "homepage": "https://github.com/NextCommunity/NextCommunity.github.io#readme",
   "engines": {
     "node": ">=20.0.0"
-  },
-  "devDependencies": {
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0"
   }
 }

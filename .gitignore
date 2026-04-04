@@ -1,5 +1,13 @@
 _site
-.jekyll-cache
 node_modules
 vendor
+.idea
+.jekyll-cache
 .venv
+
+# Generated CSS (compiled from TailwindCSS)
+src/assets/css/tailwind.css
+
+# Generated JS (bundled by esbuild)
+src/assets/js/phaser.bundle.js
+src/assets/js/bundle.js

@@ -13,7 +13,7 @@
  * Theme-aware: reads the current dark/light mode at startup.
  */
 
-const CodeBreaker = (function () {
+const CodeBreaker = (() => {
   const GAME_ID = "code-breaker";
   const TILE_SPEED_BASE = 180;
   const TILE_SPEED_INC = 8; // extra px/s per collected tile
@@ -25,7 +25,7 @@ const CodeBreaker = (function () {
   // ─── Public entry-point ──────────────────────────────────────────────────
 
   function launch(skills, devName) {
-    GameManager.loadPhaser(function () {
+    GameManager.loadPhaser(() => {
       _init(skills, devName);
     });
   }
@@ -52,8 +52,7 @@ const CodeBreaker = (function () {
     titleBar.style.cssText =
       "color:#fff;font-size:0.85rem;font-weight:900;text-transform:uppercase;" +
       "letter-spacing:0.15em;margin-bottom:0.5rem;opacity:0.8;";
-    titleBar.textContent =
-      "⌨️ CODE BREAKER" + (devName ? " — " + devName : "");
+    titleBar.textContent = `⌨️ CODE BREAKER${devName ? ` — ${devName}` : ""}`;
     overlay.appendChild(titleBar);
 
     // Canvas container — intentionally has NO id matching "game-canvas-{GAME_ID}"
@@ -112,11 +111,7 @@ const CodeBreaker = (function () {
     catcherGfx.generateTexture("catcher", CATCHER_WIDTH, CATCHER_HEIGHT);
     catcherGfx.destroy();
 
-    scene.cb_catcher = scene.physics.add.image(
-      W / 2,
-      H - 40,
-      "catcher",
-    );
+    scene.cb_catcher = scene.physics.add.image(W / 2, H - 40, "catcher");
     scene.cb_catcher.setCollideWorldBounds(true);
     scene.cb_catcher.setImmovable(true);
 
@@ -124,11 +119,13 @@ const CodeBreaker = (function () {
     scene.cb_livesText = scene.add.text(10, 10, "❤️".repeat(LIVES), {
       fontSize: "18px",
     });
-    scene.cb_scoreText = scene.add.text(W - 10, 10, "Score: 0", {
-      fontSize: "14px",
-      fill: theme.accent,
-      fontStyle: "bold",
-    }).setOrigin(1, 0);
+    scene.cb_scoreText = scene.add
+      .text(W - 10, 10, "Score: 0", {
+        fontSize: "14px",
+        fill: theme.accent,
+        fontStyle: "bold",
+      })
+      .setOrigin(1, 0);
 
     scene.cb_infoText = scene.add
       .text(W / 2, H - 12, "← → to move  •  catch your skills!", {
@@ -141,7 +138,7 @@ const CodeBreaker = (function () {
     scene.physics.add.overlap(
       scene.cb_catcher,
       scene.cb_tiles,
-      function (catcher, tile) {
+      (catcher, tile) => {
         _collectTile(scene, tile, theme, W, H);
       },
     );
@@ -150,7 +147,7 @@ const CodeBreaker = (function () {
     scene.cb_cursors = scene.input.keyboard.createCursorKeys();
 
     // Mouse / touch drag
-    scene.input.on("pointermove", function (ptr) {
+    scene.input.on("pointermove", (ptr) => {
       if (!scene.cb_active) return;
       scene.cb_catcher.x = Phaser.Math.Clamp(
         ptr.x,
@@ -160,12 +157,12 @@ const CodeBreaker = (function () {
     });
 
     // ESC to quit
-    scene.input.keyboard.once("keydown-ESC", function () {
+    scene.input.keyboard.once("keydown-ESC", () => {
       _cleanup();
     });
 
     // Spawn first tile after a short delay
-    scene.time.delayedCall(500, function () {
+    scene.time.delayedCall(500, () => {
       _spawnTile(scene, theme, W);
     });
   }
@@ -193,12 +190,15 @@ const CodeBreaker = (function () {
     // Check if any tile fell off the bottom.
     // Use .slice() to iterate over a copy — destroying tiles inside forEach
     // mutates the live getChildren() array and causes tiles to be skipped.
-    scene.cb_tiles.getChildren().slice().forEach(function (tile) {
-      if (tile.y > scene.scale.height + 40) {
-        tile.destroy();
-        _loseLife(scene);
-      }
-    });
+    scene.cb_tiles
+      .getChildren()
+      .slice()
+      .forEach((tile) => {
+        if (tile.y > scene.scale.height + 40) {
+          tile.destroy();
+          _loseLife(scene);
+        }
+      });
   }
 
   // ─── Game logic ──────────────────────────────────────────────────────────
@@ -240,11 +240,13 @@ const CodeBreaker = (function () {
     tile.setData("color", color);
 
     // Skill label on top of the pill
-    const label = scene.add.text(x, -20, skill, {
-      fontSize: TILE_FONT_SIZE,
-      fill: color,
-      fontStyle: "bold",
-    }).setOrigin(0.5);
+    const label = scene.add
+      .text(x, -20, skill, {
+        fontSize: TILE_FONT_SIZE,
+        fill: color,
+        fontStyle: "bold",
+      })
+      .setOrigin(0.5);
 
     // Keep label synced with the physics body each frame
     function syncLabel() {
@@ -294,7 +296,7 @@ const CodeBreaker = (function () {
       y: H - 120,
       alpha: 0,
       duration: 900,
-      onComplete: function () {
+      onComplete: () => {
         popup.destroy();
       },
     });
@@ -330,7 +332,7 @@ const CodeBreaker = (function () {
     if (!scene.cb_active) return;
     scene.cb_active = false;
 
-    GameManager.awardXP(XP_CODE_BREAKER_WIN);
+    GameManager.awardXP(_XP_CODE_BREAKER_WIN);
     const wins = GameManager.incrementStat("code_breaker_wins");
     if (wins >= 10) GameManager.grantAchievement("code_wizard");
     GameManager.setHighScore(GAME_ID, scene.cb_score);
@@ -341,7 +343,7 @@ const CodeBreaker = (function () {
       H,
       "⌨️ SKILLS MASTERED!",
       "#fbbf24",
-      "+" + XP_CODE_BREAKER_WIN + " XP",
+      "+" + _XP_CODE_BREAKER_WIN + " XP",
     );
   }
 
