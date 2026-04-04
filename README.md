@@ -1,19 +1,24 @@
-# 🌐 NextCommunity Developer Directory
+<div align="center">
+<h1>🌐 NextCommunity Developer Directory</h1>
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Built with Eleventy](https://img.shields.io/badge/Built%20with-Eleventy-black)](https://www.11ty.dev/)
 [![Run JavaScript Everywhere](https://img.shields.io/badge/Run%20JavaScript%20Everywhere-yellow)](https://nodejs.org/en)
 [![Built with Nunjucks](https://img.shields.io/badge/Built%20with-Nunjucks-darkgreen)](https://mozilla.github.io/nunjucks/)
 [![Built with Tailwind CSS](https://img.shields.io/badge/Built%20with-Tailwind-blue)](https://tailwindcss.com/)
+
 [![Super-Linter](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml)
-[![pre-commit](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml)
-[![Manual hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-manual.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-manual.yml)
 [![Audit hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-audit.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-audit.yml)
-[![Easter Eggs](https://img.shields.io/badge/Easter-Eggs-ff69b4?labelColor=9b59b6)](#)
+[![Manual hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-manual.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-manual.yml)
+[![Standard hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml)
+
+[![Easter Eggs](https://img.shields.io/badge/Easter-Eggs-ff69b4?labelColor=9b59b6)](https://nextcommunity.github.io)
 
 > A vibrant community directory showcasing open-source developers and software engineers from around the world.
 
 **🔗 Live Site:** [https://nextcommunity.github.io](https://nextcommunity.github.io)
+
+</div>
 
 ---
 
