@@ -3,6 +3,12 @@
 # MD013/line-length Line length
 MD013: false
 
+# MD024/no-duplicate-heading No duplicate headings
+MD024: false
+
+# MD051/link-fragments Link fragments
+MD051: false
+
 # MD033/no-inline-html Inline HTML
 MD033: false
 
