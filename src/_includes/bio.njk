@@ -22,12 +22,10 @@
           </div>
 
           <div class="space-y-4 text-sm border-t border-[var(--border-color)] pt-6">
-            {% if location %}
+            {% if location | trim %}
             <div class="flex items-center gap-3">
               <span class="text-lg">📍</span>
-              <span class="text-[var(--text-muted)]">
-              {% if location and country %}{{ location }}, {{ country }}{% elif location %}{{ location }}{% endif %}
-              </span>
+              <span class="text-[var(--text-muted)]">{{ location | trim }}{% if country %}, {{ country }}{% endif %}</span>
             </div>
             {% endif %}
 
