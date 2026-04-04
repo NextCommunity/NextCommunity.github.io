@@ -10,7 +10,8 @@ MD024: false
 MD051: false
 
 # MD033/no-inline-html Inline HTML
-MD033: false
+MD033:
+  allowed_elements: ["div", "h1"]
 
 # MD036/no-emphasis-as-heading Emphasis used instead of a heading
 MD036: false
