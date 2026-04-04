@@ -46,6 +46,7 @@ const XP_SPACE_INVADERS_WIN = 200; // Defeat all Space Invaders
 const _XP_CODE_BREAKER_WIN = 100; // Win a Code Breaker round
 const _XP_DEV_DUEL_PLAY = 25; // Play a Developer Duel
 const _XP_DEV_DUEL_WIN = 50; // Win a Developer Duel
+const _XP_LOAD_RUNNER_WIN = 150; // Complete Lode Runner Level 1
 
 const NUM_LEVELS = LEVELS.length;
 
