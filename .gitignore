@@ -4,6 +4,7 @@ vendor
 .idea
 .jekyll-cache
 .venv
+__pycache__
 
 # Generated CSS (compiled from TailwindCSS)
 src/assets/css/tailwind.css
