@@ -99,6 +99,7 @@ git checkout -b add-your-github-username
 ```
 
 Use a descriptive branch name that reflects your change, e.g. `add-jbampton` or `fix-yaml-typo`.
+Replace `your-github-username` in every example below with the actual branch name you chose here.
 
 ### Step 4: Create Your Profile File
 
@@ -155,6 +156,7 @@ git add src/users/your-github-username.yaml
 git commit -m "Add [Your Name] to developer directory"
 
 # Push your feature branch to your fork (NOT main!)
+# Replace 'add-your-github-username' with the branch name you created in Step 3
 git push origin add-your-github-username
 ```
 
