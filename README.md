@@ -118,12 +118,12 @@ github: your-github-username
 website: https://yourwebsite.com
 email: your.email@example.com
 instagram: https://instagram.com/yourusername
-twitter: https://twitter.com/yourhandle
+x: https://x.com/yourhandle
 linkedin: https://linkedin.com/in/yourprofile
 country: Your Country
 location: Your City
 role: Your Professional Title
-languages: JavaScript Python Go Rust
+languages: js py go rust
 bio: |
   Write your professional bio here.
   You can use multiple lines.
@@ -206,7 +206,8 @@ git push origin my-feature-branch
 | `email`     | Your email address         | `you@example.com`                  |
 | `instagram` | Full Instagram profile URL | `https://instagram.com/username`   |
 | `linkedin`  | Full LinkedIn profile URL  | `https://linkedin.com/in/username` |
-| `twitter`   | Full Twitter/X profile URL | `https://twitter.com/username`     |
+| `x`   | Full X profile URL | `https://x.com/username`     |
+| `facebook`   | Full Facebook profile URL | `https://facebook.com/username`     |
 | `website`   | Your personal website URL  | `https://yoursite.com`             |
 
 ### Field Guidelines
@@ -240,12 +241,12 @@ name: Carlos Rodriguez
 github: carlosr
 website: https://carlos.dev
 email: carlos@example.com
-twitter: https://twitter.com/carlos_codes
+x: https://x.com/carlos_codes
 linkedin: https://linkedin.com/in/carlosrodriguez
 country: Spain
 location: Barcelona
 role: Full Stack Engineer
-languages: TypeScript React Node.js AWS
+languages: ts react.js node.js aws
 bio: |
   Full-stack engineer specializing in modern web technologies.
 
@@ -700,7 +701,7 @@ If checks fail, you'll see error messages in the PR. Fix the issues and push aga
 - Check for proper indentation (use spaces, not tabs)
 - Ensure colons have a space after them (`name: John`, not `name:John`)
 - Use `|` for multi-line bio text
-- Validate your YAML at [yamllint.com](http://www.yamllint.com/)
+- Validate your YAML at [yamllint.com](https://www.yamllint.com/)
 
 #### ❌ "GitHub username not found"
 
@@ -745,7 +746,7 @@ A: Yes! Just create a new PR with updates to your YAML file.
 A: Usually within 24-48 hours, depending on maintainer availability.
 
 **Q: Can I add multiple social links?**
-A: Yes, all social fields (twitter, linkedin, instagram) are optional and independent.
+A: Yes, all social fields (x, linkedin, instagram) are optional and independent.
 
 **Q: What if I don't have a personal website?**
 A: No problem! Just omit the `website` field or set it to your GitHub profile.
