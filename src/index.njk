@@ -29,7 +29,7 @@ layout: false
               <p class="text-accent font-semibold text-sm uppercase tracking-wider">{{ person.data.role }}</p>
             </div>
             {% set location = person.data.location %}
-            {% if location %}
+            {% if location and location | trim %}
             <span class="shrink-0 text-[10px] bg-[var(--bg-footer)] text-[var(--text-muted)] px-2 py-1 rounded font-bold uppercase border border-[var(--border-color)]">
               {{ location }}
             </span>

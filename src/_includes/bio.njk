@@ -22,10 +22,14 @@
           </div>
 
           <div class="space-y-4 text-sm border-t border-[var(--border-color)] pt-6">
+            {% if location %}
             <div class="flex items-center gap-3">
               <span class="text-lg">📍</span>
-              <span class="text-[var(--text-muted)]">{{ location }}{% if country %}, {{ country }}{% endif %}</span>
+              <span class="text-[var(--text-muted)]">
+              {% if location and country %}{{ location }}, {{ country }}{% elif location %}{{ location }}{% endif %}
+              </span>
             </div>
+            {% endif %}
 
             {% if email %}
             <div class="flex items-center gap-3 group cursor-pointer" onclick="copyToClipboard('{{ email }}', this)">
