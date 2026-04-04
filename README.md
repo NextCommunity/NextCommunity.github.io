@@ -7,10 +7,10 @@
 [![Built with Nunjucks](https://img.shields.io/badge/Built%20with-Nunjucks-darkgreen)](https://mozilla.github.io/nunjucks/)
 [![Built with Tailwind CSS](https://img.shields.io/badge/Built%20with-Tailwind-blue)](https://tailwindcss.com/)
 
-[![Super-Linter](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml)
-[![Audit hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-audit.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-audit.yml)
-[![Manual hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-manual.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-manual.yml)
-[![Standard hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml)
+[![Super-Linter](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml?query=branch%3Amain)
+[![Audit hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-audit.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-audit.yml?query=branch%3Amain)
+[![Manual hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-manual.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-manual.yml?query=branch%3Amain)
+[![Standard hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml?query=branch%3Amain)
 
 [![Easter Eggs](https://img.shields.io/badge/Easter-Eggs-ff69b4?labelColor=9b59b6)](https://nextcommunity.github.io)
 
@@ -100,7 +100,6 @@ git checkout -b my-feature-branch
 ```
 
 Use a descriptive branch name that reflects your change, e.g. `add-jbampton` or `fix-yaml-typo`.
-Replace `your-github-username` in every example below with the actual branch name you chose here.
 
 ### Step 4: Create Your Profile File
 
