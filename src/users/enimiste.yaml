@@ -1,10 +1,9 @@
 name: Nouni Elbachir
 github: enimiste
-website:
 email: nouni.elbachir@gmail.com
 country: Morocco
 location: Internet
 role: Software Engineer
-languages: java python php go scala js css3 html5
+languages: java py php go scala js css html
 bio: |
   Algorithms, programming, backend dev, devops, ...

@@ -2,9 +2,13 @@ name: Max Base
 github: basemax
 website: https://maxbase.org/
 email: maxbasecode@gmail.com
+instagram:
+x:
+linkedin:
+facebook:
 country: The Internet
 location: Remote
 role: Software engineer
-languages: c php js css3 html5
+languages: c php js css html
 bio: |
   @github developer maintainer. Full-Time Open-Sourcerer. Full-stack programmer. In the path of a real computer engineer... (Compiler enthusiast)

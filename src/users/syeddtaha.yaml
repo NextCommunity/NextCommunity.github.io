@@ -1,9 +1,15 @@
 name: Syed Muhammad Taha
-github: SyeddTaha
+github: syeddtaha
+website:
+email:
+instagram:
+x:
+linkedin:
+facebook:
 country: Pakistan
 location: Karachi
 role: Full Stack Engineer
-languages: C/C++ JavaScript Python
+languages: c cpp javascript py
 bio: |
   Full Stack Engineer and Graphic Designer currently pursuing a BSCS degree.
   Interested in web development, UI/UX, backend systems, and building full stack applications using React, Node.js, Express, MongoDB, and Next.js.
