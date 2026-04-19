@@ -28,10 +28,10 @@
 - [How to Add Yourself](#-how-to-add-yourself)
 - [YAML File Format](#-yaml-file-format)
 - [Local Development](#-local-development-optional)
-- [Git Workflow & Keeping in Sync](#-git-workflow--keeping-in-sync)
-- [Contributing with GitHub CLI](#-contributing-with-github-cli)
 - [Contribution Guidelines](#-contribution-guidelines)
 - [Troubleshooting](#-troubleshooting--faq)
+- [Git Workflow & Keeping in Sync](#-git-workflow--keeping-in-sync)
+- [Contributing with GitHub CLI](#-contributing-with-github-cli)
 - [License](#-license)
 
 ---
@@ -343,6 +343,118 @@ NextCommunity.github.io/
 
 ---
 
+## 🤝 Contribution Guidelines
+
+### Code of Conduct
+
+We're committed to providing a welcoming and inclusive environment. Please be respectful and professional in all interactions.
+
+### PR Review Process
+
+1. **Automated Checks**: Your PR will automatically run linting checks
+2. **Manual Review**: A maintainer will review your submission
+3. **Feedback**: You may be asked to make changes
+4. **Merge**: Once approved, your PR will be merged!
+
+### What Gets Approved?
+
+✅ **Yes:**
+
+- Complete, valid YAML files
+- Professional bios and appropriate content
+- Real GitHub profiles
+- Accurate information
+
+❌ **No:**
+
+- Spam or promotional content
+- Offensive or inappropriate material
+- Fake or duplicate profiles
+- Invalid YAML syntax
+
+### CI/CD Checks
+
+Every pull request runs automated checks:
+
+- **Linting**: Ensures YAML syntax is correct
+- **Build Test**: Verifies the site builds successfully
+- **Pre-commit Hooks**: Checks code quality
+
+If checks fail, you'll see error messages in the PR. Fix the issues and push again.
+
+---
+
+## 🔧 Troubleshooting & FAQ
+
+### Common Issues
+
+#### ❌ Build Fails: "Invalid YAML"
+
+**Problem**: Your YAML file has syntax errors.
+
+**Solution**:
+
+- Check for proper indentation (use spaces, not tabs)
+- Ensure colons have a space after them (`name: John`, not `name:John`)
+- Use `|` for multi-line bio text
+- Validate your YAML at [yamllint.com](http://www.yamllint.com/)
+
+#### ❌ "GitHub username not found"
+
+**Problem**: The `github` field doesn't match a real GitHub profile.
+
+**Solution**:
+
+- Ensure you're using your exact GitHub username
+- Check for typos
+- Username is case-sensitive in this field
+
+#### ❌ My profile doesn't show up
+
+**Problem**: File naming or format issue.
+
+**Solution**:
+
+- File must be in `src/users/` directory
+- File must be named `username.yaml` (lowercase, with `.yaml` extension)
+- All required fields must be filled in
+
+#### ❌ Pre-commit hooks fail
+
+**Problem**: Code quality checks didn't pass.
+
+**Solution**:
+
+```bash
+# Install pre-commit
+pip install pre-commit
+
+# Run checks manually
+pre-commit run --all-files
+```
+
+### FAQ
+
+**Q: Can I update my profile after it's merged?**
+A: Yes! Just create a new PR with updates to your YAML file.
+
+**Q: How long does review take?**
+A: Usually within 24-48 hours, depending on maintainer availability.
+
+**Q: Can I add multiple social links?**
+A: Yes, all social fields (twitter, linkedin, instagram) are optional and independent.
+
+**Q: What if I don't have a personal website?**
+A: No problem! Just omit the `website` field or set it to your GitHub profile.
+
+**Q: Can I use emojis in my profile?**
+A: Yes, emojis are supported in the `name` and `bio` fields! 🎉
+
+**Q: Is there a character limit for the bio?**
+A: No hard limit, but keep it concise (2-4 paragraphs recommended).
+
+---
+
 ## 🔀 Git Workflow & Keeping in Sync
 
 Working with a forked repository means your copy can fall behind the upstream (the original NextCommunity repo) over time. This section explains the complete feature-branch workflow and the essential git commands every contributor should know.
@@ -643,120 +755,6 @@ git push origin add-your-github-username
 ```
 
 Once all checks pass and a maintainer approves the PR, it will be merged and your profile will go live! 🎉
-
----
-
-## 🤝 Contribution Guidelines
-
-### Code of Conduct
-
-We're committed to providing a welcoming and inclusive environment. Please be respectful and professional in all interactions.
-
-### PR Review Process
-
-1. **Automated Checks**: Your PR will automatically run linting checks
-2. **Manual Review**: A maintainer will review your submission
-3. **Feedback**: You may be asked to make changes
-4. **Merge**: Once approved, your PR will be merged!
-
-### What Gets Approved?
-
-✅ **Yes:**
-
-- Complete, valid YAML files
-- Professional bios and appropriate content
-- Real GitHub profiles
-- Accurate information
-
-❌ **No:**
-
-- Spam or promotional content
-- Offensive or inappropriate material
-- Fake or duplicate profiles
-- Invalid YAML syntax
-
-### CI/CD Checks
-
-Every pull request runs automated checks:
-
-- **Linting**: Ensures YAML syntax is correct
-- **Build Test**: Verifies the site builds successfully
-- **Pre-commit Hooks**: Checks code quality
-
-If checks fail, you'll see error messages in the PR. Fix the issues and push again.
-
----
-
-## 🔧 Troubleshooting & FAQ
-
-### Common Issues
-
-#### ❌ Build Fails: "Invalid YAML"
-
-**Problem**: Your YAML file has syntax errors.
-
-**Solution**:
-
-- Check for proper indentation (use spaces, not tabs)
-- Ensure colons have a space after them (`name: John`, not `name:John`)
-- Use `|` for multi-line bio text
-- Validate your YAML at [yamllint.com](http://www.yamllint.com/)
-
-#### ❌ "GitHub username not found"
-
-**Problem**: The `github` field doesn't match a real GitHub profile.
-
-**Solution**:
-
-- Ensure you're using your exact GitHub username
-- Check for typos
-- Username is case-sensitive in this field
-
-#### ❌ My profile doesn't show up
-
-**Problem**: File naming or format issue.
-
-**Solution**:
-
-- File must be in `src/users/` directory
-- File must be named `username.yaml` (lowercase, with `.yaml` extension)
-- All required fields must be filled in
-
-#### ❌ Pre-commit hooks fail
-
-**Problem**: Code quality checks didn't pass.
-
-**Solution**:
-
-```bash
-# Install pre-commit
-pip install pre-commit
-
-# Run checks manually
-pre-commit run --all-files
-```
-
-### FAQ
-
-**Q: Can I update my profile after it's merged?**
-A: Yes! Just create a new PR with updates to your YAML file.
-
-**Q: How long does review take?**
-A: Usually within 24-48 hours, depending on maintainer availability.
-
-**Q: Can I add multiple social links?**
-A: Yes, all social fields (twitter, linkedin, instagram) are optional and independent.
-
-**Q: What if I don't have a personal website?**
-A: No problem! Just omit the `website` field or set it to your GitHub profile.
-
-**Q: Can I use emojis in my profile?**
-A: Yes, emojis are supported in the `name` and `bio` fields! 🎉
-
-**Q: Is there a character limit for the bio?**
-A: No hard limit, but keep it concise (2-4 paragraphs recommended).
-
----
 
 ## 📄 License
 
