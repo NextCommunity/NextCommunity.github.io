@@ -12,6 +12,7 @@ const SpaceInvaders = (() => {
   const ALIEN_ROWS = ["👾", "👽", "🛸", "🐙", "👾"];
   const GAME_ID = "space-invaders";
   const BULLET_CLEANUP_BUFFER = 40;
+  let _audioContext = null;
 
   // ─── Public entry-point ──────────────────────────────────────────────────
 
@@ -152,6 +153,7 @@ const SpaceInvaders = (() => {
       (bullet, alien) => {
         bullet.destroy();
         alien.destroy();
+        _playInvaderHitSound();
 
         if (scene.si_aliens.countActive() === 0) {
           _onVictory(scene);
@@ -222,6 +224,36 @@ const SpaceInvaders = (() => {
     bullet.body.isCircle = true;
 
     scene.si_lastFired = now;
+  }
+
+  function _playInvaderHitSound() {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+
+    if (!_audioContext) {
+      _audioContext = new AudioCtx();
+    }
+    if (_audioContext.state === "suspended") {
+      _audioContext.resume().catch(() => {});
+    }
+
+    const now = _audioContext.currentTime;
+    const oscillator = _audioContext.createOscillator();
+    const gainNode = _audioContext.createGain();
+
+    oscillator.type = "square";
+    oscillator.frequency.setValueAtTime(840, now);
+    oscillator.frequency.exponentialRampToValueAtTime(280, now + 0.08);
+
+    gainNode.gain.setValueAtTime(0.0001, now);
+    gainNode.gain.exponentialRampToValueAtTime(0.12, now + 0.01);
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(_audioContext.destination);
+
+    oscillator.start(now);
+    oscillator.stop(now + 0.1);
   }
 
   // ─── Victory / cleanup ────────────────────────────────────────────────────
