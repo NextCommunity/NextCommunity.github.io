@@ -36,6 +36,7 @@ const SpaceInvaders = (() => {
       height: "100vh",
       zIndex: "10000",
       pointerEvents: "auto",
+      background: "#000000",
     });
     document.body.appendChild(canvas);
 
@@ -44,7 +45,8 @@ const SpaceInvaders = (() => {
       canvas: canvas,
       width: window.innerWidth,
       height: window.innerHeight,
-      transparent: true,
+      transparent: false,
+      backgroundColor: "#000000",
       physics: {
         default: "arcade",
         arcade: { gravity: { y: 0 }, debug: false },
@@ -79,6 +81,14 @@ const SpaceInvaders = (() => {
     if (this.si_cursors.space.isDown) {
       _fireBullet(this);
     }
+
+    const bullets = this.si_bullets?.getChildren?.() || [];
+    bullets.forEach((bullet) => {
+      if (!bullet.active) return;
+      if (bullet.y < -40 || bullet.x < -40 || bullet.x > this.scale.width + 40) {
+        bullet.destroy();
+      }
+    });
   }
 
   // ─── Game setup ──────────────────────────────────────────────────────────
