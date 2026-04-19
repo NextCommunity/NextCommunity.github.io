@@ -11,6 +11,7 @@
 const SpaceInvaders = (() => {
   const ALIEN_ROWS = ["👾", "👽", "🛸", "🐙", "👾"];
   const GAME_ID = "space-invaders";
+  const BULLET_CLEANUP_BUFFER = 40;
 
   // ─── Public entry-point ──────────────────────────────────────────────────
 
@@ -85,7 +86,11 @@ const SpaceInvaders = (() => {
     const bullets = this.si_bullets?.getChildren?.() || [];
     bullets.forEach((bullet) => {
       if (!bullet.active) return;
-      if (bullet.y < -40 || bullet.x < -40 || bullet.x > this.scale.width + 40) {
+      if (
+        bullet.y < -BULLET_CLEANUP_BUFFER ||
+        bullet.x < -BULLET_CLEANUP_BUFFER ||
+        bullet.x > this.scale.width + BULLET_CLEANUP_BUFFER
+      ) {
         bullet.destroy();
       }
     });
