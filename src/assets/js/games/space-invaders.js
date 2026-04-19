@@ -9,41 +9,6 @@
  */
 
 const SpaceInvaders = (() => {
-  // ─── Emoji assets ────────────────────────────────────────────────────────
-
-  const BURST_EMOJIS = [
-    "🎮",
-    "🕹️",
-    "👾",
-    "🚀",
-    "✨",
-    "⭐",
-    "🔥",
-    "💥",
-    "🌈",
-    "🎉",
-    "💖",
-    "💎",
-    "🤖",
-    "👻",
-    "🦄",
-    "🍄",
-    "🌍",
-    "⚡",
-    "🏆",
-    "🎯",
-    "🛸",
-    "👽",
-    "👾",
-    "🐙",
-    "🦖",
-    "🪐",
-    "🌌",
-    "🌠",
-    "☄️",
-    "🌙",
-  ];
-
   const ALIEN_ROWS = ["👾", "👽", "🛸", "🐙", "👾"];
   const GAME_ID = "space-invaders";
 
@@ -70,7 +35,7 @@ const SpaceInvaders = (() => {
       width: "100vw",
       height: "100vh",
       zIndex: "10000",
-      pointerEvents: "none", // non-interactive until explosion is done
+      pointerEvents: "auto",
     });
     document.body.appendChild(canvas);
 
@@ -97,24 +62,7 @@ const SpaceInvaders = (() => {
   // ─── Scene callbacks ─────────────────────────────────────────────────────
 
   function _onCreate() {
-    const particles = _spawnExplosion(this);
-
-    // After 5 s, fade out the explosion and start the real game
-    this.time.delayedCall(5000, () => {
-      this.tweens.add({
-        targets: particles.getChildren(),
-        alpha: 0,
-        duration: 1000,
-        onComplete: () => {
-          particles.clear(true, true);
-
-          const canvas = document.getElementById("game-canvas-" + GAME_ID);
-          if (canvas) canvas.style.pointerEvents = "auto";
-
-          _setupGame(this);
-        },
-      });
-    });
+    _setupGame(this);
   }
 
   function _onUpdate() {
@@ -134,34 +82,6 @@ const SpaceInvaders = (() => {
   }
 
   // ─── Game setup ──────────────────────────────────────────────────────────
-
-  function _spawnExplosion(scene) {
-    const heartEl = document.getElementById("footer-heart");
-    const rect = heartEl
-      ? heartEl.getBoundingClientRect()
-      : { left: window.innerWidth / 2, top: window.innerHeight - 60 };
-
-    const group = scene.add.group();
-
-    for (let i = 0; i < 40; i++) {
-      const emoji = Phaser.Utils.Array.GetRandom(BURST_EMOJIS);
-      const p = scene.add.text(rect.left, rect.top, emoji, {
-        fontSize: "32px",
-      });
-
-      scene.physics.add.existing(p);
-      p.body.setVelocity(
-        Phaser.Math.Between(-400, 400),
-        Phaser.Math.Between(-600, -1200),
-      );
-      p.body.setBounce(0.6);
-      p.body.setCollideWorldBounds(true);
-      p.body.setAngularVelocity(Phaser.Math.Between(-200, 200));
-      group.add(p);
-    }
-
-    return group;
-  }
 
   function _setupGame(scene) {
     // Player rocket
