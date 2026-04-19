@@ -251,6 +251,10 @@ const SpaceInvaders = (() => {
 
     oscillator.connect(gainNode);
     gainNode.connect(_audioContext.destination);
+    oscillator.onended = () => {
+      oscillator.disconnect();
+      gainNode.disconnect();
+    };
 
     oscillator.start(now);
     oscillator.stop(now + 0.1);
