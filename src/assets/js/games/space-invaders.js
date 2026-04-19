@@ -11,6 +11,7 @@
 const SpaceInvaders = (() => {
   const ALIEN_ROWS = ["👾", "👽", "🛸", "🐙", "👾"];
   const GAME_ID = "space-invaders";
+  const BULLET_CLEANUP_BUFFER = 40;
 
   // ─── Public entry-point ──────────────────────────────────────────────────
 
@@ -36,6 +37,7 @@ const SpaceInvaders = (() => {
       height: "100vh",
       zIndex: "10000",
       pointerEvents: "auto",
+      background: "#000000",
     });
     document.body.appendChild(canvas);
 
@@ -44,7 +46,8 @@ const SpaceInvaders = (() => {
       canvas: canvas,
       width: window.innerWidth,
       height: window.innerHeight,
-      transparent: true,
+      transparent: false,
+      backgroundColor: "#000000",
       physics: {
         default: "arcade",
         arcade: { gravity: { y: 0 }, debug: false },
@@ -79,6 +82,18 @@ const SpaceInvaders = (() => {
     if (this.si_cursors.space.isDown) {
       _fireBullet(this);
     }
+
+    const bullets = this.si_bullets?.getChildren?.() || [];
+    bullets.forEach((bullet) => {
+      if (!bullet.active) return;
+      if (
+        bullet.y < -BULLET_CLEANUP_BUFFER ||
+        bullet.x < -BULLET_CLEANUP_BUFFER ||
+        bullet.x > this.scale.width + BULLET_CLEANUP_BUFFER
+      ) {
+        bullet.destroy();
+      }
+    });
   }
 
   // ─── Game setup ──────────────────────────────────────────────────────────
