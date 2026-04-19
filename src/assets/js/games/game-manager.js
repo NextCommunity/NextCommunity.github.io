@@ -156,6 +156,12 @@ const GameManager = (() => {
       desc: "Played 5 Developer Duels!",
       xp: 75,
     },
+    lode_runner_win: {
+      emoji: "🏃",
+      name: "Lode Star",
+      desc: "Collected all gold in Lode Runner Level 1!",
+      xp: 75,
+    },
   };
 
   /** Returns the full achievements object stored in localStorage. */
