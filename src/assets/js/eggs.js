@@ -22,21 +22,10 @@
 
     heartClickCount++;
 
-    // Visual feedback: heart grows with each click
-    const scaleAmount = 1 + heartClickCount * 0.3;
-    heart.style.transition =
-      "transform 0.1s cubic-bezier(0.17, 0.67, 0.83, 0.67)";
-    heart.style.transform = `scale(${scaleAmount})`;
-
     if (heartClickCount === 5) {
       phaserStarted = true;
       heart.innerHTML = "🎮";
-      heart.style.transform = "scale(1.5)";
-
-      setTimeout(() => {
-        heart.style.opacity = "0";
-        SpaceInvaders.launch();
-      }, 300);
+      SpaceInvaders.launch();
     }
   });
 })();
