@@ -17,7 +17,7 @@
     "magic-string": "^0.30.21",
     "mri": "^1.2.0",
     "node-addon-api": "^8.7.0",
-    "phaser": "^3.90.0",
+    "phaser": "^4.0.0",
     "picocolors": "^1.1.1",
     "picomatch": "^4.0.4",
     "postcss": "^8.5.9",
