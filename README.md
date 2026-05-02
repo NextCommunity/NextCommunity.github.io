@@ -729,7 +729,6 @@ git push origin add-your-github-username
 
 ```bash
 gh pr create \
-  --repo NextCommunity/NextCommunity.github.io \
   --base main \
   --title "Add [Your Name] to directory" \
   --body "Fixes #213
