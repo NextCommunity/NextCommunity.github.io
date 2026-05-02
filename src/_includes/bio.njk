@@ -23,7 +23,7 @@
 
           <div class="space-y-4 text-sm border-t border-[var(--border-color)] pt-6">
             {% if location or country %}
-            <div class="flex items-center gap-3">
+            <div class="flex justify-end gap-2 text-right">
               <span class="text-lg">📍</span>
               <span class="text-[var(--text-muted)]">{{ location }}{% if location and country %}, {% endif %}{{ country }}</span>
             </div>
