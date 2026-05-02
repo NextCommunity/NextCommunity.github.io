@@ -32,7 +32,9 @@ layout: false
             {% set location = person.data.location %}
             {% if location or country %}
             <span class="shrink-0 text-[10px] bg-[var(--bg-footer)] text-[var(--text-muted)] px-2 py-1 rounded font-bold uppercase border border-[var(--border-color)]">
-              {{ location }}{% if location and country %}, {% endif %}{{ country }}
+              {{ location }}
+              {% if location and country %}<br>{% endif %}
+              {{ country }}
             </span>
             {% endif %}
           </div>
