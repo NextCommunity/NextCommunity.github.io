@@ -23,7 +23,7 @@ permalink: /games/
     </div>
 
     {# ── High-score strip ── #}
-    <div id="hs-strip" class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+    <div id="hs-strip" class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
       <div class="user-card p-5 rounded-2xl text-center">
         <p class="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Space Invaders</p>
         <p class="text-2xl font-black text-accent" id="hs-space-invaders">—</p>
@@ -39,10 +39,15 @@ permalink: /games/
         <p class="text-2xl font-black text-accent" id="hs-dev-duel">—</p>
         <p class="text-[9px] text-[var(--text-muted)] mt-1">High Score</p>
       </div>
+      <div class="user-card p-5 rounded-2xl text-center">
+        <p class="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Lode Runner</p>
+        <p class="text-2xl font-black text-accent" id="hs-lode-runner">—</p>
+        <p class="text-[9px] text-[var(--text-muted)] mt-1">High Score</p>
+      </div>
     </div>
 
     {# ── Game cards ── #}
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
 
       {# Space Invaders #}
       <div class="user-card p-8 rounded-3xl flex flex-col gap-4">
@@ -80,6 +85,20 @@ permalink: /games/
         </a>
       </div>
 
+      {# Lode Runner #}
+      <div class="user-card p-8 rounded-3xl flex flex-col gap-4">
+        <div class="text-4xl">🏃</div>
+        <h3 class="text-xl font-black">Lode Runner</h3>
+        <p class="text-sm text-[var(--text-muted)] flex-1">Classic grid platformer — collect all the gold while dodging guards! Dig holes to trap them. Earn <span class="text-accent font-bold">+{{ _XP_LOAD_RUNNER_WIN or 150 }} XP</span> for clearing Level 1.</p>
+        <div class="text-[10px] font-mono text-[var(--text-muted)]">
+          Arrows: move/climb &nbsp; Z: dig left &nbsp; X: dig right
+        </div>
+        <button onclick="LoadRunner.launch()"
+          class="mt-auto px-5 py-3 rounded-xl bg-accent text-white font-black uppercase tracking-wider text-sm hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-accent/30">
+          🏃 Play
+        </button>
+      </div>
+
     </div>
 
     {# ── Achievements ── #}
@@ -112,6 +131,14 @@ permalink: /games/
           </div>
           <span class="ml-auto achievement-status text-[10px] font-black uppercase text-[var(--text-muted)]">Locked</span>
         </div>
+        <div class="achievement-card flex items-center gap-4 p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-footer)]" data-id="lode_runner_win">
+          <span class="text-3xl">🏃</span>
+          <div>
+            <p class="font-black text-sm">Lode Star</p>
+            <p class="text-[10px] text-[var(--text-muted)]">Collect all gold in Lode Runner Level 1</p>
+          </div>
+          <span class="ml-auto achievement-status text-[10px] font-black uppercase text-[var(--text-muted)]">Locked</span>
+        </div>
       </div>
     </div>
 
@@ -127,6 +154,7 @@ permalink: /games/
         "space-invaders": document.getElementById("hs-space-invaders"),
         "code-breaker": document.getElementById("hs-code-breaker"),
         "dev-duel": document.getElementById("hs-dev-duel"),
+        "lode-runner": document.getElementById("hs-lode-runner"),
       };
       Object.keys(scores).forEach(function (id) {
         var val = parseInt(localStorage.getItem("hs_" + id)) || 0;
