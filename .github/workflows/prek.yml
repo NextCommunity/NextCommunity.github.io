@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   pre-commit:
-    name: 🏃🏿‍♂️‍➡️ Run prek on ${{ matrix.os }}
+    name: 🏃🏿‍♂️‍➡️ prek on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
