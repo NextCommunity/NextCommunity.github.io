@@ -11,3 +11,8 @@
 *.jpeg binary
 *.gif binary
 *.ico binary
+*.webp binary
+*.avif binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
