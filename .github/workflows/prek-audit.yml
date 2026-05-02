@@ -1,5 +1,5 @@
 # https://github.com/j178/prek
-name: Manual hooks
+name: Audit hooks
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  pre-commit:
+  prek-audit:
     name: 🏃‍♂️‍➡️ prek on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -26,4 +26,4 @@ jobs:
         with:
           install-only: true
       - name: Run manual prek hooks
-        run: prek run --all-files --hook-stage manual
+        run: prek run --all-files --config .pre-commit-config-audit.yaml
