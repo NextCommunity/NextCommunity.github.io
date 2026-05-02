@@ -107,7 +107,6 @@ repos:
         name: run mixed-line-ending
         description: replaces or checks mixed line ending
         args: [--fix=lf]
-        types: [text]
 
   - repo: https://github.com/biomejs/pre-commit
     rev: "v2.4.8"
