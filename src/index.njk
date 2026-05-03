@@ -24,16 +24,16 @@ layout: false
         data-skills="{{ person.data.languages }}">
         <div class="p-8">
           <div class="flex justify-between items-start gap-4">
-            <div class="flex-1">
+            <div class="flex-1 min-w-0">
               <h2 class="text-2xl font-bold group-hover:text-accent transition-colors">{{ person.data.name }}</h2>
               <p class="text-accent font-semibold text-sm uppercase tracking-wider">{{ person.data.role }}</p>
             </div>
             {% set country = person.data.country %}
             {% set location = person.data.location %}
             {% if location or country %}
-            <div class="flex flex-col items-end text-right gap-0.5 text-[10px] bg-[var(--bg-footer)] text-[var(--text-muted)] px-2 py-1 rounded font-bold uppercase border border-[var(--border-color)]">
-              {% if location %}<span>{{ location }}</span>{% endif %}
-              {% if country %}<span>{{ country }}</span>{% endif %}
+            <div class="flex-none min-w-[6.5rem] max-w-[9rem] flex flex-col items-end text-right gap-0.5 text-[10px] bg-[var(--bg-footer)] text-[var(--text-muted)] px-2 py-1 rounded font-bold uppercase border border-[var(--border-color)]">
+              {% if location %}<span class="break-words">{{ location }}</span>{% endif %}
+              {% if country %}<span class="break-words">{{ country }}</span>{% endif %}
             </div>
             {% endif %}
           </div>
