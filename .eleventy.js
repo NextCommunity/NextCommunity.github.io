@@ -4,6 +4,7 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addShortcode("currentYear", () => new Date().getFullYear());
   // Add this line to copy your external assets
   eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy("src/favicon.ico");
   // 1. Recognize YAML as a template format
   eleventyConfig.addTemplateFormats("yaml");
 
