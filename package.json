@@ -17,10 +17,10 @@
     "magic-string": "^0.30.21",
     "mri": "^1.2.0",
     "node-addon-api": "^8.7.0",
-    "phaser": "^4.0.0",
+    "phaser": "^4.1.0",
     "picocolors": "^1.1.1",
     "picomatch": "^4.0.4",
-    "postcss": "^8.5.12",
+    "postcss": "^8.5.13",
     "source-map-js": "^1.2.1",
     "tailwindcss": "^4.2.2",
     "tapable": "^2.3.3"
