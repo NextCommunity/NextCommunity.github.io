@@ -11,7 +11,7 @@
     "graceful-fs": "^4.2.11",
     "is-extglob": "^2.1.1",
     "is-glob": "^4.0.3",
-    "jiti": "^2.6.1",
+    "jiti": "^2.7.0",
     "js-yaml": "^4.1.1",
     "lightningcss": "^1.32.0",
     "magic-string": "^0.30.21",
@@ -20,7 +20,7 @@
     "phaser": "^4.1.0",
     "picocolors": "^1.1.1",
     "picomatch": "^4.0.4",
-    "postcss": "^8.5.13",
+    "postcss": "^8.5.14",
     "source-map-js": "^1.2.1",
     "tailwindcss": "^4.2.2",
     "tapable": "^2.3.3"
