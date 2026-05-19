@@ -22,10 +22,12 @@
           </div>
 
           <div class="space-y-4 text-sm border-t border-[var(--border-color)] pt-6">
+            {% if location or country %}
             <div class="flex items-center gap-3">
               <span class="text-lg">📍</span>
-              <span class="text-[var(--text-muted)]">{{ location }}{% if country %}, {{ country }}{% endif %}</span>
+              <span class="text-[var(--text-muted)]">{{ location }}{% if location and country %}, {% endif %}{{ country }}</span>
             </div>
+            {% endif %}
 
             {% if email %}
             <div class="flex items-center gap-3 group cursor-pointer" onclick="copyToClipboard('{{ email }}', this)">
@@ -72,28 +74,32 @@
       </div>
 
       <div class="lg:col-span-2 space-y-8">
+        {% if bio %}
         <div class="user-card p-8 sm:p-12 rounded-3xl">
           <h2 class="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-6 flex items-center gap-2">
-            <span class="w-8 h-[2px] bg-accent"></span> Professional Bio
+            <span class="w-8 h-[2px] bg-accent" aria-hidden="true"></span> Professional Bio
           </h2>
           <div class="text-[var(--text-main)] text-lg leading-relaxed whitespace-pre-line">
             {{ bio }}
           </div>
         </div>
+        {% endif %}
 
         {% if languages is defined and languages is not null %}
-        <div class="user-card p-8 rounded-3xl">
-          <h2 class="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-6">Technologies</h2>
+        <div class="user-card p-8 sm:p-12 rounded-3xl">
+          <h2 class="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-6 flex items-center gap-2">
+            <span class="w-8 h-[2px] bg-accent" aria-hidden="true"></span> Technologies
+          </h2>
           <div class="flex flex-wrap gap-3">
               {% set skills = languages.split(' ') %}
               {% include "skills-list.njk" %}
           </div>
         </div>
-       {% endif %}
+        {% endif %}
 
-        <div class="user-card p-8 rounded-3xl">
-          <h2 class="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-4 flex items-center gap-2">
-            <span class="w-8 h-[2px] bg-accent"></span> Mini-Game
+        <div class="user-card p-8 sm:p-12 rounded-3xl">
+          <h2 class="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-6 flex items-center gap-2">
+            <span class="w-8 h-[2px] bg-accent" aria-hidden="true"></span> Mini-Game
           </h2>
           <p class="text-sm text-[var(--text-muted)] mb-4">Catch the skill tiles before they fall! Collect enough to win XP.</p>
           <button

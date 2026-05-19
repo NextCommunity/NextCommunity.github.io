@@ -1,0 +1,18 @@
+# Enforce LF line endings for all text files to prevent CRLF issues on Windows
+* text=auto eol=lf
+
+# Explicitly enforce LF for YAML files (prevents yamllint failures on Windows)
+*.yaml text eol=lf
+*.yml text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.avif binary
+*.pdf binary
+*.woff binary
+*.woff2 binary

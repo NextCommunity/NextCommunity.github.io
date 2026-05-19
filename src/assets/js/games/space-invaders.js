@@ -9,43 +9,10 @@
  */
 
 const SpaceInvaders = (() => {
-  // ─── Emoji assets ────────────────────────────────────────────────────────
-
-  const BURST_EMOJIS = [
-    "🎮",
-    "🕹️",
-    "👾",
-    "🚀",
-    "✨",
-    "⭐",
-    "🔥",
-    "💥",
-    "🌈",
-    "🎉",
-    "💖",
-    "💎",
-    "🤖",
-    "👻",
-    "🦄",
-    "🍄",
-    "🌍",
-    "⚡",
-    "🏆",
-    "🎯",
-    "🛸",
-    "👽",
-    "👾",
-    "🐙",
-    "🦖",
-    "🪐",
-    "🌌",
-    "🌠",
-    "☄️",
-    "🌙",
-  ];
-
   const ALIEN_ROWS = ["👾", "👽", "🛸", "🐙", "👾"];
   const GAME_ID = "space-invaders";
+  const BULLET_CLEANUP_BUFFER = 40;
+  let _audioContext = null;
 
   // ─── Public entry-point ──────────────────────────────────────────────────
 
@@ -70,7 +37,8 @@ const SpaceInvaders = (() => {
       width: "100vw",
       height: "100vh",
       zIndex: "10000",
-      pointerEvents: "none", // non-interactive until explosion is done
+      pointerEvents: "auto",
+      background: "#000000",
     });
     document.body.appendChild(canvas);
 
@@ -79,7 +47,8 @@ const SpaceInvaders = (() => {
       canvas: canvas,
       width: window.innerWidth,
       height: window.innerHeight,
-      transparent: true,
+      transparent: false,
+      backgroundColor: "#000000",
       physics: {
         default: "arcade",
         arcade: { gravity: { y: 0 }, debug: false },
@@ -97,24 +66,7 @@ const SpaceInvaders = (() => {
   // ─── Scene callbacks ─────────────────────────────────────────────────────
 
   function _onCreate() {
-    const particles = _spawnExplosion(this);
-
-    // After 5 s, fade out the explosion and start the real game
-    this.time.delayedCall(5000, () => {
-      this.tweens.add({
-        targets: particles.getChildren(),
-        alpha: 0,
-        duration: 1000,
-        onComplete: () => {
-          particles.clear(true, true);
-
-          const canvas = document.getElementById("game-canvas-" + GAME_ID);
-          if (canvas) canvas.style.pointerEvents = "auto";
-
-          _setupGame(this);
-        },
-      });
-    });
+    _setupGame(this);
   }
 
   function _onUpdate() {
@@ -131,37 +83,21 @@ const SpaceInvaders = (() => {
     if (this.si_cursors.space.isDown) {
       _fireBullet(this);
     }
+
+    const bullets = this.si_bullets?.getChildren?.() || [];
+    bullets.forEach((bullet) => {
+      if (!bullet.active) return;
+      if (
+        bullet.y < -BULLET_CLEANUP_BUFFER ||
+        bullet.x < -BULLET_CLEANUP_BUFFER ||
+        bullet.x > this.scale.width + BULLET_CLEANUP_BUFFER
+      ) {
+        bullet.destroy();
+      }
+    });
   }
 
   // ─── Game setup ──────────────────────────────────────────────────────────
-
-  function _spawnExplosion(scene) {
-    const heartEl = document.getElementById("footer-heart");
-    const rect = heartEl
-      ? heartEl.getBoundingClientRect()
-      : { left: window.innerWidth / 2, top: window.innerHeight - 60 };
-
-    const group = scene.add.group();
-
-    for (let i = 0; i < 40; i++) {
-      const emoji = Phaser.Utils.Array.GetRandom(BURST_EMOJIS);
-      const p = scene.add.text(rect.left, rect.top, emoji, {
-        fontSize: "32px",
-      });
-
-      scene.physics.add.existing(p);
-      p.body.setVelocity(
-        Phaser.Math.Between(-400, 400),
-        Phaser.Math.Between(-600, -1200),
-      );
-      p.body.setBounce(0.6);
-      p.body.setCollideWorldBounds(true);
-      p.body.setAngularVelocity(Phaser.Math.Between(-200, 200));
-      group.add(p);
-    }
-
-    return group;
-  }
 
   function _setupGame(scene) {
     // Player rocket
@@ -217,6 +153,7 @@ const SpaceInvaders = (() => {
       (bullet, alien) => {
         bullet.destroy();
         alien.destroy();
+        _playInvaderHitSound();
 
         if (scene.si_aliens.countActive() === 0) {
           _onVictory(scene);
@@ -287,6 +224,40 @@ const SpaceInvaders = (() => {
     bullet.body.isCircle = true;
 
     scene.si_lastFired = now;
+  }
+
+  function _playInvaderHitSound() {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+
+    if (!_audioContext) {
+      _audioContext = new AudioCtx();
+    }
+    if (_audioContext.state === "suspended") {
+      _audioContext.resume().catch(() => {});
+    }
+
+    const now = _audioContext.currentTime;
+    const oscillator = _audioContext.createOscillator();
+    const gainNode = _audioContext.createGain();
+
+    oscillator.type = "square";
+    oscillator.frequency.setValueAtTime(840, now);
+    oscillator.frequency.exponentialRampToValueAtTime(280, now + 0.08);
+
+    gainNode.gain.setValueAtTime(0.0001, now);
+    gainNode.gain.exponentialRampToValueAtTime(0.12, now + 0.01);
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(_audioContext.destination);
+    oscillator.onended = () => {
+      oscillator.disconnect();
+      gainNode.disconnect();
+    };
+
+    oscillator.start(now);
+    oscillator.stop(now + 0.1);
   }
 
   // ─── Victory / cleanup ────────────────────────────────────────────────────

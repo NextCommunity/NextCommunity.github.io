@@ -8,9 +8,9 @@
 [![Built with Tailwind CSS](https://img.shields.io/badge/Built%20with-Tailwind-blue)](https://tailwindcss.com/)
 
 [![Super-Linter](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/super-linter.yml?query=branch%3Amain)
-[![Audit hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-audit.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-audit.yml?query=branch%3Amain)
-[![Manual hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-manual.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit-manual.yml?query=branch%3Amain)
-[![Standard hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/pre-commit.yml?query=branch%3Amain)
+[![Audit hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek-audit.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek-audit.yml?query=branch%3Amain)
+[![Manual hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek-manual.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek-manual.yml?query=branch%3Amain)
+[![Standard hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek.yml?query=branch%3Amain)
 
 [![Easter Eggs](https://img.shields.io/badge/Easter-Eggs-ff69b4?labelColor=9b59b6)](https://nextcommunity.github.io)
 
@@ -28,10 +28,10 @@
 - [How to Add Yourself](#-how-to-add-yourself)
 - [YAML File Format](#-yaml-file-format)
 - [Local Development](#-local-development-optional)
-- [Git Workflow & Keeping in Sync](#-git-workflow--keeping-in-sync)
-- [Contributing with GitHub CLI](#-contributing-with-github-cli)
 - [Contribution Guidelines](#-contribution-guidelines)
 - [Troubleshooting](#-troubleshooting--faq)
+- [Git Workflow & Keeping in Sync](#-git-workflow--keeping-in-sync)
+- [Contributing with GitHub CLI](#-contributing-with-github-cli)
 - [License](#-license)
 
 ---
@@ -295,51 +295,189 @@ npm run build
 
 ```text
 NextCommunity.github.io/
+├── .github/
+│   ├── linters/
+│   │   ├── .markdown-lint.yml         # Markdown linting rules
+│   │   ├── .markdown-link-check.json  # Markdown link checker config
+│   │   ├── .yaml-lint.yml             # YAML linting rules
+│   │   ├── codespell.txt              # Accepted words for spell checks
+│   │   └── zizmor.yml                 # GitHub Actions security lint config
+│   ├── workflows/
+│   │   ├── deploy.yml                 # Deployment workflow
+│   │   ├── prek-audit.yml             # Pre-commit audit workflow
+│   │   ├── prek-manual.yml            # Manual pre-commit workflow
+│   │   ├── prek.yml                   # Pre-commit workflow
+│   │   └── super-linter.yml           # Super-linter workflow
+│   ├── CODEOWNERS                     # Code ownership rules
+│   ├── dependabot.yml                 # Dependabot configuration
+│   └── FUNDING.yml                    # Sponsorship links
 ├── src/
-│   ├── _data/                      # Site-wide data files
-│   │   ├── build.js                # Build metadata injected into templates
-│   │   └── levels.json             # XP level definitions for the gamification system
-│   ├── _includes/                  # Reusable Nunjucks templates
-│   │   ├── bio.njk                 # Individual developer profile page layout
-│   │   ├── footer.njk              # Site footer wrapper
-│   │   ├── footer-details.njk      # Footer content (links, credits)
-│   │   ├── game-modal.njk          # Modal overlay for mini-games
-│   │   ├── game-stats.njk          # In-game XP / stats display
-│   │   ├── header.njk              # Site header wrapper
-│   │   ├── header-details.njk      # Header content (nav, theme toggle)
-│   │   ├── matrix-overlay.njk      # Matrix rain easter egg overlay
-│   │   ├── scripts.njk             # JS <script> tags included by footer
-│   │   ├── skills-list.njk         # Renders a developer's skills/languages
-│   │   ├── system-log.njk          # Scrolling system-log UI element
-│   │   └── system-override.njk     # "System override" easter egg UI
+│   ├── _data/                         # Site-wide data files
+│   │   ├── build.js                   # Build metadata injected into templates
+│   │   └── levels.json                # XP level definitions for gamification
+│   ├── _includes/                     # Reusable Nunjucks templates
+│   │   ├── bio.njk                    # Individual developer profile layout
+│   │   ├── footer.njk                 # Site footer wrapper
+│   │   ├── footer-details.njk         # Footer content (links, credits)
+│   │   ├── game-modal.njk             # Modal overlay for mini-games
+│   │   ├── game-stats.njk             # In-game XP / stats display
+│   │   ├── header.njk                 # Site header wrapper
+│   │   ├── header-details.njk         # Header content (nav, theme toggle)
+│   │   ├── matrix-overlay.njk         # Matrix rain easter egg overlay
+│   │   ├── scripts.njk                # JS <script> tags included by footer
+│   │   ├── skills-list.njk            # Renders a developer's skills/languages
+│   │   ├── system-log.njk             # Scrolling system-log UI element
+│   │   └── system-override.njk        # "System override" easter egg UI
 │   ├── assets/
 │   │   ├── css/
-│   │   │   ├── style.css           # Compiled / custom CSS
-│   │   │   └── tailwind-input.css  # Tailwind CSS entry point
+│   │   │   ├── style.css              # Custom styles
+│   │   │   ├── tailwind-input.css     # Tailwind CSS entry point
+│   │   │   └── tailwind.css           # Generated Tailwind CSS output
 │   │   ├── img/
-│   │   │   └── next.jpeg           # Site logo / avatar image
+│   │   │   └── next.jpeg              # Site logo / avatar image
 │   │   └── js/
-│   │       ├── eggs.js             # Easter egg interactions (Konami code, etc.)
-│   │       ├── phaser-init.js      # Phaser game engine bootstrap
-│   │       ├── script.js           # Core interactivity & XP system
-│   │       └── games/              # Mini-game modules (lazy-loaded via Phaser)
-│   │           ├── config.js       # Shared game constants & CDN URL
-│   │           ├── game-manager.js # Game lifecycle (load, create, destroy)
-│   │           ├── space-invaders.js
+│   │       ├── eggs.js                # Easter egg interactions
+│   │       ├── phaser.bundle.js       # Generated Phaser bundle
+│   │       ├── phaser-init.js         # Phaser game engine bootstrap
+│   │       ├── script.js              # Core interactivity & XP system
+│   │       └── games/                 # Mini-game modules
 │   │           ├── code-breaker.js
-│   │           └── dev-duel.js
-│   ├── users/                      # 👈 Developer profile YAML files go here
-│   │   ├── users.json              # Eleventy data file that aggregates all YAMLs
+│   │           ├── config.js          # Shared game constants & CDN URL
+│   │           ├── dev-duel.js
+│   │           ├── game-manager.js    # Game lifecycle (load/create/destroy)
+│   │           └── space-invaders.js
+│   ├── users/                         # 👈 Developer profile YAML files
+│   │   ├── users.json                 # Eleventy data file aggregating YAMLs
 │   │   ├── jbampton.yaml
-│   │   └── ...                     # One <github-username>.yaml per developer
-│   ├── games.njk                   # Games page template
-│   └── index.njk                   # Homepage template
-├── .eleventy.js                    # Eleventy configuration
-├── biome.json                      # Biome formatter / linter config
-├── postcss.config.js               # PostCSS / Tailwind build config
-├── package.json                    # Node.js dependencies & scripts
-└── README.md                       # This file
+│   │   └── ...                        # One <github-username>.yaml per dev
+│   ├── games.njk                      # Games page template
+│   └── index.njk                      # Homepage template
+├── .editorconfig                      # Editor formatting rules
+├── .eleventy.js                       # Eleventy configuration
+├── .gitattributes                     # Git text normalization rules
+├── .gitignore                         # Git ignored files
+├── .npmrc                             # npm configuration
+├── .pre-commit-config-audit.yaml      # Pre-commit audit config
+├── .pre-commit-config.yaml            # Pre-commit hooks config
+├── LICENSE                            # Project license
+├── biome.json                         # Biome formatter / linter config
+├── package-lock.json                  # Locked npm dependency versions
+├── package.json                       # Node.js dependencies & scripts
+├── postcss.config.js                  # PostCSS / Tailwind build config
+└── README.md                          # This documentation
 ```
+
+---
+
+## 🤝 Contribution Guidelines
+
+### Code of Conduct
+
+We're committed to providing a welcoming and inclusive environment. Please be respectful and professional in all interactions.
+
+### PR Review Process
+
+1. **Automated Checks**: Your PR will automatically run linting checks
+2. **Manual Review**: A maintainer will review your submission
+3. **Feedback**: You may be asked to make changes
+4. **Merge**: Once approved, your PR will be merged!
+
+### What Gets Approved?
+
+✅ **Yes:**
+
+- Complete, valid YAML files
+- Professional bios and appropriate content
+- Real GitHub profiles
+- Accurate information
+
+❌ **No:**
+
+- Spam or promotional content
+- Offensive or inappropriate material
+- Fake or duplicate profiles
+- Invalid YAML syntax
+
+### CI/CD Checks
+
+Every pull request runs automated checks:
+
+- **Linting**: Ensures YAML syntax is correct
+- **Build Test**: Verifies the site builds successfully
+- **Pre-commit Hooks**: Checks code quality
+
+If checks fail, you'll see error messages in the PR. Fix the issues and push again.
+
+---
+
+## 🔧 Troubleshooting & FAQ
+
+### Common Issues
+
+#### ❌ Build Fails: "Invalid YAML"
+
+**Problem**: Your YAML file has syntax errors.
+
+**Solution**:
+
+- Check for proper indentation (use spaces, not tabs)
+- Ensure colons have a space after them (`name: John`, not `name:John`)
+- Use `|` for multi-line bio text
+- Validate your YAML at [yamllint.com](http://www.yamllint.com/)
+
+#### ❌ "GitHub username not found"
+
+**Problem**: The `github` field doesn't match a real GitHub profile.
+
+**Solution**:
+
+- Ensure you're using your exact GitHub username
+- Check for typos
+- Username is case-sensitive in this field
+
+#### ❌ My profile doesn't show up
+
+**Problem**: File naming or format issue.
+
+**Solution**:
+
+- File must be in `src/users/` directory
+- File must be named `username.yaml` (lowercase, with `.yaml` extension)
+- All required fields must be filled in
+
+#### ❌ Pre-commit hooks fail
+
+**Problem**: Code quality checks didn't pass.
+
+**Solution**:
+
+```bash
+# Install pre-commit
+pip install pre-commit
+
+# Run checks manually
+pre-commit run --all-files
+```
+
+### FAQ
+
+**Q: Can I update my profile after it's merged?**
+A: Yes! Just create a new PR with updates to your YAML file.
+
+**Q: How long does review take?**
+A: Usually within 24-48 hours, depending on maintainer availability.
+
+**Q: Can I add multiple social links?**
+A: Yes, all social fields (twitter, linkedin, instagram) are optional and independent.
+
+**Q: What if I don't have a personal website?**
+A: No problem! Just omit the `website` field or set it to your GitHub profile.
+
+**Q: Can I use emojis in my profile?**
+A: Yes, emojis are supported in the `name` and `bio` fields! 🎉
+
+**Q: Is there a character limit for the bio?**
+A: No hard limit, but keep it concise (2-4 paragraphs recommended).
 
 ---
 
@@ -643,120 +781,6 @@ git push origin add-your-github-username
 ```
 
 Once all checks pass and a maintainer approves the PR, it will be merged and your profile will go live! 🎉
-
----
-
-## 🤝 Contribution Guidelines
-
-### Code of Conduct
-
-We're committed to providing a welcoming and inclusive environment. Please be respectful and professional in all interactions.
-
-### PR Review Process
-
-1. **Automated Checks**: Your PR will automatically run linting checks
-2. **Manual Review**: A maintainer will review your submission
-3. **Feedback**: You may be asked to make changes
-4. **Merge**: Once approved, your PR will be merged!
-
-### What Gets Approved?
-
-✅ **Yes:**
-
-- Complete, valid YAML files
-- Professional bios and appropriate content
-- Real GitHub profiles
-- Accurate information
-
-❌ **No:**
-
-- Spam or promotional content
-- Offensive or inappropriate material
-- Fake or duplicate profiles
-- Invalid YAML syntax
-
-### CI/CD Checks
-
-Every pull request runs automated checks:
-
-- **Linting**: Ensures YAML syntax is correct
-- **Build Test**: Verifies the site builds successfully
-- **Pre-commit Hooks**: Checks code quality
-
-If checks fail, you'll see error messages in the PR. Fix the issues and push again.
-
----
-
-## 🔧 Troubleshooting & FAQ
-
-### Common Issues
-
-#### ❌ Build Fails: "Invalid YAML"
-
-**Problem**: Your YAML file has syntax errors.
-
-**Solution**:
-
-- Check for proper indentation (use spaces, not tabs)
-- Ensure colons have a space after them (`name: John`, not `name:John`)
-- Use `|` for multi-line bio text
-- Validate your YAML at [yamllint.com](http://www.yamllint.com/)
-
-#### ❌ "GitHub username not found"
-
-**Problem**: The `github` field doesn't match a real GitHub profile.
-
-**Solution**:
-
-- Ensure you're using your exact GitHub username
-- Check for typos
-- Username is case-sensitive in this field
-
-#### ❌ My profile doesn't show up
-
-**Problem**: File naming or format issue.
-
-**Solution**:
-
-- File must be in `src/users/` directory
-- File must be named `username.yaml` (lowercase, with `.yaml` extension)
-- All required fields must be filled in
-
-#### ❌ Pre-commit hooks fail
-
-**Problem**: Code quality checks didn't pass.
-
-**Solution**:
-
-```bash
-# Install pre-commit
-pip install pre-commit
-
-# Run checks manually
-pre-commit run --all-files
-```
-
-### FAQ
-
-**Q: Can I update my profile after it's merged?**
-A: Yes! Just create a new PR with updates to your YAML file.
-
-**Q: How long does review take?**
-A: Usually within 24-48 hours, depending on maintainer availability.
-
-**Q: Can I add multiple social links?**
-A: Yes, all social fields (twitter, linkedin, instagram) are optional and independent.
-
-**Q: What if I don't have a personal website?**
-A: No problem! Just omit the `website` field or set it to your GitHub profile.
-
-**Q: Can I use emojis in my profile?**
-A: Yes, emojis are supported in the `name` and `bio` fields! 🎉
-
-**Q: Is there a character limit for the bio?**
-A: No hard limit, but keep it concise (2-4 paragraphs recommended).
-
----
 
 ## 📄 License
 

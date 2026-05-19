@@ -28,11 +28,13 @@ layout: false
               <h2 class="text-2xl font-bold group-hover:text-accent transition-colors">{{ person.data.name }}</h2>
               <p class="text-accent font-semibold text-sm uppercase tracking-wider">{{ person.data.role }}</p>
             </div>
+            {% set country = person.data.country %}
             {% set location = person.data.location %}
-            {% if location %}
-            <span class="shrink-0 text-[10px] bg-[var(--bg-footer)] text-[var(--text-muted)] px-2 py-1 rounded font-bold uppercase border border-[var(--border-color)]">
-              {{ location }}
-            </span>
+            {% if location or country %}
+            <div class="flex flex-col items-end text-right gap-0.5 text-[10px] bg-[var(--bg-footer)] text-[var(--text-muted)] px-2 py-1 rounded font-bold uppercase border border-[var(--border-color)] min-w-[7rem] max-w-[10rem] shrink-0">
+              {% if location %}<span>{{ location }}</span>{% endif %}
+              {% if country %}<span>{{ country }}</span>{% endif %}
+            </div>
             {% endif %}
           </div>
 
@@ -45,7 +47,7 @@ layout: false
 
           {% set bio = person.data.bio %}
           {% if bio %}
-          <p class="mt-4 text-[var(--text-muted)] text-sm italic line-clamp-3">"{{ bio | truncate(120) }}"</p>
+          <p class="mt-4 text-[var(--text-muted)] text-sm italic line-clamp-3">"{{ bio | trim | truncate(120) }}"</p>
           {% endif %}
         </div>
 
