@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% set seoBioDescription = bio
+    and (bio
+      | replace('\r', ' ')
+      | replace('\n', ' ')
+      | replace('\t', ' ')
+      | replace('"', "'")
+      | trim
+      | truncate(160))
+    or "" %}
   {% set seo = {
     title: name + " | " + role + " | NextCommunity",
-    description: (bio and bio | trim | truncate(160) or ("Explore " + name + "'s developer profile, skills, and social links on NextCommunity.")),
+    description: (seoBioDescription or ("Explore " + name + "'s developer profile, skills, and social links on NextCommunity.")),
     keywords: "developer profile, " + name + ", " + role + ", github profile, software developer portfolio",
     type: "profile",
     image: "/assets/img/next.jpeg",
