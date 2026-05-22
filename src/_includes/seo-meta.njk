@@ -5,7 +5,7 @@
 {% set seoDescription = seo.description or "Discover and connect with open-source developers in the NextCommunity global talent directory." %}
 {% set seoKeywords = seo.keywords or "developer directory, open source developers, software engineers, github profiles, tech community" %}
 {% set seoType = seo.type or "website" %}
-{% set imagePath = seo.image or site.defaultImage or "/assets/img/next.jpeg" %}
+{% set imagePath = seo.image or site.defaultImage %}
 {% if imagePath and imagePath[0] == "/" %}
   {% set imageUrl = siteUrl + imagePath %}
 {% else %}
@@ -16,8 +16,8 @@
 <meta name="description" content="{{ seoDescription | escape }}">
 <meta name="keywords" content="{{ seoKeywords | escape }}">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<meta name="author" content="NextCommunity">
-<meta name="theme-color" content="#2563eb">
+<meta name="author" content="{{ (site.author or 'NextCommunity') | escape }}">
+<meta name="theme-color" content="{{ (site.themeColor or '#2563eb') | escape }}">
 <link rel="canonical" href="{{ canonicalUrl | escape }}">
 
 <meta property="og:locale" content="{{ (site.locale or 'en_US') | escape }}">
