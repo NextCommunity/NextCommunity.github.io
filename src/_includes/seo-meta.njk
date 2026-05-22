@@ -1,0 +1,89 @@
+{% set siteUrl = site.url or "https://nextcommunity.github.io" %}
+{% set pagePath = page.url or "/" %}
+{% set canonicalUrl = siteUrl + pagePath %}
+{% set seoTitle = seo.title or (site.name + " | Open Source Profiles") %}
+{% set seoDescription = seo.description or "Discover and connect with open-source developers in the NextCommunity global talent directory." %}
+{% set seoKeywords = seo.keywords or "developer directory, open source developers, software engineers, github profiles, tech community" %}
+{% set seoType = seo.type or "website" %}
+{% set imagePath = seo.image or site.defaultImage or "/assets/img/next.jpeg" %}
+{% if imagePath and imagePath[0] == "/" %}
+  {% set imageUrl = siteUrl + imagePath %}
+{% else %}
+  {% set imageUrl = imagePath %}
+{% endif %}
+
+{% set jsonTitle = seoTitle | replace('"', "'") %}
+{% set jsonDescription = seoDescription | replace('"', "'") | replace('\n', ' ') %}
+
+<title>{{ seoTitle }}</title>
+<meta name="description" content="{{ seoDescription }}">
+<meta name="keywords" content="{{ seoKeywords }}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="author" content="NextCommunity">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="{{ canonicalUrl }}">
+
+<meta property="og:locale" content="{{ site.locale or 'en_US' }}">
+<meta property="og:type" content="{{ seoType }}">
+<meta property="og:site_name" content="{{ site.name or 'NextCommunity Developer Directory' }}">
+<meta property="og:title" content="{{ seoTitle }}">
+<meta property="og:description" content="{{ seoDescription }}">
+<meta property="og:url" content="{{ canonicalUrl }}">
+<meta property="og:image" content="{{ imageUrl }}">
+<meta property="og:image:alt" content="{{ seoTitle }}">
+
+<meta name="twitter:card" content="{{ site.twitterCard or 'summary_large_image' }}">
+<meta name="twitter:title" content="{{ seoTitle }}">
+<meta name="twitter:description" content="{{ seoDescription }}">
+<meta name="twitter:image" content="{{ imageUrl }}">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ site.name or 'NextCommunity Developer Directory' }}",
+  "url": "{{ siteUrl }}",
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "name": "NextCommunity",
+    "url": "{{ siteUrl }}"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{{ jsonTitle }}",
+  "description": "{{ jsonDescription }}",
+  "url": "{{ canonicalUrl }}",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "{{ site.name or 'NextCommunity Developer Directory' }}",
+    "url": "{{ siteUrl }}"
+  },
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "{{ imageUrl }}"
+  }
+}
+</script>
+
+{% if seo.person %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ seo.person.name | replace('"', "'") }}",
+  "jobTitle": "{{ seo.person.role | replace('"', "'") }}",
+  "url": "{{ canonicalUrl }}",
+  "sameAs": [
+    {% if seo.person.github %}"https://github.com/{{ seo.person.github }}"{% endif %}
+    {% if seo.person.github and seo.person.linkedin %},{% endif %}
+    {% if seo.person.linkedin %}"{{ seo.person.linkedin }}"{% endif %}
+  ]
+}
+</script>
+{% endif %}

@@ -3,7 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ name }} | {{ role }}</title>
+  {% set seo = {
+    title: name + " | " + role + " | NextCommunity",
+    description: (bio and bio | trim | truncate(160) or ("Explore " + name + "'s developer profile, skills, and social links on NextCommunity.")),
+    keywords: "developer profile, " + name + ", " + role + ", github profile, software developer portfolio",
+    type: "profile",
+    image: "/assets/img/next.jpeg",
+    person: {
+      name: name,
+      role: role,
+      github: github,
+      linkedin: linkedin
+    }
+  } %}
+  {% include "seo-meta.njk" %}
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
