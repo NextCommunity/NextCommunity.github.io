@@ -1,4 +1,4 @@
-name: Super-Linter
+name: 🧪 Code Quality - Super-Linter
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ permissions: {}
 
 jobs:
   build:
-    name: Run Super-Linter
+    name: Super-Linter Validation
     runs-on: ubuntu-latest
     permissions:
       # contents permission to clone the repository
