@@ -7,7 +7,7 @@ eleventyExcludeFromCollections: true
 {% for entry in collections.all %}
   {% if entry.url and entry.url != "/404.html" %}
   <url>
-    <loc>{{ site.url }}{{ entry.url }}</loc>
+    <loc>{{ site.url or "https://nextcommunity.github.io" }}{{ entry.url }}</loc>
   </url>
   {% endif %}
 {% endfor %}

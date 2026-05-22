@@ -12,9 +12,6 @@
   {% set imageUrl = imagePath %}
 {% endif %}
 
-{% set jsonTitle = seoTitle | replace('"', "'") %}
-{% set jsonDescription = seoDescription | replace('"', "'") | replace('\n', ' ') %}
-
 <title>{{ seoTitle }}</title>
 <meta name="description" content="{{ seoDescription }}">
 <meta name="keywords" content="{{ seoKeywords }}">
@@ -41,13 +38,13 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "{{ site.name or 'NextCommunity Developer Directory' }}",
-  "url": "{{ siteUrl }}",
-  "inLanguage": "en",
+  "name": {{ (site.name or 'NextCommunity Developer Directory') | dump | safe }},
+  "url": {{ siteUrl | dump | safe }},
+  "inLanguage": {{ ((site.locale or 'en_US') | replace('_', '-')) | dump | safe }},
   "publisher": {
     "@type": "Organization",
     "name": "NextCommunity",
-    "url": "{{ siteUrl }}"
+    "url": {{ siteUrl | dump | safe }}
   }
 }
 </script>
@@ -56,17 +53,17 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "{{ jsonTitle }}",
-  "description": "{{ jsonDescription }}",
-  "url": "{{ canonicalUrl }}",
+  "name": {{ seoTitle | dump | safe }},
+  "description": {{ seoDescription | dump | safe }},
+  "url": {{ canonicalUrl | dump | safe }},
   "isPartOf": {
     "@type": "WebSite",
-    "name": "{{ site.name or 'NextCommunity Developer Directory' }}",
-    "url": "{{ siteUrl }}"
+    "name": {{ (site.name or 'NextCommunity Developer Directory') | dump | safe }},
+    "url": {{ siteUrl | dump | safe }}
   },
   "primaryImageOfPage": {
     "@type": "ImageObject",
-    "url": "{{ imageUrl }}"
+    "url": {{ imageUrl | dump | safe }}
   }
 }
 </script>
@@ -76,13 +73,13 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "{{ seo.person.name | replace('"', "'") }}",
-  "jobTitle": "{{ seo.person.role | replace('"', "'") }}",
-  "url": "{{ canonicalUrl }}",
+  "name": {{ seo.person.name | dump | safe }},
+  "jobTitle": {{ seo.person.role | dump | safe }},
+  "url": {{ canonicalUrl | dump | safe }},
   "sameAs": [
-    {% if seo.person.github %}"https://github.com/{{ seo.person.github }}"{% endif %}
+    {% if seo.person.github %}{{ ("https://github.com/" + seo.person.github) | dump | safe }}{% endif %}
     {% if seo.person.github and seo.person.linkedin %},{% endif %}
-    {% if seo.person.linkedin %}"{{ seo.person.linkedin }}"{% endif %}
+    {% if seo.person.linkedin %}{{ seo.person.linkedin | dump | safe }}{% endif %}
   ]
 }
 </script>
