@@ -7,7 +7,14 @@ permalink: /games/
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arcade | Developer Directory</title>
+  {% set seo = {
+    title: "Developer Arcade | Coding Games, XP, and Achievements",
+    description: "Play coding mini-games, earn XP, and unlock achievements in the NextCommunity Developer Arcade.",
+    keywords: "developer games, coding arcade, programming mini games, developer xp, gamified coding",
+    type: "website",
+    image: "/assets/img/next.jpeg"
+  } %}
+  {% include "seo-meta.njk" %}
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>

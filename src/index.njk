@@ -6,7 +6,14 @@ layout: false
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Developer Directory</title>
+  {% set seo = {
+    title: "NextCommunity Developer Directory | Discover Open-Source Talent",
+    description: "Explore developer profiles from around the world, discover skills, and connect with open-source contributors in the NextCommunity directory.",
+    keywords: "developer directory, open source developers, software engineers, github developers, developer community, global tech talent",
+    type: "website",
+    image: "/assets/img/next.jpeg"
+  } %}
+  {% include "seo-meta.njk" %}
   <link rel="stylesheet" href="/assets/css/tailwind.css">
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
