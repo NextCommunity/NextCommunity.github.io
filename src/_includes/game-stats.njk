@@ -104,7 +104,6 @@
 
 <script>
 (function refreshGameStats() {
-  // High scores
   var hs = {
     "hs-si": localStorage.getItem("hs_space-invaders"),
     "hs-cb": localStorage.getItem("hs_code-breaker"),
@@ -115,13 +114,14 @@
     if (el && hs[id]) el.textContent = hs[id];
   });
 
-  // Achievement badges
   var badgeContainer = document.getElementById("achievement-badges");
   if (!badgeContainer) return;
+    badgeContainer.innerHTML = "";
   var earned = {};
   try { earned = JSON.parse(localStorage.getItem("gameAchievements") || "{}"); } catch (_) {}
   var icons = { first_blood: "🩸", code_wizard: "🧙", duelist: "⚔️" };
   var labels = { first_blood: "First Blood", code_wizard: "Code Wizard", duelist: "Duelist" };
+    var badgeCount = 0;
   Object.keys(icons).forEach(function (id) {
     if (earned[id]) {
       var badge = document.createElement("span");
@@ -129,7 +129,9 @@
       badge.className = "text-sm cursor-help";
       badge.textContent = icons[id];
       badgeContainer.appendChild(badge);
+            badgeCount += 1;
     }
   });
+  badgeContainer.classList.toggle("hidden", badgeCount === 0);
 })();
 </script>
