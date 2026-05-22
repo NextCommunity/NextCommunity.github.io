@@ -2,6 +2,9 @@ const yaml = require("js-yaml");
 
 module.exports = (eleventyConfig) => {
   eleventyConfig.addShortcode("currentYear", () => new Date().getFullYear());
+  eleventyConfig.addFilter("safeJsonLd", (value) =>
+    JSON.stringify(value).replace(/<\//g, "<\\/")
+  );
   // Add this line to copy your external assets
   eleventyConfig.addPassthroughCopy("src/assets");
   // 1. Recognize YAML as a template format

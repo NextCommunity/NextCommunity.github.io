@@ -12,39 +12,39 @@
   {% set imageUrl = imagePath %}
 {% endif %}
 
-<title>{{ seoTitle }}</title>
-<meta name="description" content="{{ seoDescription }}">
-<meta name="keywords" content="{{ seoKeywords }}">
+<title>{{ seoTitle | escape }}</title>
+<meta name="description" content="{{ seoDescription | escape }}">
+<meta name="keywords" content="{{ seoKeywords | escape }}">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="author" content="NextCommunity">
 <meta name="theme-color" content="#2563eb">
-<link rel="canonical" href="{{ canonicalUrl }}">
+<link rel="canonical" href="{{ canonicalUrl | escape }}">
 
-<meta property="og:locale" content="{{ site.locale or 'en_US' }}">
-<meta property="og:type" content="{{ seoType }}">
-<meta property="og:site_name" content="{{ site.name or 'NextCommunity Developer Directory' }}">
-<meta property="og:title" content="{{ seoTitle }}">
-<meta property="og:description" content="{{ seoDescription }}">
-<meta property="og:url" content="{{ canonicalUrl }}">
-<meta property="og:image" content="{{ imageUrl }}">
-<meta property="og:image:alt" content="{{ seoTitle }}">
+<meta property="og:locale" content="{{ (site.locale or 'en_US') | escape }}">
+<meta property="og:type" content="{{ seoType | escape }}">
+<meta property="og:site_name" content="{{ (site.name or 'NextCommunity Developer Directory') | escape }}">
+<meta property="og:title" content="{{ seoTitle | escape }}">
+<meta property="og:description" content="{{ seoDescription | escape }}">
+<meta property="og:url" content="{{ canonicalUrl | escape }}">
+<meta property="og:image" content="{{ imageUrl | escape }}">
+<meta property="og:image:alt" content="{{ seoTitle | escape }}">
 
-<meta name="twitter:card" content="{{ site.twitterCard or 'summary_large_image' }}">
-<meta name="twitter:title" content="{{ seoTitle }}">
-<meta name="twitter:description" content="{{ seoDescription }}">
-<meta name="twitter:image" content="{{ imageUrl }}">
+<meta name="twitter:card" content="{{ (site.twitterCard or 'summary_large_image') | escape }}">
+<meta name="twitter:title" content="{{ seoTitle | escape }}">
+<meta name="twitter:description" content="{{ seoDescription | escape }}">
+<meta name="twitter:image" content="{{ imageUrl | escape }}">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": {{ (site.name or 'NextCommunity Developer Directory') | dump | safe }},
-  "url": {{ siteUrl | dump | safe }},
-  "inLanguage": {{ ((site.locale or 'en_US') | replace('_', '-')) | dump | safe }},
+  "name": {{ (site.name or 'NextCommunity Developer Directory') | safeJsonLd | safe }},
+  "url": {{ siteUrl | safeJsonLd | safe }},
+  "inLanguage": {{ ((site.locale or 'en_US') | replace('_', '-')) | safeJsonLd | safe }},
   "publisher": {
     "@type": "Organization",
     "name": "NextCommunity",
-    "url": {{ siteUrl | dump | safe }}
+    "url": {{ siteUrl | safeJsonLd | safe }}
   }
 }
 </script>
@@ -53,17 +53,17 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": {{ seoTitle | dump | safe }},
-  "description": {{ seoDescription | dump | safe }},
-  "url": {{ canonicalUrl | dump | safe }},
+  "name": {{ seoTitle | safeJsonLd | safe }},
+  "description": {{ seoDescription | safeJsonLd | safe }},
+  "url": {{ canonicalUrl | safeJsonLd | safe }},
   "isPartOf": {
     "@type": "WebSite",
-    "name": {{ (site.name or 'NextCommunity Developer Directory') | dump | safe }},
-    "url": {{ siteUrl | dump | safe }}
+    "name": {{ (site.name or 'NextCommunity Developer Directory') | safeJsonLd | safe }},
+    "url": {{ siteUrl | safeJsonLd | safe }}
   },
   "primaryImageOfPage": {
     "@type": "ImageObject",
-    "url": {{ imageUrl | dump | safe }}
+    "url": {{ imageUrl | safeJsonLd | safe }}
   }
 }
 </script>
@@ -73,13 +73,13 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": {{ seo.person.name | dump | safe }},
-  "jobTitle": {{ seo.person.role | dump | safe }},
-  "url": {{ canonicalUrl | dump | safe }},
+  "name": {{ seo.person.name | safeJsonLd | safe }},
+  "jobTitle": {{ seo.person.role | safeJsonLd | safe }},
+  "url": {{ canonicalUrl | safeJsonLd | safe }},
   "sameAs": [
-    {% if seo.person.github %}{{ ("https://github.com/" + seo.person.github) | dump | safe }}{% endif %}
+    {% if seo.person.github %}{{ ("https://github.com/" + seo.person.github) | safeJsonLd | safe }}{% endif %}
     {% if seo.person.github and seo.person.linkedin %},{% endif %}
-    {% if seo.person.linkedin %}{{ seo.person.linkedin | dump | safe }}{% endif %}
+    {% if seo.person.linkedin %}{{ seo.person.linkedin | safeJsonLd | safe }}{% endif %}
   ]
 }
 </script>
