@@ -32,3 +32,14 @@ updates:
           - "*"
     cooldown:
       default-days: 7
+
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      uv-hooks:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 7
