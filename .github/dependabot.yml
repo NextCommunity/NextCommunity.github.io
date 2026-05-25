@@ -38,7 +38,7 @@ updates:
     schedule:
       interval: "weekly"
     groups:
-      uv-hooks:
+      uv-dependencies:
         patterns:
           - "*"
     cooldown:
