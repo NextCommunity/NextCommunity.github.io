@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% include "seo-meta.njk" %}
+  {% if useTailwindCdn %}
+  <script src="https://cdn.tailwindcss.com"></script>
+  {% else %}
+  <link rel="stylesheet" href="/assets/css/tailwind.css">
+  {% endif %}
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="min-h-screen scroll-smooth bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-300">
+
+  {% include "github-ribbon.njk" %}
+
+  {% include "header.njk" %}
