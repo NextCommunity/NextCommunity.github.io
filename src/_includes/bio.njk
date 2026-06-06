@@ -104,17 +104,25 @@ layout: layouts/base.njk
 
 <script>
   function copyToClipboard(text, el) {
-    navigator.clipboard.writeText(text);
-    const span = el.querySelector('span:last-child');
-    span.innerText = 'Copied!';
-    setTimeout(() => span.innerText = 'Copy', 2000);
+    if (!navigator.clipboard) {
+      console.warn('Clipboard API not available');
+      return;
+    }
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        const span = el.querySelector('span:last-child');
+        if (span) {
+          span.innerText = 'Copied!';
+          setTimeout(() => span.innerText = 'Copy', 2000);
+        }
+      })
+      .catch(err => console.error('Failed to copy:', err));
   }
 
   document.querySelector('.copy-email-btn')?.addEventListener('click', function() {
     copyToClipboard(this.getAttribute('data-email'), this);
   });
 
-  // Pass profile data to game modules
   const profileData = document.getElementById('profile-data');
   window.PROFILE_NAME = profileData ? profileData.dataset.name : "";
   window.PROFILE_SKILLS = profileData && profileData.dataset.skills ? profileData.dataset.skills.trim().split(/\s+/).filter(Boolean) : [];
