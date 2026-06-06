@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 ---
-<main class="max-w-5xl mx-auto px-4 py-12">
+<main id="profile-data" data-name="{{ name }}" data-skills="{{ languages }}" data-email="{{ email }}" class="max-w-5xl mx-auto px-4 py-12">
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
     <div class="lg:col-span-1 space-y-6">
@@ -20,7 +20,7 @@ layout: layouts/base.njk
           {% endif %}
 
           {% if email %}
-          <div class="flex items-center gap-3 group cursor-pointer" onclick="copyToClipboard('{{ email }}', this)">
+          <div class="flex items-center gap-3 group cursor-pointer copy-email-btn" data-email="{{ email }}">
             <span class="text-lg">✉️</span>
             <span class="text-[var(--text-muted)] group-hover:text-accent truncate">{{ email }}</span>
             <span class="hidden group-hover:inline text-[10px] bg-accent text-white px-2 py-0.5 rounded">Copy</span>
