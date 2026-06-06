@@ -103,7 +103,6 @@ layout: layouts/base.njk
 </main>
 
 <script>
-  // Specific helper for the bio page email copy
   function copyToClipboard(text, el) {
     navigator.clipboard.writeText(text);
     const span = el.querySelector('span:last-child');
@@ -111,7 +110,12 @@ layout: layouts/base.njk
     setTimeout(() => span.innerText = 'Copy', 2000);
   }
 
+  document.querySelector('.copy-email-btn')?.addEventListener('click', function() {
+    copyToClipboard(this.getAttribute('data-email'), this);
+  });
+
   // Pass profile data to game modules
-  window.PROFILE_NAME = "{{ name }}";
-  window.PROFILE_SKILLS = "{{ languages | default('') }}".trim().split(/\s+/).filter(Boolean);
+  const profileData = document.getElementById('profile-data');
+  window.PROFILE_NAME = profileData ? profileData.dataset.name : "";
+  window.PROFILE_SKILLS = profileData && profileData.dataset.skills ? profileData.dataset.skills.trim().split(/\s+/).filter(Boolean) : [];
 </script>
