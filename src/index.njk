@@ -1,92 +1,71 @@
 ---
-layout: false
+layout: layouts/base.njk
+seo:
+  title: "NextCommunity Developer Directory | Discover Open-Source Talent"
+  description: "Explore developer profiles from around the world, discover skills, and connect with open-source contributors in the NextCommunity directory."
+  keywords: "developer directory, open source developers, software engineers, github developers, developer community, global tech talent"
+  type: "website"
+  image: "/assets/img/next.jpeg"
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% set seo = {
-    title: "NextCommunity Developer Directory | Discover Open-Source Talent",
-    description: "Explore developer profiles from around the world, discover skills, and connect with open-source contributors in the NextCommunity directory.",
-    keywords: "developer directory, open source developers, software engineers, github developers, developer community, global tech talent",
-    type: "website",
-    image: "/assets/img/next.jpeg"
-  } %}
-  {% include "seo-meta.njk" %}
-  <link rel="stylesheet" href="/assets/css/tailwind.css">
-  <link rel="stylesheet" href="/assets/css/style.css">
-</head>
-<body class="min-h-screen scroll-smooth bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-300">
-
-  {% include "github-ribbon.njk" %}
-
-  {% include "header.njk" %}
-
-  <main class="max-w-7xl mx-auto px-4 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {# We use collections.developer (or whichever tag you use in your .md files) #}
-      {% for person in collections.randomPeople %}
-      <div class="user-card group bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl overflow-hidden flex flex-col scroll-mt-32 transition-all hover:shadow-2xl hover:-translate-y-1"
-        data-name="{{ person.data.name }}"
-        data-role="{{ person.data.role }}"
-        data-skills="{{ person.data.languages }}">
-        <div class="p-8">
-          <div class="flex justify-between items-start gap-4">
-            <div class="flex-1">
-              <h2 class="text-2xl font-bold group-hover:text-accent transition-colors">{{ person.data.name }}</h2>
-              <p class="text-accent font-semibold text-sm uppercase tracking-wider">{{ person.data.role }}</p>
-            </div>
-            {% set country = person.data.country %}
-            {% set location = person.data.location %}
-            {% if location or country %}
-            <div class="flex flex-col items-end text-right gap-0.5 text-[10px] bg-[var(--bg-footer)] text-[var(--text-muted)] px-2 py-1 rounded font-bold uppercase border border-[var(--border-color)] min-w-[7rem] max-w-[10rem] shrink-0">
-              {% if location %}<span>{{ location }}</span>{% endif %}
-              {% if country %}<span>{{ country }}</span>{% endif %}
-            </div>
-            {% endif %}
+<main class="max-w-7xl mx-auto px-4 py-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {# We use collections.developer (or whichever tag you use in your .md files) #}
+    {% for person in collections.randomPeople %}
+    <div class="user-card group bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl overflow-hidden flex flex-col scroll-mt-32 transition-all hover:shadow-2xl hover:-translate-y-1"
+      data-name="{{ person.data.name }}"
+      data-role="{{ person.data.role }}"
+      data-skills="{{ person.data.languages }}">
+      <div class="p-8">
+        <div class="flex justify-between items-start gap-4">
+          <div class="flex-1">
+            <h2 class="text-2xl font-bold group-hover:text-accent transition-colors">{{ person.data.name }}</h2>
+            <p class="text-accent font-semibold text-sm uppercase tracking-wider">{{ person.data.role }}</p>
           </div>
-
-          {% if person.data.languages is defined and person.data.languages is not null  %}
-          <div class="mt-6 flex flex-wrap gap-2">
-            {% set skills = person.data.languages.split(' ') %}
-            {% include "skills-list.njk" %}
+          {% set country = person.data.country %}
+          {% set location = person.data.location %}
+          {% if location or country %}
+          <div class="flex flex-col items-end text-right gap-0.5 text-[10px] bg-[var(--bg-footer)] text-[var(--text-muted)] px-2 py-1 rounded font-bold uppercase border border-[var(--border-color)] min-w-[7rem] max-w-[10rem] shrink-0">
+            {% if location %}<span>{{ location }}</span>{% endif %}
+            {% if country %}<span>{{ country }}</span>{% endif %}
           </div>
-          {% endif %}
-
-          {% set bio = person.data.bio %}
-          {% if bio %}
-          <p class="mt-4 text-[var(--text-muted)] text-sm italic line-clamp-3">"{{ bio | trim | truncate(120) }}"</p>
           {% endif %}
         </div>
 
-        <div class="mt-auto p-4 flex justify-between items-center px-6 bg-black/5 dark:bg-white/5 border-t border-[var(--border-color)]">
-          <div class="flex items-center gap-4">
-            {% if person.data.github %}
-            <a href="https://github.com/{{ person.data.github }}" target="_blank" class="text-[var(--text-muted)] hover:text-accent transition-colors font-bold text-[10px] uppercase">GitHub</a>
-            {% endif %}
-            {% if person.data.linkedin %}
-            <a href="{{ person.data.linkedin }}" target="_blank" class="text-[var(--text-muted)] hover:text-accent transition-colors font-bold text-[10px] uppercase">LinkedIn</a>
-            {% endif %}
-          </div>
-
-          <a href="{{ person.url }}" class="font-bold text-accent flex items-center group/link text-sm">
-            <span>Profile</span>
-            <span class="inline-block ml-1 transition-transform group-hover/link:translate-x-1">→</span>
-          </a>
-          <button
-            onclick="startDuelFromCard(this.closest('.user-card'))"
-            class="font-bold text-[10px] uppercase px-3 py-1.5 rounded-lg bg-accent/10 text-accent border border-accent/30 hover:bg-accent/20 transition-colors opacity-0 group-hover:opacity-100"
-            title="Duel this developer!">
-            ⚔️ Duel
-          </button>
+        {% if person.data.languages is defined and person.data.languages is not null  %}
+        <div class="mt-6 flex flex-wrap gap-2">
+          {% set skills = person.data.languages.split(' ') %}
+          {% include "skills-list.njk" %}
         </div>
+        {% endif %}
+
+        {% set bio = person.data.bio %}
+        {% if bio %}
+        <p class="mt-4 text-[var(--text-muted)] text-sm italic line-clamp-3">"{{ bio | trim | truncate(120) }}"</p>
+        {% endif %}
       </div>
-      {% endfor %}
+
+      <div class="mt-auto p-4 flex justify-between items-center px-6 bg-black/5 dark:bg-white/5 border-t border-[var(--border-color)]">
+        <div class="flex items-center gap-4">
+          {% if person.data.github %}
+          <a href="https://github.com/{{ person.data.github }}" target="_blank" class="text-[var(--text-muted)] hover:text-accent transition-colors font-bold text-[10px] uppercase">GitHub</a>
+          {% endif %}
+          {% if person.data.linkedin %}
+          <a href="{{ person.data.linkedin }}" target="_blank" class="text-[var(--text-muted)] hover:text-accent transition-colors font-bold text-[10px] uppercase">LinkedIn</a>
+          {% endif %}
+        </div>
+
+        <a href="{{ person.url }}" class="font-bold text-accent flex items-center group/link text-sm">
+          <span>Profile</span>
+          <span class="inline-block ml-1 transition-transform group-hover/link:translate-x-1">→</span>
+        </a>
+        <button
+          onclick="startDuelFromCard(this.closest('.user-card'))"
+          class="font-bold text-[10px] uppercase px-3 py-1.5 rounded-lg bg-accent/10 text-accent border border-accent/30 hover:bg-accent/20 transition-colors opacity-0 group-hover:opacity-100"
+          title="Duel this developer!">
+          ⚔️ Duel
+        </button>
+      </div>
     </div>
-  </main>
-
-  {% include "footer.njk" %}
-
-</body>
-</html>
+    {% endfor %}
+  </div>
+</main>
