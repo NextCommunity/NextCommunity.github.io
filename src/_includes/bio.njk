@@ -30,7 +30,7 @@ layout: layouts/base.njk
           {% if website %}
           <div class="flex items-center gap-3">
             <span class="text-lg">🔗</span>
-            <a href="{{ website }}" target="_blank" class="text-accent font-bold hover:underline truncate">{{ website | replace("https://", "") }}</a>
+            <a href="{{ website }}" target="_blank" rel="noopener noreferrer" class="text-accent font-bold hover:underline truncate">{{ website | replace("https://", "") }}</a>
           </div>
           {% endif %}
         </div>
@@ -39,22 +39,22 @@ layout: layouts/base.njk
           <h3 class="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mb-4">Connect</h3>
           <div class="grid grid-cols-2 gap-3">
             {% if github %}
-            <a href="https://github.com/{{ github }}" target="_blank" class="flex items-center justify-center p-3 rounded-xl bg-[var(--bg-footer)] border border-[var(--border-color)] hover:border-accent transition-colors">
+            <a href="https://github.com/{{ github }}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center p-3 rounded-xl bg-[var(--bg-footer)] border border-[var(--border-color)] hover:border-accent transition-colors">
               <span class="font-bold text-xs">GitHub</span>
             </a>
             {% endif %}
             {% if linkedin %}
-            <a href="{{ linkedin }}" target="_blank" class="flex items-center justify-center p-3 rounded-xl bg-[var(--bg-footer)] border border-[var(--border-color)] hover:border-accent transition-colors">
+            <a href="{{ linkedin }}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center p-3 rounded-xl bg-[var(--bg-footer)] border border-[var(--border-color)] hover:border-accent transition-colors">
               <span class="font-bold text-xs text-[#0077b5]">LinkedIn</span>
             </a>
             {% endif %}
             {% if twitter %}
-            <a href="{{ twitter }}" target="_blank" class="flex items-center justify-center p-3 rounded-xl bg-[var(--bg-footer)] border border-[var(--border-color)] hover:border-accent transition-colors">
+            <a href="{{ twitter }}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center p-3 rounded-xl bg-[var(--bg-footer)] border border-[var(--border-color)] hover:border-accent transition-colors">
               <span class="font-bold text-xs">Twitter</span>
             </a>
             {% endif %}
             {% if instagram %}
-            <a href="{{ instagram }}" target="_blank" class="flex items-center justify-center p-3 rounded-xl bg-[var(--bg-footer)] border border-[var(--border-color)] hover:border-accent transition-colors">
+            <a href="{{ instagram }}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center p-3 rounded-xl bg-[var(--bg-footer)] border border-[var(--border-color)] hover:border-accent transition-colors">
               <span class="font-bold text-xs text-pink-500">Instagram</span>
             </a>
             {% endif %}
