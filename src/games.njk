@@ -120,10 +120,12 @@ seo:
       "code-breaker": document.getElementById("hs-code-breaker"),
       "dev-duel": document.getElementById("hs-dev-duel"),
     };
-    Object.keys(scores).forEach(function (id) {
-      var val = parseInt(localStorage.getItem("hs_" + id)) || 0;
-      if (scores[id]) scores[id].textContent = val > 0 ? val : "—";
-    });
+    try {
+      Object.keys(scores).forEach(function (id) {
+        var val = parseInt(localStorage.getItem("hs_" + id)) || 0;
+        if (scores[id]) scores[id].textContent = val > 0 ? val : "—";
+      });
+    } catch (_) {}
 
     // Populate achievements
     var achievements = {};
