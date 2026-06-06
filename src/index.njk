@@ -47,10 +47,10 @@ seo:
       <div class="mt-auto p-4 flex justify-between items-center px-6 bg-black/5 dark:bg-white/5 border-t border-[var(--border-color)]">
         <div class="flex items-center gap-4">
           {% if person.data.github %}
-          <a href="https://github.com/{{ person.data.github }}" target="_blank" class="text-[var(--text-muted)] hover:text-accent transition-colors font-bold text-[10px] uppercase">GitHub</a>
+          <a href="https://github.com/{{ person.data.github }}" target="_blank" rel="noopener noreferrer" class="text-[var(--text-muted)] hover:text-accent transition-colors font-bold text-[10px] uppercase">GitHub</a>
           {% endif %}
           {% if person.data.linkedin %}
-          <a href="{{ person.data.linkedin }}" target="_blank" class="text-[var(--text-muted)] hover:text-accent transition-colors font-bold text-[10px] uppercase">LinkedIn</a>
+          <a href="{{ person.data.linkedin }}" target="_blank" rel="noopener noreferrer" class="text-[var(--text-muted)] hover:text-accent transition-colors font-bold text-[10px] uppercase">LinkedIn</a>
           {% endif %}
         </div>
 
