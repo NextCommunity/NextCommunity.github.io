@@ -46,14 +46,14 @@ repos:
 
   # GO-based
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.30.1
+    rev: 83d9cd684c87d95d656c1458ef04895a7f1cbd8e # frozen: v8.30.1
     hooks:
       - id: gitleaks
         name: Run gitleaks
         description: Check for secrets with gitleaks
 
   - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.5.6
+    rev: ad1b27d73581aa16cca06fc4a0761fc563ffe8e8 # frozen: v1.5.6
     hooks:
       - id: chmod
         name: Set file permissions
@@ -63,7 +63,7 @@ repos:
         stages: [manual]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v6.0.0
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # frozen: v6.0.0
     hooks:
       - id: trailing-whitespace
         name: run trailing-whitespace
@@ -109,7 +109,7 @@ repos:
         args: [--fix=lf]
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: "v2.5.0"
+    rev: 19865851e014cbe6138e295365f95ca51bf953f8 # frozen: v2.5.0
     hooks:
       - id: biome-check
         name: run biome-check
@@ -117,7 +117,7 @@ repos:
         additional_dependencies: ["@biomejs/biome"]
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.48.0
+    rev: a4d5d37e66ebcd6b3705204a1d6dbb56dea66338 # frozen: v0.49.0
     hooks:
       - id: markdownlint
         name: run markdownlint
@@ -127,7 +127,7 @@ repos:
         files: \.md$
 
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.38.0
+    rev: cba56bcde1fdd01c1deb3f945e69764c291a6530 # frozen: v1.38.0
     hooks:
       - id: yamllint
         name: run yamllint
@@ -137,7 +137,7 @@ repos:
         files: \.ya?ml$
 
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: v1.25.2
+    rev: 9257c6050c0261b8c57e712f632dc4a8010109a9 # frozen: v1.25.2
     hooks:
       - id: zizmor
         name: run zizmor
