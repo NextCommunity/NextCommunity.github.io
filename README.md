@@ -11,6 +11,9 @@
 [![Audit hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek-audit.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek-audit.yml?query=branch%3Amain)
 [![Manual hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek-manual.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek-manual.yml?query=branch%3Amain)
 [![Standard hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek.yml?query=branch%3Amain)
+[![Deploy static site to GitHub Pages](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/deploy.yml?query=branch%3Amain)
+[![Deploy to Firebase Hosting on merge](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/firebase-hosting-merge.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/firebase-hosting-merge.yml?query=branch%3Amain)
+[![Deploy to Firebase Hosting on PR](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/firebase-hosting-pull-request.yml)
 
 [![Easter Eggs](https://img.shields.io/badge/Easter-Eggs-ff69b4?labelColor=9b59b6)](https://nextcommunity.github.io)
 
