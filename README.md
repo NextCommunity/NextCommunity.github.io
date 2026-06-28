@@ -13,7 +13,7 @@
 [![Standard hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek.yml?query=branch%3Amain)
 [![Deploy static site to GitHub Pages](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/deploy.yml?query=branch%3Amain)
 [![Deploy to Firebase Hosting on merge](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/firebase-hosting-merge.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/firebase-hosting-merge.yml?query=branch%3Amain)
-[![Deploy to Firebase Hosting on PR](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/firebase-hosting-pull-request.yml)
+[![Deploy to Firebase Hosting on PR](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/firebase-hosting-pull-request.yml/badge.svg?event=pull_request)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/firebase-hosting-pull-request.yml?query=event%3Apull_request)
 
 [![Easter Eggs](https://img.shields.io/badge/Easter-Eggs-ff69b4?labelColor=9b59b6)](https://nextcommunity.github.io)
 
