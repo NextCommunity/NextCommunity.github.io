@@ -12,7 +12,7 @@
     "is-extglob": "^2.1.1",
     "is-glob": "^4.0.3",
     "jiti": "^2.7.0",
-    "js-yaml": "^4.3.0",
+    "js-yaml": "^5.0.0",
     "lightningcss": "^1.32.0",
     "magic-string": "^0.30.21",
     "mri": "^1.2.0",
