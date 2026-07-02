@@ -279,6 +279,12 @@ html body #dev-tools[data-lock="true"] {
 #dev-tools button[onclick*="badge_click"] {
   color: #bc13fe !important;
 }
+#dev-tools button[onclick*="pulse"] {
+  color: #fbbf24 !important;
+}
+#dev-tools button[onclick*="triggerForceSurge"] {
+  color: #60a5fa !important; 
+}
 
 /**
  * 5. SELF DESTRUCT & REPAIR
@@ -496,7 +502,7 @@ body[data-level="6"]::after {
 /* Added via JS when XP increases */
 .xp-pulse {
   transform: scale(1.3);
-  color: white !important;
+  color: #f59e0b !important;
 }
 #jump-lvl {
   font-family: "Courier New", monospace;
