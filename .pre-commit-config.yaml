@@ -109,7 +109,7 @@ repos:
         args: [--fix=lf]
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: 19865851e014cbe6138e295365f95ca51bf953f8 # frozen: v2.5.0
+    rev: 4b413f3670a174f31451d158949f7a5938352eff # frozen: v2.5.1
     hooks:
       - id: biome-check
         name: run biome-check
