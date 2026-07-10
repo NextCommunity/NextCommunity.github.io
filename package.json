@@ -19,7 +19,7 @@
     "node-addon-api": "^8.9.0",
     "phaser": "^4.2.0",
     "picocolors": "^1.1.1",
-    "picomatch": "^4.0.4",
+    "picomatch": "^4.0.5",
     "postcss": "^8.5.16",
     "source-map-js": "^1.2.1",
     "tailwindcss": "^4.2.2",
