@@ -109,7 +109,7 @@ repos:
         args: [--fix=lf]
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: 53525e29648f6e0d6a7b0cfaa67276478d3b1906 # frozen: v2.5.2
+    rev: 646c16033359bc8df479bac9eb87df9e0d6b60a1 # frozen: v2.5.4
     hooks:
       - id: biome-check
         name: run biome-check
@@ -117,7 +117,7 @@ repos:
         additional_dependencies: ["@biomejs/biome"]
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: a4d5d37e66ebcd6b3705204a1d6dbb56dea66338 # frozen: v0.49.0
+    rev: 5b5dddc4fb0f83c3ea1fc5616fa63e115dce83e0 # frozen: v0.49.1
     hooks:
       - id: markdownlint
         name: run markdownlint
@@ -137,7 +137,7 @@ repos:
         files: \.ya?ml$
 
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: e3eebf65325ccc992422292cb7a4baee967cf815 # frozen: v1.26.1
+    rev: 64a97fb7fa63188393d3215c6e312f5f9c6d0f78 # frozen: v1.27.0
     hooks:
       - id: zizmor
         name: run zizmor
