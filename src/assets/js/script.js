@@ -78,67 +78,69 @@ function initAudio() {
 window.addEventListener("click", initAudio, { once: true });
 window.addEventListener("keydown", initAudio, { once: true });
 
-window.playSound = (() => {
-  function playLayeredSound(type, osc, now) {
-    if (type === "secret") {
-      osc.type = "triangle";
-      [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
-        const s = audioCtx.createOscillator();
-        const g = audioCtx.createGain();
-        s.connect(g);
-        g.connect(audioCtx.destination);
-        s.frequency.setValueAtTime(freq, now + i * 0.3);
-        g.gain.setValueAtTime(0.07, now + i * 0.3);
-        g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.3 + 0.3);
-        s.start(now + i * 0.3);
-        s.stop(now + i * 0.3 + 0.3);
-      });
-    } else if (type === "restore") {
-      osc.type = "sine";
-      [220, 440, 880, 1760].forEach((freq, i) => {
-        const s = audioCtx.createOscillator();
-        const g = audioCtx.createGain();
-        s.connect(g);
-        g.connect(audioCtx.destination);
-        s.frequency.setValueAtTime(freq, now + i * 0.05);
-        g.gain.setValueAtTime(0.1, now + i * 0.05);
-        g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.05 + 0.1);
-        s.start(now + i * 0.05);
-        s.stop(now + i * 0.05 + 0.1);
-      });
-    }
+const isAudioRunning = () => audioCtx?.state === "running";
+
+const LAYERED_SOUND_CONFIGS = {
+  secret: {
+    oscillatorType: "triangle",
+    frequencies: [523.25, 659.25, 783.99, 1046.5],
+    interval: 0.3,
+    volume: 0.07,
+    duration: 0.3,
+  },
+  restore: {
+    oscillatorType: "sine",
+    frequencies: [220, 440, 880, 1760],
+    interval: 0.05,
+    volume: 0.1,
+    duration: 0.1,
+  },
+};
+
+window.playSound = function playSound(type) {
+  initAudio();
+  if (!isAudioRunning()) return;
+
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  const now = audioCtx.currentTime;
+
+  if (type === "click") {
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(880, now);
+    gain.gain.setValueAtTime(0.1, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+    osc.start(now);
+    osc.stop(now + 0.1);
+  } else if (type === "levelUp") {
+    osc.type = "square";
+    osc.frequency.setValueAtTime(440, now);
+    osc.frequency.exponentialRampToValueAtTime(880, now + 0.4);
+    gain.gain.setValueAtTime(0.15, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
+    osc.start(now);
+    osc.stop(now + 1.5);
+  } else {
+    const config = LAYERED_SOUND_CONFIGS[type];
+    if (!config) return;
+
+    osc.type = config.oscillatorType;
+    config.frequencies.forEach((freq, i) => {
+      const startTime = now + i * config.interval;
+      const s = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      s.connect(g);
+      g.connect(audioCtx.destination);
+      s.frequency.setValueAtTime(freq, startTime);
+      g.gain.setValueAtTime(config.volume, startTime);
+      g.gain.exponentialRampToValueAtTime(0.01, startTime + config.duration);
+      s.start(startTime);
+      s.stop(startTime + config.duration);
+    });
   }
-
-  return function playSound(type) {
-    initAudio();
-    if (audioCtx?.state !== "running") return;
-
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    const now = audioCtx.currentTime;
-
-    if (type === "click") {
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(880, now);
-      gain.gain.setValueAtTime(0.1, now);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-      osc.start(now);
-      osc.stop(now + 0.1);
-    } else if (type === "levelUp") {
-      osc.type = "square";
-      osc.frequency.setValueAtTime(440, now);
-      osc.frequency.exponentialRampToValueAtTime(880, now + 0.4);
-      gain.gain.setValueAtTime(0.15, now);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
-      osc.start(now);
-      osc.stop(now + 1.5);
-    } else {
-      playLayeredSound(type, osc, now);
-    }
-  };
-})();
+};
 
 function getRank(lvl) {
   const numericLevel = Number(lvl) || 0;
