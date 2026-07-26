@@ -78,65 +78,67 @@ function initAudio() {
 window.addEventListener("click", initAudio, { once: true });
 window.addEventListener("keydown", initAudio, { once: true });
 
-window.playSound = function playSound(type) {
-  initAudio();
-  if (audioCtx?.state !== "running") return;
-
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-  const now = audioCtx.currentTime;
-
-  if (type === "click") {
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(880, now);
-    gain.gain.setValueAtTime(0.1, now);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-    osc.start(now);
-    osc.stop(now + 0.1);
-  } else if (type === "levelUp") {
-    osc.type = "square";
-    osc.frequency.setValueAtTime(440, now);
-    osc.frequency.exponentialRampToValueAtTime(880, now + 0.4);
-    gain.gain.setValueAtTime(0.15, now);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
-    osc.start(now);
-    osc.stop(now + 1.5);
-  } else {
-    playLayeredSound(type, osc, now);
+window.playSound = (() => {
+  function playLayeredSound(type, osc, now) {
+    if (type === "secret") {
+      osc.type = "triangle";
+      [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+        const s = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        s.connect(g);
+        g.connect(audioCtx.destination);
+        s.frequency.setValueAtTime(freq, now + i * 0.3);
+        g.gain.setValueAtTime(0.07, now + i * 0.3);
+        g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.3 + 0.3);
+        s.start(now + i * 0.3);
+        s.stop(now + i * 0.3 + 0.3);
+      });
+    } else if (type === "restore") {
+      osc.type = "sine";
+      [220, 440, 880, 1760].forEach((freq, i) => {
+        const s = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        s.connect(g);
+        g.connect(audioCtx.destination);
+        s.frequency.setValueAtTime(freq, now + i * 0.05);
+        g.gain.setValueAtTime(0.1, now + i * 0.05);
+        g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.05 + 0.1);
+        s.start(now + i * 0.05);
+        s.stop(now + i * 0.05 + 0.1);
+      });
+    }
   }
-};
 
-const playLayeredSound = (type, osc, now) => {
-  if (type === "secret") {
-    osc.type = "triangle";
-    [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
-      const s = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      s.connect(g);
-      g.connect(audioCtx.destination);
-      s.frequency.setValueAtTime(freq, now + i * 0.3);
-      g.gain.setValueAtTime(0.07, now + i * 0.3);
-      g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.3 + 0.3);
-      s.start(now + i * 0.3);
-      s.stop(now + i * 0.3 + 0.3);
-    });
-  } else if (type === "restore") {
-    osc.type = "sine";
-    [220, 440, 880, 1760].forEach((freq, i) => {
-      const s = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      s.connect(g);
-      g.connect(audioCtx.destination);
-      s.frequency.setValueAtTime(freq, now + i * 0.05);
-      g.gain.setValueAtTime(0.1, now + i * 0.05);
-      g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.05 + 0.1);
-      s.start(now + i * 0.05);
-      s.stop(now + i * 0.05 + 0.1);
-    });
-  }
-};
+  return function playSound(type) {
+    initAudio();
+    if (audioCtx?.state !== "running") return;
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    const now = audioCtx.currentTime;
+
+    if (type === "click") {
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(880, now);
+      gain.gain.setValueAtTime(0.1, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+      osc.start(now);
+      osc.stop(now + 0.1);
+    } else if (type === "levelUp") {
+      osc.type = "square";
+      osc.frequency.setValueAtTime(440, now);
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.4);
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
+      osc.start(now);
+      osc.stop(now + 1.5);
+    } else {
+      playLayeredSound(type, osc, now);
+    }
+  };
+})();
 
 function getRank(lvl) {
   const numericLevel = Number(lvl) || 0;
@@ -459,7 +461,7 @@ function applyTheme(theme) {
 
 // biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function toggleTheme() {
-  playSound("click");
+  window.playSound("click");
   const current = localStorage.getItem("theme") || "light";
   const next =
     current === "light" ? "dark" : current === "dark" ? "random" : "light";
@@ -579,7 +581,7 @@ function triggerSecretUnlock(type) {
 
   // 3. Only process XP and Save if it's the first time
   if (isNewUnlock) {
-    playSound("secret");
+    window.playSound("secret");
     // Update the array and save to localStorage
     unlockedEggs.push(eggId);
     localStorage.setItem("unlockedEggs", JSON.stringify(unlockedEggs));
@@ -602,7 +604,7 @@ function triggerSecretUnlock(type) {
 
     console.log(`✨ Secret Unlocked: ${eggId}`);
   } else {
-    playSound("click");
+    window.playSound("click");
     console.log(`Secret ${eggId} already discovered. No extra XP granted.`);
   }
 }
@@ -672,7 +674,7 @@ window.addEventListener("keydown", (e) => {
     const isOpening = systemDash.classList.contains("hidden");
 
     localStorage.setItem("devToolsVisible", isOpening);
-    playSound(isOpening ? "secret" : "click");
+    window.playSound(isOpening ? "secret" : "click");
 
     if (isOpening) {
       document
@@ -754,7 +756,7 @@ function activateGravityEffect() {
                     box-shadow: 0 0 50px rgba(37, 99, 235, 0.8);
                 `;
         btn.onclick = () => {
-          playSound("restore");
+          window.playSound("restore");
           btn.innerHTML = "SYSTEM RESTORED";
           btn.style.pointerEvents = "none";
           setTimeout(() => window.location.reload(), 1000);
@@ -834,7 +836,7 @@ function triggerBadgeLevelUp() {
   // 2. Secret Sound & Level Logic
   if (!hasTriggeredFirstLevel) {
     // Play your secret sound
-    playSound("secret");
+    window.playSound("secret");
 
     // Force a level up for the "first time" experience
     addExperience(XP_PER_LEVEL);
@@ -935,7 +937,7 @@ window.startSelfDestruct = () => {
 
 // biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function scrollToRandomUser() {
-  playSound("click");
+  window.playSound("click");
 
   surpriseClickCount++;
   if (surpriseClickCount >= 5) {
@@ -958,7 +960,7 @@ function scrollToRandomUser() {
   randomCard.scrollIntoView({ behavior: "smooth", block: "center" });
 
   setTimeout(() => {
-    playSound("levelUp");
+    window.playSound("levelUp");
     randomCard.classList.add("selected-fancy");
 
     // Inject the Tracing SVG
