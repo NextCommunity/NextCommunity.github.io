@@ -78,7 +78,7 @@ function initAudio() {
 window.addEventListener("click", initAudio, { once: true });
 window.addEventListener("keydown", initAudio, { once: true });
 
-function playSound(type) {
+window.playSound = function playSound(type) {
   initAudio();
   if (audioCtx?.state !== "running") return;
 
@@ -106,9 +106,9 @@ function playSound(type) {
   } else {
     playLayeredSound(type, osc, now);
   }
-}
+};
 
-function playLayeredSound(type, osc, now) {
+const playLayeredSound = (type, osc, now) => {
   if (type === "secret") {
     osc.type = "triangle";
     [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
@@ -136,7 +136,7 @@ function playLayeredSound(type, osc, now) {
       s.stop(now + i * 0.05 + 0.1);
     });
   }
-}
+};
 
 function getRank(lvl) {
   const numericLevel = Number(lvl) || 0;
