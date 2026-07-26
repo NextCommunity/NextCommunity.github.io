@@ -42,6 +42,7 @@ const XP_GRAVITY_SECRET = 250; // Gravity effect easter egg
 const XP_KONAMI_SECRET = 500; // Konami code easter egg
 const XP_FOOTER_SURGE = 1000; // Footer surge secret
 const XP_BADGE_CLICK = 45; // Badge click reward
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 const XP_SPACE_INVADERS_WIN = 200; // Defeat all Space Invaders
 const _XP_CODE_BREAKER_WIN = 100; // Win a Code Breaker round
 const _XP_DEV_DUEL_PLAY = 25; // Play a Developer Duel
@@ -79,7 +80,7 @@ window.addEventListener("keydown", initAudio, { once: true });
 
 function playSound(type) {
   initAudio();
-  if (!audioCtx || audioCtx.state !== "running") return;
+  if (audioCtx?.state !== "running") return;
 
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
@@ -263,6 +264,7 @@ document.addEventListener("mouseup", () => {
   dragContainer.classList.add("transition-all", "duration-300", "ease-in-out");
 });
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function minimizeConsole() {
   if (consoleOutput.style.display === "none") {
     consoleOutput.style.display = "block";
@@ -273,6 +275,7 @@ function minimizeConsole() {
   }
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function maximizeConsole() {
   consoleContainer.classList.toggle("console-maximized");
 
@@ -353,6 +356,7 @@ window.createFloatingXP = (e) => {
   setTimeout(() => popup.remove(), 800);
 };
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function handleLevelClick() {
   triggerSecretUnlock("badge_click");
 }
@@ -447,6 +451,7 @@ function applyTheme(theme) {
   updateThemeIcon(theme);
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function toggleTheme() {
   playSound("click");
   const current = localStorage.getItem("theme") || "light";
@@ -545,6 +550,7 @@ function triggerForceSurge() {
   }, 8000);
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function triggerMagicXP() {
   initAudio();
   addExperience(XP_MAGIC_BONUS);
@@ -921,6 +927,7 @@ window.startSelfDestruct = () => {
   }, 1000);
 };
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function scrollToRandomUser() {
   playSound("click");
 
@@ -1336,6 +1343,7 @@ function addMaintenanceXP() {
   }
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function jumpToLevel() {
   const input = document.getElementById("jump-lvl");
   if (!input || input.value === "") return;
@@ -1360,6 +1368,7 @@ function jumpToLevel() {
   showLevelUpNotification(rank);
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function handleFooterDotClick() {
   // 1. Get the current list of unlocked eggs
   const rawEggs = localStorage.getItem("unlockedEggs") || "[]";

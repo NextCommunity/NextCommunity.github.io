@@ -8,6 +8,7 @@
  * GameManager and lazy-loaded alongside the other mini-games.
  */
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 const SpaceInvaders = (() => {
   const ALIEN_ROWS = ["👾", "👽", "🛸", "🐙", "👾"];
   const GAME_ID = "space-invaders";
@@ -70,7 +71,7 @@ const SpaceInvaders = (() => {
   }
 
   function _onUpdate() {
-    if (!this.si_player || !this.si_player.body) return;
+    if (!this.si_player?.body) return;
 
     if (this.si_cursors.left.isDown) {
       this.si_player.body.setVelocityX(-400);
