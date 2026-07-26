@@ -103,7 +103,13 @@ function playSound(type) {
     gain.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
     osc.start(now);
     osc.stop(now + 1.5);
-  } else if (type === "secret") {
+  } else {
+    playLayeredSound(type, osc, now);
+  }
+}
+
+function playLayeredSound(type, osc, now) {
+  if (type === "secret") {
     osc.type = "triangle";
     [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
       const s = audioCtx.createOscillator();
