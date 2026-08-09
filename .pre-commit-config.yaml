@@ -109,7 +109,7 @@ repos:
         args: [--fix=lf]
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: 06894e75c7c22ab408daf8e1ad00c2fe81512f08 # frozen: v2.5.5
+    rev: cd5d6ed44598e228e214b704d673541d9675f8e4 # frozen: v2.5.6
     hooks:
       - id: biome-check
         name: run biome-check
@@ -137,7 +137,7 @@ repos:
         files: \.ya?ml$
 
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: 067260dc5fe6ea86b7551bfd6f8b3ba4e6c93129 # frozen: v1.28.0
+    rev: 451b56af716f9f0d0c2b816503a3fd0cf8b036fa # frozen: v1.29.0
     hooks:
       - id: zizmor
         name: run zizmor
