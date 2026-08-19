@@ -14,7 +14,7 @@
     "jiti": "^2.7.0",
     "js-yaml": "^5.2.3",
     "lightningcss": "^1.33.0",
-    "magic-string": "^1.1.0",
+    "magic-string": "^1.1.1",
     "mri": "^1.2.0",
     "node-addon-api": "^8.9.1",
     "phaser": "^4.2.1",
