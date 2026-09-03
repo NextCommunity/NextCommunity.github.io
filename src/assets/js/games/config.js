@@ -4,10 +4,12 @@
  */
 
 // CDN URL for the pinned Phaser version used site-wide
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 const PHASER_CDN_URL =
   "https://cdnjs.cloudflare.com/ajax/libs/phaser/3.90.0/phaser.min.js";
 
 // Rarity order and weights used by Dev Duel scoring
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 const RARITY_WEIGHTS = {
   common: 1,
   uncommon: 2,
@@ -19,6 +21,7 @@ const RARITY_WEIGHTS = {
 };
 
 // CSS variable colour names per rarity (matches style.css)
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 const RARITY_COLORS = {
   common: "#94a3b8",
   uncommon: "#10b981",
@@ -30,6 +33,7 @@ const RARITY_COLORS = {
 };
 
 // Fallback generic tech skills used when no profile skills are available
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 const GENERIC_SKILLS = [
   "JavaScript",
   "TypeScript",
@@ -57,6 +61,7 @@ const GENERIC_SKILLS = [
  * Reads the current site theme from the document root class.
  * Returns an object of useful colour strings for Phaser text/backgrounds.
  */
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function getGameTheme() {
   const isDark = document.documentElement.classList.contains("dark");
   return {
@@ -73,6 +78,7 @@ function getGameTheme() {
  * Deterministically assigns a rarity tier to a skill name string.
  * Uses a simple hash so the same skill always gets the same rarity.
  */
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function skillRarity(skillName) {
   let hash = 0;
   for (let i = 0; i < skillName.length; i++) {
@@ -99,6 +105,7 @@ function skillRarity(skillName) {
  *
  * @param {object} overrides  Fields that replace defaults (e.g. width, scene).
  */
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function buildGameConfig(overrides) {
   return Object.assign(
     {

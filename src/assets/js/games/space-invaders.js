@@ -8,6 +8,7 @@
  * GameManager and lazy-loaded alongside the other mini-games.
  */
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 const SpaceInvaders = (() => {
   const ALIEN_ROWS = ["👾", "👽", "🛸", "🐙", "👾"];
   const GAME_ID = "space-invaders";
@@ -69,22 +70,29 @@ const SpaceInvaders = (() => {
     _setupGame(this);
   }
 
-  function _onUpdate() {
-    if (!this.si_player || !this.si_player.body) return;
-
-    if (this.si_cursors.left.isDown) {
-      this.si_player.body.setVelocityX(-400);
-    } else if (this.si_cursors.right.isDown) {
-      this.si_player.body.setVelocityX(400);
+  function _updatePlayerVelocity(scene) {
+    if (scene.si_cursors.left.isDown) {
+      scene.si_player.body.setVelocityX(-400);
+    } else if (scene.si_cursors.right.isDown) {
+      scene.si_player.body.setVelocityX(400);
     } else {
-      this.si_player.body.setVelocityX(0);
+      scene.si_player.body.setVelocityX(0);
     }
+  }
 
+  function _getBullets(scene) {
+    return scene.si_bullets?.getChildren?.() || [];
+  }
+
+  function _onUpdate() {
+    if (!this.si_player?.body) return;
+
+    _updatePlayerVelocity(this);
     if (this.si_cursors.space.isDown) {
       _fireBullet(this);
     }
 
-    const bullets = this.si_bullets?.getChildren?.() || [];
+    const bullets = _getBullets(this);
     bullets.forEach((bullet) => {
       if (!bullet.active) return;
       if (
