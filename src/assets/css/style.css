@@ -279,6 +279,12 @@ html body #dev-tools[data-lock="true"] {
 #dev-tools button[onclick*="badge_click"] {
   color: #bc13fe !important;
 }
+#dev-tools button[onclick*="pulse"] {
+  color: #ff9500 !important;
+}
+#dev-tools button[onclick*="ForceSurge"] {
+  color: #00aaff !important;
+}
 
 /**
  * 5. SELF DESTRUCT & REPAIR
