@@ -267,6 +267,8 @@ Want to contribute to the project code or test your profile locally? Here's how 
 
 - **Node.js**: Version 20.x or higher ([Download](https://nodejs.org/))
 - **npm**: Comes with Node.js
+- **Python**: Version 3.13 or higher for the repository's `uv sync`-managed dev tools
+- **uv**: Recommended for installing Python dev tools
 - **Git**: For version control
 
 ### Installation
@@ -295,6 +297,24 @@ npm start
 npm run build
 ```
 
+### Quality Checks with prek
+
+This repository uses [prek](https://github.com/j178/prek) to run its local quality checks and Git hooks from `.pre-commit-config.yaml`.
+
+```bash
+# Install Python dev tools, including prek
+uv sync --only-group dev
+
+# Install Git hooks in your clone
+uv run prek install
+
+# Run the standard hooks across the repository
+uv run prek run --all-files
+
+# Run the manual hooks when needed
+uv run prek run --all-files --hook-stage manual
+```
+
 ### Project Structure
 
 ```text
@@ -308,9 +328,9 @@ NextCommunity.github.io/
 │   │   └── zizmor.yml                 # GitHub Actions security lint config
 │   ├── workflows/
 │   │   ├── deploy.yml                 # Deployment workflow
-│   │   ├── prek-audit.yml             # Pre-commit audit workflow
-│   │   ├── prek-manual.yml            # Manual pre-commit workflow
-│   │   ├── prek.yml                   # Pre-commit workflow
+│   │   ├── prek-audit.yml             # prek audit workflow
+│   │   ├── prek-manual.yml            # Manual prek workflow
+│   │   ├── prek.yml                   # Standard prek workflow
 │   │   └── super-linter.yml           # Super-linter workflow
 │   ├── CODEOWNERS                     # Code ownership rules
 │   ├── dependabot.yml                 # Dependabot configuration
@@ -361,8 +381,8 @@ NextCommunity.github.io/
 ├── .gitattributes                     # Git text normalization rules
 ├── .gitignore                         # Git ignored files
 ├── .npmrc                             # npm configuration
-├── .pre-commit-config-audit.yaml      # Pre-commit audit config
-├── .pre-commit-config.yaml            # Pre-commit hooks config
+├── .pre-commit-config-audit.yaml      # prek audit config
+├── .pre-commit-config.yaml            # prek hooks config
 ├── LICENSE                            # Project license
 ├── biome.json                         # Biome formatter / linter config
 ├── package-lock.json                  # Locked npm dependency versions
@@ -408,7 +428,7 @@ Every pull request runs automated checks:
 
 - **Linting**: Ensures YAML syntax is correct
 - **Build Test**: Verifies the site builds successfully
-- **Pre-commit Hooks**: Checks code quality
+- **prek Hooks**: Checks code quality
 
 If checks fail, you'll see error messages in the PR. Fix the issues and push again.
 
@@ -449,18 +469,18 @@ If checks fail, you'll see error messages in the PR. Fix the issues and push aga
 - File must be named `username.yaml` (lowercase, with `.yaml` extension)
 - All required fields must be filled in
 
-#### ❌ Pre-commit hooks fail
+#### ❌ prek hooks fail
 
 **Problem**: Code quality checks didn't pass.
 
 **Solution**:
 
 ```bash
-# Install pre-commit
-pip install pre-commit
+# Install prek
+uv sync --only-group dev
 
 # Run checks manually
-pre-commit run --all-files
+uv run prek run --all-files
 ```
 
 ### FAQ
