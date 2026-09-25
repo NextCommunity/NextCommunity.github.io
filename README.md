@@ -263,7 +263,7 @@ Want to contribute to the project code or test your profile locally? Here's how 
 
 - **Node.js**: Version 20.x or higher ([Download](https://nodejs.org/))
 - **npm**: Comes with Node.js
-- **Python**: Version 3.13 or higher
+- **Python**: Version 3.13 or higher for the repository's `uv sync`-managed dev tools
 - **uv**: Recommended for installing Python dev tools
 - **Git**: For version control
 
