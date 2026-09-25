@@ -11,6 +11,7 @@
 [![Audit hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek-audit.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek-audit.yml?query=branch%3Amain)
 [![Manual hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek-manual.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek-manual.yml?query=branch%3Amain)
 [![Standard hooks](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/prek.yml?query=branch%3Amain)
+[![ls-lint](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/ls-lint.yml/badge.svg?branch=main)](https://github.com/NextCommunity/NextCommunity.github.io/actions/workflows/ls-lint.yml?query=branch%3Amain)
 
 [![Easter Eggs](https://img.shields.io/badge/Easter-Eggs-ff69b4?labelColor=9b59b6)](https://nextcommunity.github.io)
 
@@ -304,6 +305,7 @@ NextCommunity.github.io/
 │   │   └── zizmor.yml                 # GitHub Actions security lint config
 │   ├── workflows/
 │   │   ├── deploy.yml                 # Deployment workflow
+│   │   ├── ls-lint.yml                # File naming lint workflow
 │   │   ├── prek-audit.yml             # Pre-commit audit workflow
 │   │   ├── prek-manual.yml            # Manual pre-commit workflow
 │   │   ├── prek.yml                   # Pre-commit workflow
@@ -356,6 +358,7 @@ NextCommunity.github.io/
 ├── .eleventy.js                       # Eleventy configuration
 ├── .gitattributes                     # Git text normalization rules
 ├── .gitignore                         # Git ignored files
+├── .ls-lint.yml                       # File and directory naming rules
 ├── .npmrc                             # npm configuration
 ├── .pre-commit-config-audit.yaml      # Pre-commit audit config
 ├── .pre-commit-config.yaml            # Pre-commit hooks config
