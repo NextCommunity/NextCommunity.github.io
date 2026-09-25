@@ -42,9 +42,9 @@ module.exports = (eleventyConfig) => {
   // 2. Define how to process YAML files
   eleventyConfig.addExtension("yaml", {
     key: "yaml",
-    compile: async (inputContent) => {
+    compile: (inputContent) => {
       const data = yaml.load(inputContent);
-      return async () => {
+      return () => {
         // This returns the 'content' for the page (the bio)
         return data.bio || "";
       };
