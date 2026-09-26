@@ -1445,8 +1445,12 @@ function initButtonHandlers() {
   document
     .querySelectorAll("button[data-action='start-duel-from-card']")
     .forEach((button) => {
-      button.addEventListener("click", () => {
-        startDuelFromCard(button.closest(".user-card"));
+      button.addEventListener("click", (event) => {
+        const card = event.currentTarget.closest(".user-card[data-name]");
+
+        if (card) {
+          startDuelFromCard(card);
+        }
       });
     });
 
