@@ -467,16 +467,16 @@ function updateThemeIcon(theme) {
 /**
  * 5. EASTER EGG LOGIC & TRIGGERS
  */
-function playForceSoundtrack(duration = 8000) {
+const playForceSoundtrack = (duration = 8000) => {
   initAudio();
   if (!audioCtx) return;
 
-  // 1. Create a Master Compressor to prevent distortion
+  // Catch peaks without flattening the whole soundtrack.
   const compressor = audioCtx.createDynamicsCompressor();
-  compressor.threshold.setValueAtTime(-24, audioCtx.currentTime);
-  compressor.knee.setValueAtTime(40, audioCtx.currentTime);
-  compressor.ratio.setValueAtTime(12, audioCtx.currentTime);
-  compressor.attack.setValueAtTime(0, audioCtx.currentTime);
+  compressor.threshold.setValueAtTime(-12, audioCtx.currentTime);
+  compressor.knee.setValueAtTime(12, audioCtx.currentTime);
+  compressor.ratio.setValueAtTime(3, audioCtx.currentTime);
+  compressor.attack.setValueAtTime(0.01, audioCtx.currentTime);
   compressor.release.setValueAtTime(0.25, audioCtx.currentTime);
   compressor.connect(audioCtx.destination);
 
@@ -486,14 +486,15 @@ function playForceSoundtrack(duration = 8000) {
 
   // Smooth volume swell
   masterGain.gain.setValueAtTime(0, now);
-  masterGain.gain.linearRampToValueAtTime(0.6, now + 1.5);
-  masterGain.gain.setValueAtTime(0.6, now + duration / 1000 - 2);
+  // Three oscillators can add together; keep the sum below full scale.
+  masterGain.gain.linearRampToValueAtTime(0.15, now + 1.5);
+  masterGain.gain.setValueAtTime(0.15, now + duration / 1000 - 2);
   masterGain.gain.exponentialRampToValueAtTime(0.001, now + duration / 1000);
 
   // Create the "Harmonic Stack" (Multiple notes for a rich sound)
   [55, 110, 164.81].forEach((freq, i) => {
     const osc = audioCtx.createOscillator();
-    osc.type = i === 0 ? "sawtooth" : "triangle"; // Mix textures
+    osc.type = i === 0 ? "sine" : "triangle"; // Keep the bass warm, without sawtooth buzz.
     osc.frequency.setValueAtTime(freq, now);
 
     // Add a slight "wobble" (detune) for realism
@@ -503,7 +504,7 @@ function playForceSoundtrack(duration = 8000) {
     osc.start(now);
     osc.stop(now + duration / 1000);
   });
-}
+};
 
 function triggerForceSurge() {
   if (isSurging) return;
