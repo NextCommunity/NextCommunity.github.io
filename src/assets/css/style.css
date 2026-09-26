@@ -267,22 +267,22 @@ html body #dev-tools[data-lock="true"] {
 }
 
 /* Console Neon Overrides */
-#dev-tools button[onclick*="matrix"] {
+#dev-tools button[data-secret-unlock="matrix"] {
   color: #00ff41 !important;
 }
-#dev-tools button[onclick*="konami"] {
+#dev-tools button[data-secret-unlock="konami"] {
   color: #ffcc00 !important;
 }
-#dev-tools button[onclick*="gravity"] {
+#dev-tools button[data-secret-unlock="gravity"] {
   color: #ff3333 !important;
 }
-#dev-tools button[onclick*="badge_click"] {
+#dev-tools button[data-secret-unlock="badge_click"] {
   color: #bc13fe !important;
 }
-#dev-tools button[onclick*="pulse"] {
+#dev-tools button[data-secret-unlock="pulse"] {
   color: #ff9500 !important;
 }
-#dev-tools button[onclick*="ForceSurge"] {
+#dev-tools button[data-action="trigger-force-surge"] {
   color: #00aaff !important;
 }
 

@@ -45,7 +45,7 @@ seo:
       <div class="text-[10px] font-mono text-[var(--text-muted)]">
         Trigger: click the footer ❤️ five times
       </div>
-      <button onclick="SpaceInvaders.launch()"
+      <button type="button" data-action="launch-space-invaders"
         class="mt-auto px-5 py-3 rounded-xl bg-accent text-white font-black uppercase tracking-wider text-sm hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-accent/30">
         🚀 Launch
       </button>
@@ -56,7 +56,7 @@ seo:
       <div class="text-4xl">⌨️</div>
       <h3 class="text-xl font-black">Code Breaker</h3>
       <p class="text-sm text-[var(--text-muted)] flex-1">Catch falling tech skills before they hit the ground. Uses generic skills here — visit any profile page for that developer's own skill set. Earn <span class="text-accent font-bold">+{{ _XP_CODE_BREAKER_WIN or 100 }} XP</span> on win.</p>
-      <button onclick="CodeBreaker.launch(null, 'Arcade Mode')"
+      <button type="button" data-action="launch-arcade-code-breaker"
         class="mt-auto px-5 py-3 rounded-xl bg-accent text-white font-black uppercase tracking-wider text-sm hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-accent/30">
         ⌨️ Play
       </button>

@@ -1,6 +1,6 @@
 <div class="flex items-center gap-3 md:gap-4">
     {% if page.url == "/" %}
-    <button onclick="scrollToRandomUser()" class="surprise-btn bg-blue-600 text-white px-8 py-3 rounded-full font-black uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-blue-500/30">
+    <button type="button" id="surprise-me-btn" class="surprise-btn bg-blue-600 text-white px-8 py-3 rounded-full font-black uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-blue-500/30">
         ✨ Surprise Me
     </button>
     {% endif %}
@@ -92,7 +92,7 @@
 
         <div class="w-px h-6 md:h-8 bg-[var(--border-color)] ml-1"></div>
 
-        <button onclick="toggleTheme()" class="text-base md:text-lg p-1 md:p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-full transition-all" id="theme-icon">
+        <button type="button" class="text-base md:text-lg p-1 md:p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-full transition-all" id="theme-icon">
             🌙
         </button>
 

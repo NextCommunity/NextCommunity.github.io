@@ -1360,6 +1360,112 @@ function jumpToLevel() {
   showLevelUpNotification(rank);
 }
 
+function resolveExperienceValue(value) {
+  const experienceMap = {
+    XP_SPACE_INVADERS_WIN,
+    _XP_CODE_BREAKER_WIN,
+    _XP_DEV_DUEL_PLAY,
+  };
+
+  return experienceMap[value] ?? Number(value);
+}
+
+function bindClickHandler(id, handler) {
+  const element = document.getElementById(id);
+
+  if (element) {
+    element.addEventListener("click", handler);
+  }
+}
+
+function initButtonHandlers() {
+  document.querySelectorAll("button[data-secret-unlock]").forEach((button) => {
+    button.addEventListener("click", () => {
+      triggerSecretUnlock(button.dataset.secretUnlock);
+    });
+  });
+
+  document.querySelectorAll("button[data-add-experience]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const amount = resolveExperienceValue(button.dataset.addExperience);
+
+      if (Number.isFinite(amount)) {
+        addExperience(amount);
+      }
+
+      if (button.dataset.sound) {
+        playSound(button.dataset.sound);
+      }
+    });
+  });
+
+  document.querySelectorAll("button[data-action='trigger-force-surge']").forEach((button) => {
+    button.addEventListener("click", triggerForceSurge);
+  });
+
+  document.querySelectorAll("button[data-action='trigger-magic-xp']").forEach((button) => {
+    button.addEventListener("click", () => {
+      triggerMagicXP();
+      if (button.dataset.sound) {
+        playSound(button.dataset.sound);
+      }
+    });
+  });
+
+  document
+    .querySelectorAll("button[data-action='toggle-screenshot-mode']")
+    .forEach((button) => {
+      button.addEventListener("click", window.toggleScreenshotMode);
+    });
+
+  document
+    .querySelectorAll("button[data-action='launch-profile-code-breaker']")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        CodeBreaker.launch(window.PROFILE_SKILLS, window.PROFILE_NAME);
+      });
+    });
+
+  document
+    .querySelectorAll("button[data-action='launch-space-invaders']")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        SpaceInvaders.launch();
+      });
+    });
+
+  document
+    .querySelectorAll("button[data-action='launch-arcade-code-breaker']")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        CodeBreaker.launch(null, "Arcade Mode");
+      });
+    });
+
+  document
+    .querySelectorAll("button[data-action='start-duel-from-card']")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        startDuelFromCard(button.closest(".user-card"));
+      });
+    });
+
+  bindClickHandler("close-matrix-btn", closeMatrix);
+  bindClickHandler("footer-surge-button", handleFooterDotClick);
+  bindClickHandler("reopen-console-btn", reopenConsole);
+  bindClickHandler("minimize-console-btn", minimizeConsole);
+  bindClickHandler("maximize-console-btn", maximizeConsole);
+  bindClickHandler("close-console-btn", closeConsole);
+  bindClickHandler("surprise-me-btn", scrollToRandomUser);
+  bindClickHandler("theme-icon", toggleTheme);
+  bindClickHandler("jump-to-level-btn", jumpToLevel);
+  bindClickHandler("self-destruct-btn", window.startSelfDestruct);
+  bindClickHandler("reset-local-storage-btn", () => {
+    localStorage.clear();
+    location.reload();
+  });
+}
+
 function handleFooterDotClick() {
   // 1. Get the current list of unlocked eggs
   const rawEggs = localStorage.getItem("unlockedEggs") || "[]";
@@ -1451,6 +1557,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initDotEasterEgg();
   initSkillMining();
+  initButtonHandlers();
   // Initialize the profile counter
   initProfileTracker();
 

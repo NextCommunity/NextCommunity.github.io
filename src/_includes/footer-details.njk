@@ -26,8 +26,8 @@
     <div class="flex flex-col items-center md:items-end gap-2">
       <div class="flex items-center gap-3">
         <button
+          type="button"
           id="footer-surge-button"
-          onclick="handleFooterDotClick()"
           class="relative flex h-6 w-6 items-center justify-center focus:outline-none group cursor-pointer"
         >
           <span id="footer-dot-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 transition-colors duration-500"></span>
@@ -37,7 +37,7 @@
       </div>
 
      <div class="flex items-center bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg overflow-hidden shadow-sm">
-      <button onclick="triggerSecretUnlock('gravity')" class="px-3 py-1.5 text-[10px] font-mono hover:bg-red-500/10 transition-colors group/hash">
+      <button type="button" data-secret-unlock="gravity" class="px-3 py-1.5 text-[10px] font-mono hover:bg-red-500/10 transition-colors group/hash">
         <span class="text-[var(--text-muted)] group-hover/hash:text-red-500">Hash:</span>
         <span class="text-accent font-bold underline decoration-dotted">
           <code class="cursor-pointer hover:text-red-500 transition-colors">{{ build.hash }}</code>

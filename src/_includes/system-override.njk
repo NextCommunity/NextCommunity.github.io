@@ -5,22 +5,22 @@
     </div>
 
     <div class="grid grid-cols-3 gap-1 mb-2">
-        <button onclick="triggerSecretUnlock('badge_click')" class="override-btn py-1.5 bg-purple-500/5 hover:bg-purple-500/20 text-purple-400 text-[8px] border border-purple-500/20 rounded transition-all">
+        <button type="button" data-secret-unlock="badge_click" class="override-btn py-1.5 bg-purple-500/5 hover:bg-purple-500/20 text-purple-400 text-[8px] border border-purple-500/20 rounded transition-all">
             BADGE_XP
         </button>
-        <button onclick="triggerSecretUnlock('gravity')" class="override-btn py-1.5 bg-red-500/5 hover:bg-red-500/20 text-red-500 text-[8px] border border-red-500/20 rounded transition-all">
+        <button type="button" data-secret-unlock="gravity" class="override-btn py-1.5 bg-red-500/5 hover:bg-red-500/20 text-red-500 text-[8px] border border-red-500/20 rounded transition-all">
             GRAVITY
         </button>
-        <button onclick="triggerSecretUnlock('konami')" class="override-btn py-1.5 bg-yellow-500/5 hover:bg-yellow-500/20 text-yellow-500 text-[8px] border border-yellow-500/20 rounded transition-all">
+        <button type="button" data-secret-unlock="konami" class="override-btn py-1.5 bg-yellow-500/5 hover:bg-yellow-500/20 text-yellow-500 text-[8px] border border-yellow-500/20 rounded transition-all">
             KONAMI
         </button>
-        <button onclick="triggerSecretUnlock('matrix')" class="override-btn py-1.5 bg-green-500/5 hover:bg-green-500/20 text-green-500 text-[8px] border border-green-500/20 rounded transition-all">
+        <button type="button" data-secret-unlock="matrix" class="override-btn py-1.5 bg-green-500/5 hover:bg-green-500/20 text-green-500 text-[8px] border border-green-500/20 rounded transition-all">
             MATRIX
         </button>
-        <button onclick="triggerSecretUnlock('pulse')" class="override-btn py-1.5 bg-orange-500/5 hover:bg-orange-500/20 text-orange-400 text-[8px] border border-orange-500/20 rounded transition-all">
+        <button type="button" data-secret-unlock="pulse" class="override-btn py-1.5 bg-orange-500/5 hover:bg-orange-500/20 text-orange-400 text-[8px] border border-orange-500/20 rounded transition-all">
             PULSE
         </button>
-        <button onclick="triggerForceSurge()"
+        <button type="button" data-action="trigger-force-surge"
             class="relative overflow-hidden py-2 px-6 bg-blue-600/20 text-blue-300 border-2 border-blue-400 rounded-lg font-bold tracking-[0.2em] transition-all hover:bg-blue-500/40 hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] animate-pulse uppercase">
             <span class="relative z-10">Force Surge</span>
             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
@@ -28,31 +28,31 @@
     </div>
 
     <div class="space-y-1 mb-2">
-        <button onclick="addExperience(XP_SPACE_INVADERS_WIN); playSound('levelUp');" class="override-btn w-full flex justify-between px-2 py-1 bg-orange-500/5 text-orange-400 text-[8px] border border-orange-500/20 rounded">
+        <button type="button" data-add-experience="XP_SPACE_INVADERS_WIN" data-sound="levelUp" class="override-btn w-full flex justify-between px-2 py-1 bg-orange-500/5 text-orange-400 text-[8px] border border-orange-500/20 rounded">
             <span>👾 INVADER_WIN</span>
             <span class="opacity-50">+{{ XP_SPACE_INVADERS_WIN }}</span>
         </button>
-        <button onclick="addExperience(_XP_CODE_BREAKER_WIN); playSound('levelUp');" class="override-btn w-full flex justify-between px-2 py-1 bg-teal-500/5 text-teal-400 text-[8px] border border-teal-500/20 rounded">
+        <button type="button" data-add-experience="_XP_CODE_BREAKER_WIN" data-sound="levelUp" class="override-btn w-full flex justify-between px-2 py-1 bg-teal-500/5 text-teal-400 text-[8px] border border-teal-500/20 rounded">
             <span>⌨️ BREAKER_WIN</span>
             <span class="opacity-50">+{{ _XP_CODE_BREAKER_WIN }}</span>
         </button>
-        <button onclick="addExperience(_XP_DEV_DUEL_PLAY); playSound('click');" class="override-btn w-full flex justify-between px-2 py-1 bg-yellow-500/5 text-yellow-400 text-[8px] border border-yellow-500/20 rounded">
+        <button type="button" data-add-experience="_XP_DEV_DUEL_PLAY" data-sound="click" class="override-btn w-full flex justify-between px-2 py-1 bg-yellow-500/5 text-yellow-400 text-[8px] border border-yellow-500/20 rounded">
             <span>⚔️ DUEL_PLAY</span>
             <span class="opacity-50">+{{ _XP_DEV_DUEL_PLAY }}</span>
         </button>
-        <button onclick="addExperience(5); playSound('click');" class="override-btn w-full flex justify-between px-2 py-1 bg-cyan-500/5 text-cyan-400 text-[8px] border border-cyan-500/20 rounded">
+        <button type="button" data-add-experience="5" data-sound="click" class="override-btn w-full flex justify-between px-2 py-1 bg-cyan-500/5 text-cyan-400 text-[8px] border border-cyan-500/20 rounded">
             <span>💎 SKILL_MINER</span>
             <span class="opacity-50">+5</span>
         </button>
-        <button onclick="addExperience(15); playSound('restore');" class="override-btn w-full flex justify-between px-2 py-1 bg-pink-500/5 text-pink-400 text-[8px] border border-pink-500/20 rounded">
+        <button type="button" data-add-experience="15" data-sound="restore" class="override-btn w-full flex justify-between px-2 py-1 bg-pink-500/5 text-pink-400 text-[8px] border border-pink-500/20 rounded">
             <span>🛠️ SYS_OPTIMIZE</span>
             <span class="opacity-50">+15</span>
         </button>
-        <button onclick="triggerMagicXP(); playSound('levelUp');" class="override-btn w-full flex justify-between px-2 py-1.5 bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-400 text-[8px] border border-purple-500/30 rounded hover:from-purple-600/40 hover:to-blue-600/40 transition-all group">
+        <button type="button" data-action="trigger-magic-xp" data-sound="levelUp" class="override-btn w-full flex justify-between px-2 py-1.5 bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-400 text-[8px] border border-purple-500/30 rounded hover:from-purple-600/40 hover:to-blue-600/40 transition-all group">
             <span>✨ CAST_MAGIC_XP</span>
             <span class="group-hover:animate-pulse">+50 XP</span>
         </button>
-        <button onclick="toggleScreenshotMode()" class="override-btn w-full flex justify-between px-2 py-1 bg-white/5 text-slate-400 text-[8px] border border-white/10 rounded">
+        <button type="button" data-action="toggle-screenshot-mode" class="override-btn w-full flex justify-between px-2 py-1 bg-white/5 text-slate-400 text-[8px] border border-white/10 rounded">
             <span>📸 SCREENSHOT</span>
             <span class="opacity-50">[5 Seconds]</span>
         </button>
@@ -70,7 +70,8 @@
             style="background-color: #000 !important; color: #00ffcc !important; border: 1px solid #00ffcc !important; width: 60px !important; height: 30px !important; font-size: 14px !important; padding: 0 5px !important; border-radius: 4px !important;"
         >
         <button
-            onclick="jumpToLevel()"
+            type="button"
+            id="jump-to-level-btn"
             class="override-btn flex-1 bg-accent/20 hover:bg-accent/40 text-accent text-[10px] font-black py-1 rounded transition-all border border-accent/40 uppercase"
             style="height: 30px !important;"
         >
@@ -80,11 +81,11 @@
 </div>
 
     <div class="flex gap-1.5 pt-2 border-t border-white/10">
-        <button id="self-destruct-btn" onclick="startSelfDestruct()" class="override-btn flex-1 py-1.5 bg-red-600/10 hover:bg-red-600/30 text-red-500 text-[8px] border border-red-500/30 rounded flex justify-center gap-1">
+        <button type="button" id="self-destruct-btn" class="override-btn flex-1 py-1.5 bg-red-600/10 hover:bg-red-600/30 text-red-500 text-[8px] border border-red-500/30 rounded flex justify-center gap-1">
             <span id="destruct-text">💥 DESTRUCT</span>
             <span id="destruct-timer"></span>
         </button>
-        <button onclick="localStorage.clear(); location.reload();" class="override-btn px-2 py-1.5 bg-blue-600/10 hover:bg-blue-600/30 text-blue-400 text-[8px] border border-blue-500/20 rounded uppercase">
+        <button type="button" id="reset-local-storage-btn" class="override-btn px-2 py-1.5 bg-blue-600/10 hover:bg-blue-600/30 text-blue-400 text-[8px] border border-blue-500/20 rounded uppercase">
             <span>🔄 Reset</span>
         </button>
     </div>
