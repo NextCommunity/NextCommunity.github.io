@@ -215,7 +215,11 @@ git push origin my-feature-branch
 - **`name`**: Use your real name or preferred professional name
 - **`github`**: Must match your actual GitHub username for links to work
 - **`languages`**: Separate with spaces, not commas (e.g., `Python Java Go`)
-- **`bio`**: Use the `|` syntax for multi-line text. Be professional and concise
+- **`bio`**: Use the `|` syntax for multi-line text. Be professional and concise.
+  The bio is rendered as Markdown, so `**bold**`, `_italic_`, `[links](https://...)`,
+  lists, and `code` all work. HTML tags are **not** rendered, they are escaped and
+  shown as plain text, so please use Markdown instead of writing `<strong>` or
+  `<a href="...">` by hand.
 - **`role`**: Keep it short and clear (e.g., "Full Stack Developer", "DevOps Engineer")
 
 ### 📚 Real Examples
