@@ -5,7 +5,7 @@
     </div>
 
     <div class="grid grid-cols-3 gap-1 mb-2">
-        <button onclick="triggerSecretUnlock('badge_click')" class="override-btn py-1.5 bg-purple-500/5 hover:bg-purple-500/20 text-purple-400 text-[8px] border border-purple-500/20 rounded transition-all">
+        <button onclick="triggerSecretUnlock('badge_click'); const badge = document.getElementById('level-badge'); if (badge) { badge.classList.remove('animate-badge-pop'); badge.getBoundingClientRect(); badge.classList.add('animate-badge-pop'); }" class="override-btn py-1.5 bg-purple-500/5 hover:bg-purple-500/20 text-purple-400 text-[8px] border border-purple-500/20 rounded transition-all">
             BADGE_XP
         </button>
         <button onclick="triggerSecretUnlock('gravity')" class="override-btn py-1.5 bg-red-500/5 hover:bg-red-500/20 text-red-500 text-[8px] border border-red-500/20 rounded transition-all">
