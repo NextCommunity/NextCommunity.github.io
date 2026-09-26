@@ -265,7 +265,7 @@ Want to contribute to the project code or test your profile locally? Here's how 
 
 ### Prerequisites
 
-- **Node.js**: Version 20.x or higher ([Download](https://nodejs.org/))
+- **Node.js**: Version 22.x or higher ([Download](https://nodejs.org/)); check the Node.js release EOL schedule at [endoflife.date/nodejs](https://endoflife.date/nodejs)
 - **npm**: Comes with Node.js
 - **Python**: Version 3.13 or higher for the repository's `uv sync`-managed dev tools
 - **uv**: Recommended for installing Python dev tools

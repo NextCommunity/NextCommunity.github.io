@@ -55,6 +55,6 @@
   },
   "homepage": "https://github.com/NextCommunity/NextCommunity.github.io#readme",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   }
 }
