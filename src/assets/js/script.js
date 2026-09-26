@@ -1457,6 +1457,7 @@ function initButtonHandlers() {
   bindClickHandler("maximize-console-btn", maximizeConsole);
   bindClickHandler("close-console-btn", closeConsole);
   bindClickHandler("surprise-me-btn", scrollToRandomUser);
+  bindClickHandler("level-badge", handleLevelClick);
   bindClickHandler("theme-icon", toggleTheme);
   bindClickHandler("jump-to-level-btn", jumpToLevel);
   bindClickHandler("self-destruct-btn", window.startSelfDestruct);
