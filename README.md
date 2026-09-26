@@ -264,8 +264,8 @@ Want to contribute to the project code or test your profile locally? Here's how 
 
 - **Node.js**: Version 22.x or higher ([Download](https://nodejs.org/)); check the Node.js release EOL schedule at [endoflife.date/nodejs](https://endoflife.date/nodejs)
 - **npm**: Comes with Node.js
-- **Python**: Version 3.13 or higher for the repository's `uv sync`-managed dev tools
-- **uv**: Recommended for installing Python dev tools
+- **Python**: Optional; use version 3.13 or higher if you want to provide your own interpreter for the repository's `uv sync`-managed dev tools
+- **uv**: Recommended for installing Python dev tools and can download a compatible Python version when needed
 - **Git**: For version control
 
 ### Installation
@@ -297,6 +297,8 @@ npm run build
 ### Quality Checks with prek
 
 This repository uses [prek](https://github.com/j178/prek) to run its local quality checks and Git hooks from `.pre-commit-config.yaml`.
+
+If Python 3.13+ is not already installed, `uv` can download a compatible version for these commands.
 
 ```bash
 # Install Python dev tools, including prek
