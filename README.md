@@ -262,8 +262,10 @@ Want to contribute to the project code or test your profile locally? Here's how 
 
 ### Prerequisites
 
-- **Node.js**: Version 20.x or higher ([Download](https://nodejs.org/))
+- **Node.js**: Version 22.x or higher ([Download](https://nodejs.org/)); check the Node.js release EOL schedule at [endoflife.date/nodejs](https://endoflife.date/nodejs)
 - **npm**: Comes with Node.js
+- **Python**: Version 3.13 or higher for the repository's `uv sync`-managed dev tools
+- **uv**: Recommended for installing Python dev tools
 - **Git**: For version control
 
 ### Installation
@@ -292,6 +294,24 @@ npm start
 npm run build
 ```
 
+### Quality Checks with prek
+
+This repository uses [prek](https://github.com/j178/prek) to run its local quality checks and Git hooks from `.pre-commit-config.yaml`.
+
+```bash
+# Install Python dev tools, including prek
+uv sync --only-group dev
+
+# Install Git hooks in your clone
+uv run prek install
+
+# Run the standard hooks across the repository
+uv run prek run --all-files
+
+# Run the manual hooks when needed
+uv run prek run --all-files --hook-stage manual
+```
+
 ### Project Structure
 
 ```text
@@ -304,28 +324,34 @@ NextCommunity.github.io/
 │   │   ├── codespell.txt              # Accepted words for spell checks
 │   │   └── zizmor.yml                 # GitHub Actions security lint config
 │   ├── workflows/
-│   │   ├── deploy.yml                 # Deployment workflow
-│   │   ├── ls-lint.yml                # File naming lint workflow
-│   │   ├── prek-audit.yml             # Pre-commit audit workflow
-│   │   ├── prek-manual.yml            # Manual pre-commit workflow
-│   │   ├── prek.yml                   # Pre-commit workflow
-│   │   └── super-linter.yml           # Super-linter workflow
+│   │   ├── deploy.yml                         # Production deployment workflow
+│   │   ├── firebase-hosting-merge.yml        # Firebase deploy on merge
+│   │   ├── firebase-hosting-pull-request.yml # Firebase preview deploys for PRs
+│   │   ├── prek-audit.yml                     # prek audit workflow
+│   │   ├── prek-manual.yml                    # Manual prek workflow
+│   │   ├── prek.yml                           # Standard prek workflow
+│   │   └── super-linter.yml                   # Super-linter workflow
 │   ├── CODEOWNERS                     # Code ownership rules
 │   ├── dependabot.yml                 # Dependabot configuration
 │   └── FUNDING.yml                    # Sponsorship links
 ├── src/
 │   ├── _data/                         # Site-wide data files
 │   │   ├── build.js                   # Build metadata injected into templates
-│   │   └── levels.json                # XP level definitions for gamification
+│   │   ├── levels.json                # XP level definitions for gamification
+│   │   └── site.js                    # Global site metadata
 │   ├── _includes/                     # Reusable Nunjucks templates
 │   │   ├── bio.njk                    # Individual developer profile layout
 │   │   ├── footer.njk                 # Site footer wrapper
 │   │   ├── footer-details.njk         # Footer content (links, credits)
 │   │   ├── game-modal.njk             # Modal overlay for mini-games
 │   │   ├── game-stats.njk             # In-game XP / stats display
+│   │   ├── github-ribbon.njk          # "Fork me on GitHub" ribbon include
 │   │   ├── header.njk                 # Site header wrapper
 │   │   ├── header-details.njk         # Header content (nav, theme toggle)
+│   │   ├── layouts/
+│   │   │   └── base.njk               # Base page layout wrapper
 │   │   ├── matrix-overlay.njk         # Matrix rain easter egg overlay
+│   │   ├── seo-meta.njk               # SEO/Open Graph metadata tags
 │   │   ├── scripts.njk                # JS <script> tags included by footer
 │   │   ├── skills-list.njk            # Renders a developer's skills/languages
 │   │   ├── system-log.njk             # Scrolling system-log UI element
@@ -336,37 +362,43 @@ NextCommunity.github.io/
 │   │   │   ├── tailwind-input.css     # Tailwind CSS entry point
 │   │   │   └── tailwind.css           # Generated Tailwind CSS output
 │   │   ├── img/
+│   │   │   ├── github-fork-me.png     # GitHub ribbon image asset
 │   │   │   └── next.jpeg              # Site logo / avatar image
 │   │   └── js/
 │   │       ├── eggs.js                # Easter egg interactions
-│   │       ├── phaser.bundle.js       # Generated Phaser bundle
 │   │       ├── phaser-init.js         # Phaser game engine bootstrap
 │   │       ├── script.js              # Core interactivity & XP system
 │   │       └── games/                 # Mini-game modules
-│   │           ├── code-breaker.js
+│   │           ├── code-breaker.js    # Code puzzle mini-game
 │   │           ├── config.js          # Shared game constants & CDN URL
-│   │           ├── dev-duel.js
+│   │           ├── dev-duel.js        # Reflex mini-game
 │   │           ├── game-manager.js    # Game lifecycle (load/create/destroy)
-│   │           └── space-invaders.js
+│   │           └── space-invaders.js  # Shooter mini-game
 │   ├── users/                         # 👈 Developer profile YAML files
 │   │   ├── users.json                 # Eleventy data file aggregating YAMLs
 │   │   ├── jbampton.yaml
 │   │   └── ...                        # One <github-username>.yaml per dev
 │   ├── games.njk                      # Games page template
-│   └── index.njk                      # Homepage template
+│   ├── index.njk                      # Homepage template
+│   ├── robots.njk                     # robots.txt template
+│   └── sitemap.njk                    # XML sitemap template
 ├── .editorconfig                      # Editor formatting rules
 ├── .eleventy.js                       # Eleventy configuration
+├── .firebaserc                        # Firebase project alias config
 ├── .gitattributes                     # Git text normalization rules
 ├── .gitignore                         # Git ignored files
 ├── .ls-lint.yml                       # File and directory naming rules
 ├── .npmrc                             # npm configuration
-├── .pre-commit-config-audit.yaml      # Pre-commit audit config
-├── .pre-commit-config.yaml            # Pre-commit hooks config
+├── .pre-commit-config-audit.yaml      # prek audit config
+├── .pre-commit-config.yaml            # prek hooks config
 ├── LICENSE                            # Project license
 ├── biome.json                         # Biome formatter / linter config
+├── firebase.json                      # Firebase Hosting configuration
 ├── package-lock.json                  # Locked npm dependency versions
 ├── package.json                       # Node.js dependencies & scripts
 ├── postcss.config.js                  # PostCSS / Tailwind build config
+├── pyproject.toml                     # Python tooling config for prek/uv
+├── uv.lock                            # Locked Python dev dependencies
 └── README.md                          # This documentation
 ```
 
@@ -407,7 +439,7 @@ Every pull request runs automated checks:
 
 - **Linting**: Ensures YAML syntax is correct
 - **Build Test**: Verifies the site builds successfully
-- **Pre-commit Hooks**: Checks code quality
+- **prek Hooks**: Checks code quality
 
 If checks fail, you'll see error messages in the PR. Fix the issues and push again.
 
@@ -448,18 +480,18 @@ If checks fail, you'll see error messages in the PR. Fix the issues and push aga
 - File must be named `username.yaml` (lowercase, with `.yaml` extension)
 - All required fields must be filled in
 
-#### ❌ Pre-commit hooks fail
+#### ❌ prek hooks fail
 
 **Problem**: Code quality checks didn't pass.
 
 **Solution**:
 
 ```bash
-# Install pre-commit
-pip install pre-commit
+# Install prek
+uv sync --only-group dev
 
 # Run checks manually
-pre-commit run --all-files
+uv run prek run --all-files
 ```
 
 ### FAQ
