@@ -468,41 +468,38 @@ function updateThemeIcon(theme) {
  * 5. EASTER EGG LOGIC & TRIGGERS
  */
 function playForceSoundtrack(duration = 8000) {
-  initAudio();
-  if (!audioCtx) return;
+  // Play pre-recorded cinematic force-surge audio
+  // Replaces the oscillator-based synthesis that caused distortion
+  const audio = new Audio();
+  // Prefer OGG (better compression/quality), fallback to MP3
+  audio.src = "/assets/audio/force-surge.ogg";
+  audio.type = 'audio/ogg';
 
-  // 1. Create a Master Compressor to prevent distortion
-  const compressor = audioCtx.createDynamicsCompressor();
-  compressor.threshold.setValueAtTime(-24, audioCtx.currentTime);
-  compressor.knee.setValueAtTime(40, audioCtx.currentTime);
-  compressor.ratio.setValueAtTime(12, audioCtx.currentTime);
-  compressor.attack.setValueAtTime(0, audioCtx.currentTime);
-  compressor.release.setValueAtTime(0.25, audioCtx.currentTime);
-  compressor.connect(audioCtx.destination);
+  // Fallback to MP3 if OGG isn't supported
+  if (!audio.canPlayType('audio/ogg')) {
+    audio.src = "/assets/audio/force-surge.mp3";
+    audio.type = 'audio/mpeg';
+  }
 
-  const now = audioCtx.currentTime;
-  const masterGain = audioCtx.createGain();
-  masterGain.connect(compressor);
-
-  // Smooth volume swell
-  masterGain.gain.setValueAtTime(0, now);
-  masterGain.gain.linearRampToValueAtTime(0.6, now + 1.5);
-  masterGain.gain.setValueAtTime(0.6, now + duration / 1000 - 2);
-  masterGain.gain.exponentialRampToValueAtTime(0.001, now + duration / 1000);
-
-  // Create the "Harmonic Stack" (Multiple notes for a rich sound)
-  [55, 110, 164.81].forEach((freq, i) => {
-    const osc = audioCtx.createOscillator();
-    osc.type = i === 0 ? "sawtooth" : "triangle"; // Mix textures
-    osc.frequency.setValueAtTime(freq, now);
-
-    // Add a slight "wobble" (detune) for realism
-    osc.detune.setValueAtTime(i * 5, now);
-
-    osc.connect(masterGain);
-    osc.start(now);
-    osc.stop(now + duration / 1000);
-  });
+  audio.volume = 0.5;
+  const playPromise = audio.play();
+  if (playPromise) {
+    playPromise.catch(() => {
+      // Autoplay blocked — use Web Audio API with context interaction
+      initAudio();
+      if (!audioCtx) return;
+      try {
+        const source = audioCtx.createMediaElementSource(audio);
+        const gainNode = audioCtx.createGain();
+        gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
+        source.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        audio.play();
+      } catch(e) {
+        console.warn('Force Surge audio unavailable:', e.message);
+      }
+    });
+  }
 }
 
 function triggerForceSurge() {
