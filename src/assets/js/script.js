@@ -473,6 +473,24 @@ function playForceSoundtrack(duration = 8000) {
 
   const now = audioCtx.currentTime;
 
+  // Local helper: schedule pre-recorded audio playback with volume envelope
+  function schedulePlayback(ctx, buffer, startTime, duration) {
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+
+    // Apply volume swell matching original envelope
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(0.5, startTime + 1.5);
+    gain.gain.setValueAtTime(0.5, startTime + duration / 1000 - 2);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration / 1000);
+
+    source.connect(gain);
+    gain.connect(ctx.destination);
+    source.start(startTime);
+    source.stop(startTime + duration / 1000);
+  }
+
   // Pre-load the pre-recorded audio (cached after first play)
   if (!playForceSoundtrack._audioBuffer) {
     const audioUrl = "/assets/audio/force-surge.mp3";
@@ -493,23 +511,6 @@ function playForceSoundtrack(duration = 8000) {
 
   // Already cached — play immediately
   schedulePlayback(audioCtx, playForceSoundtrack._audioBuffer, now, duration);
-}
-
-function schedulePlayback(ctx, buffer, startTime, duration) {
-  const source = ctx.createBufferSource();
-  source.buffer = buffer;
-
-  // Apply volume swell matching original envelope
-  const gain = ctx.createGain();
-  gain.gain.setValueAtTime(0, startTime);
-  gain.gain.linearRampToValueAtTime(0.5, startTime + 1.5);
-  gain.gain.setValueAtTime(0.5, startTime + duration / 1000 - 2);
-  gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration / 1000);
-
-  source.connect(gain);
-  gain.connect(ctx.destination);
-  source.start(startTime);
-  source.stop(startTime + duration / 1000);
 }
 
 function triggerForceSurge() {
