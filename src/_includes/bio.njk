@@ -69,8 +69,8 @@ layout: layouts/base.njk
         <h2 class="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-6 flex items-center gap-2">
           <span class="w-8 h-[2px] bg-accent" aria-hidden="true"></span> Professional Bio
         </h2>
-        <div class="text-[var(--text-main)] text-lg leading-relaxed whitespace-pre-line">
-          {{ bio }}
+        <div class="text-[var(--text-main)] text-lg leading-relaxed bio-content">
+          {{ bio | markdown | safe }}
         </div>
       </div>
       {% endif %}
