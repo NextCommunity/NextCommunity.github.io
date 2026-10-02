@@ -26,6 +26,9 @@ jobs:
       - name: Super-Linter
         uses: super-linter/super-linter@4ce20838b8ab83717e78138c5b3a1407148e0918 # v8.7.0
         env:
+          # Fork pull requests cannot write commit statuses; the workflow check
+          # itself reports the lint result without making those API calls.
+          MULTI_STATUS: false
           ERROR_ON_MISSING_EXEC_BIT: true
           VALIDATE_EDITORCONFIG: true
           VALIDATE_JSON: true
@@ -33,4 +36,3 @@ jobs:
           VALIDATE_YAML: true
           VALIDATE_BIOME_LINT: true
           VALIDATE_BIOME_FORMAT: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
