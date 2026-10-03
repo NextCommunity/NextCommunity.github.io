@@ -1433,43 +1433,50 @@ function finalizeFooterDot(core, ping) {
 /**
  * INITIALIZATION
  */
-document.addEventListener("DOMContentLoaded", () => {
-  initSkillXP();
-
-  const unlockedEggs = JSON.parse(localStorage.getItem("unlockedEggs") || "[]");
-  if (unlockedEggs.includes("footer_surge")) {
-    finalizeFooterDot(
-      document.getElementById("footer-dot-core"),
-      document.getElementById("footer-dot-ping"),
-    );
+(() => {
+  function initFooterSurgeState() {
+    const unlockedEggs = JSON.parse(localStorage.getItem("unlockedEggs") || "[]");
+    if (unlockedEggs.includes("footer_surge")) {
+      finalizeFooterDot(
+        document.getElementById("footer-dot-core"),
+        document.getElementById("footer-dot-ping"),
+      );
+    }
   }
 
-  const devToolsVisible = localStorage.getItem("devToolsVisible") === "true";
-  const devPanel = document.getElementById("dev-tools");
+  function initConsoleState() {
+    const devToolsVisible = localStorage.getItem("devToolsVisible") === "true";
+    const devPanel = document.getElementById("dev-tools");
 
-  if (devToolsVisible && devPanel) {
-    devPanel.classList.remove("hidden");
+    if (devToolsVisible && devPanel) {
+      devPanel.classList.remove("hidden");
+    }
+
+    const container = document.getElementById("matrix-console-container");
+    const reopenBtn = document.getElementById("reopen-console-btn");
+
+    // Force closed state on load
+    if (container) {
+      container.classList.add("hidden");
+      container.style.opacity = "0";
+      container.style.transform = "translateY(20px)";
+    }
+
+    if (reopenBtn) {
+      reopenBtn.classList.remove("hidden");
+    }
   }
 
-  const container = document.getElementById("matrix-console-container");
-  const reopenBtn = document.getElementById("reopen-console-btn");
+  document.addEventListener("DOMContentLoaded", () => {
+    initSkillXP();
+    initFooterSurgeState();
+    initConsoleState();
+    initDotEasterEgg();
+    initSkillMining();
+    // Initialize the profile counter
+    initProfileTracker();
 
-  // Force closed state on load
-  if (container) {
-    container.classList.add("hidden");
-    container.style.opacity = "0";
-    container.style.transform = "translateY(20px)";
-  }
-
-  if (reopenBtn) {
-    reopenBtn.classList.remove("hidden");
-  }
-
-  initDotEasterEgg();
-  initSkillMining();
-  // Initialize the profile counter
-  initProfileTracker();
-
-  applyTheme(localStorage.getItem("theme") || "light");
-  updateGameUI();
-});
+    applyTheme(localStorage.getItem("theme") || "light");
+    updateGameUI();
+  });
+})();
