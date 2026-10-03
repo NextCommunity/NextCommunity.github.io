@@ -1435,7 +1435,6 @@ function finalizeFooterDot(core, ping) {
  */
 (() => {
   function initFooterSurgeState() {
-    const unlockedEggs = JSON.parse(localStorage.getItem("unlockedEggs") || "[]");
     if (unlockedEggs.includes("footer_surge")) {
       finalizeFooterDot(
         document.getElementById("footer-dot-core"),
