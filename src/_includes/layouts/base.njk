@@ -17,7 +17,7 @@
       description: (seoBioDescription or ("Explore " + (name or '') + "'s developer profile, skills, and social links on NextCommunity.")),
       keywords: "developer profile, " + (name or '') + ", " + (role or '') + ", github profile, software developer portfolio",
       type: "profile",
-      image: site.defaultImage,
+      image: (github and ("https://github.com/" + github + ".png?size=460")) or site.defaultImage,
       person: {
         name: name,
         role: role,

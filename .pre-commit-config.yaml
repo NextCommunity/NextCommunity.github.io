@@ -113,7 +113,7 @@ repos:
     hooks:
       - id: biome-check
         name: run biome-check
-        description: Run Biome linter and formatter for JSON files
+        description: Run Biome linter and formatter for JSON and JavaScript files
         additional_dependencies: ["@biomejs/biome"]
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
@@ -145,3 +145,10 @@ repos:
         # args: [--config=.github/linters/zizmor.yml]
         files: ^\.github/workflows/.*$
         types: [yaml]
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: 914e7df21a07ef503a81201c76d2b11c789d3fca # frozen: v1.7.12
+    hooks:
+      - id: actionlint
+        name: run actionlint
+        description: Check GitHub Actions workflows
