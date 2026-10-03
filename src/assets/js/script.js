@@ -1430,10 +1430,10 @@ function finalizeFooterDot(core, ping) {
   document.getElementById("footer-surge-button").style.cursor = "default";
 }
 
-// Re-initialize skills after Surprise scroll or any DOM changes
-window.addEventListener("DOMContentLoaded", () => {
-  initSkillXP();
-
+/**
+ * INITIALIZATION
+ */
+function initFooterSurgeState() {
   const unlockedEggs = JSON.parse(localStorage.getItem("unlockedEggs") || "[]");
   if (unlockedEggs.includes("footer_surge")) {
     finalizeFooterDot(
@@ -1441,12 +1441,9 @@ window.addEventListener("DOMContentLoaded", () => {
       document.getElementById("footer-dot-ping"),
     );
   }
-});
+}
 
-/**
- * INITIALIZATION
- */
-document.addEventListener("DOMContentLoaded", () => {
+function initConsoleState() {
   const devToolsVisible = localStorage.getItem("devToolsVisible") === "true";
   const devPanel = document.getElementById("dev-tools");
 
@@ -1467,7 +1464,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (reopenBtn) {
     reopenBtn.classList.remove("hidden");
   }
+}
 
+function bootstrap() {
+  initSkillXP();
+  initFooterSurgeState();
+  initConsoleState();
   initDotEasterEgg();
   initSkillMining();
   // Initialize the profile counter
@@ -1475,4 +1477,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   applyTheme(localStorage.getItem("theme") || "light");
   updateGameUI();
-});
+}
+
+document.addEventListener("DOMContentLoaded", bootstrap);
