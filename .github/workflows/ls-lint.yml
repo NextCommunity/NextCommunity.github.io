@@ -1,0 +1,23 @@
+name: 📛 Code Quality - ls-lint
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+jobs:
+  ls-lint:
+    name: ls-lint File Naming Validation
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: ls-lint
+        uses: ls-lint/action@02e380fe8733d499cbfc9e22276de5085508a5bd # v2.3.1

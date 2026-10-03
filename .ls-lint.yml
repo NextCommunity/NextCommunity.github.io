@@ -1,0 +1,9 @@
+ls:
+  .js: kebab-case
+  .md: regex:[A-Z][A-Z0-9]*(-[A-Z0-9]+)*
+
+ignore:
+  - .git
+  - node_modules
+  - _site
+  - vendor
