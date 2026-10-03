@@ -109,7 +109,7 @@ repos:
         args: [--fix=lf]
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: 742ab683a70977bd4648797d799ddd6b5496ae87 # frozen: v2.5.13
+    rev: df12125767e3be2d945f0239811b308ff2a32c3f # frozen: v2.5.14
     hooks:
       - id: biome-check
         name: run biome-check
@@ -145,3 +145,11 @@ repos:
         # args: [--config=.github/linters/zizmor.yml]
         files: ^\.github/workflows/.*$
         types: [yaml]
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: 914e7df21a07ef503a81201c76d2b11c789d3fca # frozen: v1.7.12
+    hooks:
+      - id: actionlint
+        name: run actionlint
+        description: Check GitHub Actions workflows
+        args: [-shellcheck=, -pyflakes=]
