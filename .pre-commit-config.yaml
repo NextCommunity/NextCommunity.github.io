@@ -145,3 +145,11 @@ repos:
         # args: [--config=.github/linters/zizmor.yml]
         files: ^\.github/workflows/.*$
         types: [yaml]
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: 914e7df21a07ef503a81201c76d2b11c789d3fca # frozen: v1.7.12
+    hooks:
+      - id: actionlint
+        name: run actionlint
+        description: Check GitHub Actions workflows
+        args: [-shellcheck=, -pyflakes=]
