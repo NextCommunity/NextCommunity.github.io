@@ -327,8 +327,8 @@ NextCommunity.github.io/
 │   │   └── zizmor.yml                 # GitHub Actions security lint config
 │   ├── workflows/
 │   │   ├── deploy.yml                         # Production deployment workflow
-│   │   ├── firebase-hosting-merge.yml        # Firebase deploy on merge
-│   │   ├── firebase-hosting-pull-request.yml # Firebase preview deploys for PRs
+│   │   ├── firebase-hosting-merge.yml         # Firebase deploy on merge
+│   │   ├── firebase-hosting-pull-request.yml  # Firebase preview deploys for PRs
 │   │   ├── prek-audit.yml                     # prek audit workflow
 │   │   ├── prek-manual.yml                    # Manual prek workflow
 │   │   ├── prek.yml                           # Standard prek workflow
