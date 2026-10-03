@@ -152,4 +152,3 @@ repos:
       - id: actionlint
         name: run actionlint
         description: Check GitHub Actions workflows
-        args: [-shellcheck=, -pyflakes=]
