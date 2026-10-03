@@ -1430,49 +1430,52 @@ function finalizeFooterDot(core, ping) {
   document.getElementById("footer-surge-button").style.cursor = "default";
 }
 
-// Re-initialize skills after Surprise scroll or any DOM changes
-window.addEventListener("DOMContentLoaded", () => {
-  initSkillXP();
-
-  const unlockedEggs = JSON.parse(localStorage.getItem("unlockedEggs") || "[]");
-  if (unlockedEggs.includes("footer_surge")) {
-    finalizeFooterDot(
-      document.getElementById("footer-dot-core"),
-      document.getElementById("footer-dot-ping"),
-    );
-  }
-});
-
 /**
  * INITIALIZATION
  */
-document.addEventListener("DOMContentLoaded", () => {
-  const devToolsVisible = localStorage.getItem("devToolsVisible") === "true";
-  const devPanel = document.getElementById("dev-tools");
-
-  if (devToolsVisible && devPanel) {
-    devPanel.classList.remove("hidden");
+(() => {
+  function initFooterSurgeState() {
+    if (unlockedEggs.includes("footer_surge")) {
+      finalizeFooterDot(
+        document.getElementById("footer-dot-core"),
+        document.getElementById("footer-dot-ping"),
+      );
+    }
   }
 
-  const container = document.getElementById("matrix-console-container");
-  const reopenBtn = document.getElementById("reopen-console-btn");
+  function initConsoleState() {
+    const devToolsVisible = localStorage.getItem("devToolsVisible") === "true";
+    const devPanel = document.getElementById("dev-tools");
 
-  // Force closed state on load
-  if (container) {
-    container.classList.add("hidden");
-    container.style.opacity = "0";
-    container.style.transform = "translateY(20px)";
+    if (devToolsVisible && devPanel) {
+      devPanel.classList.remove("hidden");
+    }
+
+    const container = document.getElementById("matrix-console-container");
+    const reopenBtn = document.getElementById("reopen-console-btn");
+
+    // Force closed state on load
+    if (container) {
+      container.classList.add("hidden");
+      container.style.opacity = "0";
+      container.style.transform = "translateY(20px)";
+    }
+
+    if (reopenBtn) {
+      reopenBtn.classList.remove("hidden");
+    }
   }
 
-  if (reopenBtn) {
-    reopenBtn.classList.remove("hidden");
-  }
+  document.addEventListener("DOMContentLoaded", () => {
+    initSkillXP();
+    initFooterSurgeState();
+    initConsoleState();
+    initDotEasterEgg();
+    initSkillMining();
+    // Initialize the profile counter
+    initProfileTracker();
 
-  initDotEasterEgg();
-  initSkillMining();
-  // Initialize the profile counter
-  initProfileTracker();
-
-  applyTheme(localStorage.getItem("theme") || "light");
-  updateGameUI();
-});
+    applyTheme(localStorage.getItem("theme") || "light");
+    updateGameUI();
+  });
+})();
