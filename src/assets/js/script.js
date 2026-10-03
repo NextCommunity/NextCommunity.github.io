@@ -1433,7 +1433,9 @@ function finalizeFooterDot(core, ping) {
 /**
  * INITIALIZATION
  */
-function initFooterSurgeState() {
+document.addEventListener("DOMContentLoaded", () => {
+  initSkillXP();
+
   const unlockedEggs = JSON.parse(localStorage.getItem("unlockedEggs") || "[]");
   if (unlockedEggs.includes("footer_surge")) {
     finalizeFooterDot(
@@ -1441,9 +1443,7 @@ function initFooterSurgeState() {
       document.getElementById("footer-dot-ping"),
     );
   }
-}
 
-function initConsoleState() {
   const devToolsVisible = localStorage.getItem("devToolsVisible") === "true";
   const devPanel = document.getElementById("dev-tools");
 
@@ -1464,12 +1464,7 @@ function initConsoleState() {
   if (reopenBtn) {
     reopenBtn.classList.remove("hidden");
   }
-}
 
-function bootstrap() {
-  initSkillXP();
-  initFooterSurgeState();
-  initConsoleState();
   initDotEasterEgg();
   initSkillMining();
   // Initialize the profile counter
@@ -1477,6 +1472,4 @@ function bootstrap() {
 
   applyTheme(localStorage.getItem("theme") || "light");
   updateGameUI();
-}
-
-document.addEventListener("DOMContentLoaded", bootstrap);
+});
