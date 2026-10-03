@@ -13,6 +13,7 @@
  * Theme-aware: reads the current dark/light mode at startup.
  */
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 const CodeBreaker = (() => {
   const GAME_ID = "code-breaker";
   const TILE_SPEED_BASE = 180;
@@ -75,7 +76,7 @@ const CodeBreaker = (() => {
       },
       scene: {
         create: function () {
-          _onSceneCreate(this, skills, devName, theme, W, H);
+          _onSceneCreate(this, skills, theme, W, H);
         },
         update: function () {
           _onSceneUpdate(this);
@@ -91,7 +92,7 @@ const CodeBreaker = (() => {
 
   // ─── Scene ───────────────────────────────────────────────────────────────
 
-  function _onSceneCreate(scene, skills, devName, theme, W, H) {
+  function _onSceneCreate(scene, skills, theme, W, H) {
     // State stored on scene object
     scene.cb_lives = LIVES;
     scene.cb_score = 0;
@@ -138,8 +139,8 @@ const CodeBreaker = (() => {
     scene.physics.add.overlap(
       scene.cb_catcher,
       scene.cb_tiles,
-      (catcher, tile) => {
-        _collectTile(scene, tile, theme, W, H);
+      (_catcher, tile) => {
+        _collectTile(scene, tile, W, H);
       },
     );
 
@@ -163,7 +164,7 @@ const CodeBreaker = (() => {
 
     // Spawn first tile after a short delay
     scene.time.delayedCall(500, () => {
-      _spawnTile(scene, theme, W);
+      _spawnTile(scene, W);
     });
   }
 
@@ -184,7 +185,7 @@ const CodeBreaker = (() => {
     const now = scene.time.now;
     if (now - scene.cb_lastSpawn > scene.cb_spawnDelay) {
       scene.cb_lastSpawn = now;
-      _spawnTile(scene, getGameTheme(), scene.scale.width);
+      _spawnTile(scene, scene.scale.width);
     }
 
     // Check if any tile fell off the bottom.
@@ -203,7 +204,7 @@ const CodeBreaker = (() => {
 
   // ─── Game logic ──────────────────────────────────────────────────────────
 
-  function _spawnTile(scene, theme, W) {
+  function _spawnTile(scene, W) {
     if (!scene.cb_active) return;
 
     const skill =
@@ -264,8 +265,7 @@ const CodeBreaker = (() => {
     scene.cb_spawnDelay = Math.max(600, scene.cb_spawnDelay - 20);
   }
 
-  function _collectTile(scene, tile, theme, W, H) {
-    const skill = tile.getData("skill");
+  function _collectTile(scene, tile, W, H) {
     const rarity = tile.getData("rarity");
     const color = tile.getData("color");
 
@@ -277,7 +277,7 @@ const CodeBreaker = (() => {
       TILE_SPEED_BASE + scene.cb_score * TILE_SPEED_INC,
     );
 
-    if (scene.cb_scoreText && scene.cb_scoreText.active) {
+    if (scene.cb_scoreText?.active) {
       scene.cb_scoreText.setText("Score: " + scene.cb_score);
     }
 
@@ -316,7 +316,7 @@ const CodeBreaker = (() => {
 
     scene.cb_lives--;
 
-    if (scene.cb_livesText && scene.cb_livesText.active) {
+    if (scene.cb_livesText?.active) {
       scene.cb_livesText.setText("❤️".repeat(Math.max(0, scene.cb_lives)));
     }
 
