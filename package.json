@@ -14,7 +14,7 @@
     "jiti": "^2.7.0",
     "js-yaml": "^5.4.2",
     "lightningcss": "^1.33.0",
-    "magic-string": "^1.4.1",
+    "magic-string": "^1.4.2",
     "mri": "^1.2.0",
     "node-addon-api": "^8.9.2",
     "phaser": "^4.2.1",
@@ -54,6 +54,6 @@
   },
   "homepage": "https://github.com/NextCommunity/NextCommunity.github.io#readme",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   }
 }

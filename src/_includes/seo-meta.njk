@@ -77,9 +77,9 @@
   "jobTitle": {{ seo.person.role | safeJsonLd | safe }},
   "url": {{ canonicalUrl | safeJsonLd | safe }},
   "sameAs": [
-    {% if seo.person.github %}{{ ("https://github.com/" + seo.person.github) | safeJsonLd | safe }}{% endif %}
-    {% if seo.person.github and seo.person.linkedin %},{% endif %}
-    {% if seo.person.linkedin %}{{ seo.person.linkedin | safeJsonLd | safe }}{% endif %}
+    {%- set comma = joiner(",") -%}
+    {%- if seo.person.github -%}{{ comma() }}{{ ("https://github.com/" + seo.person.github) | safeJsonLd | safe }}{%- endif -%}
+    {%- if seo.person.linkedin -%}{{ comma() }}{{ seo.person.linkedin | safeJsonLd | safe }}{%- endif -%}
   ]
 }
 </script>
