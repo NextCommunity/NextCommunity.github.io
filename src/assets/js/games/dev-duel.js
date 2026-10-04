@@ -90,8 +90,8 @@ const DevDuel = (() => {
       .setOrigin(0.5, 0);
 
     // Cards
-    _drawCard(scene, challenger, cPower, W * 0.22, H / 2 - 20, theme, false);
-    _drawCard(scene, opponent, oPower, W * 0.78, H / 2 - 20, theme, true);
+    _drawCard(scene, challenger, cPower, W * 0.22, H / 2 - 20, theme);
+    _drawCard(scene, opponent, oPower, W * 0.78, H / 2 - 20, theme);
 
     // VS label
     scene.add
@@ -127,11 +127,11 @@ const DevDuel = (() => {
 
     // Animate the battle after a short delay
     scene.time.delayedCall(800, () => {
-      _animateBattle(scene, challenger, opponent, cPower, oPower, W, H, theme);
+      _animateBattle(scene, challenger, opponent, cPower, oPower, W, H);
     });
   }
 
-  function _drawCard(scene, dev, power, cx, cy, theme, flipSide) {
+  function _drawCard(scene, dev, power, cx, cy, theme) {
     const cardW = 160;
     const cardH = 200;
     const x = cx - cardW / 2;
@@ -215,7 +215,7 @@ const DevDuel = (() => {
       w: barW,
       duration: 800,
       ease: "Power2",
-      onUpdate: (tween, target) => {
+      onUpdate: (_tween, target) => {
         fillGfx.clear();
         fillGfx.fillStyle(0x38bdf8, 1);
         fillGfx.fillRoundedRect(x, y + 14, target.w, 10, 3);
@@ -231,16 +231,7 @@ const DevDuel = (() => {
 
   // ─── Battle animation ─────────────────────────────────────────────────────
 
-  function _animateBattle(
-    scene,
-    challenger,
-    opponent,
-    cPower,
-    oPower,
-    W,
-    H,
-    theme,
-  ) {
+  function _animateBattle(scene, challenger, opponent, cPower, oPower, W, H) {
     // Flash attacks back and forth
     let round = 0;
     const maxRounds = 5;
@@ -248,7 +239,7 @@ const DevDuel = (() => {
     const attackFlash = () => {
       if (round >= maxRounds) {
         scene.time.delayedCall(400, () => {
-          _showResult(scene, challenger, opponent, cPower, oPower, W, H, theme);
+          _showResult(scene, challenger, opponent, cPower, oPower, W, H);
         });
         return;
       }
@@ -280,16 +271,7 @@ const DevDuel = (() => {
 
   // ─── Result screen ────────────────────────────────────────────────────────
 
-  function _showResult(
-    scene,
-    challenger,
-    opponent,
-    cPower,
-    oPower,
-    W,
-    H,
-    theme,
-  ) {
+  function _showResult(scene, challenger, opponent, cPower, oPower, W, H) {
     const challengerWins = cPower >= oPower;
     const winner = challengerWins ? challenger : opponent;
 
@@ -397,6 +379,7 @@ function getCardData(cardEl) {
  *
  * @param {HTMLElement} challengerCard  The card element that was clicked.
  */
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function startDuelFromCard(challengerCard) {
   const allCards = Array.from(
     document.querySelectorAll(".user-card[data-name]"),

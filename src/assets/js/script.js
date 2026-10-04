@@ -42,6 +42,7 @@ const XP_GRAVITY_SECRET = 250; // Gravity effect easter egg
 const XP_KONAMI_SECRET = 500; // Konami code easter egg
 const XP_FOOTER_SURGE = 1000; // Footer surge secret
 const XP_BADGE_CLICK = 45; // Badge click reward
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 const XP_SPACE_INVADERS_WIN = 200; // Defeat all Space Invaders
 const _XP_CODE_BREAKER_WIN = 100; // Win a Code Breaker round
 const _XP_DEV_DUEL_PLAY = 25; // Play a Developer Duel
@@ -77,9 +78,28 @@ function initAudio() {
 window.addEventListener("click", initAudio, { once: true });
 window.addEventListener("keydown", initAudio, { once: true });
 
-function playSound(type) {
+const isAudioRunning = () => audioCtx?.state === "running";
+
+const LAYERED_SOUND_CONFIGS = {
+  secret: {
+    oscillatorType: "triangle",
+    frequencies: [523.25, 659.25, 783.99, 1046.5],
+    interval: 0.3,
+    volume: 0.07,
+    duration: 0.3,
+  },
+  restore: {
+    oscillatorType: "sine",
+    frequencies: [220, 440, 880, 1760],
+    interval: 0.05,
+    volume: 0.1,
+    duration: 0.1,
+  },
+};
+
+window.playSound = function playSound(type) {
   initAudio();
-  if (!audioCtx || audioCtx.state !== "running") return;
+  if (!isAudioRunning()) return;
 
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
@@ -102,34 +122,25 @@ function playSound(type) {
     gain.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
     osc.start(now);
     osc.stop(now + 1.5);
-  } else if (type === "secret") {
-    osc.type = "triangle";
-    [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+  } else {
+    const config = LAYERED_SOUND_CONFIGS[type];
+    if (!config) return;
+
+    osc.type = config.oscillatorType;
+    config.frequencies.forEach((freq, i) => {
+      const startTime = now + i * config.interval;
       const s = audioCtx.createOscillator();
       const g = audioCtx.createGain();
       s.connect(g);
       g.connect(audioCtx.destination);
-      s.frequency.setValueAtTime(freq, now + i * 0.3);
-      g.gain.setValueAtTime(0.07, now + i * 0.3);
-      g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.3 + 0.3);
-      s.start(now + i * 0.3);
-      s.stop(now + i * 0.3 + 0.3);
-    });
-  } else if (type === "restore") {
-    osc.type = "sine";
-    [220, 440, 880, 1760].forEach((freq, i) => {
-      const s = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      s.connect(g);
-      g.connect(audioCtx.destination);
-      s.frequency.setValueAtTime(freq, now + i * 0.05);
-      g.gain.setValueAtTime(0.1, now + i * 0.05);
-      g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.05 + 0.1);
-      s.start(now + i * 0.05);
-      s.stop(now + i * 0.05 + 0.1);
+      s.frequency.setValueAtTime(freq, startTime);
+      g.gain.setValueAtTime(config.volume, startTime);
+      g.gain.exponentialRampToValueAtTime(0.01, startTime + config.duration);
+      s.start(startTime);
+      s.stop(startTime + config.duration);
     });
   }
-}
+};
 
 function getRank(lvl) {
   const numericLevel = Number(lvl) || 0;
@@ -263,6 +274,7 @@ document.addEventListener("mouseup", () => {
   dragContainer.classList.add("transition-all", "duration-300", "ease-in-out");
 });
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function minimizeConsole() {
   if (consoleOutput.style.display === "none") {
     consoleOutput.style.display = "block";
@@ -273,6 +285,7 @@ function minimizeConsole() {
   }
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function maximizeConsole() {
   consoleContainer.classList.toggle("console-maximized");
 
@@ -353,6 +366,7 @@ window.createFloatingXP = (e) => {
   setTimeout(() => popup.remove(), 800);
 };
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function handleLevelClick() {
   triggerSecretUnlock("badge_click");
 }
@@ -447,8 +461,9 @@ function applyTheme(theme) {
   updateThemeIcon(theme);
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function toggleTheme() {
-  playSound("click");
+  window.playSound("click");
   const current = localStorage.getItem("theme") || "light";
   const next =
     current === "light" ? "dark" : current === "dark" ? "random" : "light";
@@ -545,6 +560,7 @@ function triggerForceSurge() {
   }, 8000);
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function triggerMagicXP() {
   initAudio();
   addExperience(XP_MAGIC_BONUS);
@@ -567,7 +583,7 @@ function triggerSecretUnlock(type) {
 
   // 3. Only process XP and Save if it's the first time
   if (isNewUnlock) {
-    playSound("secret");
+    window.playSound("secret");
     // Update the array and save to localStorage
     unlockedEggs.push(eggId);
     localStorage.setItem("unlockedEggs", JSON.stringify(unlockedEggs));
@@ -590,7 +606,7 @@ function triggerSecretUnlock(type) {
 
     console.log(`✨ Secret Unlocked: ${eggId}`);
   } else {
-    playSound("click");
+    window.playSound("click");
     console.log(`Secret ${eggId} already discovered. No extra XP granted.`);
   }
 }
@@ -660,7 +676,7 @@ window.addEventListener("keydown", (e) => {
     const isOpening = systemDash.classList.contains("hidden");
 
     localStorage.setItem("devToolsVisible", isOpening);
-    playSound(isOpening ? "secret" : "click");
+    window.playSound(isOpening ? "secret" : "click");
 
     if (isOpening) {
       document
@@ -742,7 +758,7 @@ function activateGravityEffect() {
                     box-shadow: 0 0 50px rgba(37, 99, 235, 0.8);
                 `;
         btn.onclick = () => {
-          playSound("restore");
+          window.playSound("restore");
           btn.innerHTML = "SYSTEM RESTORED";
           btn.style.pointerEvents = "none";
           setTimeout(() => window.location.reload(), 1000);
@@ -822,7 +838,7 @@ function triggerBadgeLevelUp() {
   // 2. Secret Sound & Level Logic
   if (!hasTriggeredFirstLevel) {
     // Play your secret sound
-    playSound("secret");
+    window.playSound("secret");
 
     // Force a level up for the "first time" experience
     addExperience(XP_PER_LEVEL);
@@ -921,8 +937,9 @@ window.startSelfDestruct = () => {
   }, 1000);
 };
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function scrollToRandomUser() {
-  playSound("click");
+  window.playSound("click");
 
   surpriseClickCount++;
   if (surpriseClickCount >= 5) {
@@ -945,7 +962,7 @@ function scrollToRandomUser() {
   randomCard.scrollIntoView({ behavior: "smooth", block: "center" });
 
   setTimeout(() => {
-    playSound("levelUp");
+    window.playSound("levelUp");
     randomCard.classList.add("selected-fancy");
 
     // Inject the Tracing SVG
@@ -1336,6 +1353,7 @@ function addMaintenanceXP() {
   }
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function jumpToLevel() {
   const input = document.getElementById("jump-lvl");
   if (!input || input.value === "") return;
@@ -1360,6 +1378,7 @@ function jumpToLevel() {
   showLevelUpNotification(rank);
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function handleFooterDotClick() {
   // 1. Get the current list of unlocked eggs
   const rawEggs = localStorage.getItem("unlockedEggs") || "[]";

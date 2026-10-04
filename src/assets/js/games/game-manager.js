@@ -8,6 +8,7 @@
  *  - Persisting per-game high scores and achievement flags in localStorage
  */
 
+// biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 const GameManager = (() => {
   /** Active Phaser.Game instances keyed by game id. */
   const _instances = {};
