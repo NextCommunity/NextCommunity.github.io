@@ -139,10 +139,10 @@ bio: |
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Start the development server
-npm start
+bun start
 ```
 
 Visit `http://localhost:8080` to preview your profile before submitting.
@@ -262,8 +262,8 @@ Want to contribute to the project code or test your profile locally? Here's how 
 
 ### Prerequisites
 
-- **Node.js**: Version 22.x or higher ([Download](https://nodejs.org/)); check the Node.js release EOL schedule at [endoflife.date/nodejs](https://endoflife.date/nodejs)
-- **npm**: Comes with Node.js
+- **Bun**: Version 1.2.x or higher ([Download](https://bun.sh/))
+- **Node.js**: Required only if you need a fallback runtime for tooling that still expects Node.js; this project targets Bun for local development and CI
 - **Python**: Optional; use version 3.13 or higher if you want to provide your own interpreter for the repository's `uv sync`-managed dev tools
 - **uv**: Recommended for installing Python dev tools and can download a compatible Python version when needed
 - **Git**: For version control
@@ -276,10 +276,10 @@ git clone https://github.com/NextCommunity/NextCommunity.github.io.git
 cd NextCommunity.github.io
 
 # Install dependencies
-npm install
+bun install
 
 # Start the development server
-npm start
+bun start
 ```
 
 The site will be available at `http://localhost:8080` with live reload enabled.
@@ -288,10 +288,10 @@ The site will be available at `http://localhost:8080` with live reload enabled.
 
 ```bash
 # Start development server with live reload
-npm start
+bun start
 
 # Build for production
-npm run build
+bun run build
 ```
 
 ### Quality Checks with prek
@@ -390,14 +390,14 @@ NextCommunity.github.io/
 ├── .gitattributes                     # Git text normalization rules
 ├── .gitignore                         # Git ignored files
 ├── .ls-lint.yml                       # File and directory naming rules
-├── .npmrc                             # npm configuration
+├── .npmrc                             # npm compatibility config for legacy tooling
 ├── .pre-commit-config-audit.yaml      # prek audit config
 ├── .pre-commit-config.yaml            # prek hooks config
 ├── LICENSE                            # Project license
 ├── biome.json                         # Biome formatter / linter config
+├── bun.lock                           # Locked Bun dependency versions
 ├── firebase.json                      # Firebase Hosting configuration
-├── package-lock.json                  # Locked npm dependency versions
-├── package.json                       # Node.js dependencies & scripts
+├── package.json                       # Bun-managed dependencies & scripts
 ├── postcss.config.js                  # PostCSS / Tailwind build config
 ├── pyproject.toml                     # Python tooling config for prek/uv
 ├── uv.lock                            # Locked Python dev dependencies
@@ -769,8 +769,8 @@ Open `src/users/your-github-username.yaml` in your editor and fill in your detai
 ### Step 4: Test Locally (Optional but Recommended)
 
 ```bash
-npm install
-npm start
+bun install
+bun start
 ```
 
 Visit `http://localhost:8080` to preview your profile before submitting.

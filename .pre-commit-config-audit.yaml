@@ -22,9 +22,9 @@ repos:
 
   - repo: local
     hooks:
-      - id: npm-audit
-        name: run npm-audit
-        description: Run npm audit
-        entry: npm audit
+      - id: bun-audit
+        name: run bun-audit
+        description: Run Bun audit
+        entry: bun audit
         language: system
         pass_filenames: false

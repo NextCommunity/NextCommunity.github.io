@@ -7,8 +7,7 @@ exclude: |
   (?x)^(
     \.git/|
     _site/|
-    node_modules/|
-    package-lock\.json$
+    node_modules/
   )
 
 repos:
@@ -31,16 +30,16 @@ repos:
           Zip files are not allowed in the repository as they are hard to
           track and have security implications. Please remove the zip file from the repository.
         files: (?i)\.zip$
-      - id: npm-ci
-        name: run npm-ci
-        description: Install Node dependencies
-        entry: npm ci
+      - id: bun-install
+        name: run bun-install
+        description: Install Bun dependencies
+        entry: bun install --frozen-lockfile
         language: system
         pass_filenames: false
       - id: eleventy-build-check
         name: run eleventy-build-check
         description: Eleventy build and output check
-        entry: npm run build
+        entry: bun run build
         language: system
         pass_filenames: false
 
