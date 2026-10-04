@@ -15,15 +15,18 @@ repos:
   - repo: meta
     hooks:
       - id: identity
+        priority: 10
         name: Run identity
         description: Run the identity check
       - id: check-hooks-apply
+        priority: 10
         name: run check-hooks-apply
         description: check that all the hooks apply to the repository
 
   - repo: local
     hooks:
       - id: check-zip-file-is-not-committed
+        priority: 20
         name: check no zip files are committed
         description: Zip files are not allowed in the repository
         language: fail
@@ -32,12 +35,14 @@ repos:
           track and have security implications. Please remove the zip file from the repository.
         files: (?i)\.zip$
       - id: npm-ci
+        priority: 90
         name: run npm-ci
         description: Install Node dependencies
         entry: npm ci
         language: system
         pass_filenames: false
       - id: eleventy-build-check
+        priority: 100
         name: run eleventy-build-check
         description: Eleventy build and output check
         entry: npm run build
@@ -49,6 +54,7 @@ repos:
     rev: 83d9cd684c87d95d656c1458ef04895a7f1cbd8e # frozen: v8.30.1
     hooks:
       - id: gitleaks
+        priority: 10
         name: Run gitleaks
         description: Check for secrets with gitleaks
 
@@ -56,6 +62,7 @@ repos:
     rev: ad1b27d73581aa16cca06fc4a0761fc563ffe8e8 # frozen: v1.5.6
     hooks:
       - id: chmod
+        priority: 80
         name: Set file permissions
         description: Does not run on Windows so setup as a manual hook
         args: ["644"]
@@ -66,44 +73,57 @@ repos:
     rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # frozen: v6.0.0
     hooks:
       - id: trailing-whitespace
+        priority: 70
         name: run trailing-whitespace
         description: trims trailing whitespace
         args: [--markdown-linebreak-ext=md]
       - id: end-of-file-fixer
+        priority: 70
         name: run end-of-file-fixer
         description: makes sure files end in a newline and only a newline
       - id: fix-byte-order-marker
+        priority: 70
         name: run fix-byte-order-marker
         description: removes UTF-8 byte order marker
       - id: forbid-submodules
+        priority: 20
         name: run forbid-submodules
         description: forbids any submodules in the repository
       - id: check-yaml
+        priority: 20
         name: run check-yaml
         description: attempts to load all yaml files to verify syntax
       - id: check-added-large-files
+        priority: 20
         name: run check-added-large-files
         description: prevent giant files from being committed
       - id: check-json
+        priority: 20
         name: run check-json
         description: check JSON files for syntax errors
       - id: check-merge-conflict
+        priority: 20
         name: run check-merge-conflict
         description: check for merge conflict markers
       - id: check-case-conflict
+        priority: 20
         name: run check-case-conflict
         description: check for case conflicts in file names
       - id: check-vcs-permalinks
+        priority: 20
         name: run check-vcs-permalinks
         description: ensures that links to vcs websites are permalinks
       - id: detect-aws-credentials
+        priority: 10
         name: run detect-aws-credentials
         description: checks for the existence of AWS secrets that you have set up with the AWS CLI
         args: [--allow-missing-credentials]
       - id: detect-private-key
+        priority: 10
         name: run detect-private-key
         description: checks for the existence of private keys
       - id: mixed-line-ending
+        priority: 70
         name: run mixed-line-ending
         description: replaces or checks mixed line ending
         args: [--fix=lf]
@@ -112,6 +132,7 @@ repos:
     rev: df12125767e3be2d945f0239811b308ff2a32c3f # frozen: v2.5.14
     hooks:
       - id: biome-check
+        priority: 70
         name: run biome-check
         description: Run Biome linter and formatter for JSON and JavaScript files
         additional_dependencies: ["@biomejs/biome"]
@@ -120,6 +141,7 @@ repos:
     rev: 5b5dddc4fb0f83c3ea1fc5616fa63e115dce83e0 # frozen: v0.49.1
     hooks:
       - id: markdownlint
+        priority: 70
         name: run markdownlint
         description: check Markdown files with markdownlint
         args: [--config=.github/linters/.markdown-lint.yml]
@@ -130,6 +152,7 @@ repos:
     rev: cba56bcde1fdd01c1deb3f945e69764c291a6530 # frozen: v1.38.0
     hooks:
       - id: yamllint
+        priority: 70
         name: run yamllint
         description: check YAML files with yamllint
         args: [--strict, -c=.github/linters/.yaml-lint.yml]
@@ -140,6 +163,7 @@ repos:
     rev: fa412071e4f5d44d44f9e365f4676f9df92456a2 # frozen: v1.30.1
     hooks:
       - id: zizmor
+        priority: 10
         name: run zizmor
         description: zizmor is a static analysis tool for GitHub Actions
         # args: [--config=.github/linters/zizmor.yml]
@@ -150,5 +174,6 @@ repos:
     rev: 914e7df21a07ef503a81201c76d2b11c789d3fca # frozen: v1.7.12
     hooks:
       - id: actionlint
+        priority: 10
         name: run actionlint
         description: Check GitHub Actions workflows
