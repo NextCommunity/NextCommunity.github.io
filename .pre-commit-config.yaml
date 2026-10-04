@@ -21,6 +21,15 @@ repos:
         name: run check-hooks-apply
         description: check that all the hooks apply to the repository
 
+  - repo: https://github.com/thlorenz/doctoc.git
+    rev: 59dcae910a6ad4bbe8711275b854e3cd5c30f08b # frozen: v2.5.0
+    hooks:
+      - id: doctoc
+        name: add TOC for Markdown files
+        description: Automatically keep the README table of contents up to date
+        args: [--maxlevel, "6"]
+        files: ^README\.md$
+
   - repo: local
     hooks:
       - id: check-zip-file-is-not-committed
