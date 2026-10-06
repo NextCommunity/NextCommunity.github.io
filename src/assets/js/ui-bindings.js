@@ -1,4 +1,4 @@
-// Fixes #627 - remove inline button handlers and centralize UI click binding
+// Fixes #627 - remove inline handlers and centralize UI binding
 document.addEventListener('click', function(e) {
   const btn = e.target.closest('[data-action]');
   if (!btn) return;
@@ -27,4 +27,11 @@ document.addEventListener('click', function(e) {
     case 'launch-codebreaker': CodeBreaker?.launch(window.PROFILE_SKILLS, window.PROFILE_NAME); break;
     case 'footer-dot': handleFooterDotClick?.(); break;
   }
+});
+
+// Fix onmouseenter -> addEventListener
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.floating-xp-trigger').forEach(el => {
+    el.addEventListener('mouseenter', (e) => createFloatingXP?.(e));
+  });
 });
