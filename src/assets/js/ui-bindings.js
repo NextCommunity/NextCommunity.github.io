@@ -1,3 +1,4 @@
+// skipcq: JS-0357, JS-0239, JS-0090
 /* global scrollToRandomUser, handleLevelClick, toggleTheme, closeMatrix, reopenConsole, minimizeConsole, maximizeConsole, closeConsole, triggerSecretUnlock, triggerForceSurge, addExperience, XP_SPACE_INVADERS_WIN, _XP_CODE_BREAKER_WIN, _XP_DEV_DUEL_PLAY, playSound, triggerMagicXP, toggleScreenshotMode, jumpToLevel, startSelfDestruct, CodeBreaker, handleFooterDotClick, SpaceInvaders, startDuelFromCard, createFloatingXP */
 
 // Fixes #627 - Centralized UI bindings
@@ -14,7 +15,7 @@ document.addEventListener('click', function(e) {
     case 'minimize-console': minimizeConsole?.(); break;
     case 'maximize-console': maximizeConsole?.(); break;
     case 'close-console': closeConsole?.(); break;
-    case 'secret-unlock': triggerSecretUnlock?.(btn.dataset.secret); break;
+    case 'secret-unlock': triggerSecretUnlock?.(btn.dataset.code); break;
     case 'force-surge': triggerForceSurge?.(); break;
     case 'xp-invader': addExperience(XP_SPACE_INVADERS_WIN); playSound?.('levelUp'); break;
     case 'xp-breaker': addExperience(_XP_CODE_BREAKER_WIN); playSound?.('levelUp'); break;
