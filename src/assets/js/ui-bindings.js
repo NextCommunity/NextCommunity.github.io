@@ -25,5 +25,6 @@ document.addEventListener('click', function(e) {
     case 'self-destruct': startSelfDestruct?.(); break;
     case 'reset-storage': localStorage.clear(); location.reload(); break;
     case 'launch-codebreaker': CodeBreaker?.launch(window.PROFILE_SKILLS, window.PROFILE_NAME); break;
+    case 'footer-dot': handleFooterDotClick?.(); break;
   }
 });
