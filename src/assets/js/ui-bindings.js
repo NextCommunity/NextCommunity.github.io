@@ -1,33 +1,29 @@
-// Centralized UI click binding - fixes #627
-// No inline onclick - all actions handled via data-action
+// Fixes #627 - centralize ALL UI clicks
 document.addEventListener('click', function(e) {
-  const target = e.target.closest('[data-action]');
-  if (!target) return;
-
-  const action = target.dataset.action;
+  const btn = e.target.closest('[data-action]');
+  if (!btn) return;
+  const action = btn.dataset.action;
 
   switch(action) {
-    case 'scroll-to-random':
-      if (typeof scrollToRandomUser === 'function') scrollToRandomUser();
-      break;
-    case 'level-click':
-      if (typeof handleLevelClick === 'function') handleLevelClick();
-      break;
-    case 'toggle-theme':
-      if (typeof toggleTheme === 'function') toggleTheme();
-      break;
-    case 'close-matrix':
-      if (typeof closeMatrix === 'function') closeMatrix();
-      break;
-  }
-});
-
-// Also handle ESC key to close matrix (bonus - was already there but keep it)
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    const overlay = document.getElementById('matrix-overlay');
-    if (overlay &&!overlay.classList.contains('hidden')) {
-      if (typeof closeMatrix === 'function') closeMatrix();
-    }
+    case 'scroll-to-random': scrollToRandomUser?.(); break;
+    case 'level-click': handleLevelClick?.(); break;
+    case 'toggle-theme': toggleTheme?.(); break;
+    case 'close-matrix': closeMatrix?.(); break;
+    case 'reopen-console': reopenConsole?.(); break;
+    case 'minimize-console': minimizeConsole?.(); break;
+    case 'maximize-console': maximizeConsole?.(); break;
+    case 'close-console': closeConsole?.(); break;
+    case 'secret-unlock': triggerSecretUnlock?.(btn.dataset.secret); break;
+    case 'force-surge': triggerForceSurge?.(); break;
+    case 'xp-invader': addExperience(XP_SPACE_INVADERS_WIN); playSound?.('levelUp'); break;
+    case 'xp-breaker': addExperience(_XP_CODE_BREAKER_WIN); playSound?.('levelUp'); break;
+    case 'xp-duel': addExperience(_XP_DEV_DUEL_PLAY); playSound?.('click'); break;
+    case 'xp-skill': addExperience(5); playSound?.('click'); break;
+    case 'xp-optimize': addExperience(15); playSound?.('restore'); break;
+    case 'magic-xp': triggerMagicXP?.(); playSound?.('levelUp'); break;
+    case 'screenshot-mode': toggleScreenshotMode?.(); break;
+    case 'jump-level': jumpToLevel?.(); break;
+    case 'self-destruct': startSelfDestruct?.(); break;
+    case 'reset-storage': localStorage.clear(); location.reload(); break;
   }
 });
