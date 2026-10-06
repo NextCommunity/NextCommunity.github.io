@@ -1,4 +1,6 @@
-// Fixes #627
+/* global scrollToRandomUser, handleLevelClick, toggleTheme, closeMatrix, reopenConsole, minimizeConsole, maximizeConsole, closeConsole, triggerSecretUnlock, triggerForceSurge, addExperience, XP_SPACE_INVADERS_WIN, _XP_CODE_BREAKER_WIN, _XP_DEV_DUEL_PLAY, playSound, triggerMagicXP, toggleScreenshotMode, jumpToLevel, startSelfDestruct, CodeBreaker, handleFooterDotClick, SpaceInvaders, startDuelFromCard, createFloatingXP */
+
+// Fixes #627 - Centralized UI bindings
 document.addEventListener('click', function(e) {
   const btn = e.target.closest('[data-action]');
   if (!btn) return;
