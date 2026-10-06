@@ -1,9 +1,8 @@
-// Fixes #627 - centralize ALL UI clicks
+// Fixes #627 - centralized click binding, no inline onclick
 document.addEventListener('click', function(e) {
   const btn = e.target.closest('[data-action]');
   if (!btn) return;
   const action = btn.dataset.action;
-
   switch(action) {
     case 'scroll-to-random': scrollToRandomUser?.(); break;
     case 'level-click': handleLevelClick?.(); break;
@@ -25,5 +24,6 @@ document.addEventListener('click', function(e) {
     case 'jump-level': jumpToLevel?.(); break;
     case 'self-destruct': startSelfDestruct?.(); break;
     case 'reset-storage': localStorage.clear(); location.reload(); break;
+    case 'launch-codebreaker': CodeBreaker?.launch(window.PROFILE_SKILLS, window.PROFILE_NAME); break;
   }
 });
