@@ -29,7 +29,12 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// Fix onmouseenter -> addEventListener
+// FIX for skills hover - matches YOUR screenshot: data-action="floating-xp"
+document.addEventListener('mouseover', function(e) {
+  const el = e.target.closest('[data-action="floating-xp"]');
+  if (el) createFloatingXP?.(e);
+});
+// ALSO support old class for safety
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.floating-xp-trigger').forEach(el => {
     el.addEventListener('mouseenter', (e) => createFloatingXP?.(e));
