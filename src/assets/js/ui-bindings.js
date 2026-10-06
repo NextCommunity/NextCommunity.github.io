@@ -1,4 +1,4 @@
-// Fixes #627 - centralized click binding, no inline onclick
+// Fixes #627 - remove inline button handlers and centralize UI click binding
 document.addEventListener('click', function(e) {
   const btn = e.target.closest('[data-action]');
   if (!btn) return;
