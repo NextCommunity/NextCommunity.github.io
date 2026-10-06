@@ -26,6 +26,8 @@ document.addEventListener('click', function(e) {
     case 'reset-storage': localStorage.clear(); location.reload(); break;
     case 'launch-codebreaker': CodeBreaker?.launch(window.PROFILE_SKILLS, window.PROFILE_NAME); break;
     case 'footer-dot': handleFooterDotClick?.(); break;
+    case 'launch-invaders': SpaceInvaders?.launch(); break;
+    case 'launch-breaker-arcade': CodeBreaker?.launch(null, 'Arcade Mode'); break;
   }
 });
 
