@@ -21,7 +21,7 @@
     "picocolors": "^1.1.1",
     "picomatch": "^4.0.7",
     "postcss": "^8.5.28",
-    "source-map-js": "^1.2.1",
+    "source-map-js": "^1.2.2",
     "tailwindcss": "^4.2.2",
     "tapable": "^2.3.3"
   },
