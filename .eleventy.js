@@ -1,10 +1,38 @@
 const yaml = require("js-yaml");
+const MarkdownIt = require("markdown-it");
+
+const md = new MarkdownIt({
+  html: false,
+  linkify: true,
+  breaks: true,
+  typographer: false,
+});
+
+const defaultLinkOpen =
+  md.renderer.rules.link_open ||
+  ((tokens, idx, options, _env, self) => self.renderToken(tokens, idx, options));
+
+md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+  const href = tokens[idx].attrGet("href") || "";
+  if (/^https?:\/\//i.test(href)) {
+    tokens[idx].attrSet("target", "_blank");
+    tokens[idx].attrSet("rel", "noopener noreferrer");
+  }
+  return defaultLinkOpen(tokens, idx, options, env, self);
+};
 
 module.exports = (eleventyConfig) => {
   eleventyConfig.addShortcode("currentYear", () => new Date().getFullYear());
   eleventyConfig.addFilter("safeJsonLd", (value) => {
     const json = JSON.stringify(value) ?? "null";
     return json.replace(/<\//g, "<\\/");
+  });
+  eleventyConfig.addFilter("markdown", (value) =>
+    md.render(String(value ?? "").trim()),
+  );
+  eleventyConfig.addFilter("plainText", (value) => {
+    const rendered = md.renderInline(String(value ?? "").trim());
+    return md.utils.unescapeAll(rendered.replace(/<[^>]*>/g, ""));
   });
   // Add this line to copy your external assets
   eleventyConfig.addPassthroughCopy("src/assets");
@@ -14,9 +42,9 @@ module.exports = (eleventyConfig) => {
   // 2. Define how to process YAML files
   eleventyConfig.addExtension("yaml", {
     key: "yaml",
-    compile: async (inputContent) => {
+    compile: (inputContent) => {
       const data = yaml.load(inputContent);
-      return async () => {
+      return () => {
         // This returns the 'content' for the page (the bio)
         return data.bio || "";
       };

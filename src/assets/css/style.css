@@ -108,6 +108,87 @@ body {
   border-color: var(--accent);
 }
 
+.bio-content p {
+  margin: 0 0 1em;
+}
+
+.bio-content p:last-child {
+  margin-bottom: 0;
+}
+
+.bio-content h1,
+.bio-content h2,
+.bio-content h3,
+.bio-content h4,
+.bio-content h5,
+.bio-content h6 {
+  font-weight: 800;
+  line-height: 1.3;
+  margin: 1.2em 0 0.5em;
+}
+
+.bio-content h1 {
+  font-size: 1.4em;
+}
+
+.bio-content h2 {
+  font-size: 1.25em;
+}
+
+.bio-content h3,
+.bio-content h4,
+.bio-content h5,
+.bio-content h6 {
+  font-size: 1.1em;
+}
+
+.bio-content h1:first-child,
+.bio-content h2:first-child,
+.bio-content h3:first-child {
+  margin-top: 0;
+}
+
+.bio-content ul,
+.bio-content ol {
+  margin: 0 0 1em;
+  padding-left: 1.4em;
+}
+
+.bio-content ul {
+  list-style: disc;
+}
+
+.bio-content ol {
+  list-style: decimal;
+}
+
+.bio-content li {
+  margin-bottom: 0.25em;
+}
+
+.bio-content li > p {
+  margin: 0;
+}
+
+.bio-content a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.bio-content a:hover {
+  opacity: 0.8;
+}
+
+.bio-content code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875em;
+  background: var(--bg-footer);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+
 /* If you have a specific button-style profile link */
 .profile-btn {
   background-color: var(--accent-light) !important;
