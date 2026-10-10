@@ -17,11 +17,11 @@ layout: layouts/base.njk
           </div>
           {% endif %}
           {% if email %}
-          <div class="flex items-center gap-3 group cursor-pointer copy-email-btn" data-email="{{ email }}">
+          <button data-action="copy-email" data-email="{{ email }}" class="flex items-center gap-3 group cursor-pointer w-full text-left">
             <span class="text-lg">✉️</span>
             <span class="text-[var(--text-muted)] group-hover:text-accent truncate">{{ email }}</span>
             <span class="hidden group-hover:inline text-[10px] bg-accent text-white px-2 py-0.5 rounded">Copy</span>
-          </div>
+          </button>
           {% endif %}
           {% if website %}
           <div class="flex items-center gap-3">
@@ -114,11 +114,8 @@ layout: layouts/base.njk
     }
     navigator.clipboard.writeText(text).then(showSuccess).catch(err => console.error('Failed to copy:', err));
   }
-  document.querySelector('.copy-email-btn')?.addEventListener('click', function() {
-    copyToClipboard(this.getAttribute('data-email'), this);
-  });
 
   const profileData = document.getElementById('profile-data');
-  window.PROFILE_NAME = profileData ? profileData.dataset.name : "";
-  window.PROFILE_SKILLS = profileData && profileData.dataset.skills ? profileData.dataset.skills.trim().split(/\s+/).filter(Boolean) : [];
+  window.PROFILE_NAME = profileData? profileData.dataset.name : "";
+  window.PROFILE_SKILLS = profileData && profileData.dataset.skills? profileData.dataset.skills.trim().split(/\s+/).filter(Boolean) : [];
 </script>
