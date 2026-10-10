@@ -1,7 +1,4 @@
-// skipcq: JS-0357
-/* global scrollToRandomUser, handleLevelClick, toggleTheme, closeMatrix, reopenConsole, minimizeConsole, maximizeConsole, closeConsole, triggerSecretUnlock, triggerForceSurge, addExperience, XP_SPACE_INVADERS_WIN, _XP_CODE_BREAKER_WIN, _XP_DEV_DUEL_PLAY, playSound, triggerMagicXP, toggleScreenshotMode, jumpToLevel, startSelfDestruct, CodeBreaker, handleFooterDotClick, SpaceInvaders, startDuelFromCard, createFloatingXP */
-
-// Fixes #627 - Centralized UI bindings - Refactored to reduce complexity
+// Fixes #627 + #648 - 100% delegated, no per-element listeners
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-action]');
   if (!btn) return;
@@ -34,17 +31,11 @@ document.addEventListener('click', (e) => {
     'duel-from-card': () => startDuelFromCard?.(btn.closest('.user-card')),
   };
 
-  const handler = handlers[btn.dataset.action];
-  if (handler) handler();
+  handlers[btn.dataset.action]?.();
 });
 
+// #648 fix: delegated hover - no querySelectorAll loop
 document.addEventListener('mouseover', (e) => {
-  const el = e.target.closest('[data-action="floating-xp"]');
-  if (el) createFloatingXP?.(e);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.floating-xp-trigger').forEach((el) => {
-    el.addEventListener('mouseenter', (ev) => createFloatingXP?.(ev));
-  });
+  const xpEl = e.target.closest('[data-action="floating-xp"], .floating-xp-trigger');
+  if (xpEl) createFloatingXP?.(e);
 });
