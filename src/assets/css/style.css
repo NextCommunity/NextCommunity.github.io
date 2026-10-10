@@ -7,10 +7,17 @@
   --bg-footer: #e2e8f0;
   --text-main: #1e293b; /* Default Light */
   --text-muted: #4a5568;
+  --text-light: #ffffff;
   --border-color: #cbd5e0;
   --accent: #94a3b8; /* Default */
   --accent-light: #eff6ff;
   --accent-rgb: 37, 99, 235;
+  --primary: #2563eb;
+  --primary-rgb: 37, 99, 235;
+  --success: #10b981;
+  --success-rgb: 16, 185, 129;
+  --info: #06b6d4;
+  --info-rgb: 6, 182, 212;
   --danger: #dc2626;
   --card-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -121,7 +128,7 @@ body {
 
 .profile-btn:hover {
   background-color: var(--accent) !important;
-  color: #ffffff !important;
+  color: var(--text-light) !important;
   box-shadow: 0 4px 15px var(--accent-light);
 }
 
@@ -147,7 +154,7 @@ body {
 
 .skill-item:hover {
   background-color: var(--accent) !important;
-  color: #ffffff !important;
+  color: var(--text-light) !important;
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.4);
 }
@@ -156,8 +163,8 @@ body {
  * 3. BUTTONS & SHIMMER EFFECTS
  */
 .surprise-btn {
-  background-color: #2563eb !important;
-  color: #ffffff !important;
+  background-color: var(--primary) !important;
+  color: var(--text-light) !important;
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
@@ -168,7 +175,7 @@ body {
   letter-spacing: 0.05em;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -180,7 +187,7 @@ body {
 
 .surprise-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+  box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.5);
   filter: brightness(1.1);
 }
 
@@ -308,13 +315,13 @@ html body #dev-tools[data-lock="true"] {
 }
 
 #repair-btn {
-  background-color: #2563eb !important; /* Restore to Blue */
-  color: #fff !important;
-  border: 4px solid #fff;
+  background-color: var(--primary) !important; /* Restore to Blue */
+  color: var(--text-light) !important;
+  border: 4px solid var(--text-light);
   border-radius: 9999px;
   padding: 1.5rem 3rem;
   font-weight: 900;
-  box-shadow: 0 0 60px rgba(37, 99, 235, 0.6);
+  box-shadow: 0 0 60px rgba(var(--primary-rgb), 0.6);
   z-index: 10001;
   position: fixed;
   top: 50%;
@@ -426,8 +433,8 @@ html body #dev-tools[data-lock="true"] {
 
 /* Special styling for those who have reached Level 5 (Data Miner) */
 body[data-level="5"] .skill-item {
-  border-color: #06b6d4 !important; /* Data Miner Cyan */
-  background: rgba(6, 182, 212, 0.1) !important;
+  border-color: var(--info) !important; /* Data Miner Cyan */
+  background: rgba(var(--info-rgb), 0.1) !important;
   position: relative;
   overflow: hidden;
 }
@@ -472,9 +479,9 @@ body[data-level="5"] .skill-item::before {
 /* Level 5 Specific Visual Perk */
 .level-architect .skill-item,
 body[data-level="5"] .skill-item {
-  border-color: #06b6d4 !important;
-  background: rgba(6, 182, 212, 0.1) !important;
-  box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+  border-color: var(--info) !important;
+  background: rgba(var(--info-rgb), 0.1) !important;
+  box-shadow: 0 0 10px rgba(var(--info-rgb), 0.2);
 }
 
 .skill-item {
@@ -764,12 +771,12 @@ a:hover {
   bottom: 20%;
   right: 20px;
   background: rgba(0, 0, 0, 0.9);
-  border-left: 4px solid #10b981;
-  color: #10b981;
+  border-left: 4px solid var(--success);
+  color: var(--success);
   padding: 15px;
   font-family: "Courier New", monospace;
   z-index: 2000;
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 20px rgba(var(--success-rgb), 0.2);
   animation: matrixSlideIn 0.3s ease-out;
 }
 
@@ -786,7 +793,7 @@ a:hover {
 
 #matrix-console-output {
   /* Subtle green glow on text */
-  text-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+  text-shadow: 0 0 5px rgba(var(--success-rgb), 0.3);
   scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
@@ -797,12 +804,12 @@ a:hover {
   width: 3px;
 }
 #matrix-console-output::-webkit-scrollbar-thumb {
-  background: rgba(16, 185, 129, 0.3);
+  background: rgba(var(--success-rgb), 0.3);
 }
 
 /* The Matrix Line Animation */
 .matrix-line {
-  border-left: 2px solid #10b981;
+  border-left: 2px solid var(--success);
   padding-left: 8px;
   margin-bottom: 4px;
   animation: matrixLineFade 0.3s ease-out;
@@ -830,7 +837,7 @@ a:hover {
 
 #matrix-console-output {
   scrollbar-width: thin;
-  scrollbar-color: #10b981 transparent;
+  scrollbar-color: var(--success) transparent;
 }
 
 /* Add a scanline effect for that retro terminal feel */
