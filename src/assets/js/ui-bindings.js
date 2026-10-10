@@ -1,7 +1,28 @@
-// Fixes #627 + #648 - 100% delegated, no per-element listeners
+// skipcq: JS-0357
+/* global scrollToRandomUser, handleLevelClick, toggleTheme, closeMatrix, reopenConsole, minimizeConsole, maximizeConsole, closeConsole, triggerSecretUnlock, triggerForceSurge, addExperience, XP_SPACE_INVADERS_WIN, _XP_CODE_BREAKER_WIN, _XP_DEV_DUEL_PLAY, playSound, triggerMagicXP, toggleScreenshotMode, jumpToLevel, startSelfDestruct, CodeBreaker, handleFooterDotClick, SpaceInvaders, startDuelFromCard, createFloatingXP, copyToClipboard */
+
+// Fixes #627 + #648 - 100% delegated UI bindings - zero inline onclick / zero per-element listeners
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-action]');
   if (!btn) return;
+
+  // #648 fix - copy email (was direct querySelector listener in bio.njk)
+  if (btn.dataset.action === 'copy-email') {
+    const email = btn.dataset.email || btn.getAttribute('data-email');
+    if (email && typeof copyToClipboard === 'function') {
+      copyToClipboard(email, btn);
+    } else if (email && navigator.clipboard) {
+      navigator.clipboard.writeText(email).then(() => {
+        const span = btn.querySelector('span:last-child');
+        if (span) {
+          const orig = span.innerText;
+          span.innerText = 'Copied!';
+          setTimeout(() => { span.innerText = orig; }, 2000);
+        }
+      });
+    }
+    return;
+  }
 
   const handlers = {
     'scroll-to-random': () => scrollToRandomUser?.(),
@@ -31,11 +52,12 @@ document.addEventListener('click', (e) => {
     'duel-from-card': () => startDuelFromCard?.(btn.closest('.user-card')),
   };
 
-  handlers[btn.dataset.action]?.();
+  const handler = handlers[btn.dataset.action];
+  if (handler) handler();
 });
 
-// #648 fix: delegated hover - no querySelectorAll loop
+// #648 fix - 100% delegated hover (replaces DOMContentLoaded + querySelectorAll loop)
 document.addEventListener('mouseover', (e) => {
-  const xpEl = e.target.closest('[data-action="floating-xp"], .floating-xp-trigger');
-  if (xpEl) createFloatingXP?.(e);
+  const el = e.target.closest('[data-action="floating-xp"], .floating-xp-trigger');
+  if (el) createFloatingXP?.(e);
 });
