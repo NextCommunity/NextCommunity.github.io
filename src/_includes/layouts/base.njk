@@ -6,6 +6,7 @@
   {% set seo = seo or {} %}
   {% if not seo.title and name %}
     {% set seoBioDescription = (bio or "")
+      | plainText
       | replace('\r', ' ')
       | replace('\n', ' ')
       | replace('\t', ' ')
