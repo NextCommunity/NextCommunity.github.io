@@ -8,6 +8,7 @@ module.exports = (eleventyConfig) => {
   });
   // Add this line to copy your external assets
   eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy({ "src/favicon.ico": "favicon.ico" });
   // 1. Recognize YAML as a template format
   eleventyConfig.addTemplateFormats("yaml");
 
