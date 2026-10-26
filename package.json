@@ -4,7 +4,7 @@
   "description": "A community for open-source programmers and software engineers.",
   "main": "script.js",
   "dependencies": {
-    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy": "^3.1.7",
     "@tailwindcss/postcss": "^4.3.3",
     "detect-libc": "^2.1.2",
     "enhanced-resolve": "^5.26.0",
@@ -12,7 +12,7 @@
     "is-extglob": "^2.1.1",
     "is-glob": "^4.0.3",
     "jiti": "^2.7.0",
-    "js-yaml": "^5.4.3",
+    "js-yaml": "^5.5.0",
     "lightningcss": "^1.33.0",
     "magic-string": "^1.4.3",
     "mri": "^1.2.0",
@@ -20,7 +20,7 @@
     "phaser": "^4.2.1",
     "picocolors": "^1.1.1",
     "picomatch": "^4.0.7",
-    "postcss": "^8.5.29",
+    "postcss": "^8.5.30",
     "source-map-js": "^1.2.2",
     "tailwindcss": "^4.2.2",
     "tapable": "^2.3.3"
