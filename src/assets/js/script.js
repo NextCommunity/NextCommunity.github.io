@@ -486,38 +486,46 @@ function playForceSoundtrack(duration = 8000) {
   initAudio();
   if (!audioCtx) return;
 
-  // 1. Create a Master Compressor to prevent distortion
-  const compressor = audioCtx.createDynamicsCompressor();
-  compressor.threshold.setValueAtTime(-24, audioCtx.currentTime);
-  compressor.knee.setValueAtTime(40, audioCtx.currentTime);
-  compressor.ratio.setValueAtTime(12, audioCtx.currentTime);
-  compressor.attack.setValueAtTime(0, audioCtx.currentTime);
-  compressor.release.setValueAtTime(0.25, audioCtx.currentTime);
-  compressor.connect(audioCtx.destination);
-
   const now = audioCtx.currentTime;
-  const masterGain = audioCtx.createGain();
-  masterGain.connect(compressor);
 
-  // Smooth volume swell
-  masterGain.gain.setValueAtTime(0, now);
-  masterGain.gain.linearRampToValueAtTime(0.6, now + 1.5);
-  masterGain.gain.setValueAtTime(0.6, now + duration / 1000 - 2);
-  masterGain.gain.exponentialRampToValueAtTime(0.001, now + duration / 1000);
+  // Local helper: schedule pre-recorded audio playback with volume envelope
+  function schedulePlayback(ctx, buffer, startTime, duration) {
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
 
-  // Create the "Harmonic Stack" (Multiple notes for a rich sound)
-  [55, 110, 164.81].forEach((freq, i) => {
-    const osc = audioCtx.createOscillator();
-    osc.type = i === 0 ? "sawtooth" : "triangle"; // Mix textures
-    osc.frequency.setValueAtTime(freq, now);
+    // Apply volume swell matching original envelope
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(0.5, startTime + 1.5);
+    gain.gain.setValueAtTime(0.5, startTime + duration / 1000 - 2);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration / 1000);
 
-    // Add a slight "wobble" (detune) for realism
-    osc.detune.setValueAtTime(i * 5, now);
+    source.connect(gain);
+    gain.connect(ctx.destination);
+    source.start(startTime);
+    source.stop(startTime + duration / 1000);
+  }
 
-    osc.connect(masterGain);
-    osc.start(now);
-    osc.stop(now + duration / 1000);
-  });
+  // Pre-load the pre-recorded audio (cached after first play)
+  if (!playForceSoundtrack._audioBuffer) {
+    const audioUrl = "/assets/audio/force-surge.mp3";
+    const ac = audioCtx;
+    fetch(audioUrl)
+      .then((res) => res.arrayBuffer())
+      .then((buf) => ac.decodeAudioData(buf))
+      .then((decoded) => {
+        playForceSoundtrack._audioBuffer = decoded;
+        // Play immediately after decode on first load
+        schedulePlayback(ac, decoded, now, duration);
+      })
+      .catch(() => {
+        // Fallback: silent — better than distorted audio
+      });
+    return;
+  }
+
+  // Already cached — play immediately
+  schedulePlayback(audioCtx, playForceSoundtrack._audioBuffer, now, duration);
 }
 
 function triggerForceSurge() {
