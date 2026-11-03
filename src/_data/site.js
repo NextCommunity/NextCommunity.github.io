@@ -5,5 +5,5 @@ module.exports = {
   locale: "en_US",
   themeColor: "#2563eb",
   twitterCard: "summary_large_image",
-  defaultImage: "/assets/img/next.jpeg",
+  defaultImage: "/assets/img/og-default.jpg",
 };
