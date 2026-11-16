@@ -1,7 +1,12 @@
 const yaml = require("js-yaml");
+const MarkdownIt = require("markdown-it");
+const markdown = new MarkdownIt({ html: false });
 
 module.exports = (eleventyConfig) => {
   eleventyConfig.addShortcode("currentYear", () => new Date().getFullYear());
+  eleventyConfig.addFilter("markdown", (value) =>
+  markdown.render(typeof value === "string" ? value : "")
+);
   eleventyConfig.addFilter("safeJsonLd", (value) => {
     const json = JSON.stringify(value) ?? "null";
     return json.replace(/<\//g, "<\\/");
