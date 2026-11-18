@@ -3,37 +3,37 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 
-function game() {
-  let config;
+const game = () => {
+  let config = null;
   const rewards = [];
   const scores = [];
   const context = vm.createContext({
     window: { innerWidth: 1000, innerHeight: 800 },
-    document: { createElement: () => ({ style: {} }), body: { appendChild() {} } },
+    document: { createElement: () => ({ style: {} }), body: { appendChild() { /* Unused renderer hook in this scene test double. */ } } },
     Phaser: { CANVAS: 1 }, XP_SPACE_INVADERS_WIN: 100,
     GameManager: {
       loadPhaser: fn => fn(), create: (_, c) => { config = c; },
       awardXP: xp => rewards.push(xp), incrementStat: () => 1,
-      grantAchievement() {}, setHighScore: (_, score) => scores.push(score), destroy() {},
+      grantAchievement() { /* Unused renderer hook in this scene test double. */ }, setHighScore: (_, score) => scores.push(score), destroy() { /* Unused renderer hook in this scene test double. */ },
     },
   });
-  vm.runInContext(fs.readFileSync('src/assets/js/games/space-invaders.js', 'utf8') + '\nSpaceInvaders.launch();', context);
+  vm.runInContext(`${fs.readFileSync('src/assets/js/games/space-invaders.js', 'utf8')}\nSpaceInvaders.launch();`, context);
   const handlers = {};
   const group = () => ({ children: [], add(x) { this.children.push(x); }, getChildren() { return this.children.filter(x => x.active); }, countActive() { return this.getChildren().length; } });
   const scene = {
     scale: { width: 1000, height: 800 },
     add: { text(x,y,text) { return { x,y,text,width:24,active:true, setOrigin() { return this; },setText(t) { this.text=t; },getBounds() { return {top:this.y,bottom:this.y+24}; },destroy() { this.active=false; } }; } },
     physics: { pause() { scene.paused=true; }, add: {
-      existing(x) { x.body={setCollideWorldBounds(){},setAllowGravity(){},setSize(){},setVelocityX(v){this.vx=v;},setVelocityY(){}}; },
+      existing(x) { x.body={setCollideWorldBounds(){ /* Unused physics hook in this scene test double. */ },setAllowGravity(){ /* Unused physics hook in this scene test double. */ },setSize(){ /* Unused physics hook in this scene test double. */ },setVelocityX(v){this.vx=v;},setVelocityY(){ /* Unused physics hook in this scene test double. */ }}; },
       group, overlap(a,b,fn) { scene.hit=fn; },
     } },
     time: { now:1000,addEvent(c) { scene.move=c.callback; return {remove() { scene.timerRemoved=true; }}; } },
-    input: { once() {},keyboard: {createCursorKeys:()=>({left:{},right:{},space:{}}),once(k,fn){handlers[k]=fn;} } },
+    input: { once() { /* Unused renderer hook in this scene test double. */ },keyboard: {createCursorKeys:()=>({left:{},right:{},space:{}}),once(k,fn){handlers[k]=fn;} } },
     scene: { restart() { config.scene.create.call(scene); } },
   };
   config.scene.create.call(scene);
   return { scene, handlers, rewards, scores, update:()=>config.scene.update.call(scene) };
-}
+};
 
 test('hits update HUD; duplicate collision cannot score twice',()=>{
   const {scene}=game(); const bullet={active:true,destroy(){this.active=false;}};
