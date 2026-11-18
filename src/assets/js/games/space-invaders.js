@@ -42,7 +42,6 @@ const SpaceInvaders = (() => {
       pointerEvents: "auto",
       background: "#000000",
     });
-    document.body.appendChild(canvas);
 
     const config = {
       type: Phaser.CANVAS,
@@ -63,6 +62,8 @@ const SpaceInvaders = (() => {
     };
 
     GameManager.create(GAME_ID, config);
+    // create() removes the previous canvas; attach the new one afterwards.
+    document.body.appendChild(canvas);
   }
 
   // ─── Scene callbacks ─────────────────────────────────────────────────────
