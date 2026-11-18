@@ -61,3 +61,27 @@ test('victory awards once, stores round score, and supports restart',()=>{
   scene.hit({active:true},{active:true});assert.deepEqual(rewards,[100]);
   handlers['keydown-R']();assert.equal(scene.si_scoreText.text,'SCORE 0');
 });
+
+test('launch attaches the new canvas after manager cleanup, including relaunch', () => {
+  const canvases = [];
+  const context = vm.createContext({
+    window: { innerWidth: 1000, innerHeight: 800 },
+    document: {
+      createElement: () => ({ style: {}, remove() { canvases.splice(canvases.indexOf(this), 1); } }),
+      getElementById: id => canvases.find(canvas => canvas.id === id),
+      body: { appendChild: canvas => canvases.push(canvas) },
+    },
+    Phaser: { CANVAS: 1, Game: class {
+      constructor(config) { this.canvas = config.canvas; }
+      destroy() { this.canvas.remove(); }
+    } },
+  });
+  vm.runInContext(fs.readFileSync('src/assets/js/games/game-manager.js', 'utf8'), context);
+  vm.runInContext(fs.readFileSync('src/assets/js/games/space-invaders.js', 'utf8'), context);
+  vm.runInContext('SpaceInvaders.launch()', context);
+  assert.equal(canvases.length, 1);
+  const firstCanvas = canvases[0];
+  vm.runInContext('SpaceInvaders.launch()', context);
+  assert.equal(canvases.length, 1);
+  assert.notEqual(canvases[0], firstCanvas);
+});
