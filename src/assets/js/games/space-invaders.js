@@ -1,3 +1,4 @@
+/* global GameManager, Phaser, XP_SPACE_INVADERS_WIN */
 /**
  * space-invaders.js — The classic Space Invaders Easter Egg game.
  *
@@ -182,7 +183,7 @@ const SpaceInvaders = (() => {
         bullet.destroy();
         alien.destroy();
         scene.si_score += 10;
-        scene.si_scoreText.setText("SCORE " + scene.si_score);
+        scene.si_scoreText.setText(`SCORE ${scene.si_score}`);
         _playInvaderHitSound();
 
         if (scene.si_aliens.countActive() === 0) {
@@ -354,7 +355,7 @@ const SpaceInvaders = (() => {
       .text(
         scene.scale.width / 2,
         scene.scale.height / 2,
-        "GAME OVER\nSCORE " + scene.si_score + "\nR RESTART    ESC QUIT",
+        `GAME OVER\nSCORE ${scene.si_score}\nR RESTART    ESC QUIT`,
         {
           fontSize: "24px",
           fill: "#ffffff",
