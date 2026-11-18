@@ -85,8 +85,20 @@ const SpaceInvaders = (() => {
   }
 
   function _onUpdate() {
-    if (!this.si_player?.body) return;
+    if (!this.si_player?.body || this.si_finished) return;
 
+    if (
+      this.si_aliens
+        .getChildren()
+        .some(
+          (alien) =>
+            alien.active &&
+            alien.getBounds().bottom >= this.si_player.getBounds().top,
+        )
+    ) {
+      _onDefeat(this);
+      return;
+    }
     _updatePlayerVelocity(this);
     if (this.si_cursors.space.isDown) {
       _fireBullet(this);
@@ -108,6 +120,13 @@ const SpaceInvaders = (() => {
   // ─── Game setup ──────────────────────────────────────────────────────────
 
   function _setupGame(scene) {
+    scene.si_finished = false;
+    scene.si_score = 0;
+    scene.si_scoreText = scene.add.text(20, 20, "SCORE 0", {
+      fontSize: "24px",
+      fill: "#ffffff",
+    });
+
     // Player rocket
     scene.si_player = scene.add.text(
       window.innerWidth / 2,
@@ -147,7 +166,7 @@ const SpaceInvaders = (() => {
 
     // Alien movement timer
     scene.si_alienDirection = 1;
-    scene.time.addEvent({
+    scene.si_movementTimer = scene.time.addEvent({
       delay: 800,
       callback: _moveAliens,
       callbackScope: scene,
@@ -159,8 +178,11 @@ const SpaceInvaders = (() => {
       scene.si_bullets,
       scene.si_aliens,
       (bullet, alien) => {
+        if (scene.si_finished || !bullet.active || !alien.active) return;
         bullet.destroy();
         alien.destroy();
+        scene.si_score += 10;
+        scene.si_scoreText.setText("SCORE " + scene.si_score);
         _playInvaderHitSound();
 
         if (scene.si_aliens.countActive() === 0) {
@@ -191,6 +213,7 @@ const SpaceInvaders = (() => {
 
   /** Called with `callbackScope: scene` so `this` = scene. */
   function _moveAliens() {
+    if (this.si_finished) return;
     const padding = 60;
     let hitEdge = false;
     const children = this.si_aliens.getChildren();
@@ -215,6 +238,7 @@ const SpaceInvaders = (() => {
   }
 
   function _fireBullet(scene) {
+    if (scene.si_finished) return;
     const now = scene.time.now;
     if (now - scene.si_lastFired < 400) return;
 
@@ -271,6 +295,7 @@ const SpaceInvaders = (() => {
   // ─── Victory / cleanup ────────────────────────────────────────────────────
 
   function _onVictory(scene) {
+    if (!_finishRound(scene)) return;
     const w = scene.scale.width;
     const h = scene.scale.height;
 
@@ -280,9 +305,6 @@ const SpaceInvaders = (() => {
     // Track wins and check achievement
     const wins = GameManager.incrementStat("space_invaders_wins");
     if (wins === 1) GameManager.grantAchievement("first_blood");
-
-    // Update high score (score = wins × 100)
-    GameManager.setHighScore(GAME_ID, wins * 100);
 
     // Victory overlay
     scene.add
@@ -305,7 +327,7 @@ const SpaceInvaders = (() => {
       .setOrigin(0.5);
 
     scene.add
-      .text(w / 2, h / 2 + 70, "Click anywhere to continue", {
+      .text(w / 2, h / 2 + 70, "R RESTART    ESC QUIT    CLICK TO CLOSE", {
         fontSize: "16px",
         fill: "#ffffff",
         alpha: 0.7,
@@ -313,6 +335,36 @@ const SpaceInvaders = (() => {
       .setOrigin(0.5);
 
     scene.input.once("pointerdown", _cleanup);
+    scene.input.keyboard.once("keydown-R", () => scene.scene.restart());
+  }
+
+  function _finishRound(scene) {
+    if (scene.si_finished) return false;
+    scene.si_finished = true;
+    scene.si_player.body.setVelocityX(0);
+    scene.si_movementTimer.remove(false);
+    scene.physics.pause();
+    GameManager.setHighScore(GAME_ID, scene.si_score);
+    return true;
+  }
+
+  function _onDefeat(scene) {
+    if (!_finishRound(scene)) return;
+    scene.add
+      .text(
+        scene.scale.width / 2,
+        scene.scale.height / 2,
+        "GAME OVER\nSCORE " + scene.si_score + "\nR RESTART    ESC QUIT",
+        {
+          fontSize: "24px",
+          fill: "#ffffff",
+          align: "center",
+          backgroundColor: "#000000",
+          padding: { x: 20, y: 20 },
+        },
+      )
+      .setOrigin(0.5);
+    scene.input.keyboard.once("keydown-R", () => scene.scene.restart());
   }
 
   function _cleanup() {
