@@ -70,7 +70,7 @@ layout: layouts/base.njk
           <span class="w-8 h-[2px] bg-accent" aria-hidden="true"></span> Professional Bio
         </h2>
         <div class="text-[var(--text-main)] text-lg leading-relaxed whitespace-pre-line">
-          {{ bio }}
+          {{ bio | markdown | safe }}
         </div>
       </div>
       {% endif %}

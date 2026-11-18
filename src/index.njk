@@ -40,7 +40,7 @@ seo:
 
         {% set bio = person.data.bio %}
         {% if bio %}
-        <p class="mt-4 text-[var(--text-muted)] text-sm italic line-clamp-3">"{{ bio | trim | truncate(120) }}"</p>
+        <p class="mt-4 text-[var(--text-muted)] text-sm italic line-clamp-3">"{{ bio | markdown | striptags | trim | truncate(120) }}"</p>
         {% endif %}
       </div>
 
