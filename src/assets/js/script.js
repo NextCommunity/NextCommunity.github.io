@@ -482,7 +482,7 @@ function updateThemeIcon(theme) {
 /**
  * 5. EASTER EGG LOGIC & TRIGGERS
  */
-function playForceSoundtrack(duration = 8000) {
+window.playForceSoundtrack = function (duration = 8000) {
   initAudio();
   if (!audioCtx) return;
 
@@ -535,7 +535,7 @@ function playForceSoundtrack(duration = 8000) {
   });
 }
 
-function triggerForceSurge() {
+window.triggerForceSurge = function () {
   if (isSurging) return;
   isSurging = true;
 
