@@ -123,7 +123,7 @@ window.playSound = function playSound(type) {
     osc.start(now);
     osc.stop(now + 1.5);
   } else {
-    const config = LAYERED_SOUND_CONFIGS[type];
+    const config = LAYERED_SOUND_CONFIGS[type]; 
     if (!config) return;
 
     osc.type = config.oscillatorType;
@@ -486,37 +486,52 @@ function playForceSoundtrack(duration = 8000) {
   initAudio();
   if (!audioCtx) return;
 
-  // 1. Create a Master Compressor to prevent distortion
+  const now = audioCtx.currentTime;
+  const seconds = duration / 1000;
+
+  // Master compressor: gentle settings to avoid pumping/crackle
   const compressor = audioCtx.createDynamicsCompressor();
-  compressor.threshold.setValueAtTime(-24, audioCtx.currentTime);
-  compressor.knee.setValueAtTime(40, audioCtx.currentTime);
-  compressor.ratio.setValueAtTime(12, audioCtx.currentTime);
-  compressor.attack.setValueAtTime(0, audioCtx.currentTime);
-  compressor.release.setValueAtTime(0.25, audioCtx.currentTime);
+  compressor.threshold.setValueAtTime(-24, now);
+  compressor.knee.setValueAtTime(30, now);
+  compressor.ratio.setValueAtTime(4, now);
+  compressor.attack.setValueAtTime(0.01, now);
+  compressor.release.setValueAtTime(0.25, now);
   compressor.connect(audioCtx.destination);
 
-  const now = audioCtx.currentTime;
+  // Lowpass filter: removes harsh high frequencies
+  const filter = audioCtx.createBiquadFilter();
+  filter.type = "lowpass";
+  filter.frequency.setValueAtTime(800, now);
+  filter.connect(compressor);
+
+  // Master volume: smooth swell in and fade out
   const masterGain = audioCtx.createGain();
-  masterGain.connect(compressor);
+  masterGain.connect(filter);
+  masterGain.gain.setValueAtTime(0.0001, now);
+  masterGain.gain.linearRampToValueAtTime(0.25, now + 1.5);
+  masterGain.gain.setValueAtTime(0.25, now + seconds - 2);
+  masterGain.gain.exponentialRampToValueAtTime(0.001, now + seconds);
 
-  // Smooth volume swell
-  masterGain.gain.setValueAtTime(0, now);
-  masterGain.gain.linearRampToValueAtTime(0.6, now + 1.5);
-  masterGain.gain.setValueAtTime(0.6, now + duration / 1000 - 2);
-  masterGain.gain.exponentialRampToValueAtTime(0.001, now + duration / 1000);
+  // Harmonic stack: each oscillator has its own small gain so the sum never clips
+  const layers = [
+    { freq: 55, type: "triangle", level: 0.5 },
+    { freq: 110, type: "triangle", level: 0.3 },
+    { freq: 164.81, type: "sine", level: 0.3 },
+  ];
 
-  // Create the "Harmonic Stack" (Multiple notes for a rich sound)
-  [55, 110, 164.81].forEach((freq, i) => {
+  layers.forEach(({ freq, type, level }, i) => {
     const osc = audioCtx.createOscillator();
-    osc.type = i === 0 ? "sawtooth" : "triangle"; // Mix textures
+    const oscGain = audioCtx.createGain();
+
+    osc.type = type;
     osc.frequency.setValueAtTime(freq, now);
+    osc.detune.setValueAtTime(i * 5, now); // slight wobble
+    oscGain.gain.setValueAtTime(level, now);
 
-    // Add a slight "wobble" (detune) for realism
-    osc.detune.setValueAtTime(i * 5, now);
-
-    osc.connect(masterGain);
+    osc.connect(oscGain);
+    oscGain.connect(masterGain);
     osc.start(now);
-    osc.stop(now + duration / 1000);
+    osc.stop(now + seconds);
   });
 }
 
