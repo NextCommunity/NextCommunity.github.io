@@ -6,10 +6,10 @@
   "dependencies": {
     "markdown-it": "^15.0.3",
     "@11ty/eleventy": "^3.1.8",
-    "@tailwindcss/postcss": "^4.3.4",
+    "@tailwindcss/postcss": "^4.3.5",
     "detect-libc": "^2.1.2",
-    "enhanced-resolve": "^5.26.1",
-    "graceful-fs": "^4.2.11",
+    "enhanced-resolve": "^5.27.0",
+    "graceful-fs": "^4.2.12",
     "is-extglob": "^2.1.1",
     "is-glob": "^4.0.3",
     "jiti": "^2.7.0",
@@ -21,10 +21,10 @@
     "phaser": "^4.2.1",
     "picocolors": "^1.1.1",
     "picomatch": "^4.0.7",
-    "postcss": "^8.5.32",
+    "postcss": "^8.5.33",
     "source-map-js": "^1.2.2",
     "tailwindcss": "^4.2.2",
-    "tapable": "^2.3.3"
+    "tapable": "^2.3.4"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",
