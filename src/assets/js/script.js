@@ -540,7 +540,7 @@ window.triggerForceSurge = function () {
   isSurging = true;
 
   // 1. Audio
-  playForceSoundtrack(8000);
+  window.playForceSoundtrack(8000);
 
   // 2. Add Overlay
   const overlay = document.createElement("div");
@@ -1412,7 +1412,7 @@ function handleFooterDotClick() {
     // 3. Update the global unlockedEggs array
     if (!unlockedEggs.includes("secret_footer_surge")) {
       // Trigger the main function
-      triggerForceSurge();
+      window.triggerForceSurge();
 
       unlockedEggs.push("secret_footer_surge");
       localStorage.setItem("unlockedEggs", JSON.stringify(unlockedEggs));
