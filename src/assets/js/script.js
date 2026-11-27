@@ -533,7 +533,7 @@ window.playForceSoundtrack = function (duration = 8000) {
     osc.start(now);
     osc.stop(now + seconds);
   });
-}
+};
 
 window.triggerForceSurge = function () {
   if (isSurging) return;
@@ -573,7 +573,7 @@ window.triggerForceSurge = function () {
     flash.remove();
     isSurging = false;
   }, 8000);
-}
+};
 
 // biome-ignore lint/correctness/noUnusedVariables: Used outside this classic script.
 function triggerMagicXP() {
