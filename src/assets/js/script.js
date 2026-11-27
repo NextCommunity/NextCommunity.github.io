@@ -501,22 +501,22 @@ window.playForceSoundtrack = function (duration = 8000) {
   // Lowpass filter: removes harsh high frequencies
   const filter = audioCtx.createBiquadFilter();
   filter.type = "lowpass";
-  filter.frequency.setValueAtTime(800, now);
+  filter.frequency.setValueAtTime(2000, now);
   filter.connect(compressor);
 
   // Master volume: smooth swell in and fade out
   const masterGain = audioCtx.createGain();
   masterGain.connect(filter);
   masterGain.gain.setValueAtTime(0.0001, now);
-  masterGain.gain.linearRampToValueAtTime(0.25, now + 1.5);
-  masterGain.gain.setValueAtTime(0.25, now + seconds - 2);
+  masterGain.gain.linearRampToValueAtTime(0.5, now + 1.5);
+  masterGain.gain.setValueAtTime(0.5, now + seconds - 2);
   masterGain.gain.exponentialRampToValueAtTime(0.001, now + seconds);
 
   // Harmonic stack: each oscillator has its own small gain so the sum never clips
-  const layers = [
-    { freq: 55, type: "triangle", level: 0.5 },
-    { freq: 110, type: "triangle", level: 0.3 },
-    { freq: 164.81, type: "sine", level: 0.3 },
+    const layers = [
+    { freq: 110, type: "triangle", level: 0.4 },
+    { freq: 220, type: "triangle", level: 0.3 },
+    { freq: 330, type: "sine", level: 0.3 },
   ];
 
   layers.forEach(({ freq, type, level }, i) => {
