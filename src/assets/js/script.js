@@ -123,7 +123,7 @@ window.playSound = function playSound(type) {
     osc.start(now);
     osc.stop(now + 1.5);
   } else {
-    const config = LAYERED_SOUND_CONFIGS[type]; 
+    const config = LAYERED_SOUND_CONFIGS[type];
     if (!config) return;
 
     osc.type = config.oscillatorType;
